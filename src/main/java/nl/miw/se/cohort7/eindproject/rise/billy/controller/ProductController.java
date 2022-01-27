@@ -30,7 +30,6 @@ public class ProductController {
         return "productOverview";
     }
 
-
     @GetMapping("/products/new")
     protected String showProductForm(Model model) {
         model.addAttribute("product", new Product());
