@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 /**
  * @author Martijn Gäbler <m.gabler@st.hanze.nl>
  * Date created: 27/01/2022
- * Dit is wat het programma doet.
+ * Manage all product-related interactions.
  */
 
 @Controller

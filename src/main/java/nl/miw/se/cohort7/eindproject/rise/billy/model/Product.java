@@ -10,7 +10,7 @@ import javax.persistence.Id;
 /**
  * @author Martijn Gäbler <m.gabler@st.hanze.nl>
  * Date created: 27/01/2022
- * Dit is wat het programma doet.
+ * Describes a product that can be ordered at the bar.
  */
 
 @Entity
@@ -27,9 +27,5 @@ public class Product {
     private double productPrice;
 
     private String productCategory;
-
-    public String getDisplayName() {
-        return String.format("%20s %4.2f", productName, productPrice);
-    }
 
 }
