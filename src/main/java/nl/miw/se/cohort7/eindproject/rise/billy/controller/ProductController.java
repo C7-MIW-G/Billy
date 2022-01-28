@@ -7,7 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 /**
  * @author Martijn Gäbler <m.gabler@st.hanze.nl>
@@ -43,4 +46,27 @@ public class ProductController {
         }
         return "redirect:/products";
     }
+
+    @GetMapping("/products/update/{productName}")
+    protected String showProductForm(@PathVariable("productName") String productName, Model model) {
+        Optional<Product> product = productRepository.findByProductName(productName);
+        if (productName.isEmpty()) {
+            return "redirect:/products";
+        }
+        model.addAttribute("product", product.get());
+        return "productForm";
+    }
+
+    @GetMapping("/products/details/{productName}")
+    protected String showProductDetails(@PathVariable("productName") String productName, Model model) {
+        Optional<Product> product = productRepository.findByProductName(productName);
+        if (productName.isEmpty()) {
+            return "redirect:/products";
+        }
+        model.addAttribute("product", product.get());
+        return "productDetails";
+
+    }
+
+
 }

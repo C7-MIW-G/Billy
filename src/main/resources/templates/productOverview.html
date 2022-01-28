@@ -13,7 +13,7 @@
       <th>Price</th>
     </tr>
     <tr th:each="product:${allProducts}">
-      <td th:text="${product.productName}"></td>
+      <td><a th:href="@{/products/details/{productName}(productName=${product.productName})}" th:text="${product.productName}"></a> </td>
       <td th:text="${product.productPrice}"></td>
     </tr>
   </table>
