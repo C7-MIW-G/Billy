@@ -41,9 +41,10 @@ public class ProductController {
 
     @PostMapping("/products/new")
     protected String saveOrUpdateProduct(@ModelAttribute("product") Product product, BindingResult result) {
-        if (!result.hasErrors()) {
-            productRepository.save(product);
+        if (result.hasErrors()) {
+            return "productForm";
         }
+        productRepository.save(product);
         return "redirect:/products";
     }
 
@@ -67,6 +68,17 @@ public class ProductController {
         return "productDetails";
 
     }
+
+    @GetMapping("/products/delete/{productName}")
+    protected String deleteProduct(@PathVariable("productName") String productName) {
+        Optional<Product> product = productRepository.findByProductName(productName);
+        if (productName.isEmpty()) {
+            return "redirect:/products";
+        }
+        productRepository.delete(product.get());
+        return "redirect:/products";
+    }
+
 
 
 }

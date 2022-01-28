@@ -2,10 +2,10 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 
 import lombok.Setter;
 import lombok.Getter;
+import org.springframework.lang.Nullable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.lang.model.element.Name;
+import javax.persistence.*;
 
 /**
  * @author Martijn Gäbler <m.gabler@st.hanze.nl>

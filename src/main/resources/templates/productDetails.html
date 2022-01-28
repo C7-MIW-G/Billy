@@ -9,6 +9,8 @@
     <h1>Details van <span th:text="${product.productName}"></span></h1>
 
     <a th:href="@{/products/update/{productName}(productName=${product.productName})}">Edit</a>
+    <a th:href="@{/products/delete/{productName}(productName=${product.productName})}">Delete</a>
+
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
