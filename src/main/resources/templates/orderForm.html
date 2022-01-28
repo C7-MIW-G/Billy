@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-    <title>Form to create an Order</title>
+    <title>Create order</title>
 </head>
 <body>
 
 <div class="container">
-    <h1>Create an barOrder</h1>
+    <h1>Create order</h1>
         <form th:action="@{/orders/new}" method="post" th:object="${barOrder}">
             <input type="hidden" th:field="*{dateTime}"/>
             <input type="hidden" th:field="*{productList}">
