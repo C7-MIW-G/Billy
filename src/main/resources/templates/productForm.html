@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-    <title>Form for a new product</title>
+    <title>Product form</title>
 </head>
 <body>
 
 <div class="container">
-    <h1>Make a new product</h1>
+    <h1>Form for a product</h1>
     <form th:action="@{/products/new}" method="post" th:object="${product}">
         <input type="hidden" th:field="*{productId}">
         <table>
