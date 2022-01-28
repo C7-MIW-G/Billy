@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Form to create an Order</title>
+</head>
+<body>
+
+<div class="container">
+    <h1>Create an barOrder</h1>
+        <form th:action="@{/orders/new}" method="post" th:object="${barOrder}">
+            <input type="hidden" th:field="*{dateTime}"/>
+            <input type="hidden" th:field="*{productList}">
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th></th>
+                    <th>Price</th>
+                </tr>
+                <tr th:each="orderProduct : *{productList}">
+                    <td th:text="${orderProduct.productName}"></td>
+                    <td> &#8364</td>
+                    <td th:text="${orderProduct.productPrice}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select multiple id="product" th:field="*{addProductList}">
+                            <option th:each="product : ${allProducts}" th:value="${product.productId}" th:text="${product.productName}"></option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Add">
+        </form>
+</div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>

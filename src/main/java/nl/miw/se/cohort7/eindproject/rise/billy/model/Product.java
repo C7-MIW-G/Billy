@@ -3,9 +3,9 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 import lombok.Setter;
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Martijn Gäbler <m.gabler@st.hanze.nl>
@@ -27,6 +27,9 @@ public class Product {
     private double productPrice;
 
     private String productCategory;
+
+//    @ManyToMany(mappedBy = "productList")
+//    private List<BarOrder> orderList = new ArrayList<>();
 
     public String getDisplayName() {
         return String.format("%20s %4.2f", productName, productPrice);

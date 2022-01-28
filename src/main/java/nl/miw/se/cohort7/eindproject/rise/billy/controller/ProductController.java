@@ -23,25 +23,25 @@ public class ProductController {
     public ProductController(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
-
-    @GetMapping({"/","/products"})
-    protected String showProductOverview(Model model) {
-        model.addAttribute("allProducts", productRepository.findAll());
-        return "productOverview";
-    }
-
-
-    @GetMapping("/products/new")
-    protected String showProductForm(Model model) {
-        model.addAttribute("product", new Product());
-        return "productForm";
-    }
-
-    @PostMapping("/products/new")
-    protected String saveOrUpdateProduct(@ModelAttribute("product") Product product, BindingResult result) {
-        if (!result.hasErrors()) {
-            productRepository.save(product);
-        }
-        return "redirect:/products";
-    }
+//
+//    @GetMapping({"/","/products"})
+//    protected String showProductOverview(Model model) {
+//        model.addAttribute("allProducts", productRepository.findAll());
+//        return "productOverview";
+//    }
+//
+//
+//    @GetMapping("/products/new")
+//    protected String showProductForm(Model model) {
+//        model.addAttribute("product", new Product());
+//        return "productForm";
+//    }
+//
+//    @PostMapping("/products/new")
+//    protected String saveOrUpdateProduct(@ModelAttribute("product") Product product, BindingResult result) {
+//        if (!result.hasErrors()) {
+//            productRepository.save(product);
+//        }
+//        return "redirect:/products";
+//    }
 }
