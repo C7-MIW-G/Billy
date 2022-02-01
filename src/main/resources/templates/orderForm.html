@@ -13,14 +13,27 @@
             <table>
                 <tr>
                     <th>Product</th>
-                    <th></th>
-                    <th>Price</th>
+                    <th style="text-align: start; vertical-align: central;">Price</th>
                 </tr>
                 <tr th:each="orderProduct : *{productList}">
                     <td th:text="${orderProduct.productName}"></td>
-                    <td> &#8364</td>
-                    <td th:text="${orderProduct.productPrice}"></td>
+                    <td th:text="${orderProduct.getProductPriceDisplayString()}"></td>
                 </tr>
+                <tr class="blank_row" style="height:30px">
+                </tr>
+                <tr>
+                    <td></td>
+                    <th>Total Price</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td th:text="${barOrder.getOrderTotalPriceDisplayString()}"></td>
+                </tr>
+                </tr>
+                <tr class="blank_row" style="height:15px">
+                </tr>
+            </table>
+            <table>
                 <tr>
                     <td>
                         <select multiple id="product" th:field="*{addProductList}">

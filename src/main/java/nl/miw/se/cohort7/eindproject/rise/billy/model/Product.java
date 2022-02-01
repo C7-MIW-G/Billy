@@ -27,7 +27,6 @@ public class Product {
     public static final int MIN_VALUE_PRODUCT_PRICE = 0;
     public static final String MESSAGE_MIN_PRODUCT_PRICE = "The price of the product may not be negative";
 
-
     @Id
     @GeneratedValue
     private long productId;
@@ -38,4 +37,8 @@ public class Product {
 
     @Min(value = MIN_VALUE_PRODUCT_PRICE, message = MESSAGE_MIN_PRODUCT_PRICE)
     private double productPrice;
+
+    public String getProductPriceDisplayString(){
+        return String.format("\u20ac %.2f", this.productPrice);
+    }
 }
