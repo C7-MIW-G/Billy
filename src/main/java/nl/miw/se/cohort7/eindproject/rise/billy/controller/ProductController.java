@@ -27,7 +27,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping({"/","/products"})
+    @GetMapping("/products")
     protected String showProductOverview(Model model) {
         model.addAttribute("allProducts", productService.findAll());
         return "productOverview";
