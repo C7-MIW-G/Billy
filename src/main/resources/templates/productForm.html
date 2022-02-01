@@ -11,16 +11,18 @@
         <input type="hidden" th:field="*{productId}">
         <table>
             <tr>
-                <th><label for="name">Name</label> </th>
-                <th><input id="name" type="text" th:field="*{productName}"></th>
+                <td><label for="name">Name</label> </td>
+                <td><input id="name" type="text" th:field="*{productName}"></td>
+                <td th:if="${#fields.hasErrors('productName')}" th:errorclass="error" th:errors="*{productName}"></td>
             </tr>
             <tr>
-                <th><label for="price">Price</label> </th>
-                <th><input id="price" type="text" th:field="*{productPrice}"></th>
+                <td><label for="price">Price</label> </td>
+                <td><input id="price" type="text" th:field="*{productPrice}"></td>
+                <td th:if="${#fields.hasErrors('productPrice')}" th:errorclass="error" th:errors="*{productPrice}"></td>
             </tr>
             <tr>
-                <th><label for="category">Category</label> </th>
-                <th><input id="category" type="text" th:field="*{productCategory}"></th>
+                <td><label for="category">Category</label> </td>
+                <td><input id="category" type="text" th:field="*{productCategory}"></td>
             </tr>
         </table>
         <input type="submit" value="Save product">
