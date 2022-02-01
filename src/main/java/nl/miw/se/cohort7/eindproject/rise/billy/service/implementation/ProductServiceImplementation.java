@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * @author Martijn Gäbler <m.gabler@st.hanze.nl>
  * Date created: 01/02/2022
- * Dit is wat het programma doet.
+ * This is the service layer of product which connects the back-end with the front-end
  */
 
 @Service
