@@ -36,5 +36,5 @@ public class Product {
     private String productName;
 
     @Min(value = MIN_VALUE_PRODUCT_PRICE, message = MESSAGE_MIN_PRODUCT_PRICE)
-    private String productPrice;
+    private double productPrice;
 }
