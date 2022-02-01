@@ -1,10 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
-import nl.miw.se.cohort7.eindproject.rise.billy.repository.ProductRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
-import nl.miw.se.cohort7.eindproject.rise.billy.service.implementation.ProductServiceImplementation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
