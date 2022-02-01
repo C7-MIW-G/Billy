@@ -7,15 +7,9 @@
     <link rel="stylesheet" type="text/css" href="/css/billy.css">
 </head>
 <body>
-<div th:fragment="navbar">
-    <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/products}">Product Overview</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" th:href="@{/orders/new}">Bar Order</a>
-        </li>
-    </ul>
+<div class="topNav" th:fragment="navbar">
+    <a th:href="@{/products}">Product Overview</a>
+    <a th:href="@{/orders/new}">Bar Order</a>
 </div>
 
 <div th:fragment="bottomScripts">
