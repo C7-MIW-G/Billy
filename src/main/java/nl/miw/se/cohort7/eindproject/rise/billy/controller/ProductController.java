@@ -2,6 +2,9 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.ProductRepository;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.implementation.ProductServiceImplementation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,15 +24,15 @@ import java.util.Optional;
 @Controller
 public class ProductController {
 
-    private ProductRepository productRepository;
+    private ProductService productService;
 
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping({"/","/products"})
     protected String showProductOverview(Model model) {
-        model.addAttribute("allProducts", productRepository.findAll());
+        model.addAttribute("allProducts", productService.findAll());
         return "productOverview";
     }
 
@@ -44,13 +47,13 @@ public class ProductController {
         if (result.hasErrors()) {
             return "productForm";
         }
-        productRepository.save(product);
+        productService.save(product);
         return "redirect:/products";
     }
 
     @GetMapping("/products/update/{productName}")
     protected String showProductForm(@PathVariable("productName") String productName, Model model) {
-        Optional<Product> product = productRepository.findByProductName(productName);
+        Optional<Product> product = productService.findByProductName(productName);
         if (productName.isEmpty()) {
             return "redirect:/products";
         }
@@ -60,7 +63,7 @@ public class ProductController {
 
     @GetMapping("/products/details/{productName}")
     protected String showProductDetails(@PathVariable("productName") String productName, Model model) {
-        Optional<Product> product = productRepository.findByProductName(productName);
+        Optional<Product> product = productService.findByProductName(productName);
         if (productName.isEmpty()) {
             return "redirect:/products";
         }
@@ -71,11 +74,11 @@ public class ProductController {
 
     @GetMapping("/products/delete/{productName}")
     protected String deleteProduct(@PathVariable("productName") String productName) {
-        Optional<Product> product = productRepository.findByProductName(productName);
+        Optional<Product> product = productService.findByProductName(productName);
         if (productName.isEmpty()) {
             return "redirect:/products";
         }
-        productRepository.delete(product.get());
+        productService.delete(product.get());
         return "redirect:/products";
     }
 }
