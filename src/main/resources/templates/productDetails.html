@@ -4,7 +4,7 @@
     <title>Product details</title>
 </head>
 <body>
-
+<div th:replace="fragments/general :: navbar"></div>
 <div class="container">
     <h1>Details of <span th:text="${product.productName}"></span></h1>
     <table>
