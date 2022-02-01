@@ -13,18 +13,12 @@
             <td th:text="${product.productName}"></td>
         </tr>
         <tr>
-            <td>Category</td>
-            <td th:text="${product.productCategory}"></td>
-        </tr>
-        <tr>
             <td>Price</td>
             <td th:text="${product.productPrice}"></td>
         </tr>
     </table>
-
     <a th:href="@{/products/update/{productName}(productName=${product.productName})}">Edit</a>
     <a th:href="@{/products/delete/{productName}(productName=${product.productName})}">Delete</a>
-
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
