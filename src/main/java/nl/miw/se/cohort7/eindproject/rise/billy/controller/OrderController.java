@@ -1,7 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
-import nl.miw.se.cohort7.eindproject.rise.billy.repository.ProductRepository;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,10 +20,10 @@ import java.time.LocalDateTime;
 @Controller
 public class OrderController {
 
-    private ProductRepository productRepository;
+    private ProductService productService;
 
-    public OrderController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public OrderController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping({"/orders/new"})
@@ -31,7 +31,7 @@ public class OrderController {
         BarOrder barOrder = new BarOrder();
         barOrder.setDateTime(LocalDateTime.now());
         model.addAttribute("barOrder", barOrder);
-        model.addAttribute("allProducts", productRepository.findAll());
+        model.addAttribute("allProducts", productService.findAll());
         return "orderForm";
     }
 
@@ -42,7 +42,7 @@ public class OrderController {
             barOrder.addProducts();
             barOrder.clearAddList();
             model.addAttribute("barOrder", barOrder);
-            model.addAttribute("allProducts", productRepository.findAll());
+            model.addAttribute("allProducts", productService.findAll());
             return "orderForm";
         }
         return "redirect:/";
