@@ -7,42 +7,38 @@
 <div th:replace="fragments/general :: navbar"></div>
 <div class="container">
     <h1>Create order</h1>
-            <table>
-                <tr>
-                    <th>Product</th>
-                    <th>Amount</th>
-                    <th style="text-align: start; vertical-align: central;">Price</th>
-                </tr>
-                <tr th:each="product : ${barOrder.productMap.keySet()}">
-                    <td th:text="${product.productName}"></td>
-                    <td th:text="${barOrder.productMap.get(product)}"></td>
-                    <td th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></td>
-                </tr>
-                <tr class="blank_row" style="height:30px">
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <th>Total Price</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></td>
-                </tr>
-                </tr>
-                <tr class="blank_row" style="height:15px">
-                </tr>
-            </table>
-            <table>
-                <tr>
-
-                </tr>
-                <tr th:each="product : ${allProducts}">
-                    <td><a th:href="@{/orders/add/{productId}(productId=${product.productId})}" th:text="${product.getProductName()}"></a></td>
-                </tr>
-            </table>
-
+        <table>
+            <tr th:each="product : ${allProducts}">
+                <td><a th:href="@{/orders/add/{productId}(productId=${product.productId})}" th:text="${product.getProductName()}"></a></td>
+            </tr>
+        </table>
+        <table>
+            <tr class="blank_row" style="height:30px"></tr>
+            <tr>
+                <th>Product</th>
+                <th>Amount</th>
+                <th style="text-align: start; vertical-align: central;">Price</th>
+            </tr>
+            <tr th:each="product : ${barOrder.productMap.keySet()}">
+                <td th:text="${product.productName}"></td>
+                <td th:text="${barOrder.productMap.get(product)}"></td>
+                <td th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></td>
+            </tr>
+            <tr class="blank_row" style="height:30px"></tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <th>Total Price</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></td>
+            </tr>
+            </tr>
+            <tr class="blank_row" style="height:15px">
+            </tr>
+        </table>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
