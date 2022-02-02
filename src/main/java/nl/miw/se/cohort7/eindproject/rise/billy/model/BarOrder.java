@@ -2,8 +2,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.ui.Model;
-
 import java.time.LocalDateTime;
 import java.util.*;
 
