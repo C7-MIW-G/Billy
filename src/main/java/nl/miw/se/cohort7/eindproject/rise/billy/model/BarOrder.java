@@ -19,6 +19,8 @@ public class BarOrder {
 
     private LocalDateTime dateTime;
 
+    private List<Product> productList = new ArrayList<>();
+
     private Map<Product, Integer> productMap = new HashMap<>();
 
     public double calculateTotalOrderPrice(){
@@ -31,6 +33,7 @@ public class BarOrder {
 
     public double getSubTotal(Product product) {
         int amount = activeOrder.productMap.get(product);
+
         return amount * product.getProductPrice();
     }
 
