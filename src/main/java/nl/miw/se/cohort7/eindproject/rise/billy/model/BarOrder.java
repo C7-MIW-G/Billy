@@ -21,30 +21,24 @@ public class BarOrder {
 
     private List<Product> productList = new ArrayList<>();
 
-    private List<Product> addProductList = new ArrayList<>();
-
-    public void addProducts(){
-        this.productList.addAll(this.addProductList);
-    }
-
-    public void clearAddList(){
-        this.addProductList.clear();
-    }
+    private Map<Product, Integer> productMap = new HashMap<>();
 
     public double calculateTotalOrderPrice(){
         double totalOrderPrice = DEFAULT_ORDER_PRICE;
-        for (Product product : productList) {
-            totalOrderPrice += product.getProductPrice();
+        for (Product product : productMap.keySet()) {
+            totalOrderPrice += getSubTotal(product);
         }
         return totalOrderPrice;
     }
 
-    public String getOrderTotalPriceDisplayString(){
-        return String.format("\u20ac %.2f", this.calculateTotalOrderPrice());
+    public double getSubTotal(Product product) {
+        int amount = activeOrder.productMap.get(product);
+
+        return amount * product.getProductPrice();
     }
 
-    public static void clearActiveOrder(){
-        activeOrder = null;
+    public String getPriceDisplayString(double price){
+        return String.format("\u20ac %.2f", price);
     }
 
     public static void openNewActiveOrder(){
@@ -52,7 +46,11 @@ public class BarOrder {
     }
 
     public static void addProductToOrder(Product product){
-        activeOrder.productList.add(product);
+        if (activeOrder.productMap.containsKey(product)) {
+            activeOrder.productMap.put(product, activeOrder.productMap.get(product) + 1);
+        } else {
+            activeOrder.productMap.put(product, 1);
+        }
     }
 }
 

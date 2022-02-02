@@ -6,6 +6,7 @@ import lombok.Getter;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * @author Martijn Gäbler <m.gabler@st.hanze.nl>
@@ -38,7 +39,16 @@ public class Product {
     @Min(value = MIN_VALUE_PRODUCT_PRICE, message = MESSAGE_MIN_PRODUCT_PRICE)
     private double productPrice;
 
-    public String getProductPriceDisplayString(){
-        return String.format("\u20ac %.2f", this.productPrice);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return productId == product.productId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId);
     }
 }
