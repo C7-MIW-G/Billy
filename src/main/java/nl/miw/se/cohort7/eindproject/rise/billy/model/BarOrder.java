@@ -15,6 +15,8 @@ public class BarOrder {
 
     public static final int DEFAULT_ORDER_PRICE = 0;
 
+    public static BarOrder activeOrder = null;
+
     private LocalDateTime dateTime;
 
     private List<Product> productList = new ArrayList<>();
@@ -39,6 +41,18 @@ public class BarOrder {
 
     public String getOrderTotalPriceDisplayString(){
         return String.format("\u20ac %.2f", this.calculateTotalOrderPrice());
+    }
+
+    public static void clearActiveOrder(){
+        activeOrder = null;
+    }
+
+    public static void openNewActiveOrder(){
+        activeOrder = new BarOrder();
+    }
+
+    public static void addProductToOrder(Product product){
+        activeOrder.productList.add(product);
     }
 }
 
