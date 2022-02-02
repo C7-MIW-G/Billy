@@ -4,8 +4,7 @@ import lombok.Setter;
 import lombok.Getter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 /**
  * @author Martijn Gäbler <m.gabler@st.hanze.nl>
@@ -19,7 +18,7 @@ import javax.validation.constraints.Size;
 public class Product {
 
     public static final int MIN_CHAR_PRODUCT_NAME = 1;
-    public static final String MESSAGE_MIN_PRODUCT_NAME = "The name of the product must be at least 1 character";
+    public static final String MESSAGE_MIN_PRODUCT_NAME = "Please enter a name";
 
     public static final int MAX_CHAR_PRODUCT_NAME = 64;
     public static final String MESSAGE_MAX_PRODUCT_NAME = "The name of the product should be less than 65 characters";

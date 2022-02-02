@@ -26,7 +26,7 @@ public class OrderController {
         this.productService = productService;
     }
 
-    @GetMapping({"/orders/new", "/"})
+    @GetMapping({"/", "/orders/new"})
     protected String setupOrder(Model model) {
         BarOrder barOrder = new BarOrder();
         barOrder.setDateTime(LocalDateTime.now());
