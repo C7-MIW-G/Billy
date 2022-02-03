@@ -21,20 +21,25 @@
                     </a>
                 </td>
             </tr>
+            <tr class="blank_row" style="height:30px"></tr>
         </table>
     </div>
     <div>
         <table class="orderlist">
-            <tr>
-                <th>Product</th>
-                <th>Amount</th>
-                <th style="text-align: start; vertical-align: central;">Price</th>
-            </tr>
             <tr th:each="product : ${barOrder.productMap.keySet()}">
-                <td th:text="${product.productName}"></td>
-                <td th:text="${barOrder.productMap.get(product)}"></td>
-                <td th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></td>
+                <td class="productCell">
+                    <a class="productButton" th:href="@{/orders/remove/{productId}(productId=${product.productId})}">
+                        <table>
+                            <tr>
+                                <td th:text="${barOrder.productMap.get(product)}"></td>
+                                <td th:text="${product.productName}"></td>
+                                <td th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></td>
+                            </tr>
+                        </table>
+                    </a>
+                </td>
             </tr>
+
             <tr class="blank_row" style="height:30px"></tr>
             <tr>
                 <td></td>
