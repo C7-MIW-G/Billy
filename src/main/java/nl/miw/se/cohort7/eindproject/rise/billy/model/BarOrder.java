@@ -52,5 +52,13 @@ public class BarOrder {
             activeOrder.productMap.put(product, 1);
         }
     }
+
+    public static void removeProductFromOrder(Product product) {
+        if (activeOrder.productMap.get(product) == 1) {
+            activeOrder.productMap.remove(product);
+        } else {
+            activeOrder.productMap.put(product, activeOrder.productMap.get(product) - 1);
+        }
+    }
 }
 

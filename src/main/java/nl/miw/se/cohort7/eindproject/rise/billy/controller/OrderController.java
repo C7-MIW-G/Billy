@@ -41,12 +41,22 @@ public class OrderController {
     }
 
     @GetMapping("/orders/add/{productId}")
-    protected String addProductToOrder(@PathVariable("productId") Long productId){
+    protected String addProductToOrder(@PathVariable("productId") Long productId) {
         Optional<Product> optionalProduct = productService.findByProductId(productId);
-        if (optionalProduct.isEmpty()){
+        if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }
         BarOrder.addProductToOrder(optionalProduct.get());
+        return "redirect:/orders/new";
+    }
+
+    @GetMapping("/orders/remove/{productId}")
+    protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
+        Optional<Product> optionalProduct = productService.findByProductId(productId);
+        if (optionalProduct.isEmpty()) {
+            return "redirect:/orders/new";
+        }
+        BarOrder.removeProductFromOrder(optionalProduct.get());
         return "redirect:/orders/new";
     }
 }
