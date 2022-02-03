@@ -1,0 +1,49 @@
+.orderContainer{
+    margin: 5px;
+    background-color: green;
+    width: calc(100% - 10px);
+    height: calc(100% - 4rem - 10px);
+}
+.grid-orderPage-parent{
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 6fr 4fr;
+}
+.grid-orderPage-child{
+    margin: 5px;
+    height: calc(100% - 10px);
+}
+.productAssortment{
+    background-color: aqua;
+}
+.grid-productAssortment-parent{
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}
+.grid-productAssortment-child{
+    height: calc(100%);
+}
+.productCategoryList{
+    background-color: burlywood;
+}
+.productList{
+    background-color: antiquewhite;
+}
+.receipt{
+    background-color: rosybrown;
+}
+.receipt-child{
+    margin-left: 5px;
+    margin-right: 5px;
+    width: calc(100% - 10px);
+}
+.receipt-orderList{
+    margin-top: 5px;
+    height: calc(100% - 10rem - 5px);
+    background-color: aquamarine;
+}
+.receipt-paymentSection{
+    margin-bottom: 5px;
+    height: calc(10rem - 5px);
+    background-color: goldenrod;
+}

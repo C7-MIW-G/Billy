@@ -7,7 +7,6 @@
 <div th:replace="fragments/general :: navbar"></div>
 <div class="container">
   <h1>All products</h1>
-  <h2>Overview</h2>
   <table>
     <tr>
       <th>Name</th>
@@ -15,8 +14,9 @@
     </tr>
     <tr th:each="product:${allProducts}">
       <td><a th:href="@{/products/details/{productId}(productId=${product.productId})}" th:text="${product.productName}"></a> </td>
-      <td th:text="${product.productPrice}"></td>
+      <td th:text="${product.getPriceDisplayString(product.getProductPrice())}"></td>
     </tr>
+    <tr class="blank_row" style="height: 15px"></tr>
   </table>
   <a th:href="@{/products/new}">Add a new product</a>
 </div>

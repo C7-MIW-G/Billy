@@ -1,5 +1,36 @@
-body {
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: coral;
+    font-family: Verdana,sans-serif;
 }
+.navTop{
+    margin: 0;
+    background-color: blue;
+    width: calc(100%);
+
+    list-style: none;
+    padding: 0;
+    overflow: hidden;
+
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.navTop li{
+    margin: 0;
+    background-color: olive;
+    width: auto;
+    float: left;
+}
+.navTop li a{
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+/*ldldldl*/
 
 .products{
     width: 60vw;
@@ -16,8 +47,6 @@ body {
     border:chartreuse solid;
     border-width: 10px 10px 120px 10px;
     outline:inset #080808;
-
-
 }
 
 
@@ -25,7 +54,6 @@ body {
     width: calc(100%);
     max-width: calc(100%);
     outline:inset #080808;
-
 }
 
 .productButton{

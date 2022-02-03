@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td>Price</td>
-            <td th:text="${product.productPrice}"></td>
+            <td th:text="${product.getPriceDisplayString(product.getProductPrice())}"></td>
         </tr>
     </table>
     <a th:href="@{/products/update/{productId}(productId=${product.productId})}">Edit</a>
