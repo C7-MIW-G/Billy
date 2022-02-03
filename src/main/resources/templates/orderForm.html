@@ -1,58 +1,72 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:border-style="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>Create order</title>
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
-<div class="container">
-    <h1>Create order</h1>
-    <div class="products">
-        <table class="productTable">
-            <tr th:each="product : ${allProducts}">
-                <td class="productCell">
-                    <a class="productButton" th:href="@{/orders/add/{productId}(productId=${product.productId})}">
-                        <table>
-                            <tr>
-                                <td th:text="${product.getProductName()}"></td>
-                                <td th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></td>
-                            </tr>
-                        </table>
-                    </a>
-                </td>
-            </tr>
-            <tr class="blank_row" style="height:30px"></tr>
-        </table>
-    </div>
-    <div class="ordercontainer">
-        <table class="orderlist">
-            </tr>
-            <tr class="blank_row" style="height:15px">
-            </tr>
-            <tr th:each="product : ${barOrder.productMap.keySet()}">
-                <td class="productCell">
-                    <a class="productButton" th:href="@{/orders/remove/{productId}(productId=${product.productId})}">
-                        <table>
-                            <tr>
-                                <td th:text="${barOrder.productMap.get(product)}"></td>
-                                <td th:text="${product.productName}"></td>
-                                <td th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></td>
-                            </tr>
-                        </table>
-                    </a>
-                </td>
-            </tr>
 
-            <tr class="blank_row" style="height:30px"></tr>
-            <tr>
-                <td></td>
-                <th align="left">Total Price</th>
-                <td th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></td>
-            </tr>
-            <tr class="blank_row" style="height:15px">
-            </tr>
-        </table>
+<div class="orderContainer  grid-orderPage-parent">
+    <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
+        <div class="productCategoryList grid-productAssortment-child"></div>
+        <div class="productList grid-productAssortment-child">
+            <ul></ul>
+        </div>
+    </div>
+    <div class="receipt grid-orderPage-child">
+        <div class="receipt-child receipt-orderList"></div>
+        <div class="receipt-child receipt-paymentSection"></div>
     </div>
 </div>
+
+<!--<div class="container">-->
+<!--    <h1>Create order</h1>-->
+<!--    <div class="products">-->
+<!--        <table class="productTable">-->
+<!--            <tr th:each="product : ${allProducts}">-->
+<!--                <td class="productCell">-->
+<!--                    <a class="productButton" th:href="@{/orders/add/{productId}(productId=${product.productId})}">-->
+<!--                        <table>-->
+<!--                            <tr>-->
+<!--                                <td th:text="${product.getProductName()}"></td>-->
+<!--                                <td th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            <tr class="blank_row" style="height:30px"></tr>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--    <div class="ordercontainer">-->
+<!--        <table class="orderlist">-->
+<!--            </tr>-->
+<!--            <tr class="blank_row" style="height:15px">-->
+<!--            </tr>-->
+<!--            <tr th:each="product : ${barOrder.productMap.keySet()}">-->
+<!--                <td class="productCell">-->
+<!--                    <a class="productButton" th:href="@{/orders/remove/{productId}(productId=${product.productId})}">-->
+<!--                        <table>-->
+<!--                            <tr>-->
+<!--                                <td th:text="${barOrder.productMap.get(product)}"></td>-->
+<!--                                <td th:text="${product.productName}"></td>-->
+<!--                                <td th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </a>-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            <tr class="blank_row" style="height:30px"></tr>-->
+<!--            <tr>-->
+<!--                <td></td>-->
+<!--                <th align="left">Total Price</th>-->
+<!--                <td th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></td>-->
+<!--            </tr>-->
+<!--            <tr class="blank_row" style="height:15px">-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

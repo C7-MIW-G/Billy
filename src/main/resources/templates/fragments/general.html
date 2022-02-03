@@ -5,12 +5,12 @@
     <title th:replace="${title}">Billy</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" type="text/css" href="/css/billy.css">
-</head>
+    <link rel="stylesheet" type="text/css" href="/css/order.css"></head>
 <body>
-<div class="topNav" th:fragment="navbar">
-    <a th:href="@{/products}">Product Overview</a>
-    <a th:href="@{/orders/new}">Bar Order</a>
-</div>
+<ul class="navTop" th:fragment="navbar">
+    <li><a th:href="@{/orders/new}">Order</a></li>
+    <li><a th:href="@{/products}">Products</a></li>
+</ul>
 
 <div th:fragment="bottomScripts">
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
