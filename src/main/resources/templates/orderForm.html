@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:border-style="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>Create order</title>
 </head>
@@ -23,12 +23,10 @@
             </tr>
         </table>
     </div>
-    <div>
+    <div class="ordercontainer">
         <table class="orderlist">
-            <tr>
-                <th>Product</th>
-                <th>Amount</th>
-                <th style="text-align: start; vertical-align: central;">Price</th>
+            </tr>
+            <tr class="blank_row" style="height:15px">
             </tr>
             <tr th:each="product : ${barOrder.productMap.keySet()}">
                 <td th:text="${product.productName}"></td>
@@ -38,14 +36,8 @@
             <tr class="blank_row" style="height:30px"></tr>
             <tr>
                 <td></td>
-                <td></td>
-                <th>Total Price</th>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
+                <th align="left">Total Price</th>
                 <td th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></td>
-            </tr>
             </tr>
             <tr class="blank_row" style="height:15px">
             </tr>

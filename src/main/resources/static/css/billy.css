@@ -6,11 +6,26 @@ body {
 }
 
 .productTable{
-    width: calc(70%);
+    width: calc(40%);
 }
 
+.ordercontainer{
+    width: calc(45%);
+    max-width: calc(45%);
+    border-radius: 8px;
+    border:chartreuse solid;
+    border-width: 10px 10px 120px 10px;
+    outline:inset #080808;
+
+
+}
+
+
 .orderlist{
-    max-width: calc(49% - 16px);
+    width: calc(100%);
+    max-width: calc(100%);
+    outline:inset #080808;
+
 }
 
 .productButton{
