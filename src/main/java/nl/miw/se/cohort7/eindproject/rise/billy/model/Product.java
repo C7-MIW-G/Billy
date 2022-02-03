@@ -51,4 +51,11 @@ public class Product {
     public int hashCode() {
         return Objects.hash(productId);
     }
+
+    public String getPriceDisplayString(double price){
+        return String.format("\u20ac %.2f", price);
+    }
+
 }
+
+

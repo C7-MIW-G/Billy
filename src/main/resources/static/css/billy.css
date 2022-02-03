@@ -16,8 +16,6 @@ body {
     border:chartreuse solid;
     border-width: 10px 10px 120px 10px;
     outline:inset #080808;
-
-
 }
 
 
@@ -25,7 +23,6 @@ body {
     width: calc(100%);
     max-width: calc(100%);
     outline:inset #080808;
-
 }
 
 .productButton{
