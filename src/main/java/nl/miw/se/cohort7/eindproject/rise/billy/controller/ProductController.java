@@ -49,33 +49,24 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @GetMapping("/products/update/{productName}")
-    protected String showProductForm(@PathVariable("productName") String productName, Model model) {
-        Optional<Product> product = productService.findByProductName(productName);
-        if (productName.isEmpty()) {
-            return "redirect:/products";
-        }
+    @GetMapping("/products/update/{productId}")
+    protected String showProductForm(@PathVariable("productId") Long productId, Model model) {
+        Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
         return "productForm";
     }
 
-    @GetMapping("/products/details/{productName}")
-    protected String showProductDetails(@PathVariable("productName") String productName, Model model) {
-        Optional<Product> product = productService.findByProductName(productName);
-        if (productName.isEmpty()) {
-            return "redirect:/products";
-        }
+    @GetMapping("/products/details/{productId}")
+    protected String showProductDetails(@PathVariable("productId") Long productId, Model model) {
+        Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
         return "productDetails";
 
     }
 
-    @GetMapping("/products/delete/{productName}")
-    protected String deleteProduct(@PathVariable("productName") String productName) {
-        Optional<Product> product = productService.findByProductName(productName);
-        if (productName.isEmpty()) {
-            return "redirect:/products";
-        }
+    @GetMapping("/products/delete/{productId}")
+    protected String deleteProduct(@PathVariable("productId") Long productId) {
+        Optional<Product> product = productService.findByProductId(productId);
         productService.delete(product.get());
         return "redirect:/products";
     }

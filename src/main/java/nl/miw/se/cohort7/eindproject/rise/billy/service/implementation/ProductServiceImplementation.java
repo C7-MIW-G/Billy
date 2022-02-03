@@ -29,11 +29,6 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public Optional<Product> findByProductName(String productName) {
-        return productRepository.findByProductName(productName);
-    }
-
-    @Override
     public Optional<Product> findByProductId(Long id) {
         return productRepository.findById(id);
     }
