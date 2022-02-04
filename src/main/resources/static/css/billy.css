@@ -2,74 +2,37 @@ html, body {
     margin: 0;
     height: 100%;
     width: 100%;
-    background-color: coral;
-    font-family: Verdana,sans-serif;
+    font-family: Verdana, sans-serif;
 }
 .navTop{
     margin: 0;
-    background-color: blue;
     width: calc(100%);
+    background-color: lightsteelblue;
 
     list-style: none;
     padding: 0;
     overflow: hidden;
 
-    color: white;
     font-size: 1rem;
     line-height: 1.5;
 }
 .navTop li{
     margin: 0;
-    background-color: olive;
     width: auto;
     float: left;
 }
 .navTop li a{
+    color: #4e4f4d;
     display: block;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    border-right: 2px solid #4e4f4d;
 }
+
 /*---------*/
 
-.products{
-    width: 60vw;
-}
 
-.productTable{
-    width: calc(40%);
-}
-
-.ordercontainer{
-    width: calc(45%);
-    max-width: calc(45%);
-    border-radius: 8px;
-    border:chartreuse solid;
-    border-width: 10px 10px 120px 10px;
-    outline:inset #080808;
-}
-
-
-.orderlist{
-    width: calc(100%);
-    max-width: calc(100%);
-    outline:inset #080808;
-}
-
-.productButton{
-    min-width: calc(100%);
-    min-height: calc(100%);
-    background-color: transparent;
-    border: none;
-    font-weight: bold;
-    display: inline-block;
-    cursor: pointer;
-}
-
-.productCell{
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-}
 
 a {
     color: black;

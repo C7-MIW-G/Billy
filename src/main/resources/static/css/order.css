@@ -1,6 +1,5 @@
 .orderContainer{
     margin: 5px;
-    background-color: green;
     width: calc(100% - 10px);
     height: calc(100% - 4rem - 10px);
     max-height: calc(100% - 4rem - 10px);
@@ -16,7 +15,7 @@
     max-height: calc(100% - 10px);
 }
 .productAssortment{
-    background-color: aqua;
+
 }
 .grid-productAssortment-parent{
     display: grid;
@@ -27,17 +26,16 @@
     height: calc(100%);
 }
 .productCategoryList{
-    background-color: burlywood;
+
 }
 .productList{
-    background-color: antiquewhite;
     font-size: 1rem;
     line-height: 1.5;
     border-left: 2px solid black;
     overflow: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
-.productList ul{
+.orderPage-ul{
     list-style: none;
     padding: 0;
     margin: 0;
@@ -46,7 +44,6 @@
     border-top: 1px solid black;
 }
 .productList ul li{
-    background-color: crimson;
     border-bottom: 1px solid black;
 }
 .productList ul li a{
@@ -59,19 +56,17 @@
 }
 .productName{
     margin-left: 0.5rem;
-    background-color: greenyellow;
     width: auto;
     float: left;
 }
 .productPrice{
     margin-right: 0.5rem;
-    background-color: greenyellow;
     width: auto;
     text-align: right;
 }
 
 .receipt{
-    background-color: darksalmon;
+    overflow: hidden;
 }
 .receipt-child{
     margin-left: 5px;
@@ -81,10 +76,36 @@
 .receipt-orderList{
     margin-top: 5px;
     height: calc(100% - 10rem - 5px);
-    background-color: aquamarine;
+
+    font-family: "Courier New", Verdana, sans-serif ;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+.receipt-ProductsList{
+    height: calc(100% - 2rem);
+    overflow: hidden;
+    overflow-y: auto;
+}
+.receipt-ProductsList ul li a{
+    display: block;
+    text-align: center;
+    padding: 0.5rem 0;
+    text-decoration: none;
+}
+.receipt-TotalPrice{
+    border-top: 1px dashed black;
+    height: 2rem;
+}
+.productAmount{
+    margin-left: 0.5rem;
+    width: 2rem;
+    float: left;
+}
+.totalPrice{
+    width: auto;
+    text-align: right;
 }
 .receipt-paymentSection{
     margin-bottom: 5px;
     height: calc(10rem - 5px);
-    background-color: goldenrod;
 }
