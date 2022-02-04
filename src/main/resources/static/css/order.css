@@ -11,11 +11,11 @@
 }
 .grid-orderPage-child{
     margin: 5px;
-    height: calc(100% - 10px);
-    max-height: calc(100% - 10px);
+
 }
 .productAssortment{
-
+    height: calc(90% - 10px);
+    max-height: calc(90% - 10px);
 }
 .grid-productAssortment-parent{
     display: grid;
@@ -31,7 +31,7 @@
 .productList{
     font-size: 1rem;
     line-height: 1.5;
-    border-left: 2px solid black;
+
     overflow: hidden;
     overflow-y: auto;
 }
@@ -45,6 +45,9 @@
 }
 .productList ul li{
     border-bottom: 1px solid black;
+}
+.productList ul li:hover{
+    background-color: #e0e0e0;
 }
 .productList ul li a{
     display: block;
@@ -66,6 +69,8 @@
 }
 
 .receipt{
+    height: calc(100% - 10px);
+    max-height: calc(100% - 10px);
     overflow: hidden;
 }
 .receipt-child{

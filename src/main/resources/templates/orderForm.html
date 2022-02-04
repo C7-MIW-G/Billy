@@ -30,8 +30,8 @@
                 </ul>
             </div>
             <div class="receipt-TotalPrice">
-                <div class="productName">Total Price</div>
-                <div class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></div>
+                <span class="totalPrice">Total Price:</span>
+                <span class="totalPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
             </div>
         </div>
         <div class="receipt-child receipt-paymentSection">
