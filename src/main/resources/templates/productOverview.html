@@ -4,21 +4,21 @@
   <title>Overview products</title>
 </head>
 <body>
-<div th:replace="fragments/general :: navbar"></div>
-<div class="container">
-  <h1>All products</h1>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-    </tr>
-    <tr th:each="product:${allProducts}">
-      <td><a th:href="@{/products/details/{productId}(productId=${product.productId})}" th:text="${product.productName}"></a> </td>
-      <td th:text="${product.getPriceDisplayString(product.getProductPrice())}"></td>
-    </tr>
-    <tr class="blank_row" style="height: 15px"></tr>
-  </table>
-  <a th:href="@{/products/new}">Add a new product</a>
+<nav th:replace="fragments/general :: navbar"></nav>
+
+<div class="productContainer grid-productPage-parent">
+  <div class="productOverview">
+    <ul class="orderPage-ul" th:each="product : ${allProducts}">
+      <li><a th:href="@{/products/details/{productId}(productId=${product.productId})}">
+        <div class="productName fontBold" th:text="${product.getProductName()}"></div>
+        <div class="productPrice" th:text="${product.getPriceDisplayString(product.getProductPrice())}"></div>
+      </a>
+      </li>
+    </ul>
+
+    <div class="marginTop"> <a  th:href="@{/products/new}"><button>Add a new product</button></a> </div>
+  </div>
+</div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

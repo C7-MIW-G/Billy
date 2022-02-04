@@ -1,0 +1,29 @@
+.productOverview{
+    color: black;
+    background-color: white;
+    font-weight: normal;
+    width: calc(45%);
+    padding-top: calc(5%);
+    padding-left: calc(5%);
+}
+
+.fontBold{
+    font-weight: bold;
+}
+
+.marginTop{
+    margin-top: calc(5%);
+}
+
+.marginLeft{
+    margin-left: calc(5%);
+}
+
+.paddingTop {
+    padding-top: calc(4%);
+}
+
+
+
+
+
