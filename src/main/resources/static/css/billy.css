@@ -13,7 +13,6 @@ html, body {
     padding: 0;
     overflow: hidden;
 
-    color: white;
     font-size: 1rem;
     line-height: 1.5;
 }
@@ -23,11 +22,14 @@ html, body {
     float: left;
 }
 .navTop li a{
+    color: #4e4f4d;
     display: block;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    border-right: 2px solid #4e4f4d;
 }
+
 /*---------*/
 
 
