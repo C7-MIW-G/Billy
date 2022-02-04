@@ -3,6 +3,7 @@
     background-color: green;
     width: calc(100% - 10px);
     height: calc(100% - 4rem - 10px);
+    max-height: calc(100% - 4rem - 10px);
 }
 .grid-orderPage-parent{
     display: grid;
@@ -12,6 +13,7 @@
 .grid-orderPage-child{
     margin: 5px;
     height: calc(100% - 10px);
+    max-height: calc(100% - 10px);
 }
 .productAssortment{
     background-color: aqua;
@@ -19,6 +21,7 @@
 .grid-productAssortment-parent{
     display: grid;
     grid-template-columns: 2fr 5fr;
+    overflow: hidden;
 }
 .grid-productAssortment-child{
     height: calc(100%);
@@ -28,9 +31,47 @@
 }
 .productList{
     background-color: antiquewhite;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-left: 2px solid black;
+    overflow: hidden;
+    overflow-y: scroll;
 }
+.productList ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.productList ul:first-child{
+    border-top: 1px solid black;
+}
+.productList ul li{
+    background-color: crimson;
+    border-bottom: 1px solid black;
+}
+.productList ul li a{
+    display: block;
+    text-align: center;
+    padding: 0.875rem 1rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.productName{
+    margin-left: 0.5rem;
+    background-color: greenyellow;
+    width: auto;
+    float: left;
+}
+.productPrice{
+    margin-right: 0.5rem;
+    background-color: greenyellow;
+    width: auto;
+    text-align: right;
+}
+
 .receipt{
-    background-color: rosybrown;
+    background-color: darksalmon;
 }
 .receipt-child{
     margin-left: 5px;
