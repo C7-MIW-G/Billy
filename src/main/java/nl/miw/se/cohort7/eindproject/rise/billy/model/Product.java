@@ -56,6 +56,12 @@ public class Product {
         return String.format("\u20ac %.2f", price);
     }
 
+    public String getUserFriendlyErrorMessage(String message) {
+        if (message.contains("NumberFormatException")) {
+            return "Incorrect number format";
+        }
+        return message;
+    }
 }
 
 

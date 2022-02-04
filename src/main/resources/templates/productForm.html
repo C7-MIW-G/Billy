@@ -18,7 +18,7 @@
             <tr>
                 <td><label for="price">Price</label> </td>
                 <td><input id="price" type="text" th:field="*{productPrice}"></td>
-                <td th:if="${#fields.hasErrors('productPrice')}" th:errorclass="error" th:errors="*{productPrice}"></td>
+                <td th:each="error : ${#fields.errors('productPrice')}" th:text="${product.getUserFriendlyErrorMessage(error)}" class="error"></td>
             </tr>
 
         </table>
