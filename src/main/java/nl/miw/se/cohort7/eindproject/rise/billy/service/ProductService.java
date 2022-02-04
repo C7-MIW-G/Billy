@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @Service
 public interface ProductService {
-    Optional<Product> findByProductName(String title);
 
     Optional<Product> findByProductId(Long id);
 

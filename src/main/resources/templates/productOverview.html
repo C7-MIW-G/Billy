@@ -13,8 +13,7 @@
       <th>Price</th>
     </tr>
     <tr th:each="product:${allProducts}">
-      <td><a th:href="@{/products/details/{productName}(productName=${product.productName})}" th:text="${product.getProductName()}"></a> </td>
-      <td class=""
+      <td><a th:href="@{/products/details/{productId}(productId=${product.productId})}" th:text="${product.productName}"></a> </td>
       <td th:text="${product.getPriceDisplayString(product.getProductPrice())}"></td>
     </tr>
     <tr class="blank_row" style="height: 15px"></tr>
