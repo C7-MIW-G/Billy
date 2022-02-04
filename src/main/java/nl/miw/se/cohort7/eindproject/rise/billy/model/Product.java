@@ -19,24 +19,12 @@ import java.util.Objects;
 @Setter
 public class Product {
 
-    public static final int MIN_CHAR_PRODUCT_NAME = 1;
-    public static final String MESSAGE_MIN_PRODUCT_NAME = "Please enter a name";
-
-    public static final int MAX_CHAR_PRODUCT_NAME = 64;
-    public static final String MESSAGE_MAX_PRODUCT_NAME = "The name of the product should be less than 65 characters";
-
-    public static final int MIN_VALUE_PRODUCT_PRICE = 0;
-    public static final String MESSAGE_MIN_PRODUCT_PRICE = "The price of the product may not be negative";
-
     @Id
     @GeneratedValue
     private long productId;
 
-    @Size(min = MIN_CHAR_PRODUCT_NAME, message = MESSAGE_MIN_PRODUCT_NAME)
-    @Size(max = MAX_CHAR_PRODUCT_NAME, message = MESSAGE_MAX_PRODUCT_NAME)
     private String productName;
 
-    @Min(value = MIN_VALUE_PRODUCT_PRICE, message = MESSAGE_MIN_PRODUCT_PRICE)
     private double productPrice;
 
     @Override
@@ -56,12 +44,6 @@ public class Product {
         return String.format("\u20ac %.2f", price);
     }
 
-    public String getUserFriendlyErrorMessage(String message) {
-        if (message.contains("NumberFormatException")) {
-            return "Incorrect number format";
-        }
-        return message;
-    }
 }
 
 
