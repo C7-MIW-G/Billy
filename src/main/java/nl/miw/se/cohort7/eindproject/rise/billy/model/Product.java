@@ -3,7 +3,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 import lombok.Setter;
 import lombok.Getter;
 
-import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.util.Objects;
