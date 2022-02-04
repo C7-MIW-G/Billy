@@ -2,10 +2,14 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 
 import lombok.Setter;
 import lombok.Getter;
+import org.hibernate.validator.constraints.Range;
+import org.springframework.validation.annotation.Validated;
 
-import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 /**
