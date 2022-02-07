@@ -10,10 +10,12 @@
     <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
         <div class="productCategoryList grid-productAssortment-child"></div>
         <div class="productList grid-productAssortment-child">
-            <ul class="orderPage-ul" th:each="product : ${allProducts}">
+            <ul class="unordered-list" th:each="product : ${allProducts}">
                 <li><a th:href="@{/orders/add/{productId}(productId=${product.productId})}">
-                    <div class="productName" th:text="${product.getProductName()}"></div>
-                    <div class="productPrice" th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></div>
+                    <div class="grid-product-parent">
+                        <div class="productName" th:text="${product.getProductName()}"></div>
+                        <div class="productPrice" th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></div>
+                    </div>
                 </a></li>
             </ul>
         </div>
@@ -21,17 +23,21 @@
     <div class="receipt grid-orderPage-child">
         <div class="receipt-child receipt-orderList">
             <div class="receipt-ProductsList">
-                <ul class="orderPage-ul" th:each="product : ${barOrder.productMap.keySet()}">
+                <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
                     <li><a th:href="@{/orders/remove/{productId}(productId=${product.productId})}">
-                        <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
-                        <div class="productName" th:text="${product.productName}"></div>
-                        <div class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></div>
+                        <div class="grid-orderList-parent">
+                            <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
+                            <div class="grid-product-parent">
+                                <div class="productName" th:text="${product.productName}"></div>
+                                <div class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></div>
+                            </div>
+                        </div>
                     </a></li>
                 </ul>
             </div>
-            <div class="receipt-TotalPrice">
+            <div class="receipt-TotalPrice grid-product-parent">
                 <span class="totalPrice">Total Price:</span>
-                <span class="totalPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+                <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
             </div>
         </div>
         <div class="receipt-child receipt-paymentSection">

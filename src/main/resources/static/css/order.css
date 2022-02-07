@@ -11,7 +11,6 @@
 }
 .grid-orderPage-child{
     margin: 5px;
-
 }
 .productAssortment{
     height: calc(90% - 10px);
@@ -25,20 +24,19 @@
 .grid-productAssortment-child{
     height: calc(100%);
 }
+
+/*category*/
 .productCategoryList{
 
 }
+
+/*products*/
 .productList{
     font-size: 1rem;
     line-height: 1.5;
 
     overflow: hidden;
-    overflow-y: auto;
-}
-.orderPage-ul{
-    list-style: none;
-    padding: 0;
-    margin: 0;
+    overflow-y: scroll;
 }
 .productList ul:first-child{
     border-top: 1px solid black;
@@ -49,6 +47,9 @@
 .productList ul li:hover{
     background-color: #e0e0e0;
 }
+.productList ul li:focus{
+    background-color: #e0e0e0;
+}
 .productList ul li a{
     display: block;
     text-align: center;
@@ -57,17 +58,8 @@
     font-size: 1.2rem;
     font-weight: bold;
 }
-.productName{
-    margin-left: 0.5rem;
-    width: auto;
-    float: left;
-}
-.productPrice{
-    margin-right: 0.5rem;
-    width: auto;
-    text-align: right;
-}
 
+/*receipt*/
 .receipt{
     height: calc(100% - 10px);
     max-height: calc(100% - 10px);
@@ -97,17 +89,23 @@
     padding: 0.5rem 0;
     text-decoration: none;
 }
+.grid-orderList-parent{
+    display: grid;
+    padding-right: 1rem;
+    width: calc(100% - 1rem);
+    grid-template-columns: 2em calc(100% - 2em);
+    gap: 0.5rem;
+}
+.productAmount{
+    text-align: right;
+}
 .receipt-TotalPrice{
     border-top: 1px dashed black;
     height: 2rem;
-}
-.productAmount{
-    margin-left: 0.5rem;
-    width: 2rem;
-    float: left;
+    padding-right: 0.5rem;
+    width: calc(100% - 0.5rem);
 }
 .totalPrice{
-    width: auto;
     text-align: right;
 }
 .receipt-paymentSection{

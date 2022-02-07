@@ -1,26 +1,18 @@
 .productOverview{
     color: black;
-    background-color: white;
     font-weight: normal;
     width: calc(45%);
     padding-top: calc(5%);
     padding-left: calc(5%);
+    padding-bottom: calc(5%);
 }
-
-.fontBold{
-    font-weight: bold;
+.productOverview ul li a{
+    display: block;
+    padding: 0.125rem 0.75rem;
+    text-decoration: none;
 }
-
-.marginTop{
-    margin-top: calc(5%);
-}
-
-.marginLeft{
-    margin-left: calc(5%);
-}
-
-.paddingTop {
-    padding-top: calc(4%);
+.new-button{
+    padding: 1rem 0.75rem;
 }
 
 
