@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>User Overview</title>
+</head>
+<body>
+<nav th:replace="fragments/general :: navbar"></nav>
+<div class="container">
+
+    <h1>HALLO</h1>
+    <div class="">
+        <div th:each="user : ${allUsers}">
+            <a th:href="@{/users/details/{userId}(userId=${user.userId})}">
+                <div class="fontBold" th:text="${user.userName}"></div>
+            </a>
+    </div>
+</div>
+
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>
+</html>
