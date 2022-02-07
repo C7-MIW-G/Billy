@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>User form</title>
+</head>
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+<div class="container">
+    <h1>Form for a user</h1>
+    <form th:action="@{/users/new}" method="post" th:object="${user}">
+        <input type="hidden" th:field="*{userId}">
+        <ul>
+            <tr>
+                <td><label for="userName">User name</label> </td>
+                <td><input id="userName" type="text" required maxlength="65" th:field="*{userName}"></td>
+            </tr>
+            <tr>
+                <td><label for="dateOfBirth">Date of Birth</label> </td>
+                <td><input id="dateOfBirth" type="text" required maxlength="10" th:field="*{dateOfBirth}"></td>
+            </tr>
+        </ul>
+        <input type="submit" value="Save product">
+    </form>
+
+</div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>
+</html>

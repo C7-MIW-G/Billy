@@ -22,13 +22,12 @@ public class User {
     @GeneratedValue
     private long userId;
 
-    private String firstName;
-
-    private String infixName;
-
-    private String lastName;
+    private String userName;
 
     private LocalDateTime dateOfBirth;
 
-    private double credit;
+    public String getCreditDisplayString(double credit){
+        return String.format("\u20ac %.2f", credit);
+    }
+
 }
