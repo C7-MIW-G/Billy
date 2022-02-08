@@ -1,5 +1,6 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
+import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.User;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -67,6 +68,6 @@ public class UserController {
     protected String deleteUser(@PathVariable("userId") Long userId) {
         Optional<User> user = userService.findByUserId(userId);
         userService.delete(user.get());
-        return "redirect:/user";
+        return "redirect:/users";
     }
 }
