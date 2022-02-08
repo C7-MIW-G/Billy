@@ -3,13 +3,11 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.User;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -21,50 +19,55 @@ import java.util.Optional;
  */
 
 @Controller
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
+    PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping("/users")
+    @GetMapping("")
     protected String showUserOverview(Model model) {
         model.addAttribute("allUsers", userService.findAll());
         return "userOverview";
     }
 
-    @GetMapping("/users/new")
+    @GetMapping("/new")
     protected String showUserForm(Model model) {
         model.addAttribute("user", new User());
         return "userForm";
     }
 
-    @PostMapping("users/new")
-    protected String saveOrUpdateUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+    @PostMapping("/new")
+    protected String saveOrUpdateUser(@Valid @ModelAttribute("newUser") User user, BindingResult result) {
         if (result.hasErrors()){
             return "userForm";
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.save(user);
         return "redirect:/users";
     }
 
-    @GetMapping("/users/update/{userId}")
+    @GetMapping("/update/{userId}")
     protected String showUserForm(@PathVariable("userId") Long userId, Model model) {
         Optional<User> user = userService.findByUserId(userId);
         model.addAttribute("user", user.get());
         return "userForm";
     }
 
-    @GetMapping("/users/details/{userId}")
+    @GetMapping("/details/{userId}")
     protected String showUserDetails(@PathVariable("userId") Long userId, Model model) {
         Optional<User> user = userService.findByUserId(userId);
         model.addAttribute("user", user.get());
         return "userDetails";
     }
 
-    @GetMapping("/users/delete/{userId}")
+    @GetMapping("/delete/{userId}")
     protected String deleteUser(@PathVariable("userId") Long userId) {
         Optional<User> user = userService.findByUserId(userId);
         userService.delete(user.get());
