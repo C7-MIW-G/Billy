@@ -79,4 +79,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String fullNameDisplayString() {
+        return String.format("%s %s", this.firstname, this.lastname);
+    }
 }
