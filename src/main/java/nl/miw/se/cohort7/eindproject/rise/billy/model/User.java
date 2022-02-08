@@ -26,5 +26,6 @@ public class User {
     private String userName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     private Date date;
 }
