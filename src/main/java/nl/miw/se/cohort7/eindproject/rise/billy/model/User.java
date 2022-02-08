@@ -6,7 +6,6 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.text.DateFormat;
 import java.util.Date;
 
 /**
@@ -20,8 +19,6 @@ import java.util.Date;
 @Setter
 public class User {
 
-    public static final String DATE_FORMAT = "dd-MM-yyyy";
-    public static final String DEFAULT_BIRTHDATE = "01-01-1970";
     @Id
     @GeneratedValue
     private long userId;
@@ -31,5 +28,5 @@ public class User {
     private Date dateOfBirth;
 
     private double credit;
-        }
 
+}
