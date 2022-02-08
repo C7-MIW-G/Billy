@@ -14,7 +14,7 @@
     </tr>
     <tr>
       <td>Date of birth:</td>
-      <td th:text="${user.getDate()}"></td>
+      <td th:text="${#dates.format(user.getDate(), 'dd-MM-yyyy')}"></td>
     </tr>
   </table>
   <a th:href="@{/users/update/{userId}(userId=${user.userId})}"><button>Edit</button></a>
