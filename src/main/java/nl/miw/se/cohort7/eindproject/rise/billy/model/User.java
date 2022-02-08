@@ -43,7 +43,6 @@ public class User implements UserDetails {
     private String password;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-
     private Date birthdate;
 
     @Override
