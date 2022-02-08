@@ -6,6 +6,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.Constraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -23,9 +27,10 @@ public class User {
     @GeneratedValue
     private long userId;
 
+    @NotNull
     private String userName;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;
 }

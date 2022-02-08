@@ -12,12 +12,13 @@
         <table>
             <tr>
                 <td><label for="name">Name</label> </td>
-                <td><input id="name" type="text" required maxlength="65" th:field="*{productName}"></td>
+                <td><input id="name" type="text" required maxlength="64" th:field="*{productName}"></td>
             </tr>
             <tr>
                 <td><label for="price">Price</label> </td>
                 <td><input id="price" type="number" step="0.01" min="0.00" required th:field="*{productPrice}"></td>
             </tr>
+
         </table>
         <input type="submit" value="Save product">
     </form>
