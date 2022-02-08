@@ -63,8 +63,6 @@ public class UserController {
         return "userDetails";
     }
 
-
-
     @GetMapping("/users/delete/{userId}")
     protected String deleteUser(@PathVariable("userId") Long userId) {
         Optional<User> user = userService.findByUserId(userId);

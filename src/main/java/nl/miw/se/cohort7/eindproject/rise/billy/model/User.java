@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.text.DateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -30,11 +28,8 @@ public class User {
 
     private String userName;
 
-    private LocalDateTime dateOfBirth;
+    private Date dateOfBirth;
 
     private double credit;
-
-    public String birthdayDisplayString() {
-            return String.format("%s", this.dateOfBirth.format(DateTimeFormatter.ofPattern(DATE_FORMAT)));
         }
-    }
+
