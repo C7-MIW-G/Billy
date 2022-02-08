@@ -28,6 +28,10 @@ public class UserServiceImplementation implements UserService {
         return userRepository.findById(id);
     }
 
+    public Optional<User> findByUsername(String userName){
+        return userRepository.findByUsername(userName);
+    }
+
     @Override
     public List<User> findAll() {
         return userRepository.findAll();

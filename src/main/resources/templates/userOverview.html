@@ -10,7 +10,7 @@
     <div class="">
         <div th:each="user : ${allUsers}">
             <a th:href="@{/users/details/{userId}(userId=${user.userId})}">
-                <div class="fontBold" th:text="${user.userName}"></div>
+                <div class="fontBold" th:text="${user.getUsername()}"></div>
             </a>
         </div>
         <div class="new-button"> <a  th:href="@{/users/new}"><button>Add a new user</button></a> </div>

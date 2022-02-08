@@ -6,15 +6,21 @@
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 <div class="container">
-  <h1>Details of <span th:text="${user.getUserName()}"></span></h1>
+  <h1>Details of <span th:text="${user.firstname + user.lastname}"></span></h1>
   <table>
     <tr>
-      <td>User:</td>
-      <td th:text="${user.getUserName()}"></td>
+      <td>Firstname:</td>
+      <td th:text="${user.firstname}"></td>
+    </tr>
+      <td>Lastname:</td>
+      <td th:text="${user.lastname}"></td>
+    <tr>
+      <td>E-mail Adress:</td>
+      <td th:text="${user.username}"></td>
     </tr>
     <tr>
       <td>Date of birth:</td>
-      <td th:text="${#dates.format(user.getDate(), 'dd-MM-yyyy')}"></td>
+      <td th:text="${#dates.format(user.getBirthdate(), 'dd-MM-yyyy')}"></td>
     </tr>
   </table>
   <a th:href="@{/users/update/{userId}(userId=${user.userId})}"><button>Edit</button></a>
