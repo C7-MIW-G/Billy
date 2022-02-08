@@ -13,9 +13,10 @@
             <a th:href="@{/users/details/{userId}(userId=${user.userId})}">
                 <div class="fontBold" th:text="${user.userName}"></div>
             </a>
+        </div>
+        <div class="new-button"> <a  th:href="@{/users/new}"><button>Add a new user</button></a> </div>
     </div>
 </div>
-
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
 </html>

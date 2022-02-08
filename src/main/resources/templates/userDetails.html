@@ -14,11 +14,11 @@
     </tr>
     <tr>
       <td>Date of birth:</td>
-      <td th:text="${user.getDateOfBirth()}"></td>
+      <td th:text="${user.birthdayDisplayString()}"></td>
     </tr>
   </table>
-  <a th:href="@{/user/update/{userId}(userId=${user.userId})}">Edit</a>
-  <a th:href="@{/user/delete/{userId}(userId=${user.userId})}">Delete</a>
+  <a th:href="@{/users/update/{userId}(userId=${user.userId})}"><button>Edit</button></a>
+  <a th:href="@{/users/delete/{userId}(userId=${user.userId})}"><button>Delete</button></a>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

@@ -56,7 +56,7 @@ public class UserController {
         return "userForm";
     }
 
-    @GetMapping("/user/details/{userId}")
+    @GetMapping("/users/details/{userId}")
     protected String showUserDetails(@PathVariable("userId") Long userId, Model model) {
         Optional<User> user = userService.findByUserId(userId);
         model.addAttribute("user", user.get());
