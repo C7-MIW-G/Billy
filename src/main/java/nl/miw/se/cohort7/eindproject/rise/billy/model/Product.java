@@ -26,6 +26,10 @@ public class Product {
 
     public static final int MAX_PRODUCT_NAME_LENGTH = 64;
     public static final String MAX_PRODUCT_NAME_ERROR_MESSAGE = "The name of the product should be less than 65 characters";
+    private static final String MIN_PRODUCT_PRICE_ERROR_MESSAGE = "Please enter a positive number.";
+
+    private static final int MIN_PRODUCT_PRICE = 0;
+    private static final String MAX_PRODUCT_PRICE_ERROR_MESSAGE = "Please try a smaller number.";
 
     @Id
     @GeneratedValue
@@ -37,6 +41,8 @@ public class Product {
     private String productName;
 
     @NotNull
+    @Min(value = MIN_PRODUCT_PRICE, message = MIN_PRODUCT_PRICE_ERROR_MESSAGE)
+    @Max(value = Long.MAX_VALUE, message = MAX_PRODUCT_PRICE_ERROR_MESSAGE)
     private double productPrice;
 
     @Override
