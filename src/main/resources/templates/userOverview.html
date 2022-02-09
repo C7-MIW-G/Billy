@@ -5,15 +5,22 @@
 </head>
 <body>
 <nav th:replace="fragments/general :: navbar"></nav>
-<div class="container">
-    <h1>HALLO</h1>
-    <div class="">
-        <div th:each="user : ${allUsers}">
-            <a th:href="@{/users/details/{userId}(userId=${user.userId})}">
-                <div class="fontBold" th:text="${user.getUsername()}"></div>
-            </a>
+<div class="billyContainer">
+    <div class="overview grid-overview-parent">
+        <div class="overviewListHead grid-overviewListHead-parent">
+            <div></div>
+            <div class="new-button"> <a  th:href="@{/users/new}"><button>Add a new user</button></a> </div>
         </div>
-        <div class="new-button"> <a  th:href="@{/users/new}"><button>Add a new user</button></a> </div>
+        <div class="overviewList">
+            <ul class="unordered-list" th:each="user : ${allUsers}">
+                <li><a th:href="@{/users/details/{userId}(userId=${user.userId})}">
+                    <div class="grid-user-parent">
+                        <div class="grid-user-child-left fontBold" th:text="${user.fullNameDisplayString()}"></div>
+                        <div class="grid-user-child-right" th:text="${user.userRole}"></div>
+                    </div>
+                </a></li>
+            </ul>
+        </div>
     </div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>

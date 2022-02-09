@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>User form</title>
 </head>
@@ -48,8 +48,8 @@
                 <td><input id="dateOfBirth" type="date" th:field="*{birthdate}"></td>
             </tr>
             <tr>
-                <td><label for="userName">Role *</label></td>
-                <td><select name="" id="roles">
+                <td><label for="roles">Role *</label></td>
+                <td><select id="roles" th:field="*{userRole}">
                     <option value="Customer">Customer</option>
                     <option value="Bartender">Bartender</option>
                     <option value="Bar Manager">Bar Manager</option>

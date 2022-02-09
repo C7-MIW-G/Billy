@@ -1,6 +1,5 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.service;
 
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.User;
 
 import java.util.List;

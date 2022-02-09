@@ -61,6 +61,9 @@ public class User implements UserDetails {
     @Size(min = MIN_FIRST_NAME_LENGTH, message = MIN_FIRST_NAME_LENGTH_MESSAGE)
     @Size(max = MAX_FIRST_NAME_LENGTH, message = MAX_FIRST_NAME_LENGTH_MESSAGE)
     @Column(nullable = false)
+    private String userRole;
+
+    @Column(nullable = false)
     private String firstname;
 
     @NotBlank
@@ -82,6 +85,7 @@ public class User implements UserDetails {
     private String password;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date birthdate;
 
     @Override
@@ -117,4 +121,10 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public String fullNameDisplayString() {
+        return String.format("%s %s", this.firstname, this.lastname);
+    }
 }
+    
+

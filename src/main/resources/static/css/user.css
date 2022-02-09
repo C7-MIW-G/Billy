@@ -1,0 +1,11 @@
+.grid-user-parent{
+    display: grid;
+    grid-template-columns: calc(100% - 6.5rem) 6.5rem;
+}
+.grid-user-child-left{
+    text-align: left;
+    overflow: hidden;
+}
+.grid-user-child-right{
+    text-align: right;
+}
