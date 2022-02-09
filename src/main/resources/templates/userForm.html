@@ -6,8 +6,8 @@
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 <div class="container">
-    <h1>Form for a user</h1>
-    <form th:action="@{/users/new}" method="post" th:object="${user}">
+    <h1>Form for a billyUser</h1>
+    <form th:action="@{/users/new}" method="post" th:object="${billyUser}">
         <input type="hidden" th:field="*{userId}">
         <table>
             <tr>
@@ -33,10 +33,10 @@
                 <td><input id="dateOfBirth" type="date" min="1900-01-01" th:field="*{birthdate}"></td>
                 <td th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></td>
             </tr>
-            <tr>
+            <tr sec:authorize="hasRole('ROLE_BAR MANAGER')">
                 <td><label for="roles">Role *</label></td>
                 <td><select id="roles" th:field="*{userRole}">
-                    <option value="ROLE_CUSTOMER">Customer</option>
+                    <option value="ROLE_CUSTOMER" selected>Customer</option>
                     <option value="ROLE_BARTENDER">Bartender</option>
                     <option value="ROLE_BAR MANAGER">Bar Manager</option>
                 </select>

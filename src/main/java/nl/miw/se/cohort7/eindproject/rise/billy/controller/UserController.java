@@ -1,12 +1,9 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
-
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.User;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -36,49 +33,52 @@ public class UserController {
     @GetMapping("")
     @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String showUserOverview(Model model) {
-        model.addAttribute("allUsers", userService.findAll());
+        model.addAttribute("allBillyUsers", userService.findAll());
         return "userOverview";
     }
 
     @GetMapping("/new")
-    @Secured("ROLE_BAR MANAGER")
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String showUserForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("billyUser", new BillyUser());
         return "userForm";
     }
 
     @PostMapping("/new")
-    @Secured("ROLE_BAR MANAGER")
-    protected String saveOrUpdateUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    protected String saveOrUpdateUser(@Valid @ModelAttribute("billyUser") BillyUser billyUser, BindingResult result) {
         if (result.hasErrors()){
             return "userForm";
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.save(user);
+        billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
+        if (billyUser.getUserRole() == null) {
+            billyUser.setUserRole("ROLE_CUSTOMER");
+        }
+        userService.save(billyUser);
         return "redirect:/users";
     }
 
-    @GetMapping("/update/{userId}")
-    @Secured("ROLE_BAR MANAGER")
-    protected String showUserForm(@PathVariable("userId") Long userId, Model model) {
-        Optional<User> user = userService.findByUserId(userId);
-        model.addAttribute("user", user.get());
+    @GetMapping("/update/{billyUserId}")
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    protected String showUserForm(@PathVariable("billyUserId") Long userId, Model model) {
+        Optional<BillyUser> billyUser = userService.findByUserId(userId);
+        model.addAttribute("billyUser", billyUser.get());
         return "userForm";
     }
 
-    @GetMapping("/details/{userId}")
-    @Secured("ROLE_BAR MANAGER")
-    protected String showUserDetails(@PathVariable("userId") Long userId, Model model) {
-        Optional<User> user = userService.findByUserId(userId);
-        model.addAttribute("user", user.get());
+    @GetMapping("/details/{billyUserId}")
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    protected String showUserDetails(@PathVariable("billyUserId") Long BillyUserId, Model model) {
+        Optional<BillyUser> billyUser = userService.findByUserId(BillyUserId);
+        model.addAttribute("billyUser", billyUser.get());
         return "userDetails";
     }
 
-    @GetMapping("/delete/{userId}")
+    @GetMapping("/delete/{billyUserId}")
     @Secured("ROLE_BAR MANAGER")
-    protected String deleteUser(@PathVariable("userId") Long userId) {
-        Optional<User> user = userService.findByUserId(userId);
-        userService.delete(user.get());
+    protected String deleteUser(@PathVariable("billyUserId") Long billyUserId) {
+        Optional<BillyUser> billyUser = userService.findByUserId(billyUserId);
+        userService.delete(billyUser.get());
         return "redirect:/users";
     }
 }

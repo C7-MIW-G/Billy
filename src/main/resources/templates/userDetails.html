@@ -6,29 +6,29 @@
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 <div class="container">
-  <h1>Details of <span th:text="${user.fullNameDisplayString()}"></span></h1>
+  <h1>Details of <span th:text="${billyUser.fullNameDisplayString()}"></span></h1>
   <table>
     <tr>
       <td>Firstname:</td>
-      <td th:text="${user.firstname}"></td>
+      <td th:text="${billyUser.firstname}"></td>
     </tr>
       <td>Lastname:</td>
-      <td th:text="${user.lastname}"></td>
+      <td th:text="${billyUser.lastname}"></td>
     <tr>
       <td>E-mail Adress:</td>
-      <td th:text="${user.username}"></td>
+      <td th:text="${billyUser.username}"></td>
     </tr>
     <tr>
       <td>Date of birth:</td>
-      <td th:text="${#dates.format(user.getBirthdate(), 'dd-MM-yyyy')}"></td>
+      <td th:text="${#dates.format(billyUser.getBirthdate(), 'dd-MM-yyyy')}"></td>
     </tr>
     <tr>
       <td>Role:</td>
-      <td th:text="${user.userRole}"></td>
+      <td th:text="${billyUser.userRole}"></td>
     </tr>
   </table>
-  <a th:href="@{/users/update/{userId}(userId=${user.userId})}"><button>Edit</button></a>
-  <a th:href="@{/users/delete/{userId}(userId=${user.userId})}"><button>Delete</button></a>
+  <a th:href="@{/users/update/{userId}(userId=${billyUser.userId})}"><button>Edit</button></a>
+  <a th:href="@{/users/delete/{userId}(userId=${billyUser.userId})}"><button>Delete</button></a>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
