@@ -5,30 +5,56 @@
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
-<div class="container">
-  <h1>Details of <span th:text="${billyUser.fullNameDisplayString()}"></span></h1>
-  <table>
-    <tr>
-      <td>Firstname:</td>
-      <td th:text="${billyUser.firstname}"></td>
-    </tr>
-      <td>Lastname:</td>
-      <td th:text="${billyUser.lastname}"></td>
-    <tr>
-      <td>E-mail Adress:</td>
-      <td th:text="${billyUser.username}"></td>
-    </tr>
-    <tr>
-      <td>Date of birth:</td>
-      <td th:text="${#dates.format(billyUser.getBirthdate(), 'dd-MM-yyyy')}"></td>
-    </tr>
-    <tr>
-      <td>Role:</td>
-      <td th:text="${billyUser.userRole}"></td>
-    </tr>
-  </table>
-  <a th:href="@{/users/update/{userId}(userId=${billyUser.userId})}"><button>Edit</button></a>
-  <a th:href="@{/users/delete/{userId}(userId=${billyUser.userId})}"><button>Delete</button></a>
+
+<div class="billyContainer">
+  <div class="itemView grid-itemView-parent">
+    <div class="itemViewListHead">
+      <div class="headStyle">Details of <span th:text="${billyUser.fullNameDisplayString()}"></span></div>
+    </div>
+    <div class="itemViewList">
+      <ul class="unordered-list">
+        <li>
+          <div class="grid-item-parent">
+            <div>Name:</div>
+            <div th:text="${billyUser.firstname}"></div>
+          </div>
+        </li>
+        <li>
+          <div class="grid-item-parent">
+            <div>Price:</div>
+            <div th:text="${billyUser.lastname}"></div>
+          </div>
+        </li>
+        <li>
+          <div class="grid-item-parent">
+            <div>E-mail:</div>
+            <div th:text="${billyUser.username}"></div>
+          </div>
+        </li>
+        <li>
+          <div class="grid-item-parent">
+            <div>Date of birth:</div>
+            <div th:text="${#dates.format(billyUser.getBirthdate(), 'dd-MM-yyyy')}"></div>
+          </div>
+        </li>
+        <li>
+          <div class="grid-item-parent">
+            <div>Role:</div>
+            <div th:text="${billyUser.userRole}"></div>
+          </div>
+        </li>
+        <li>
+          <div class="item-buttons grid-buttons-parent">
+            <div>
+              <a class="marginLeft" th:href="@{/users/update/{userId}(userId=${billyUser.userId})}"><button>Edit</button></a>
+              <a th:href="@{/users/delete/{userId}(userId=${billyUser.userId})}"><button>Delete</button></a>
+            </div>
+            <button onclick="history.back()">Return</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
