@@ -6,12 +6,12 @@
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 <div class="container">
-    <h1>Form for a billyUser</h1>
+    <h1>Form for a user</h1>
     <form th:action="@{/users/new}" method="post" th:object="${billyUser}">
         <input type="hidden" th:field="*{userId}">
         <table>
             <tr>
-                <td><label for="userName">E-mail Adress *</label> </td>
+                <td><label for="userName">E-mail *</label> </td>
                 <td><input id="userName" type="email" required maxlength="65" minlength="8" th:field="*{username}"></td>
                 <td th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></td>
             </tr>
