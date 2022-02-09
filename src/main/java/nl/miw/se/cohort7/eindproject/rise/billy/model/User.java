@@ -92,7 +92,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
-        authorityList.add(new SimpleGrantedAuthority("ROLE_BARTENDER"));
+        authorityList.add(new SimpleGrantedAuthority(getUserRole()));
 
         return authorityList;
     }
