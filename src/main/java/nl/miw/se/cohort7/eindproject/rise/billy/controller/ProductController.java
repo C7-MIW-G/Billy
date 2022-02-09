@@ -61,7 +61,6 @@ public class ProductController {
         Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
         return "productDetails";
-
     }
 
     @GetMapping("/products/delete/{productId}")

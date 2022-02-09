@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,15 +30,20 @@ public class User implements UserDetails {
     @GeneratedValue
     private long userId;
 
+    @Column(nullable = false)
+    private String firstname;
+
+    @Column(nullable = false)
+    private String lastname;
+
     @Column(unique = true, nullable = false)
     private String username;
 
+    @Column(nullable = false)
     private String password;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-
     private Date birthdate;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -48,6 +52,11 @@ public class User implements UserDetails {
         authorityList.add(new SimpleGrantedAuthority("ROLE_BARTENDER"));
 
         return authorityList;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     @Override
@@ -68,5 +77,9 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String fullNameDisplayString() {
+        return String.format("%s %s", this.firstname, this.lastname);
     }
 }

@@ -3,6 +3,9 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 import lombok.Setter;
 import lombok.Getter;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
@@ -20,8 +23,10 @@ public class Product {
     @GeneratedValue
     private long productId;
 
+    @NotNull
     private String productName;
 
+    @NotNull
     private double productPrice;
 
     @Override
