@@ -1,8 +1,8 @@
 .orderContainer{
     margin: 5px;
     width: calc(100% - 10px);
-    height: calc(100% - 4rem - 10px);
-    max-height: calc(100% - 4rem - 10px);
+    height: calc(100% - 4rem);
+    max-height: calc(100% - 4rem);
 }
 .grid-orderPage-parent{
     display: grid;

@@ -39,6 +39,16 @@ html, body {
 .navTop li a:focus{
     background-color: #A0B4CE;
 }
+/*container*/
+.billyContainer{
+    padding: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 4rem);
+    /*max-height: calc(100% - 4rem);*/
+
+    background: linear-gradient(180deg, #f2f2f2 0%, #f0f0f0 15%, #ffffff 100%);
+}
+
 /*product-lists*/
 .grid-product-parent{
     display: grid;
@@ -46,6 +56,7 @@ html, body {
 }
 .productName{
     text-align: left;
+    overflow: hidden;
 }
 .productPrice{
     text-align: right;
@@ -69,5 +80,5 @@ a:visited {
     margin: 0;
 }
 .fontBold{
-    font-weight: bold;
+    font-weight: 590;
 }
