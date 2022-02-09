@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
  * <p>
- * [omschrijving van code]
+ * Manages all user-related interactions
  */
 
 @Controller

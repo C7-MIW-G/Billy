@@ -28,7 +28,7 @@ public class OrderController {
     }
 
     @GetMapping({"/", "/orders/new"})
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured("ROLE_BARTENDER")
     protected String setupOrder(Model model) {
         if (BarOrder.activeOrder == null){
             BarOrder.openNewActiveOrder();
