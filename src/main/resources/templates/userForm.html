@@ -5,46 +5,90 @@
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
-<div class="container">
-    <h1>Form for a user</h1>
-    <form th:action="@{/users/new}" method="post" th:object="${billyUser}">
-        <input type="hidden" th:field="*{userId}">
-        <table>
-            <tr>
-                <td><label for="userName">E-mail *</label> </td>
-                <td><input id="userName" type="email" required maxlength="65" minlength="8" th:field="*{username}"></td>
-                <td th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></td>
-            </tr>
-            <td><label for="password">Password *</label> </td>
-            <td><input id="password" type="password" minlength="6" th:field="*{password}"></td>
-            <td th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></td>
-            <tr>
-                <td><label for="firstname">First Name *</label> </td>
-                <td><input id="firstname" required type="text" maxlength="65" minlength="1" th:field="*{firstname}"></td>
-                <td th:if="${#fields.hasErrors('firstname')}" required minlength="1" th:errorclass="error" th:errors="*{firstname}"></td>
-            </tr>
-            <tr>
-                <td><label for="lastname">Last Name *</label> </td>
-                <td><input id="lastname" type="text" required maxlength="65" minlength="1"th:field="*{lastname}"></td>
-                <td th:if="${#fields.hasErrors('lastname')}" th:errorclass="error" th:errors="*{lastname}"></td>
-            </tr>
-            <tr>
-                <td><label for="dateOfBirth">Date of Birth</label> </td>
-                <td><input id="dateOfBirth" type="date" min="1900-01-01" th:field="*{birthdate}"></td>
-                <td th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></td>
-            </tr>
-            <tr sec:authorize="hasRole('ROLE_BAR MANAGER')">
-                <td><label for="roles">Role *</label></td>
-                <td><select id="roles" th:field="*{userRole}">
-                    <option value="ROLE_CUSTOMER" selected>Customer</option>
-                    <option value="ROLE_BARTENDER">Bartender</option>
-                    <option value="ROLE_BAR MANAGER">Bar Manager</option>
-                </select>
-                </td>
-            </tr>
-        </table>
-        <input type="submit" value="submit">
-    </form>
+<div class="billyContainer">
+    <div class="itemView grid-itemView-parent">
+        <div class="itemViewListHead">
+            <div class="headStyle">Form for a user</div>
+        </div>
+        <div class="itemViewList">
+            <form th:action="@{/users/new}" method="post" th:object="${billyUser}">
+                <ul class="unordered-list">
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="userName">E-mail *</label></div>
+                            <div><input id="userName" type="email" required maxlength="65" minlength="8" th:field="*{username}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="password">Password *</label></div>
+                            <div><input id="password" type="password" minlength="6" th:field="*{password}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="firstname">First Name *</label></div>
+                            <div><input id="firstname" required type="text" maxlength="65" minlength="1" th:field="*{firstname}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('firstname')}" th:errorclass="error" th:errors="*{firstname}"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="lastname">Last Name *</label></div>
+                            <div><input id="lastname" type="text" required maxlength="65" minlength="1" th:field="*{lastname}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('lastname')}" th:errorclass="error" th:errors="*{lastname}"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="dateOfBirth">Date of Birth *</label></div>
+                            <div><input id="dateOfBirth" type="date" min="1900-01-01" th:field="*{birthdate}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></div>
+                        </div>
+                    </li>
+                    <li sec:authorize="hasRole('ROLE_BAR MANAGER')">
+                        <div class="grid-item-parent">
+                            <div><label for="roles">Role </label></div>
+                            <div>
+                                <select id="roles" th:field="*{userRole}">
+                                    <option value="ROLE_CUSTOMER" selected>Customer</option>
+                                    <option value="ROLE_BARTENDER">Bartender</option>
+                                    <option value="ROLE_BAR MANAGER">Bar Manager</option>
+                                </select>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-buttons grid-buttons-parent">
+                            <div>
+                                <input type="hidden" th:field="*{userId}">
+                                <input type="submit" value="Save user">
+                            </div>
+                            <button onclick="history.back()">Return</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+>>>>>>> 4c28b98a94f76ab890690956d0f2e18dff16c286
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

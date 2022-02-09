@@ -135,6 +135,11 @@ html, body {
     margin-right: 0.625rem;
 }
 
+/*forms*/
+.error-inputField{
+    font-size: 0.5rem;
+    color: red;
+}
 
 /*links*/
 a {
