@@ -24,7 +24,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class User implements UserDetails {
+public class BillyUser implements UserDetails {
 
     @Id
     @GeneratedValue
