@@ -10,6 +10,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -33,20 +37,29 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String userRole;
 
+    @Size(min = 1, message = "Please enter a first name")
+    @Size(max = 64, message = "The first name of the user should be less than 65 characters")
     @Column(nullable = false)
     private String firstname;
 
+    @Size(min = 1, message = "Please enter a last name")
+    @Size(max = 64, message = "The last name of the user should be less than 65 characters")
     @Column(nullable = false)
     private String lastname;
 
+    @NotBlank
+    @Email(message = "Please enter a valid email address")
+    @Size(min = 1, message = "Please enter a email address")
+    @Size(max = 64, message = "The email of the user should be less than 65 characters")
     @Column(unique = true, nullable = false)
     private String username;
 
     @Column(nullable = false)
+    @Size(min = 6, message = "Password should contain at least 6 characters")
     private String password;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(nullable = false)
+    @NotNull(message = "Please provide a date.")
     private Date birthdate;
 
     @Override

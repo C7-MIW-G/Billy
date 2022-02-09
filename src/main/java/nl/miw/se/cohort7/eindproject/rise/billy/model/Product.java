@@ -20,29 +20,18 @@ import java.util.Objects;
 @Setter
 public class Product {
 
-
-    public static final int MIN_PRODUCT_NAME_LENGTH = 1;
-    public static final String MIN_PRODUCT_NAME_ERROR_MESSAGE = "The name of the product should be at least 1 characters";
-
-    public static final int MAX_PRODUCT_NAME_LENGTH = 64;
-    public static final String MAX_PRODUCT_NAME_ERROR_MESSAGE = "The name of the product should be less than 65 characters";
-    private static final String MIN_PRODUCT_PRICE_ERROR_MESSAGE = "Please enter a positive number.";
-
-    private static final int MIN_PRODUCT_PRICE = 0;
-    private static final String MAX_PRODUCT_PRICE_ERROR_MESSAGE = "Please try a smaller number.";
-
     @Id
     @GeneratedValue
     private long productId;
 
-    @Size(min = MIN_PRODUCT_NAME_LENGTH, message = MIN_PRODUCT_NAME_ERROR_MESSAGE)
-    @Size(max = MAX_PRODUCT_NAME_LENGTH, message = MAX_PRODUCT_NAME_ERROR_MESSAGE)
+    @Size(min = 1, message = "The name of the product should be at least 1 character")
+    @Size(max = 64, message = "The name of the product should be less than 65 characters")
     @Column(nullable = false)
     private String productName;
 
-    @NotNull
-    @Min(value = MIN_PRODUCT_PRICE, message = MIN_PRODUCT_PRICE_ERROR_MESSAGE)
-    @Max(value = Long.MAX_VALUE, message = MAX_PRODUCT_PRICE_ERROR_MESSAGE)
+    @Min(value = 0, message = "Please enter a positive number")
+    @Max(value = Long.MAX_VALUE, message = "Please try a smaller number")
+    @Column(nullable = false)
     private double productPrice;
 
     @Override
