@@ -44,8 +44,9 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    protected String saveOrUpdateUser(@Valid @ModelAttribute("newUser") User user, BindingResult result) {
+    protected String saveOrUpdateUser(@Valid @ModelAttribute("newUser") User user, BindingResult result, Model model) {
         if (result.hasErrors()){
+//            model.addAttribute("errorMsg", "Bad data!");
             return "userForm";
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
