@@ -10,7 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -54,7 +53,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
-        authorityList.add(new SimpleGrantedAuthority("ROLE_BARTENDER"));
+        authorityList.add(new SimpleGrantedAuthority(userRole));
 
         return authorityList;
     }
