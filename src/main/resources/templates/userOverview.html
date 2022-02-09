@@ -9,14 +9,14 @@
     <div class="overview grid-overview-parent">
         <div class="overviewListHead grid-overviewListHead-parent">
             <div></div>
-            <div class="new-button"> <a  th:href="@{/users/new}"><button>Add a new user</button></a> </div>
+            <div class="new-button"> <a  th:href="@{/users/new}"><button>Add a new billyUser</button></a> </div>
         </div>
         <div class="overviewList">
-            <ul class="unordered-list" th:each="user : ${allUsers}">
-                <li><a th:href="@{/users/details/{userId}(userId=${user.userId})}">
-                    <div class="grid-user-parent">
-                        <div class="grid-user-child-left fontBold" th:text="${user.fullNameDisplayString()}"></div>
-                        <div class="grid-user-child-right" th:text="${user.userRole}"></div>
+            <ul class="unordered-list" th:each="billyUser : ${allBillyUsers}">
+                <li><a th:href="@{/users/details/{userId}(userId=${billyUser.userId})}">
+                    <div class="grid-billyUser-parent">
+                        <div class="grid-billyUser-child-left fontBold" th:text="${billyUser.fullNameDisplayString()}"></div>
+                        <div class="grid-billyUser-child-right" th:text="${billyUser.userRole}"></div>
                     </div>
                 </a></li>
             </ul>

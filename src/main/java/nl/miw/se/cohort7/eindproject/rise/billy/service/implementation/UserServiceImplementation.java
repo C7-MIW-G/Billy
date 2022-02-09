@@ -1,6 +1,6 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.service.implementation;
 
-import nl.miw.se.cohort7.eindproject.rise.billy.model.User;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.stereotype.Service;
@@ -24,27 +24,27 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public Optional<User> findByUserId(Long id) {
+    public Optional<BillyUser> findByUserId(Long id) {
         return userRepository.findById(id);
     }
 
-    public Optional<User> findByUsername(String userName){
+    public Optional<BillyUser> findByUsername(String userName){
         return userRepository.findByUsername(userName);
     }
 
     @Override
-    public List<User> findAll() {
+    public List<BillyUser> findAll() {
         return userRepository.findAll();
     }
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
+    public void save(BillyUser billyUser) {
+        userRepository.save(billyUser);
     }
 
     @Override
-    public void delete(User user) {
-        userRepository.delete(user);
+    public void delete(BillyUser billyUser) {
+        userRepository.delete(billyUser);
     }
 
 }

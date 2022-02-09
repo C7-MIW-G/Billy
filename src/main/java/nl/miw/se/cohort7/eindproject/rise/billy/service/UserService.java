@@ -1,17 +1,17 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.service;
 
-import nl.miw.se.cohort7.eindproject.rise.billy.model.User;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
 
-    Optional<User> findByUserId(Long id);
+    Optional<BillyUser> findByUserId(Long id);
 
-    List<User> findAll();
+    List<BillyUser> findAll();
 
-    void save(User user);
+    void save(BillyUser billyUser);
 
-    void delete(User user);
+    void delete(BillyUser billyUser);
 }
