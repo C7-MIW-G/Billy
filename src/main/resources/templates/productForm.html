@@ -5,26 +5,47 @@
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
-<div class="container">
-    <h1>Form for a product</h1>
-    <form th:action="@{/products/new}" method="post" th:object="${product}">
-        <input type="hidden" th:field="*{productId}">
-        <table>
-            <tr>
-                <td><label for="name">Name</label> </td>
-                <td><input id="name" type="text" required maxlength="64" th:field="*{productName}"></td>
-                <td th:if="${#fields.hasErrors('productName')}" th:errorclass="error" th:errors="*{productName}"></td>
-            </tr>
-            <tr>
-                <td><label for="price">Price</label> </td>
-                <td><input id="price" type="number" step="0.01" min="0.00" required th:field="*{productPrice}"></td>
-                <td th:if="${#fields.hasErrors('productPrice')}" th:errorclass="error" th:errors="*{productPrice}"></td>
-            </tr>
-
-        </table>
-        <input type="submit" value="Save product">
-    </form>
-
+<div class="billyContainer">
+    <div class="itemView grid-itemView-parent">
+        <div class="itemViewListHead">
+            <div class="headStyle">Form for a product</div>
+        </div>
+        <div class="itemViewList">
+            <form th:action="@{/products/new}" method="post" th:object="${product}">
+                <ul class="unordered-list">
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="name">Name</label></div>
+                            <div><input id="name" type="text" required maxlength="64" th:field="*{productName}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('productName')}" th:errorclass="error" th:errors="*{productName}"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="price">Price</label></div>
+                            <div><input id="price" type="number" step="0.01" min="0.00" required th:field="*{productPrice}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('productPrice')}" th:errorclass="error" th:errors="*{productPrice}"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-buttons grid-buttons-parent">
+                            <div>
+                                <input type="hidden" th:field="*{productId}">
+                                <input type="submit" value="Save product">
+                            </div>
+                            <button onclick="history.back()">Return</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
