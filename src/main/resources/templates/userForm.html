@@ -28,10 +28,10 @@
                 <td><label for="dateOfBirth">Date of Birth</label> </td>
                 <td><input id="dateOfBirth" type="date" th:field="*{birthdate}"></td>
             </tr>
-            <tr>
+            <tr sec:authorize="hasRole('ROLE_BAR MANAGER')">
                 <td><label for="roles">Role *</label></td>
                 <td><select id="roles" th:field="*{userRole}">
-                    <option value="ROLE_CUSTOMER">Customer</option>
+                    <option value="ROLE_CUSTOMER" selected>Customer</option>
                     <option value="ROLE_BARTENDER">Bartender</option>
                     <option value="ROLE_BAR MANAGER">Bar Manager</option>
                 </select>
