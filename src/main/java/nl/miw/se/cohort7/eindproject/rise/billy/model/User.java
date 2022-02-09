@@ -54,7 +54,6 @@ public class User implements UserDetails {
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
         authorityList.add(new SimpleGrantedAuthority(userRole));
-
         return authorityList;
     }
 
