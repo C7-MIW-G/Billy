@@ -5,20 +5,38 @@
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
-<div class="container">
-    <h1>Details of <span th:text="${product.productName}"></span></h1>
-    <table class="marginLeft">
-        <tr>
-            <td class=>Name: </td>
-            <td th:text="${product.productName}"></td>
-        </tr>
-        <tr>
-            <td>Price:</td>
-            <td th:text="${product.getPriceDisplayString(product.getProductPrice())}"></td>
-        </tr>
-    </table>
-    <a class="marginLeft"  th:href="@{/products/update/{productId}(productId=${product.productId})}"><button>Edit</button></a>
-    <a th:href="@{/products/delete/{productId}(productId=${product.productId})}"><button>Delete</button></a>
+
+<div class="billyContainer">
+    <div class="itemView grid-itemView-parent">
+        <div class="itemViewListHead">
+            <div class="headStyle">Details of <span th:text="${product.productName}"></span></div>
+        </div>
+        <div class="itemViewList">
+            <ul class="unordered-list">
+                <li>
+                    <div class="grid-item-parent">
+                        <div>Name:</div>
+                        <div th:text="${product.productName}"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="grid-item-parent">
+                        <div>Price:</div>
+                        <div th:text="${product.getPriceDisplayString(product.getProductPrice())}"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-buttons grid-buttons-parent">
+                        <div>
+                            <a class="marginLeft"  th:href="@{/products/update/{productId}(productId=${product.productId})}"><button>Edit</button></a>
+                            <a th:href="@{/products/delete/{productId}(productId=${product.productId})}"><button>Delete</button></a>
+                        </div>
+                        <button onclick="history.back()">Return</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

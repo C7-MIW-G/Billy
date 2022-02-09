@@ -44,23 +44,97 @@ html, body {
     padding: 5px;
     width: calc(100% - 10px);
     height: calc(100% - 4rem);
-    /*max-height: calc(100% - 4rem);*/
 
-    background: linear-gradient(180deg, #f2f2f2 0%, #f0f0f0 15%, #ffffff 100%);
+    background: linear-gradient(180deg, #d9d9d9 0%, #f0f0f0 15%, #ffffff 100%);
 }
 
-/*product-lists*/
-.grid-product-parent{
-    display: grid;
-    grid-template-columns: calc(100% - 6em) 6em;
-}
-.productName{
-    text-align: left;
+/*overviews*/
+.overview{
+    margin: max(5vh, 0.25rem) auto;
+    width: max(60%, 18rem);
+    height: auto;
+    max-height: calc(80vh - 10px);
+    border: 2px solid dimgrey;
+    background-color: #fcfcfc;
+
     overflow: hidden;
 }
-.productPrice{
-    text-align: right;
+.grid-overview-parent{
+    display: grid;
+    grid-template-rows: 2.875rem calc(100% - 2.875rem);
 }
+.overviewList{
+    max-height: calc(80vh - 10px - 2.875rem);
+    overflow-y: auto;
+}
+.overviewList ul li a{
+    display: block;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+    border-bottom: 1px solid #e0e0e0;
+}
+.overviewList ul:last-child{
+    padding-bottom: 0.125rem;
+}
+.overviewListHead{
+    padding: 0.75rem 0.75rem;
+    border-bottom: 1px solid dimgrey;
+}
+.grid-overviewListHead-parent{
+    display: grid;
+    grid-template-columns: calc(100% - 8rem) 8rem;
+}
+.new-button{
+    margin-left: auto;
+}
+
+/*details*/
+.itemView{
+    margin: max(5vh, 0.25rem) auto;
+    width: max(60%, 18rem);
+    height: auto;
+    max-height: calc(80vh - 10px);
+    border: 2px solid dimgrey;
+    background-color: #fcfcfc;
+
+    overflow: hidden;
+}
+.grid-itemView-parent{
+    display: grid;
+    grid-template-rows: auto auto;
+}
+.itemViewListHead{
+    border-bottom: 1px solid dimgrey;
+}
+.headStyle{
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    margin-top: 0.375rem;
+    margin-left: 0.625rem;
+    margin-bottom: 0.2rem;
+}
+.itemViewList ul li{
+    padding-top: 0.5rem;
+    padding-left: 0.75rem;
+}
+.itemViewList ul:last-child{
+    padding-bottom: 0.5rem;
+}
+.grid-item-parent{
+    display: grid;
+    grid-template-columns: 8rem calc(100% - 8rem);
+}
+.grid-buttons-parent{
+    display: grid;
+    grid-template-columns: calc(100% - 3.5rem) 3.5rem;
+}
+.item-buttons{
+    padding-top: 0.5rem;
+    margin-right: 0.625rem;
+}
+
 
 /*links*/
 a {
