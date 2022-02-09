@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
   <title>User details</title>
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 <div class="container">
-  <h1>Details of <span th:text="${user.firstname + user.lastname}"></span></h1>
+  <h1>Details of <span th:text="${user.fullNameDisplayString()}"></span></h1>
   <table>
     <tr>
       <td>Firstname:</td>
@@ -21,6 +21,10 @@
     <tr>
       <td>Date of birth:</td>
       <td th:text="${#dates.format(user.getBirthdate(), 'dd-MM-yyyy')}"></td>
+    </tr>
+    <tr>
+      <td>Role:</td>
+      <td th:text="${user.userRole}"></td>
     </tr>
   </table>
   <a th:href="@{/users/update/{userId}(userId=${user.userId})}"><button>Edit</button></a>

@@ -3,6 +3,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ public class OrderController {
     }
 
     @GetMapping({"/", "/orders/new"})
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String setupOrder(Model model) {
         if (BarOrder.activeOrder == null){
             BarOrder.openNewActiveOrder();
@@ -38,6 +40,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/add/{productId}")
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String addProductToOrder(@PathVariable("productId") Long productId) {
         Optional<Product> optionalProduct = productService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {
@@ -48,6 +51,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/remove/{productId}")
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
         Optional<Product> optionalProduct = productService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {

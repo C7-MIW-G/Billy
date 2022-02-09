@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -31,6 +32,9 @@ public class User implements UserDetails {
     private long userId;
 
     @Column(nullable = false)
+    private String userRole;
+
+    @Column(nullable = false)
     private String firstname;
 
     @Column(nullable = false)
@@ -43,6 +47,7 @@ public class User implements UserDetails {
     private String password;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date birthdate;
 
     @Override
@@ -83,3 +88,5 @@ public class User implements UserDetails {
         return String.format("%s %s", this.firstname, this.lastname);
     }
 }
+    
+

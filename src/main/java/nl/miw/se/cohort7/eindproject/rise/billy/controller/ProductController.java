@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,18 +30,21 @@ public class ProductController {
     }
 
     @GetMapping("/products")
+    @Secured({"ROLE_BARTENDER"})
     protected String showProductOverview(Model model) {
         model.addAttribute("allProducts", productService.findAll());
         return "productOverview";
     }
 
     @GetMapping("/products/new")
+    @Secured({"ROLE_BARTENDER"})
     protected String showProductForm(Model model) {
         model.addAttribute("product", new Product());
         return "productForm";
     }
 
     @PostMapping("/products/new")
+    @Secured({"ROLE_BARTENDER"})
     protected String saveOrUpdateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
         if (result.hasErrors()) {
             return "productForm";
@@ -50,6 +54,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/update/{productId}")
+    @Secured({"ROLE_BARTENDER"})
     protected String showProductForm(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
@@ -57,6 +62,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/details/{productId}")
+    @Secured({"ROLE_BARTENDER"})
     protected String showProductDetails(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
@@ -64,6 +70,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/delete/{productId}")
+    @Secured({"ROLE_BARTENDER"})
     protected String deleteProduct(@PathVariable("productId") Long productId) {
         Optional<Product> product = productService.findByProductId(productId);
         productService.delete(product.get());
