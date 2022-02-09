@@ -29,8 +29,6 @@ public class BillySecurityConfiguration extends WebSecurityConfigurerAdapter {
         this.billyUserDetailsService = billyUserDetailsService;
     }
 
-
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()

@@ -17,7 +17,7 @@ import java.util.Optional;
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
  * <p>
- * [omschrijving van code]
+ * Manages all user-related interactions
  */
 
 @Controller
@@ -41,15 +41,15 @@ public class UserController {
     }
 
     @GetMapping("/new")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String showUserForm(Model model) {
         model.addAttribute("user", new User());
         return "userForm";
     }
 
     @PostMapping("/new")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
-    protected String saveOrUpdateUser(@Valid @ModelAttribute("newUser") User user, BindingResult result) {
+    @Secured("ROLE_BAR MANAGER")
+    protected String saveOrUpdateUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
         if (result.hasErrors()){
             return "userForm";
         }
@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @GetMapping("/update/{userId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String showUserForm(@PathVariable("userId") Long userId, Model model) {
         Optional<User> user = userService.findByUserId(userId);
         model.addAttribute("user", user.get());
@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @GetMapping("/details/{userId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String showUserDetails(@PathVariable("userId") Long userId, Model model) {
         Optional<User> user = userService.findByUserId(userId);
         model.addAttribute("user", user.get());
@@ -75,7 +75,7 @@ public class UserController {
     }
 
     @GetMapping("/delete/{userId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String deleteUser(@PathVariable("userId") Long userId) {
         Optional<User> user = userService.findByUserId(userId);
         userService.delete(user.get());

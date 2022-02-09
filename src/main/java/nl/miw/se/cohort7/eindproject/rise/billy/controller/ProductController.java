@@ -30,21 +30,21 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    @Secured({"ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String showProductOverview(Model model) {
         model.addAttribute("allProducts", productService.findAll());
         return "productOverview";
     }
 
     @GetMapping("/products/new")
-    @Secured({"ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String showProductForm(Model model) {
         model.addAttribute("product", new Product());
         return "productForm";
     }
 
     @PostMapping("/products/new")
-    @Secured({"ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String saveOrUpdateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
         if (result.hasErrors()) {
             return "productForm";
@@ -54,7 +54,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/update/{productId}")
-    @Secured({"ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String showProductForm(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
@@ -62,7 +62,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/details/{productId}")
-    @Secured({"ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String showProductDetails(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
@@ -70,7 +70,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/delete/{productId}")
-    @Secured({"ROLE_BARTENDER"})
+    @Secured("ROLE_BAR MANAGER")
     protected String deleteProduct(@PathVariable("productId") Long productId) {
         Optional<Product> product = productService.findByProductId(productId);
         productService.delete(product.get());
