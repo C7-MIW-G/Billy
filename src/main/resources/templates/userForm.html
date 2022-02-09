@@ -7,41 +7,22 @@
 <div th:replace="fragments/general :: navbar"></div>
 <div class="container">
     <h1>Form for a user</h1>
-<!--    <p th:text="${errorMsg}" style="color: red;"></p>-->
     <form th:action="@{/users/new}" method="post" th:object="${user}">
         <input type="hidden" th:field="*{userId}">
         <table>
-<!--            <tr>-->
-<!--                <td><label for="userName">E-mail Adress *</label> </td>-->
-<!--                <td><input id="userName" type="email" required maxlength="65" th:field="*{username}"></td>-->
-<!--            </tr>-->
-<!--            <td><label for="password">Password *</label> </td>-->
-<!--            <td><input id="password" type="password" required minlength="6" th:field="*{password}"></td>-->
-<!--            <tr>-->
-<!--                <td><label for="firstname">First Name *</label> </td>-->
-<!--                <td><input id="firstname" required minlength="1" th:field="*{firstname}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><label for="lastname">Last Name *</label> </td>-->
-<!--                <td><input id="lastname" required minlength="2" th:field="*{lastname}"></td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td><label for="dateOfBirth">Date of Birth</label> </td>-->
-<!--                <td><input id="dateOfBirth" type="date" th:field="*{birthdate}"></td>-->
-<!--            </tr>-->
             <tr>
                 <td><label for="userName">E-mail Adress *</label> </td>
-                <td><input id="userName" type="email" th:field="*{username}"></td>
+                <td><input id="userName" type="email" required maxlength="65" th:field="*{username}"></td>
             </tr>
             <td><label for="password">Password *</label> </td>
-            <td><input id="password" type="password"  th:field="*{password}"></td>
+            <td><input id="password" type="password" required minlength="6" th:field="*{password}"></td>
             <tr>
                 <td><label for="firstname">First Name *</label> </td>
-                <td><input id="firstname" th:field="*{firstname}"></td>
+                <td><input id="firstname" required minlength="1" th:field="*{firstname}"></td>
             </tr>
             <tr>
                 <td><label for="lastname">Last Name *</label> </td>
-                <td><input id="lastname"  th:field="*{lastname}"></td>
+                <td><input id="lastname" required minlength="2" th:field="*{lastname}"></td>
             </tr>
             <tr>
                 <td><label for="dateOfBirth">Date of Birth</label> </td>
