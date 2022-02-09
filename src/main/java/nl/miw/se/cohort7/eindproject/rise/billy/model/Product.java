@@ -35,14 +35,13 @@ public class Product {
     @GeneratedValue
     private long productId;
 
-    @Size(min = MIN_PRODUCT_NAME_LENGTH, message = MIN_PRODUCT_NAME_ERROR_MESSAGE)
-    @Size(max = MAX_PRODUCT_NAME_LENGTH, message = MAX_PRODUCT_NAME_ERROR_MESSAGE)
+    @Size(min = 1, max = 64, message = "The name of the product should be between 1 and 65 characters")
     @Column(nullable = false)
     private String productName;
 
     @NotNull
-    @Min(value = MIN_PRODUCT_PRICE, message = MIN_PRODUCT_PRICE_ERROR_MESSAGE)
-    @Max(value = Long.MAX_VALUE, message = MAX_PRODUCT_PRICE_ERROR_MESSAGE)
+    @Min(value = 0, message = "Please enter a positive number")
+    @Max(value = Long.MAX_VALUE, message = "Please try a smaller number.")
     private double productPrice;
 
     @Override
