@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
+@Secured("ROLE_BAR MANAGER")
 public class UserController {
 
     private UserService userService;
@@ -32,21 +33,21 @@ public class UserController {
     }
 
     @GetMapping("")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserOverview(Model model) {
         model.addAttribute("allBillyUsers", userService.findAll());
         return "userOverview";
     }
 
     @GetMapping("/new")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
         model.addAttribute("billyUser", new BillyUser());
         return "userForm";
     }
 
     @PostMapping("/new")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String saveOrUpdateUser(@Valid @ModelAttribute("billyUser") BillyUser billyUser, BindingResult result) {
         if (result.hasErrors()){
             return "userForm";
@@ -60,7 +61,6 @@ public class UserController {
     }
 
     @GetMapping("/update/{billyUserId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String showUserForm(@PathVariable("billyUserId") Long userId, Model model) {
         Optional<BillyUser> billyUser = userService.findByUserId(userId);
         model.addAttribute("billyUser", billyUser.get());
@@ -68,7 +68,7 @@ public class UserController {
     }
 
     @GetMapping("/details/{billyUserId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserDetails(@PathVariable("billyUserId") Long BillyUserId, Model model) {
         Optional<BillyUser> billyUser = userService.findByUserId(BillyUserId);
         model.addAttribute("billyUser", billyUser.get());
@@ -76,7 +76,6 @@ public class UserController {
     }
 
     @GetMapping("/delete/{billyUserId}")
-    @Secured("ROLE_BAR MANAGER")
     protected String deleteUser(@PathVariable("billyUserId") Long billyUserId) {
         Optional<BillyUser> billyUser = userService.findByUserId(billyUserId);
         userService.delete(billyUser.get());

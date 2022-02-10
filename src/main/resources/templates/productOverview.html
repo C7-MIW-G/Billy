@@ -9,15 +9,15 @@
 <div class="billyContainer">
     <div class="overview grid-overview-parent">
         <div class="overviewListHead grid-overviewListHead-parent">
-            <div></div>
-            <div class="new-button"> <a  th:href="@{/products/new}"><button>Add a new product</button></a> </div>
+            <div class="new-button">
+                <a  th:href="@{/products/new}"><button>Add a new product</button></a> </div>
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="product : ${allProducts}">
                 <li><a th:href="@{/products/details/{productId}(productId=${product.productId})}">
                     <div class="grid-product-parent">
                         <div class="productName fontBold" th:text="${product.getProductName()}"></div>
-                        <div class="productPrice" th:text="${product.getPriceDisplayString(product.getProductPrice())}"></div>
+                        <div class="productPrice" th:text="${product.getPriceDisplayString(product.productPrice)}"></div>
                     </div>
                 </a></li>
             </ul>

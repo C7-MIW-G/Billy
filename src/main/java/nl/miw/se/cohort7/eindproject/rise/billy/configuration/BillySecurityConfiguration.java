@@ -58,7 +58,5 @@ public class BillySecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         return authenticationProvider;
     }
-
-
 }
 
