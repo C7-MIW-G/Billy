@@ -2,14 +2,12 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -29,6 +27,11 @@ import java.util.List;
 @Getter
 @Setter
 public class BillyUser implements UserDetails {
+
+    public static final int MINIMUM_PASSWORD_LENGTH = 8;
+    private static final int RANDOM_PASSWORD_LENGTH = 64;
+    private static final int RANDOMIZATION_POOL_LENGTH = 94;
+    private static final int START_USABLE_ASCII_CHARACTERS = 33;
 
     @Id
     @GeneratedValue
@@ -98,17 +101,15 @@ public class BillyUser implements UserDetails {
     }
 
     public void setRandomPassword() {
-        int randomPasswordLength = 10;
-        StringBuilder passwordBuilder = new StringBuilder();
-
-        for (int i = 0; i < randomPasswordLength; i++) {
-            passwordBuilder.append(getRandomChar());
+        StringBuilder randomPasswordBuilder = new StringBuilder();
+        for (int i = 0; i < RANDOM_PASSWORD_LENGTH; i++) {
+            randomPasswordBuilder.append(getRandomChar());
         }
-        this.setPassword(passwordBuilder.toString());
+        this.setPassword(randomPasswordBuilder.toString());
     }
 
     private char getRandomChar() {
-        int randomInt = (int) (Math.random() * 94 + 33);
+        int randomInt = (int) (Math.random() * RANDOMIZATION_POOL_LENGTH + START_USABLE_ASCII_CHARACTERS);
         return (char) randomInt;
     }
 
