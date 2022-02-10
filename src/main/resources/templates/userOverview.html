@@ -15,7 +15,7 @@
             <ul class="unordered-list" th:each="billyUser : ${allBillyUsers}">
                 <li><a th:href="@{/users/details/{userId}(userId=${billyUser.userId})}">
                     <div class="grid-user-parent">
-                        <div class="grid-user-child-left fontBold" th:text="${billyUser.fullNameDisplayString()}"></div>
+                        <div class="grid-user-child-left fontBold" th:text="${billyUser.getName()}"></div>
                         <div class="grid-user-child-right" th:text="${billyUser.userRoleDisplayString()}"></div>
                     </div>
                 </a></li>

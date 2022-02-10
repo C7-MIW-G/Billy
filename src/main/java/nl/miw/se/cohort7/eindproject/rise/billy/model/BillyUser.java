@@ -40,15 +40,10 @@ public class BillyUser implements UserDetails {
     @Column(nullable = false)
     private String userRole;
 
-    @Size(min = 1, message = "Please enter a first name")
-    @Size(max = 64, message = "The first name of the user should be less than 65 characters")
+    @Size(min = 1, message = "Please enter a name")
+    @Size(max = 64, message = "The name of the user should be shorter than 65 characters")
     @Column(nullable = false)
-    private String firstname;
-
-    @Size(min = 1, message = "Please enter a last name")
-    @Size(max = 64, message = "The last name of the user should be less than 65 characters")
-    @Column(nullable = false)
-    private String lastname;
+    private String name;
 
     @NotBlank
     @Email(message = "Please enter a valid email address")
@@ -94,10 +89,6 @@ public class BillyUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public String fullNameDisplayString() {
-        return String.format("%s %s", this.firstname, this.lastname);
     }
 
     public void setRandomPassword() {
