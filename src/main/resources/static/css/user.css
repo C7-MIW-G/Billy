@@ -8,4 +8,5 @@
 }
 .grid-user-child-right{
     text-align: right;
+    overflow: hidden;
 }
