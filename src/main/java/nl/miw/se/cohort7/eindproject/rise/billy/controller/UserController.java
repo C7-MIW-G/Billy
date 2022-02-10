@@ -1,6 +1,5 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
-import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -52,10 +51,17 @@ public class UserController {
         if (result.hasErrors()){
             return "userForm";
         }
-        billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
         if (billyUser.getUserRole() == null) {
             billyUser.setUserRole("ROLE_CUSTOMER");
         }
+        if (billyUser.getUserRole().equals("ROLE_CUSTOMER")) {
+            billyUser.setRandomPassword();
+        }
+        if (billyUser.getPassword().length() < BillyUser.MINIMUM_PASSWORD_LENGTH) {
+            result.rejectValue("password", "error.user", "Please fill out a password with a minimum of 8 characters.");
+            return "userForm";
+        }
+        billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
         userService.save(billyUser);
         return "redirect:/users";
     }
