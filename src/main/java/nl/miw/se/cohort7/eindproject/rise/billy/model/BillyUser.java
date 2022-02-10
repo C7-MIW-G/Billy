@@ -98,6 +98,19 @@ public class BillyUser implements UserDetails {
     public String fullNameDisplayString() {
         return String.format("%s %s", this.firstname, this.lastname);
     }
+
+    public String userRoleDisplayString(){
+        switch (userRole) {
+            case "ROLE_BAR MANAGER":
+                return "Bar manager";
+            case "ROLE_BARTENDER":
+                return "Bartender";
+            case "ROLE_CUSTOMER":
+                return "Customer";
+            default:
+                return "Unknown";
+        }
+    }
 }
     
 
