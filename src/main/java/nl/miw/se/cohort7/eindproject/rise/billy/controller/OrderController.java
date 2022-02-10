@@ -19,6 +19,7 @@ import java.util.Optional;
  */
 
 @Controller
+@Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
 public class OrderController {
 
     private ProductService productService;
@@ -28,7 +29,6 @@ public class OrderController {
     }
 
     @GetMapping({"/", "/orders/new"})
-    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String setupOrder(Model model) {
         if (BarOrder.activeOrder == null){
             BarOrder.openNewActiveOrder();
@@ -40,7 +40,6 @@ public class OrderController {
     }
 
     @GetMapping("/orders/add/{productId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String addProductToOrder(@PathVariable("productId") Long productId) {
         Optional<Product> optionalProduct = productService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {
@@ -51,7 +50,6 @@ public class OrderController {
     }
 
     @GetMapping("/orders/remove/{productId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
         Optional<Product> optionalProduct = productService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {

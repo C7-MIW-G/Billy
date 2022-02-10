@@ -39,15 +39,11 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void save(BillyUser billyUser) {
-        Optional<BillyUser> optionalBillyUser = userRepository.findByUsername(billyUser.getUsername());
-        if (optionalBillyUser.isEmpty()){
-            userRepository.save(billyUser);
-        }
+        userRepository.save(billyUser);
     }
 
     @Override
     public void delete(BillyUser billyUser) {
         userRepository.delete(billyUser);
     }
-
 }

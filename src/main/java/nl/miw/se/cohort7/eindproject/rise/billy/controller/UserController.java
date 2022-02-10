@@ -9,6 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -58,7 +61,13 @@ public class UserController {
             billyUser.setRandomPassword();
         }
         if (billyUser.getPassword().length() < BillyUser.MINIMUM_PASSWORD_LENGTH) {
-            result.rejectValue("password", "error.user", "Please fill out a password with a minimum of 8 characters.");
+            result.rejectValue("password", "error.user"
+                    , "Please fill out a password with a minimum of 8 characters.");
+            return "userForm";
+        }
+        if (billyUser.getBirthdate().after(Date.from(Instant.now()))) {
+            result.rejectValue("birthdate", "error.birthdate"
+                    , "Please fill out a date in the past");
             return "userForm";
         }
         billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
