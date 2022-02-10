@@ -50,10 +50,18 @@ public class UserController {
         if (result.hasErrors()){
             return "userForm";
         }
-        billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
         if (billyUser.getUserRole() == null) {
             billyUser.setUserRole("ROLE_CUSTOMER");
         }
+        if (billyUser.getUserRole().equals("ROLE_CUSTOMER")) {
+            billyUser.setRandomPassword();
+            System.out.println(billyUser.getPassword());
+        }
+        if (billyUser.getPassword().length() == 0) {
+            result.rejectValue("password", "error.user", "Please fill out a password");
+            return "userForm";
+        }
+        billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
         userService.save(billyUser);
         return "redirect:/users";
     }

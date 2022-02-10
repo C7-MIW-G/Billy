@@ -54,8 +54,6 @@ public class BillyUser implements UserDetails {
     @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(nullable = false)
-    @Size(min = 6, message = "Password should contain at least 6 characters")
     private String password;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -97,6 +95,21 @@ public class BillyUser implements UserDetails {
 
     public String fullNameDisplayString() {
         return String.format("%s %s", this.firstname, this.lastname);
+    }
+
+    public void setRandomPassword() {
+        int randomPasswordLength = 10;
+        StringBuilder passwordBuilder = new StringBuilder();
+
+        for (int i = 0; i < randomPasswordLength; i++) {
+            passwordBuilder.append(getRandomChar());
+        }
+        this.setPassword(passwordBuilder.toString());
+    }
+
+    private char getRandomChar() {
+        int randomInt = (int) (Math.random() * 94 + 33);
+        return (char) randomInt;
     }
 }
     
