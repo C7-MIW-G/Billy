@@ -28,7 +28,7 @@ public class UserServiceImplementation implements UserService {
         return userRepository.findById(id);
     }
 
-    public Optional<BillyUser> findByUsername(String userName){
+    public Optional<BillyUser> findByUsername(String userName) {
         return userRepository.findByUsername(userName);
     }
 
@@ -39,15 +39,23 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void save(BillyUser billyUser) {
+        userRepository.save(billyUser);
+    }
+
+    @Override
+    public boolean usernameIsUnique(BillyUser billyUser) {
         Optional<BillyUser> optionalBillyUser = userRepository.findByUsername(billyUser.getUsername());
-        if (optionalBillyUser.isEmpty()){
-            userRepository.save(billyUser);
-        }
+        return optionalBillyUser.isEmpty();
+    }
+
+    @Override
+    public boolean isIDUnique (BillyUser billyUser) {
+        Optional<BillyUser> optionalBillyUser = userRepository.findById(billyUser.getUserId());
+        return optionalBillyUser.isEmpty();
     }
 
     @Override
     public void delete(BillyUser billyUser) {
         userRepository.delete(billyUser);
     }
-
 }

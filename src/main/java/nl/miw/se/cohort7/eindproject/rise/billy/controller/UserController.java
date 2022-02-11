@@ -1,6 +1,5 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
-import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -48,7 +47,11 @@ public class UserController {
     @PostMapping("/new")
     @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String saveOrUpdateUser(@Valid @ModelAttribute("billyUser") BillyUser billyUser, BindingResult result) {
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
+            return "userForm";
+        }
+        if (!userService.usernameIsUnique(billyUser) && userService.isIDUnique(billyUser)){
+            result.rejectValue("username", "error.error", "please insert a unique username");
             return "userForm";
         }
         if (billyUser.getUserRole() == null) {
