@@ -3,19 +3,15 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+
 
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
@@ -26,7 +22,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class BillyUser implements UserDetails {
+public class BillyUser {
 
     public static final int MINIMUM_PASSWORD_LENGTH = 8;
     private static final int RANDOM_PASSWORD_LENGTH = 64;
@@ -58,39 +54,6 @@ public class BillyUser implements UserDetails {
     @NotNull(message = "Please provide a date.")
     private Date birthdate;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorityList = new ArrayList<>();
-
-        authorityList.add(new SimpleGrantedAuthority(userRole));
-        return authorityList;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
-
     public void setRandomPassword() {
         StringBuilder randomPasswordBuilder = new StringBuilder();
         for (int i = 0; i < RANDOM_PASSWORD_LENGTH; i++) {
@@ -116,8 +79,6 @@ public class BillyUser implements UserDetails {
                 return "Unknown";
         }
     }
-
-
 }
     
 
