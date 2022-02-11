@@ -43,15 +43,15 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public boolean usernameIsUnique(BillyUser billyUser) {
+    public boolean mayWriteToDB(BillyUser billyUser) {
         Optional<BillyUser> optionalBillyUser = userRepository.findByUsername(billyUser.getUsername());
-        return optionalBillyUser.isEmpty();
-    }
-
-    @Override
-    public boolean isIDUnique (BillyUser billyUser) {
-        Optional<BillyUser> optionalBillyUser = userRepository.findById(billyUser.getUserId());
-        return optionalBillyUser.isEmpty();
+        if(optionalBillyUser.isEmpty()){
+            return true;
+        } else if (optionalBillyUser.get().equals(billyUser)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override

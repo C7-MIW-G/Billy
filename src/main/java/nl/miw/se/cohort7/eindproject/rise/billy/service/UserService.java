@@ -13,9 +13,7 @@ public interface UserService {
 
     void save(BillyUser billyUser);
 
-    boolean usernameIsUnique(BillyUser billyUser);
-
-    boolean isIDUnique(BillyUser billyUser);
+    boolean mayWriteToDB(BillyUser billyUser);
 
     void delete(BillyUser billyUser);
 }

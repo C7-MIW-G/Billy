@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -54,8 +53,8 @@ public class UserController {
         if (result.hasErrors()) {
             return "userForm";
         }
-        if (!userService.usernameIsUnique(billyUser) && userService.isIDUnique(billyUser)){
-            result.rejectValue("username", "error.error", "please insert a unique username");
+        if (!userService.mayWriteToDB(billyUser)){
+            result.rejectValue("username", "error.user", "please insert a unique username");
             return "userForm";
         }
         if (billyUser.getUserRole() == null) {
