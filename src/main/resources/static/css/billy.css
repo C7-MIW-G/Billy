@@ -44,9 +44,7 @@ html, body {
 .navTop-right{
     border-left: 2px solid #A0B4CE;
 }
-.navTop li a:hover{
-    background-color: #A0B4CE;
-}
+.navTop li a:hover,
 .navTop li a:focus{
     background-color: #A0B4CE;
 }
@@ -77,6 +75,10 @@ html, body {
 .overviewList{
     max-height: calc(80vh - 10px - 2.875rem);
     overflow-y: auto;
+}
+.overviewList ul li a:focus,
+.overviewList ul li:hover{
+    background-color: #e0e0e0;
 }
 .overviewList ul li a{
     display: block;

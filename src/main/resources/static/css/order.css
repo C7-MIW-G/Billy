@@ -44,10 +44,8 @@
 .productList ul li{
     border-bottom: 1px solid black;
 }
-.productList ul li:hover{
-    background-color: #e0e0e0;
-}
-.productList ul li:focus{
+.productList ul li:hover,
+.productList ul li a:focus{
     background-color: #e0e0e0;
 }
 .productList ul li a{
