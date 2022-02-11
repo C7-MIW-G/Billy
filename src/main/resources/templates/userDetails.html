@@ -9,20 +9,14 @@
 <div class="billyContainer">
   <div class="itemView grid-itemView-parent">
     <div class="itemViewListHead">
-      <div class="headStyle">Details of <span th:text="${billyUser.fullNameDisplayString()}"></span></div>
+      <div class="headStyle">Details of <span th:text="${billyUser.getName()}"></span></div>
     </div>
     <div class="itemViewList">
       <ul class="unordered-list">
         <li>
           <div class="grid-item-parent">
             <div>Name:</div>
-            <div th:text="${billyUser.firstname}"></div>
-          </div>
-        </li>
-        <li>
-          <div class="grid-item-parent">
-            <div>Price:</div>
-            <div th:text="${billyUser.lastname}"></div>
+            <div th:text="${billyUser.name}"></div>
           </div>
         </li>
         <li>
@@ -46,8 +40,10 @@
         <li>
           <div class="item-buttons grid-buttons-parent">
             <div>
-              <a class="marginLeft" th:href="@{/users/update/{userId}(userId=${billyUser.userId})}"><button>Edit</button></a>
-              <a th:href="@{/users/delete/{userId}(userId=${billyUser.userId})}"><button>Delete</button></a>
+              <a class="marginLeft" th:href="@{/users/update/{userId}(userId=${billyUser.userId})}"
+                 sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Edit</button></a>
+              <a th:href="@{/users/delete/{userId}(userId=${billyUser.userId})}"
+                 sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Delete</button></a>
             </div>
             <button onclick="history.back()">Return</button>
           </div>

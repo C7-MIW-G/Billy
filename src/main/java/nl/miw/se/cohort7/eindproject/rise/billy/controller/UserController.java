@@ -9,6 +9,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -19,6 +22,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
+@Secured("ROLE_BAR MANAGER")
 public class UserController {
 
     private UserService userService;
@@ -31,21 +35,21 @@ public class UserController {
     }
 
     @GetMapping("")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserOverview(Model model) {
         model.addAttribute("allBillyUsers", userService.findAll());
         return "userOverview";
     }
 
     @GetMapping("/new")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
         model.addAttribute("billyUser", new BillyUser());
         return "userForm";
     }
 
     @PostMapping("/new")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String saveOrUpdateUser(@Valid @ModelAttribute("billyUser") BillyUser billyUser, BindingResult result) {
         if (result.hasErrors()) {
             return "userForm";
@@ -59,10 +63,15 @@ public class UserController {
         }
         if (billyUser.getUserRole().equals("ROLE_CUSTOMER")) {
             billyUser.setRandomPassword();
-            System.out.println(billyUser.getPassword());
         }
-        if (billyUser.getPassword().length() == 0) {
-            result.rejectValue("password", "error.user", "Please fill out a password");
+        if (billyUser.getPassword().length() < BillyUser.MINIMUM_PASSWORD_LENGTH) {
+            result.rejectValue("password", "error.user"
+                    , "Please fill out a password with a minimum of 8 characters.");
+            return "userForm";
+        }
+        if (billyUser.getBirthdate().after(Date.from(Instant.now()))) {
+            result.rejectValue("birthdate", "error.birthdate"
+                    , "Please fill out a date in the past");
             return "userForm";
         }
         billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
@@ -71,7 +80,6 @@ public class UserController {
     }
 
     @GetMapping("/update/{billyUserId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String showUserForm(@PathVariable("billyUserId") Long userId, Model model) {
         Optional<BillyUser> billyUser = userService.findByUserId(userId);
         model.addAttribute("billyUser", billyUser.get());
@@ -79,7 +87,7 @@ public class UserController {
     }
 
     @GetMapping("/details/{billyUserId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserDetails(@PathVariable("billyUserId") Long BillyUserId, Model model) {
         Optional<BillyUser> billyUser = userService.findByUserId(BillyUserId);
         model.addAttribute("billyUser", billyUser.get());
@@ -87,7 +95,6 @@ public class UserController {
     }
 
     @GetMapping("/delete/{billyUserId}")
-    @Secured("ROLE_BAR MANAGER")
     protected String deleteUser(@PathVariable("billyUserId") Long billyUserId) {
         Optional<BillyUser> billyUser = userService.findByUserId(billyUserId);
         userService.delete(billyUser.get());

@@ -6,10 +6,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -21,6 +18,8 @@ import java.util.Optional;
  */
 
 @Controller
+@Secured("ROLE_BAR MANAGER")
+@RequestMapping("/products")
 public class ProductController {
 
     private ProductService productService;
@@ -29,22 +28,19 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
-    @Secured("ROLE_BAR MANAGER")
+    @GetMapping("")
     protected String showProductOverview(Model model) {
         model.addAttribute("allProducts", productService.findAll());
         return "productOverview";
     }
 
-    @GetMapping("/products/new")
-    @Secured("ROLE_BAR MANAGER")
+    @GetMapping("/new")
     protected String showProductForm(Model model) {
         model.addAttribute("product", new Product());
         return "productForm";
     }
 
-    @PostMapping("/products/new")
-    @Secured("ROLE_BAR MANAGER")
+    @PostMapping("/new")
     protected String saveOrUpdateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
         if (result.hasErrors()) {
             return "productForm";
@@ -53,24 +49,21 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    @GetMapping("/products/update/{productId}")
-    @Secured("ROLE_BAR MANAGER")
+    @GetMapping("/update/{productId}")
     protected String showProductForm(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
         return "productForm";
     }
 
-    @GetMapping("/products/details/{productId}")
-    @Secured("ROLE_BAR MANAGER")
+    @GetMapping("/details/{productId}")
     protected String showProductDetails(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
         return "productDetails";
     }
 
-    @GetMapping("/products/delete/{productId}")
-    @Secured("ROLE_BAR MANAGER")
+    @GetMapping("/delete/{productId}")
     protected String deleteProduct(@PathVariable("productId") Long productId) {
         Optional<Product> product = productService.findByProductId(productId);
         productService.delete(product.get());
