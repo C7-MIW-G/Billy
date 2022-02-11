@@ -12,11 +12,17 @@
 </head>
 <body>
 <ul class="navTop" th:fragment="navbar">
-    <li><a th:href="@{/}">Order</a></li>
-    <li><a th:href="@{/products}">Products</a></li>
-    <li><a th:href="@{/users}">Users</a> </li>
-    <li><a th:href="@{/logout}">Logout</a></li>
-    <li><div th:text="${#authentication.getPrincipal().getDisplayName()}" sec:authorize="hasRole('ROLE_NOT_ADMIN')"></div></li>
+    <div>
+        <li><a class="navTop-items navTop-left" th:href="@{/}">Order</a></li>
+        <li><a class="navTop-items navTop-left"th:href="@{/products}">Products</a></li>
+        <li><a class="navTop-items navTop-left"th:href="@{/users}">Users</a> </li>
+    </div>
+    <div>
+        <li><div class="navTop-items "th:text="${#authentication.getPrincipal().getDisplayName()}" sec:authorize="hasRole('ROLE_NOT_ADMIN')"></div></li>
+        <li><a class="navTop-items navTop-right"th:href="@{/logout}">Logout</a></li>
+    </div>
+
+
 
 
 </ul>
