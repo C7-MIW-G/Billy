@@ -40,7 +40,7 @@
         <li>
           <div class="item-buttons grid-buttons-parent">
             <div>
-              <a class="marginLeft" th:href="@{/users/update/{userId}(userId=${billyUser.userId})}"
+              <a th:href="@{/users/update/{userId}(userId=${billyUser.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Edit</button></a>
               <a th:href="@{/users/delete/{userId}(userId=${billyUser.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Delete</button></a>
