@@ -151,6 +151,14 @@ html, body {
     font-size: 0.5rem;
     color: red;
 }
+.grid-form_returnButton-parent{
+    display: grid;
+    grid-template-columns: calc(100% - 3.875rem) 3.25rem;
+}
+.returnButton{
+    margin-top: auto;
+    padding-bottom: 0.5rem;
+}
 
 /*links*/
 a {

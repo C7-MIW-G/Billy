@@ -10,7 +10,7 @@
         <div class="itemViewListHead">
             <div class="headStyle">Form for a user</div>
         </div>
-        <div class="itemViewList">
+        <div class="itemViewList grid-form_returnButton-parent">
             <form th:action="@{/users/new}" method="post" th:object="${billyUser}">
                 <ul class="unordered-list">
                     <li>
@@ -66,7 +66,7 @@
                         </div>
                     </li>
                     <li>
-                        <div class="item-buttons grid-buttons-parent">
+                        <div class="item-buttons">
                             <div>
                                 <input type="hidden" th:field="*{userId}">
                                 <input type="submit" value="Save user">
@@ -75,7 +75,7 @@
                     </li>
                 </ul>
             </form>
-            <a th:href="@{/users}"><button>Return</button></a>-->
+            <a class="returnButton" th:href="@{/users}"><button>Return</button></a>
         </div>
     </div>
 </div>
