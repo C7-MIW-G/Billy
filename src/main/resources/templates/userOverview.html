@@ -9,7 +9,9 @@
     <div class="overview grid-overview-parent">
         <div class="overviewListHead grid-overviewListHead-parent">
             <div></div>
-            <div class="new-button"> <a  th:href="@{/users/new}"><button>Add a new user</button></a> </div>
+            <div class="new-button">
+                <a  th:href="@{/users/new}"><button>Add a new user</button></a>
+            </div>
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="billyUser : ${allBillyUsers}">
