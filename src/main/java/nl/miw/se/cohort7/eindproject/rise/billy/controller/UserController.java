@@ -83,6 +83,9 @@ public class UserController {
     @GetMapping("/update/{billyUserId}")
     protected String showUserForm(@PathVariable("billyUserId") Long userId, Model model) {
         BillyUserDto billyUserDto = userService.findByUserId(userId);
+        if (billyUserDto == null) {
+            return "redirect:/users";
+        }
         model.addAttribute("billyUser", billyUserDto);
         model.addAttribute("headerText", "Edit");
         return "userForm";
@@ -92,6 +95,9 @@ public class UserController {
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserDetails(@PathVariable("billyUserId") Long BillyUserId, Model model) {
         BillyUserDto billyUserDto = userService.findByUserId(BillyUserId);
+        if (billyUserDto == null) {
+            return "redirect:/users";
+        }
         model.addAttribute("billyUserDto", billyUserDto);
         return "userDetails";
     }

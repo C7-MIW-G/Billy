@@ -17,6 +17,4 @@ public interface UserService {
     boolean mayWriteToDB(BillyUser billyUser);
 
     void delete(Long userId);
-
-    BillyUserDto convertToDto(BillyUser billyUser);
 }

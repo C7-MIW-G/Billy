@@ -67,8 +67,6 @@ public class BillyUser {
         return (char) randomInt;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

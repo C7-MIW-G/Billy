@@ -29,7 +29,7 @@ public class UserServiceImplementation implements UserService {
     public BillyUserDto findByUserId(Long id) {
         Optional<BillyUser> billyUser = userRepository.findById(id);
         if (billyUser.isEmpty()) {
-            return null; //TODO Exception?? User not found
+            return null;
         }
         return convertToDto(billyUser.get());
 
@@ -47,8 +47,7 @@ public class UserServiceImplementation implements UserService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public BillyUserDto convertToDto(BillyUser billyUser) {
+    private BillyUserDto convertToDto(BillyUser billyUser) {
         BillyUserDto billyUserDto = new BillyUserDto();
 
         billyUserDto.setUserId(billyUser.getUserId());
