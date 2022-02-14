@@ -1,5 +1,6 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.service.implementation;
 
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
@@ -24,8 +26,13 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public Optional<BillyUser> findByUserId(Long id) {
-        return userRepository.findById(id);
+    public BillyUserDto findByUserId(Long id) {
+        Optional<BillyUser> billyUser = userRepository.findById(id);
+        if (billyUser.isEmpty()) {
+            return null; //TODO Exception?? User not found
+        }
+        return convertToDto(billyUser.get());
+
     }
 
     public Optional<BillyUser> findByUsername(String userName) {
@@ -33,8 +40,24 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public List<BillyUser> findAll() {
-        return userRepository.findAll();
+    public List<BillyUserDto> findAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public BillyUserDto convertToDto(BillyUser billyUser) {
+        BillyUserDto billyUserDto = new BillyUserDto();
+
+        billyUserDto.setUserId(billyUser.getUserId());
+        billyUserDto.setUserRole(billyUser.getUserRole());
+        billyUserDto.setName(billyUser.getName());
+        billyUserDto.setUsername(billyUser.getUsername());
+        billyUserDto.setBirthdate(billyUser.getBirthdate());
+
+        return billyUserDto;
     }
 
     @Override
@@ -55,7 +78,8 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void delete(BillyUser billyUser) {
-        userRepository.delete(billyUser);
+    public void delete(Long userId) {
+        Optional<BillyUser> billyUser = userRepository.findById(userId);
+        userRepository.delete(billyUser.get());
     }
 }

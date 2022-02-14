@@ -9,40 +9,40 @@
 <div class="billyContainer">
   <div class="itemView grid-itemView-parent">
     <div class="itemViewListHead">
-      <div class="headStyle">Details of <span th:text="${billyUser.getName()}"></span></div>
+      <div class="headStyle">Details of <span th:text="${billyUserDto.getName()}"></span></div>
     </div>
     <div class="itemViewList">
       <ul class="unordered-list">
         <li>
           <div class="grid-item-parent">
             <div>Name:</div>
-            <div th:text="${billyUser.name}"></div>
+            <div th:text="${billyUserDto.name}"></div>
           </div>
         </li>
         <li>
           <div class="grid-item-parent">
             <div>E-mail:</div>
-            <div th:text="${billyUser.username}"></div>
+            <div th:text="${billyUserDto.username}"></div>
           </div>
         </li>
         <li>
           <div class="grid-item-parent">
             <div>Date of birth:</div>
-            <div th:text="${#dates.format(billyUser.getBirthdate(), 'dd-MM-yyyy')}"></div>
+            <div th:text="${#dates.format(billyUserDto.getBirthdate(), 'dd-MM-yyyy')}"></div>
           </div>
         </li>
         <li>
           <div class="grid-item-parent">
             <div>Role:</div>
-            <div th:text="${billyUser.userRoleDisplayString()}"></div>
+            <div th:text="${billyUserDto.userRoleDisplayString()}"></div>
           </div>
         </li>
         <li>
           <div class="item-buttons grid-buttons-parent">
             <div>
-              <a th:href="@{/users/update/{userId}(userId=${billyUser.userId})}"
+              <a th:href="@{/users/update/{userId}(userId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Edit</button></a>
-              <a th:href="@{/users/delete/{userId}(userId=${billyUser.userId})}"
+              <a th:href="@{/users/delete/{userId}(userId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Delete</button></a>
             </div>
             <button onclick="history.back()">Return</button>

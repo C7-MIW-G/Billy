@@ -1,4 +1,5 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
@@ -80,23 +81,22 @@ public class UserController {
 
     @GetMapping("/update/{billyUserId}")
     protected String showUserForm(@PathVariable("billyUserId") Long userId, Model model) {
-        Optional<BillyUser> billyUser = userService.findByUserId(userId);
-        model.addAttribute("billyUser", billyUser.get());
+        BillyUserDto billyUserDto = userService.findByUserId(userId);
+        model.addAttribute("billyUser", billyUserDto);
         return "userForm";
     }
 
     @GetMapping("/details/{billyUserId}")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserDetails(@PathVariable("billyUserId") Long BillyUserId, Model model) {
-        Optional<BillyUser> billyUser = userService.findByUserId(BillyUserId);
-        model.addAttribute("billyUser", billyUser.get());
+        BillyUserDto billyUserDto = userService.findByUserId(BillyUserId);
+        model.addAttribute("billyUserDto", billyUserDto);
         return "userDetails";
     }
 
     @GetMapping("/delete/{billyUserId}")
     protected String deleteUser(@PathVariable("billyUserId") Long billyUserId) {
-        Optional<BillyUser> billyUser = userService.findByUserId(billyUserId);
-        userService.delete(billyUser.get());
+        userService.delete(billyUserId);
         return "redirect:/users";
     }
 

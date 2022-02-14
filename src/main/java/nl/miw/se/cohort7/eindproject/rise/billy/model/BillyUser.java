@@ -67,18 +67,7 @@ public class BillyUser {
         return (char) randomInt;
     }
 
-    public String userRoleDisplayString() {
-        switch (userRole) {
-            case "ROLE_BAR MANAGER":
-                return "Bar manager";
-            case "ROLE_BARTENDER":
-                return "Bartender";
-            case "ROLE_CUSTOMER":
-                return "Customer";
-            default:
-                return "Unknown";
-        }
-    }
+
 
     @Override
     public boolean equals(Object o) {

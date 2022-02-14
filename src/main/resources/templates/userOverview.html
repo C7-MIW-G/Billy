@@ -14,11 +14,11 @@
             </div>
         </div>
         <div class="overviewList">
-            <ul class="unordered-list" th:each="billyUser : ${allBillyUsers}">
-                <li><a th:href="@{/users/details/{userId}(userId=${billyUser.userId})}">
+            <ul class="unordered-list" th:each="billyUserDto : ${allBillyUsers}">
+                <li><a th:href="@{/users/details/{userId}(userId=${billyUserDto.userId})}">
                     <div class="grid-user-parent">
-                        <div class="grid-user-child-left fontBold" th:text="${billyUser.getName()}"></div>
-                        <div class="grid-user-child-right" th:text="${billyUser.userRoleDisplayString()}"></div>
+                        <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
+                        <div class="grid-user-child-right" th:text="${billyUserDto.userRoleDisplayString()}"></div>
                     </div>
                 </a></li>
             </ul>
