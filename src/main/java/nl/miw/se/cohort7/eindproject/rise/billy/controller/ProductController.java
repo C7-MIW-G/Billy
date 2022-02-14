@@ -37,6 +37,7 @@ public class ProductController {
     @GetMapping("/new")
     protected String showProductForm(Model model) {
         model.addAttribute("product", new Product());
+        model.addAttribute("headerText", "New Product");
         return "productForm";
     }
 
@@ -53,6 +54,7 @@ public class ProductController {
     protected String showProductForm(@PathVariable("productId") Long productId, Model model) {
         Optional<Product> product = productService.findByProductId(productId);
         model.addAttribute("product", product.get());
+        model.addAttribute("headerText", "Edit");
         return "productForm";
     }
 
