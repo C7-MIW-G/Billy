@@ -31,9 +31,6 @@ html, body {
 .navTop div li a{
     color: #4e4f4d;
 }
-.navTop div li div{
-    color: #4e4f4d;
-}
 .navTop-items{
     display: block;
     text-align: center;
@@ -47,9 +44,7 @@ html, body {
 .navTop-right{
     border-left: 2px solid #A0B4CE;
 }
-.navTop li a:hover{
-    background-color: #A0B4CE;
-}
+.navTop li a:hover,
 .navTop li a:focus{
     background-color: #A0B4CE;
 }
@@ -80,6 +75,10 @@ html, body {
 .overviewList{
     max-height: calc(80vh - 10px - 2.875rem);
     overflow-y: auto;
+}
+.overviewList ul li a:focus,
+.overviewList ul li:hover{
+    background-color: #e0e0e0;
 }
 .overviewList ul li a{
     display: block;
@@ -153,6 +152,14 @@ html, body {
 .error-inputField{
     font-size: 0.5rem;
     color: red;
+}
+.grid-form_returnButton-parent{
+    display: grid;
+    grid-template-columns: calc(100% - 3.875rem) 3.25rem;
+}
+.returnButton{
+    margin-top: auto;
+    padding-bottom: 0.5rem;
 }
 
 /*links*/

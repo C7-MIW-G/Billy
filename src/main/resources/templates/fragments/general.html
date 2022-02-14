@@ -14,11 +14,13 @@
 <ul class="navTop" th:fragment="navbar">
     <div>
         <li><a class="navTop-items navTop-left" th:href="@{/}">Order</a></li>
-        <li><a class="navTop-items navTop-left"th:href="@{/products}">Products</a></li>
+        <li><a class="navTop-items navTop-left"th:href="@{/products}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Products</a></li>
         <li><a class="navTop-items navTop-left"th:href="@{/users}">Users</a> </li>
     </div>
     <div>
-        <li><div class="navTop-items "th:text="${#authentication.getPrincipal().getDisplayName()}" sec:authorize="hasRole('ROLE_NOT_ADMIN')"></div></li>
+        <li><a class="navTop-items"
+               th:href="@{/users/details/{userId}(userId=${#authentication.getPrincipal().getUserId()})}"
+               th:text="${#authentication.getPrincipal().getDisplayName()}" sec:authorize="hasRole('ROLE_NOT_ADMIN')"></a></li>
         <li><a class="navTop-items navTop-right"th:href="@{/logout}">Logout</a></li>
     </div>
 

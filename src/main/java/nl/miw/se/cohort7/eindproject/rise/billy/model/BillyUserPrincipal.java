@@ -43,6 +43,10 @@ public class BillyUserPrincipal implements UserDetails {
         return billyUser.getName();
     }
 
+    public long getUserId(){
+        return billyUser.getUserId();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
