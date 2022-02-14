@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public class BillyUserDto {
 
     private String password;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthdate;
 
     public String userRoleDisplayString() {
