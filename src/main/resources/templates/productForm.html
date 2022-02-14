@@ -8,7 +8,7 @@
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
         <div class="itemViewListHead">
-            <div class="headStyle">Form for a product</div>
+            <div class="headStyle" th:text="${headerText}"></div>
         </div>
         <div class="itemViewList">
             <form th:action="@{/products/new}" method="post" th:object="${product}">

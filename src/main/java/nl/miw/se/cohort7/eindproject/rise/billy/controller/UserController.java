@@ -45,6 +45,7 @@ public class UserController {
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
         model.addAttribute("billyUser", new BillyUser());
+        model.addAttribute("headerText", "New User");
         return "userForm";
     }
 
@@ -83,6 +84,7 @@ public class UserController {
     protected String showUserForm(@PathVariable("billyUserId") Long userId, Model model) {
         BillyUserDto billyUserDto = userService.findByUserId(userId);
         model.addAttribute("billyUser", billyUserDto);
+        model.addAttribute("headerText", "Edit");
         return "userForm";
     }
 
