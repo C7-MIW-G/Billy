@@ -44,6 +44,8 @@
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Edit</button></a>
               <a th:href="@{/users/delete/{userId}(userId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Delete</button></a>
+              <a th:href="@{/users/changePassword/{billyUserId}(billyUserId=${billyUserDto.userId})}"
+                 sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Password change</button></a>
             </div>
             <button onclick="history.back()">Return</button>
           </div>

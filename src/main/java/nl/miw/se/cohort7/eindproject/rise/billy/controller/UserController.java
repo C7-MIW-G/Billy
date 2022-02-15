@@ -1,6 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -55,7 +56,7 @@ public class UserController {
         if (result.hasErrors()) {
             return "userForm";
         }
-        if (!userService.mayWriteToDB(billyUser)){
+        if (!userService.mayWriteToDB(billyUser)) {
             result.rejectValue("username", "error.user", "please insert a unique username");
             return "userForm";
         }
@@ -108,4 +109,27 @@ public class UserController {
         return "redirect:/users";
     }
 
+    @GetMapping("/changePassword/{billyUserId}")
+    protected String changePassword(@PathVariable("billyUserId") Long billyUserId, Model model) {
+
+        ChangePassword changePassword = new ChangePassword();
+        changePassword.setUserId(billyUserId);
+
+        model.addAttribute("changePassword", changePassword);
+
+        return "changePasswordForm";
+    }
+
+    @PostMapping("/changePassword/{billyUserId}")
+    protected String changePassword(@ModelAttribute("changePassword") ChangePassword changePassword, BindingResult result) {
+        if (result.hasErrors()) {
+            return "changePasswordForm";
+        }
+        if (!changePassword.confirmNewPassword()) {
+            return "changePasswordForm";
+        }
+        changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword()));
+        userService.updatePassword(changePassword);
+        return "redirect:/users";
+    }
 }
