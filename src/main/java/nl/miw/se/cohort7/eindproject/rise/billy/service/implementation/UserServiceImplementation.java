@@ -79,6 +79,6 @@ public class UserServiceImplementation implements UserService {
     @Override
     public void delete(Long userId) {
         Optional<BillyUser> billyUser = userRepository.findById(userId);
-        userRepository.delete(billyUser.get());
+        billyUser.ifPresent(user -> userRepository.delete(user));
     }
 }
