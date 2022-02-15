@@ -182,3 +182,46 @@ a:visited {
 .fontBold{
     font-weight: 590;
 }
+
+
+/*modal-test*/
+.customModal{
+    display: none;
+    /*display: block; */
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    background-color: rgba(233, 150, 122, 0.4);
+}
+.modalContainer{
+    padding: 2.5rem;
+    text-align: center;
+    background-color: #fcfcfc;
+    margin: 25vh auto auto auto;
+    border: 2px solid dimgrey;
+    width: fit-content;
+    border-radius: 0.25rem;
+}
+.modalHeader{
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+.grid-modalButtons-parent{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: fit-content;
+    margin: 0.25rem auto;
+}
+.modalButton{
+    padding: 0.5rem 2rem;
+}
+.buttonCancel{
+    background-color: #cbcbcb;
+}
+.buttonConfirm-warning{
+    color: white;
+    background-color: #d70000;
+}
