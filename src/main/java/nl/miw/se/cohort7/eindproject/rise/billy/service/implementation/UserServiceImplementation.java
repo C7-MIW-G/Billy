@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.service.implementation;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.stereotype.Service;
@@ -80,5 +81,25 @@ public class UserServiceImplementation implements UserService {
     public void delete(Long userId) {
         Optional<BillyUser> billyUser = userRepository.findById(userId);
         billyUser.ifPresent(user -> userRepository.delete(user));
+    }
+
+    @Override
+    public boolean confirmPassword(ChangePassword changePassword) {
+        Optional<BillyUser> billyUser = userRepository.findById(changePassword.getUserId());
+        if (billyUser.isEmpty()) {
+            return false;
+        }
+        return billyUser.get().getPassword().equals(changePassword.getOldPassword());
+    }
+
+    @Override
+    public void updatePassword(ChangePassword changePassword) {
+        Optional<BillyUser> billyUser = userRepository.findById(changePassword.getUserId());
+        if (billyUser.isEmpty()) {
+            return;
+        }
+        BillyUser billyUser1 = billyUser.get();
+        billyUser1.setPassword(changePassword.getNewPassword());
+        userRepository.save(billyUser1);
     }
 }
