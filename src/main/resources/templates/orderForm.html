@@ -42,9 +42,28 @@
             </div>
         </div>
         <div class="receipt-child receipt-paymentSection">
-
+            <div class="new-button">
+                <a id="directPayButton">
+                    <button>Direct pay</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="directPayModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Direct pay</div>
+        <p>Please confirm direct pay</p>
+        <p>
+            <span class="totalPrice">Total Price:</span>
+            <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+        </p>
+        <div class="grid-modalButtons-parent">
+            <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
+            <a id="modalDirectPay" class="modalButton buttonConfirm-warning" th:href="@{/orders/directPay}">Confirm</a>
         </div>
     </div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
+<script type="text/javascript" th:src="@{/js/directPay.js}"></script>
 </body>

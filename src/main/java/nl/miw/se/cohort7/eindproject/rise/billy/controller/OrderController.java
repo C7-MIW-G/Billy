@@ -58,4 +58,10 @@ public class OrderController {
         BarOrder.removeProductFromOrder(optionalProduct.get());
         return "redirect:/orders/new";
     }
+
+    @GetMapping("/orders/directPay")
+    protected String doDirectPay() {
+        BarOrder.clearActiveOrder();
+        return "redirect:/orders/new";
+    }
 }

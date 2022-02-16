@@ -60,5 +60,9 @@ public class BarOrder {
             activeOrder.productMap.put(product, activeOrder.productMap.get(product) - 1);
         }
     }
+
+    public static void clearActiveOrder() {
+        activeOrder = null;
+    }
 }
 
