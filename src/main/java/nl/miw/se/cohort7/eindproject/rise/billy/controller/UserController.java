@@ -63,7 +63,7 @@ public class UserController {
         if (billyUser.getUserRole() == null) {
             billyUser.setUserRole("ROLE_CUSTOMER");
         }
-        if (billyUser.getUserRole().equals("ROLE_CUSTOMER")) {
+        if (billyUser.getUserRole().equals("ROLE_CUSTOMER") || billyUser.getPassword().equals("")) {
             billyUser.setRandomPassword();
         }
         if (billyUser.getPassword().length() < BillyUser.MINIMUM_PASSWORD_LENGTH) {

@@ -21,21 +21,25 @@
         <li><a class="navTop-items"
                th:href="@{/users/details/{userId}(userId=${#authentication.getPrincipal().getUserId()})}"
                th:text="${#authentication.getPrincipal().getDisplayName()}" sec:authorize="hasRole('ROLE_NOT_ADMIN')"></a></li>
-        <li><div class="navTop-items">Modal</div></li>
-        <li><a class="navTop-items navTop-right"th:href="@{/logout}">Logout</a></li>
+        <li><div id="logoutButton" class="navTop-items">Modal</div></li>
+        <li><a class="navTop-items navTop-right" th:href="@{/logout}">Logout</a></li>
     </div>
 </ul>
 
-<div class="customModal" th:fragment="logoutModal">
+<div id="logoutModal" class="customModal" th:fragment="logoutModal">
     <div class="modalContainer">
         <div class="modalHeader">Logout</div>
         <p>Are you sure you want to logout?</p>
         <div class="grid-modalButtons-parent">
-            <div class="modalButton buttonCancel">Cancel</div>
-            <div class="modalButton buttonConfirm-warning">Confirm</div>
+            <div id="modalCancel" class="modalButton buttonCancel">Cancel</div>
+            <a id="modalLogout" class="modalButton buttonConfirm-warning"
+               th:href="@{/logout}">Confirm</a>
+
         </div>
     </div>
 </div>
+
+
 
 <div th:fragment="bottomScripts">
     <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
