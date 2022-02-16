@@ -5,7 +5,6 @@ import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
 
