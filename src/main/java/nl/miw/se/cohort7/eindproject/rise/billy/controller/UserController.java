@@ -42,6 +42,13 @@ public class UserController {
         return "userOverview";
     }
 
+    @GetMapping("/balances")
+    @Secured("ROLE_BAR MANAGER")
+    protected String showUserBalanceOverview(Model model) {
+        model.addAttribute("allBillyUsers", userService.findAll());
+        return "userBalanceOverview";
+    }
+
     @GetMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
@@ -77,6 +84,7 @@ public class UserController {
             return "userForm";
         }
         billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
+        billyUser.setAccountBalance(0.0);
         userService.save(billyUser);
         return "redirect:/users";
     }
@@ -134,4 +142,6 @@ public class UserController {
         userService.updatePassword(changePassword);
         return "redirect:/users";
     }
+
+
 }

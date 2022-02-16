@@ -28,6 +28,8 @@ public class BillyUserDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthdate;
 
+    private double accountBalance;
+
     public String userRoleDisplayString() {
         switch (userRole) {
             case "ROLE_BAR MANAGER":
@@ -39,6 +41,10 @@ public class BillyUserDto {
             default:
                 return "Unknown";
         }
+    }
+
+    public String getAccountBalanceDisplayString(double accountBalance){
+        return String.format("\u20ac %.2f", accountBalance);
     }
 
 }

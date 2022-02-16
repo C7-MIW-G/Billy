@@ -37,6 +37,10 @@
             <div>Role:</div>
             <div th:text="${billyUserDto.userRoleDisplayString()}"></div>
           </div>
+          <div class="grid-item-parent">
+            <div>Account balance:</div>
+            <div th:text="${billyUserDto.getAccountBalanceDisplayString(billyUserDto.accountBalance)}"></div>
+          </div>
         </li>
         <li>
           <div class="item-buttons grid-buttons-parent">
