@@ -43,8 +43,8 @@ html, body {
 .navTop-right{
     border-left: 2px solid #A0B4CE;
 }
-.navTop li a:hover,
-.navTop li a:focus{
+.navTop div li a:hover,
+.navTop div li a:focus{
     background-color: #A0B4CE;
 }
 /*container*/
@@ -180,6 +180,9 @@ a:visited {
 }
 .fontBold{
     font-weight: 590;
+}
+.pointer{
+    cursor: pointer;
 }
 
 
