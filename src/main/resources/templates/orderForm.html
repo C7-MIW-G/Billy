@@ -13,11 +13,12 @@
         <div class="productList grid-productAssortment-child">
             <ul class="unordered-list" th:each="product : ${allProducts}">
                 <li><a th:href="@{/orders/add/{productId}(productId=${product.productId})}">
-                    <div class="grid-product-parent">
-                        <div class="productName" th:text="${product.getProductName()}"></div>
-                        <div class="productPrice" th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></div>
-                    </div>
-                </a></li>
+                        <div class="grid-product-parent">
+                            <div class="productName" th:text="${product.getProductName()}"></div>
+                            <div class="productPrice" th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></div>
+                        </div>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
