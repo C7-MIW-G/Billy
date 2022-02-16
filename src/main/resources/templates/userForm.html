@@ -23,7 +23,7 @@
                             <div th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></div>
                         </div>
                     </li>
-                    <li>
+                    <li th:style="${headerText == 'New User' ? 'visible' : 'display:none'}">
                         <div class="grid-item-parent">
                             <div><label for="password">Password</label></div>
                             <div><input id="password" type="password" th:field="*{password}"></div>
