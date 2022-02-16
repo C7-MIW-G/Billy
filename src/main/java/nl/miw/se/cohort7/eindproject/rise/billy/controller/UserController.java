@@ -121,11 +121,13 @@ public class UserController {
     }
 
     @PostMapping("/changePassword/{billyUserId}")
-    protected String changePassword(@ModelAttribute("changePassword") ChangePassword changePassword, BindingResult result) {
+    protected String changePassword(@Valid @ModelAttribute("changePassword") ChangePassword changePassword, BindingResult result) {
         if (result.hasErrors()) {
             return "changePasswordForm";
         }
         if (!changePassword.confirmNewPassword()) {
+            result.rejectValue("newPasswordConfirmation", "error.newPasswordConfirmation",
+                    "Passwords should match");
             return "changePasswordForm";
         }
         changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword()));

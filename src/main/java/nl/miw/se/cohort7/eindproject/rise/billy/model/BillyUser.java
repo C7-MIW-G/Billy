@@ -48,6 +48,7 @@ public class BillyUser {
     @Column(nullable = false, unique = true)
     private String username;
 
+    //Validation in Controller because customer accounts have auto generated passwords
     private String password;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")

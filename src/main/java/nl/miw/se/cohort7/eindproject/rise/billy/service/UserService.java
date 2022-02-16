@@ -19,7 +19,5 @@ public interface UserService {
 
     void delete(Long userId);
 
-    boolean confirmPassword(ChangePassword changePassword);
-
     void updatePassword(ChangePassword changePassword);
 }
