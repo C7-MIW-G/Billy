@@ -84,15 +84,6 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public boolean confirmPassword(ChangePassword changePassword) {
-        Optional<BillyUser> billyUser = userRepository.findById(changePassword.getUserId());
-        if (billyUser.isEmpty()) {
-            return false;
-        }
-        return billyUser.get().getPassword().equals(changePassword.getOldPassword());
-    }
-
-    @Override
     public void updatePassword(ChangePassword changePassword) {
         Optional<BillyUser> billyUser = userRepository.findById(changePassword.getUserId());
         if (billyUser.isEmpty()) {

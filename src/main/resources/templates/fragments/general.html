@@ -21,8 +21,7 @@
         <li><a class="navTop-items"
                th:href="@{/users/details/{userId}(userId=${#authentication.getPrincipal().getUserId()})}"
                th:text="${#authentication.getPrincipal().getDisplayName()}" sec:authorize="hasRole('ROLE_NOT_ADMIN')"></a></li>
-        <li><div id="logoutButton" class="navTop-items">Modal</div></li>
-        <li><a class="navTop-items navTop-right" th:href="@{/logout}">Logout</a></li>
+        <li><a id="logoutButton" class="navTop-items navTop-right pointer">Logout</a></li>
     </div>
 </ul>
 
@@ -34,7 +33,6 @@
             <div id="modalCancel" class="modalButton buttonCancel">Cancel</div>
             <a id="modalLogout" class="modalButton buttonConfirm-warning"
                th:href="@{/logout}">Confirm</a>
-
         </div>
     </div>
 </div>
