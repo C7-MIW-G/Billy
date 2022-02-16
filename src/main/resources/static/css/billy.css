@@ -131,6 +131,12 @@ html, body {
     padding-top: 0.5rem;
     padding-left: 0.75rem;
 }
+
+.text-center {
+    text-align: center !important;
+    position: relative;
+    top: 12%;
+}
 .itemViewList ul:last-child{
     padding-bottom: 0.5rem;
 }
@@ -227,4 +233,25 @@ a:visited {
 .buttonConfirm-warning{
     color: white;
     background-color: #d70000;
+}
+
+.buttonConfirm {
+    color: white;
+    background-color: lightblue;
+    margin: 0;
+    text-align: left;
+    position: relative;
+    left: 45%;
+}
+
+.center-emoji {
+    font-size: 50px;
+    position: relative;
+    left: 46%;
+    top: 20%;
+    font-size: 100px;
+}
+.error-code-center {
+    text-align: center !important;
+    position: relative;
 }
