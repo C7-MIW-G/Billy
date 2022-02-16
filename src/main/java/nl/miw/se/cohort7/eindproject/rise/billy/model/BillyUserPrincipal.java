@@ -31,12 +31,16 @@ public class BillyUserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return billyUser.getPassword();
     }
 
     @Override
     public String getUsername() {
         return billyUser.getUsername();
+    }
+
+    public String getDisplayName(){
+        return billyUser.getName();
     }
 
     public long getUserId(){
