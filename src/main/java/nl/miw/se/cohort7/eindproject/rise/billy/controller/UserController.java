@@ -141,7 +141,5 @@ public class UserController {
         changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword()));
         userService.updatePassword(changePassword);
         return "redirect:/users";
-    }
-
-
+            }
 }

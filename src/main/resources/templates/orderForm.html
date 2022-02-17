@@ -13,11 +13,11 @@
         <div class="productList grid-productAssortment-child">
             <ul class="unordered-list" th:each="product : ${allProducts}">
                 <li><a th:href="@{/orders/add/{productId}(productId=${product.productId})}">
-                        <div class="grid-product-parent">
-                            <div class="productName" th:text="${product.getProductName()}"></div>
-                            <div class="productPrice" th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></div>
-                        </div>
-                    </a>
+                    <div class="grid-product-parent">
+                        <div class="productName" th:text="${product.getProductName()}"></div>
+                        <div class="productPrice" th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></div>
+                    </div>
+                </a>
                 </li>
             </ul>
         </div>
@@ -37,19 +37,26 @@
                     </a></li>
                 </ul>
             </div>
-            <div class="receipt-TotalPrice grid-product-parent">
+            <div class="grid-footer-receipt receipt-TotalPrice">
+                <div>
+                <span class="bartender">Bartender:</span>
+                <span th:href="@{/users/details/{userId}(userId=${#authentication.getPrincipal().getUserId()})}"
+                      th:text="${#authentication.getPrincipal().getDisplayName()}"></span>
+            </div>
+            <div class="totalPrice">
                 <span class="totalPrice">Total Price:</span>
                 <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
             </div>
         </div>
-        <div class="receipt-child receipt-paymentSection">
-            <div class="new-button">
-                <a id="directPayButton">
-                    <button>Direct pay</button>
-                </a>
-            </div>
+    </div>
+    <div class="receipt-child receipt-paymentSection">
+        <div class="new-button">
+            <a id="directPayButton">
+                <button>Direct pay</button>
+            </a>
         </div>
     </div>
+</div>
 </div>
 <div id="directPayModal" class="customModal">
     <div class="modalContainer">
