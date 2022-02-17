@@ -2,14 +2,18 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -41,6 +45,7 @@ public class OrderController {
         model.addAttribute("barOrder", BarOrder.activeOrder);
         model.addAttribute("allProducts", productService.findAll());
         model.addAttribute("allUsers", userService.findAll());
+        model.addAttribute("selectedUser", new BillyUserDto());
         return "orderForm";
     }
 
@@ -70,9 +75,12 @@ public class OrderController {
         return "redirect:/orders/new";
     }
 
-    @GetMapping("/orders/accountPay/{userId}")
-    protected String doAccountPay(@PathVariable("userId") Long userId) {
-        userService.subtractFromBalance(userId, BarOrder.activeOrder.calculateTotalOrderPrice());
+    @PostMapping("/orders/accountPay")
+    protected String doAccountPay(@ModelAttribute("selectedUser") BillyUserDto selectedUser, BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/orders/new";
+        }
+        userService.subtractFromBalance(selectedUser.getUserId(), BarOrder.activeOrder.calculateTotalOrderPrice());
         BarOrder.clearActiveOrder();
         return "redirect:/orders/new";
     }

@@ -55,16 +55,11 @@
                 </a>
             </div>
             <div>
-                <ul th:each="user : ${allUsers}">
-                    <li>
-                        <a th:text="${user.getName()}" th:href="@{/orders/accountPay/{userId}(userId=${user.userId})}"></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="new-button">
-                <a id="accountPayButton">
-                    <button>Account pay</button>
-                </a>
+                <div class="new-button">
+                    <a id="accountPayButton">
+                        <button>Account pay</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -84,6 +79,30 @@
         </div>
     </div>
 </div>
+<div id="accountPayModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Account pay</div>
+        <p>Please select a customer</p>
+        <form th:action="@{/orders/accountPay}" method="post" th:object="${selectedUser}">
+            <select th:field="*{userId}">
+                <option th:each="user : ${allUsers}" th:text="${user.getName()}" th:value="${user.getUserId()}"></option>
+            </select>
+            <p>
+                <span class="totalPrice">Total Price:</span>
+                <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+            </p>
+
+            <div class="grid-modalButtons-parent">
+                <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
+
+                <input type="submit" class="modalButton buttonConfirm-warning" value="Confirm">
+
+            </div>
+
+        </form>
+    </div>
+</div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 <script type="text/javascript" th:src="@{/js/directPay.js}"></script>
+<script type="text/javascript" th:src="@{/js/accountPay.js}"></script>
 </body>
