@@ -37,7 +37,7 @@ public class BillyUserDto {
             case "ROLE_BARTENDER":
                 return "Bartender";
             case "ROLE_CUSTOMER":
-                return "Customer";
+                return " ";
             default:
                 return "Unknown";
         }

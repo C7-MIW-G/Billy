@@ -14,17 +14,15 @@
             <div class="new-button">
                 <a th:href="@{/users/new}"><button>Add a new user</button></a>
             </div>
-            <div class="balance-button">
-                <a th:href="@{/users/balances}" sec:authorize="hasRole('ROLE_BAR MANAGER')">
-                    <button>User balances</button></a>
-            </div>
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="billyUserDto : ${allBillyUsers}">
                 <li><a th:href="@{/users/details/{userId}(userId=${billyUserDto.userId})}">
                     <div class="grid-user-parent">
                         <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
-                        <div class="grid-user-child-right" th:text="${billyUserDto.userRoleDisplayString()}"></div>
+                        <div class="grid-user-child-center" th:text="${billyUserDto.userRoleDisplayString()}"></div>
+                        <div class="grid-user-child-right"  th:text="${billyUserDto.getAccountBalanceDisplayString
+                        (billyUserDto.accountBalance)}" sec:authorize="hasRole('ROLE_BAR MANAGER')"></div>
                     </div>
                 </a></li>
             </ul>
