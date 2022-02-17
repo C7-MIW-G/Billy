@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>CHANGE THIS!</title>
+</head>
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+<div th:replace="fragments/general :: logoutModal"></div>
+
+
+<div class="billyContainer">
+    <div class="itemView grid-itemView-parent">
+        <div class="itemViewListHead">
+            <div class="headStyle" th:text="${headerText}"></div>
+        </div>
+        <div class="itemViewList">
+            <form th:action="@{/assortment/new}" method="post" th:object="${newCategory}">
+                <ul class="unordered-list">
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="name">Name</label></div>
+                            <div><input id="name" type="text" required maxlength="64" th:field="*{categoryName}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('categoryName')}" th:errorclass="error" th:errors="*{categoryName}"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="item-buttons grid-buttons-parent">
+                            <div>
+                                <input type="hidden" th:field="*{categoryId}">
+                                <input type="submit" value="Save">
+                            </div>
+                            <button onclick="history.back()">Return</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>
+</html>
