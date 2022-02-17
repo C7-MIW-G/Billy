@@ -48,6 +48,18 @@
                     <button>Direct pay</button>
                 </a>
             </div>
+            <div>
+                <ul th:each="user : ${allUsers}">
+                    <li>
+                        <a th:text="${user.getName()}" th:href="@{/orders/accountPay/{userId}(userId=${user.userId})}"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="new-button">
+                <a id="accountPayButton">
+                    <button>Account pay</button>
+                </a>
+            </div>
         </div>
     </div>
 </div>

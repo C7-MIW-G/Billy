@@ -83,6 +83,12 @@ public class BillyUser {
         return Objects.hash(userId);
     }
 
+    public void payFromBalance(double amount) {
+        if (amount < 0) {
+            return;
+        }
+        this.accountBalance -= amount;
+    }
 }
     
 

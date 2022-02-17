@@ -43,8 +43,24 @@ public class BillyUserDto {
         }
     }
 
-    public String getAccountBalanceDisplayString(double accountBalance){
+    public String getAccountBalanceDisplayString(double accountBalance) {
         return String.format("\u20ac %.2f", accountBalance);
+    }
+
+
+    public void payFromBalance(double amount) {
+        if (amount < 0) {
+            return;
+        }
+        this.accountBalance -= amount;
+    }
+
+    public void makeDeposit(double amount) {
+        if (amount < 0) {
+            return;
+        }
+        this.accountBalance += amount;
+
     }
 
 }

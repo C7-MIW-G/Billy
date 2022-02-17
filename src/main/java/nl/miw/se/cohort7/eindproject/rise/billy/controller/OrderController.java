@@ -1,8 +1,10 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,9 +25,11 @@ import java.util.Optional;
 public class OrderController {
 
     private ProductService productService;
+    private UserService userService;
 
-    public OrderController(ProductService productService) {
+    public OrderController(ProductService productService, UserService userService) {
         this.productService = productService;
+        this.userService = userService;
     }
 
     @GetMapping({"/", "/orders/new"})
@@ -36,6 +40,7 @@ public class OrderController {
         }
         model.addAttribute("barOrder", BarOrder.activeOrder);
         model.addAttribute("allProducts", productService.findAll());
+        model.addAttribute("allUsers", userService.findAll());
         return "orderForm";
     }
 
@@ -61,6 +66,13 @@ public class OrderController {
 
     @GetMapping("/orders/directPay")
     protected String doDirectPay() {
+        BarOrder.clearActiveOrder();
+        return "redirect:/orders/new";
+    }
+
+    @GetMapping("/orders/accountPay/{userId}")
+    protected String doAccountPay(@PathVariable("userId") Long userId) {
+        userService.subtractFromBalance(userId, BarOrder.activeOrder.calculateTotalOrderPrice());
         BarOrder.clearActiveOrder();
         return "redirect:/orders/new";
     }
