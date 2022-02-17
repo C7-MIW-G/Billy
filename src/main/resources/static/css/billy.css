@@ -146,7 +146,7 @@ html, body {
 }
 .grid-item-parent{
     display: grid;
-    grid-template-columns: 8rem calc(100% - 8rem);
+    grid-template-columns: 10rem calc(100% - 10rem);
 }
 .grid-buttons-parent{
     display: grid;
