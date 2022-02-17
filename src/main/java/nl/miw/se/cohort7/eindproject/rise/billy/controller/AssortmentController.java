@@ -1,8 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Category;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
-import nl.miw.se.cohort7.eindproject.rise.billy.repository.CategoryRepository;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.CategoryDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,33 +22,34 @@ import javax.validation.Valid;
 @RequestMapping("/assortment")
 public class AssortmentController {
 
-    private CategoryRepository categoryRepository;
+    private AssortmentService assortmentService;
 
-    public AssortmentController(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
+    public AssortmentController(AssortmentService assortmentService) {
+        this.assortmentService = assortmentService;
     }
 
     @GetMapping("")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserOverview(Model model) {
-        model.addAttribute("allCategories", categoryRepository.findAll());
+        model.addAttribute("allCategories", assortmentService.findAllCategories());
         return "assortmentOverview";
     }
 
     @GetMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showProductForm(Model model) {
-        model.addAttribute("newCategory", new Category());
+        model.addAttribute("newCategory", new CategoryDto());
         model.addAttribute("headerText", "New Category");
         return "assortmentForm";
     }
 
     @PostMapping("/new")
-    protected String saveOrUpdateProduct(@Valid @ModelAttribute("newCategory") Category category, BindingResult result) {
+    protected String saveOrUpdateProduct(@Valid @ModelAttribute("newCategory") CategoryDto category,
+                                         BindingResult result) {
         if (result.hasErrors()) {
             return "assortmentForm";
         }
-        categoryRepository.save(category);
+        assortmentService.saveCategory(category);
         return "redirect:/assortment";
     }
 }

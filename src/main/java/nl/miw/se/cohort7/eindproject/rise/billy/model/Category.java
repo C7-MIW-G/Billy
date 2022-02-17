@@ -22,8 +22,8 @@ public class Category {
     @GeneratedValue
     private long categoryId;
 
-    @Size(min = 1, message = "The name of the product should be at least 1 character")
-    @Size(max = 32, message = "The name of the product should be less than 33 characters")
+    @Size(min = 1, message = "The name of the category is not at least 1 character")
+    @Size(max = 32, message = "The name of the category is not less than 33 characters")
     @Column(nullable = false)
     private String categoryName;
 }
