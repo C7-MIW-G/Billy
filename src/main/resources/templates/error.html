@@ -19,6 +19,7 @@
 
     <span th:if="${errorCode.contains('403')}" class="center-emoji">&#128274;</span>
     <span th:if="${errorCode.contains('404')}" class="center-emoji">&#10060;</span>
+    <span th:if="${errorCode.contains('500')}" class="center-emoji">&#128125;</span>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

@@ -39,6 +39,12 @@
           </div>
         </li>
         <li>
+          <div class="grid-item-parent">
+            <div>Account balance:</div>
+            <div th:text="${billyUserDto.getAccountBalanceDisplayString(billyUserDto.accountBalance)}"></div>
+          </div>
+        </li>
+        <li>
           <div class="item-buttons grid-buttons-parent">
             <div>
               <a th:href="@{/users/update/{userId}(userId=${billyUserDto.userId})}"

@@ -55,6 +55,8 @@ public class BillyUser {
     @NotNull(message = "Please provide a date.")
     private Date birthdate;
 
+    private double accountBalance;
+
     public void setRandomPassword() {
         StringBuilder randomPasswordBuilder = new StringBuilder();
         for (int i = 0; i < RANDOM_PASSWORD_LENGTH; i++) {
@@ -80,6 +82,7 @@ public class BillyUser {
     public int hashCode() {
         return Objects.hash(userId);
     }
+
 }
     
 
