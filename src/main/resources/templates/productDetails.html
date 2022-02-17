@@ -30,7 +30,7 @@
                     <div class="item-buttons grid-buttons-parent">
                         <div>
                             <a th:href="@{/products/update/{productId}(productId=${product.productId})}"><button>Edit</button></a>
-                            <a th:href="@{/products/delete/{productId}(productId=${product.productId})}"><button>Delete</button></a>
+                            <a id="deleteButton"><button>Delete</button></a>
                         </div>
                         <button onclick="history.back()">Return</button>
                     </div>
@@ -39,6 +39,20 @@
         </div>
     </div>
 </div>
+<div id="deleteModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Delete</div>
+        <p>
+            <span class="totalPrice">Are you sure you want to delete </span>
+            <span class="text" th:text="${product.getProductName()}"></span>
+            <span class="text">?</span>
+        </p>
+        <div class="grid-modalButtons-parent">
+            <div id="cancelDelete" class="modalButton buttonCancel">Cancel</div>
+            <a id="delete" class="modalButton buttonConfirm-warning"
+               th:href="@{/products/delete/{productId}(productId=${product.productId})}">Delete</a>
+        </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
+    <script type="text/javascript" th:src="@{/js/deleteConfirm.js}"></script>
 </body>
 </html>
