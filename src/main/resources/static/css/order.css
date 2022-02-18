@@ -66,6 +66,7 @@
 .receipt-child{
     margin-left: 5px;
     margin-right: 5px;
+    margin-bottom: 10px;
     width: calc(100% - 10px);
 }
 .receipt-orderList{
@@ -105,6 +106,18 @@
 }
 .totalPrice{
     text-align: right;
+}
+
+.bartender{
+    text-align: left;
+}
+
+.bartenderName{
+}
+
+.grid-footer-receipt{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
 }
 .receipt-paymentSection{
     margin-bottom: 5px;

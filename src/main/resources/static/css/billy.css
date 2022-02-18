@@ -100,6 +100,10 @@ html, body {
     margin-left: auto;
 }
 
+.balance-button {
+    margin-left: auto;
+}
+
 /*details*/
 .itemView{
     margin: max(5vh, 0.25rem) auto;
@@ -131,12 +135,18 @@ html, body {
     padding-top: 0.5rem;
     padding-left: 0.75rem;
 }
+
+.text-center {
+    text-align: center !important;
+    position: relative;
+    top: 12%;
+}
 .itemViewList ul:last-child{
     padding-bottom: 0.5rem;
 }
 .grid-item-parent{
     display: grid;
-    grid-template-columns: 8rem calc(100% - 8rem);
+    grid-template-columns: 10rem calc(100% - 10rem);
 }
 .grid-buttons-parent{
     display: grid;
@@ -227,4 +237,25 @@ a:visited {
 .buttonConfirm-warning{
     color: white;
     background-color: #d70000;
+}
+
+.buttonConfirm {
+    color: white;
+    background-color: lightblue;
+    margin: 0;
+    text-align: left;
+    position: relative;
+    left: 45%;
+}
+
+.center-emoji {
+    font-size: 50px;
+    position: relative;
+    left: 46%;
+    top: 20%;
+    font-size: 100px;
+}
+.error-code-center {
+    text-align: center !important;
+    position: relative;
 }

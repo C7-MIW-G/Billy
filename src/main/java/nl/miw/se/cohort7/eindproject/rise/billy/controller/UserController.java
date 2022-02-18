@@ -1,7 +1,9 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
+import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -42,6 +44,13 @@ public class UserController {
         return "userOverview";
     }
 
+    @GetMapping("/balances")
+    @Secured("ROLE_BAR MANAGER")
+    protected String showUserBalanceOverview(Model model) {
+        model.addAttribute("allBillyUsers", userService.findAll());
+        return "userBalanceOverview";
+    }
+
     @GetMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
@@ -77,6 +86,7 @@ public class UserController {
             return "userForm";
         }
         billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
+        billyUser.setAccountBalance(0.0);
         userService.save(billyUser);
         return "redirect:/users";
     }
@@ -133,5 +143,5 @@ public class UserController {
         changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword()));
         userService.updatePassword(changePassword);
         return "redirect:/users";
-    }
+            }
 }

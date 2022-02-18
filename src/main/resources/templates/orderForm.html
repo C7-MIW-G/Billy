@@ -17,7 +17,8 @@
                         <div class="productName" th:text="${product.getProductName()}"></div>
                         <div class="productPrice" th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></div>
                     </div>
-                </a></li>
+                </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -36,15 +37,72 @@
                     </a></li>
                 </ul>
             </div>
-            <div class="receipt-TotalPrice grid-product-parent">
+            <div class="grid-footer-receipt receipt-TotalPrice">
+                <div>
+                <span class="bartender">Bartender:</span>
+                <span th:href="@{/users/details/{userId}(userId=${#authentication.getPrincipal().getUserId()})}"
+                      th:text="${#authentication.getPrincipal().getDisplayName()}"></span>
+            </div>
+            <div class="totalPrice">
                 <span class="totalPrice">Total Price:</span>
                 <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
             </div>
         </div>
         <div class="receipt-child receipt-paymentSection">
-
+            <div class="new-button">
+                <a id="directPayButton">
+                    <button>Direct pay</button>
+                </a>
+            </div>
+            <div>
+                <div class="new-button">
+                    <a id="accountPayButton">
+                        <button>Account pay</button>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+</div>
+<div id="directPayModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Direct pay</div>
+        <p>Please confirm direct pay</p>
+        <p>
+            <span class="totalPrice">Total Price:</span>
+            <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+        </p>
+        <div class="grid-modalButtons-parent">
+            <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
+            <a id="modalDirectPay" class="modalButton buttonConfirm-warning" th:href="@{/orders/directPay}">Confirm</a>
+        </div>
+    </div>
+</div>
+<div id="accountPayModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Account pay</div>
+        <p>Please select a customer</p>
+        <form th:action="@{/orders/accountPay}" method="post" th:object="${selectedUser}">
+            <select th:field="*{userId}">
+                <option th:each="user : ${allUsers}" th:text="${user.getName()}" th:value="${user.getUserId()}"></option>
+            </select>
+            <p>
+                <span class="totalPrice">Total Price:</span>
+                <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+            </p>
+
+            <div class="grid-modalButtons-parent">
+                <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
+
+                <input type="submit" class="modalButton buttonConfirm-warning" value="Confirm">
+
+            </div>
+
+        </form>
+    </div>
+</div>
 <div th:replace="fragments/general :: bottomScripts"></div>
+<script type="text/javascript" th:src="@{/js/directPay.js}"></script>
+<script type="text/javascript" th:src="@{/js/accountPay.js}"></script>
 </body>

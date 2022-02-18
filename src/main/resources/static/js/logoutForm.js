@@ -1,7 +1,6 @@
 var logoutModal = document.getElementById('logoutModal');
 var logoutButton = document.getElementById('logoutButton');
 var modalCancel = document.getElementById('modalCancel');
-var modalLogout = document.getElementById('modalLogout');
 
 
 function openModal(modal){

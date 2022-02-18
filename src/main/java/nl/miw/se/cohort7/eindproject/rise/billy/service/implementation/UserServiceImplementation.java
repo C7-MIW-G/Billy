@@ -7,6 +7,7 @@ import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,6 +57,7 @@ public class UserServiceImplementation implements UserService {
         billyUserDto.setName(billyUser.getName());
         billyUserDto.setUsername(billyUser.getUsername());
         billyUserDto.setBirthdate(billyUser.getBirthdate());
+        billyUserDto.setAccountBalance(billyUser.getAccountBalance());
 
         return billyUserDto;
     }
@@ -92,5 +94,16 @@ public class UserServiceImplementation implements UserService {
         BillyUser billyUser1 = billyUser.get();
         billyUser1.setPassword(changePassword.getNewPassword());
         userRepository.save(billyUser1);
+    }
+
+    @Override
+    public void subtractFromBalance(Long userId, double amount) {
+        Optional<BillyUser> billyUserOpt = userRepository.findById(userId);
+        if (billyUserOpt.isEmpty()) {
+            return;
+        }
+        BillyUser billyUser = billyUserOpt.get();
+        billyUser.payFromBalance(amount);
+        userRepository.save(billyUser);
     }
 }

@@ -18,17 +18,17 @@
                     <li>
                         <div class="grid-item-parent">
                             <div><label for="userName">E-mail</label></div>
-                            <div><input id="userName" type="email" required maxlength="65" minlength="8" th:field="*{username}"></div>
+                            <div><input id="userName" type="email" required maxlength="65" minlength="8" th:field="*{username}" placeholder="Type E-mail"></div>
                         </div>
                         <div class="grid-item-parent error-inputField">
                             <div></div>
                             <div th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></div>
                         </div>
                     </li>
-                    <li th:style="${headerText == 'New User' ? 'visible' : 'display:none'}">
+                    <li th:style="${billyUser.getUserId() == 0 ? 'visible' : 'display:none'}">
                         <div class="grid-item-parent">
                             <div><label for="password">Password</label></div>
-                            <div><input id="password" type="password" th:field="*{password}"></div>
+                            <div><input id="password" type="password" th:field="*{password}" placeholder="Type password"></div>
                         </div>
                         <div class="grid-item-parent error-inputField">
                             <div></div>
@@ -38,7 +38,7 @@
                     <li>
                         <div class="grid-item-parent">
                             <div><label for="name">Name</label></div>
-                            <div><input id="name" required type="text" maxlength="65" minlength="1" th:field="*{name}"></div>
+                            <div><input id="name" required type="text" maxlength="65" minlength="1" th:field="*{name}" placeholder="Type name"></div>
                         </div>
                         <div class="grid-item-parent error-inputField">
                             <div></div>

@@ -19,4 +19,6 @@ public interface UserService {
     void delete(Long userId);
 
     void updatePassword(ChangePassword changePassword);
+
+    void subtractFromBalance(Long userId, double calculateTotalOrderPrice);
 }

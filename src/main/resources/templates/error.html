@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>OOPS!</title>
+</head>
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+<div th:replace="fragments/general :: logoutModal"></div>
+
+<div class="billyContainer">
+    <div class="error-code-center"><h6 th:text="${errorCode.toString()}"></h6></div>
+
+    <h1 class="text-center">Something went wrong!</h1>
+
+    <div class="text-center"><h2 th:text="${error.toString()}"></h2></div>
+    <div class="text-center"><h2 th:text="${error2.toString()}"></h2></div>
+
+    <div class="text-center"><a class="text-center" th:href="@{/}">Go back to the home screen</a></div>
+
+    <span th:if="${errorCode.contains('403')}" class="center-emoji">&#128274;</span>
+    <span th:if="${errorCode.contains('404')}" class="center-emoji">&#10060;</span>
+    <span th:if="${errorCode.contains('500')}" class="center-emoji">&#128125;</span>
+</div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>
+</html>
