@@ -2,7 +2,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.CategoryDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -40,19 +39,18 @@ public class AssortmentController {
 
     @GetMapping("/categories/new")
     protected String showCategoryForm(Model model) {
-        model.addAttribute("newCategory", new CategoryDto());
-        model.addAttribute("headerText", "New Category");
+        model.addAttribute("category", new CategoryDto());
         return "assortmentForm";
     }
 
     @PostMapping("/categories/new")
-    protected String saveOrUpdateCategory(@Valid @ModelAttribute("newCategory") CategoryDto category,
+    protected String saveOrUpdateCategory(@Valid @ModelAttribute("category") CategoryDto category,
                                          BindingResult result) {
         if (result.hasErrors()) {
             return "assortmentForm";
         }
         assortmentService.saveCategory(category);
-        return "redirect:/assortment";
+        return "redirect:/assortment/categories/" + category.getCategoryId();
     }
 
     @GetMapping("/categories/{categoryId}")
@@ -68,62 +66,19 @@ public class AssortmentController {
         return "redirect:/assortment";
     }
 
-
-    //products
-    @GetMapping("/products")
-    protected String showProductOverview(Model model) {
-        model.addAttribute("allProducts", assortmentService.findAllProducts());
-        return "productOverview";
-    }
-
-    @GetMapping("/products/new/{categoryId}")
-    protected String showProductForm(@PathVariable("categoryId") Long categoryId, Model model){
+    @GetMapping("/categories/delete/{categoryId}")
+    protected String deleteCategory(@PathVariable("categoryId") Long categoryId){
         Optional<CategoryDto> optionalCategory = assortmentService.findCategoryById(categoryId);
-        if (optionalCategory.isPresent()) {
-            ProductDto product = new ProductDto();
-            product.setCategoryDto(optionalCategory.get());
-            model.addAttribute("product", product);
-            return "productForm";
-        }
-        return "redirect:/assortment/categories/" + categoryId;
-    }
-
-    @PostMapping("/products/save")
-    protected String saveOrUpdateProduct(@Valid @ModelAttribute("product") ProductDto product, BindingResult result) {
-        if (result.hasErrors()) {
-            return "productForm";
-        }
-        assortmentService.saveProduct(product);
-        return "redirect:/assortment/categories/" + product.getCategoryDto().getCategoryId();
-    }
-
-    @GetMapping("/products/update/{productId}")
-    protected String showProductFormUpdate(@PathVariable("productId") Long productId, Model model) {
-        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
-        if (optionalProduct.isPresent()){
-            model.addAttribute("product", optionalProduct.get());
-            return "productForm";
-        }
+        optionalCategory.ifPresent(categoryDto -> assortmentService.deleteCategory(categoryDto));
         return "redirect:/assortment";
     }
 
-    @GetMapping("/products/details/{productId}")
-    protected String showProductDetails(@PathVariable("productId") Long productId, Model model) {
-        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
-        if (optionalProduct.isPresent()){
-            model.addAttribute("product", optionalProduct.get());
-            return "productDetails";
-        }
-        return "redirect:/assortment";
-    }
-
-    @GetMapping("/products/delete/{productId}")
-    protected String deleteProduct(@PathVariable("productId") Long productId) {
-        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
-        if (optionalProduct.isPresent()) {
-            ProductDto product = optionalProduct.get();
-            assortmentService.deleteProduct(product);
-            return "redirect:/assortment/categories/" + product.getCategoryDto().getCategoryId();
+    @GetMapping("/categories/update/{categoryId}")
+    protected String deleteCategory(@PathVariable("categoryId") Long categoryId, Model model) {
+        Optional<CategoryDto> optionalCategory = assortmentService.findCategoryById(categoryId);
+        if (optionalCategory.isPresent()){
+            model.addAttribute("category", optionalCategory.get());
+            return "assortmentForm";
         }
         return "redirect:/assortment";
     }

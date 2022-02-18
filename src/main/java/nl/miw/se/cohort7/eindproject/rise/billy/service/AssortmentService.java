@@ -17,6 +17,9 @@ public interface AssortmentService {
 
     List<ProductDto> findAllProductOfCategory(Long id);
 
+    void deleteCategory(CategoryDto categoryDto);
+
+
     Optional<ProductDto> findByProductId(Long id);
 
     List<ProductDto> findAllProducts();

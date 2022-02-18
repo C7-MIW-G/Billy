@@ -13,7 +13,5 @@ public interface ProductService {
 
     List<Product> findAll();
 
-    void save(Product product);
-
-    void delete(Product product);
+    //BarOrder currently still uses this!
 }

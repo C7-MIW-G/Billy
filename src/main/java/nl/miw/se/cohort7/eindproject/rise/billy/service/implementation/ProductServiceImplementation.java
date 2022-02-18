@@ -32,14 +32,4 @@ public class ProductServiceImplementation implements ProductService {
     public Optional<Product> findByProductId(Long id) {
         return productRepository.findById(id);
     }
-
-    @Override
-    public void save(Product product) {
-        productRepository.save(product);
-    }
-
-    @Override
-    public void delete(Product product) {
-        productRepository.delete(product);
-    }
 }

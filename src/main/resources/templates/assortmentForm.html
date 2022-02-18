@@ -11,10 +11,10 @@
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
         <div class="itemViewListHead">
-            <div class="headStyle" th:text="${headerText}"></div>
+            <div class="headStyle" th:text="${category.getCategoryId() == 0 ? 'New Category' : 'Edit'}"></div>
         </div>
         <div class="itemViewList">
-            <form th:action="@{/assortment/categories/new}" method="post" th:object="${newCategory}">
+            <form th:action="@{/assortment/categories/new}" method="post" th:object="${category}">
                 <ul class="unordered-list">
                     <li>
                         <div class="grid-item-parent">
@@ -30,10 +30,18 @@
                     <li>
                         <div class="item-buttons grid-buttons-parent">
                             <div>
-                                <input type="hidden" th:field="*{categoryId}">
-                                <input type="submit" value="Save">
+                                <div>
+                                    <input type="hidden" th:field="*{categoryId}">
+                                    <input type="submit" value="Save">
+                                </div>
+                                <a th:href="@{/assortment/categories/delete/{categoryId}(categoryId=${category.categoryId})}"
+                                th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
+                                th:text="Delete">
+                                </a>
                             </div>
-                            <button onclick="history.back()">Return</button>
+                            <div>
+                                <a class="returnButton" th:href="@{/assortment/categories}" th:text="Return"></a>
+                            </div>
                         </div>
                     </li>
                 </ul>

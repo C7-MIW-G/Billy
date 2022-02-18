@@ -11,8 +11,11 @@
 <div class="billyContainer">
     <div class="overview grid-overview-parent">
         <div class="overviewListHead grid-overviewListHead-parent">
-            <div th:text="${category == null ? '' : category.categoryName}"></div>
-            <div class="new-button" th:style="${category == null ? 'display:none' : 'visible'}">
+            <div>
+                <a th:href="@{/assortment/categories/update/{categoryId}(categoryId=${category.categoryId})}"
+                   th:text="${category.categoryName}"></a>
+            </div>
+            <div class="new-button">
                 <a  th:href="@{/assortment/products/new/{categoryId}(categoryId=${category.categoryId})}"><button>+</button></a>
             </div>
         </div>

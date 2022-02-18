@@ -87,6 +87,13 @@ public class AssortmentServiceImplementation implements AssortmentService {
         return productList;
     }
 
+    @Override
+    public void deleteCategory(CategoryDto categoryDto) {
+        Category category = convertDtoToCategory(categoryDto);
+        if(category.getProducts().isEmpty()){
+            categoryRepository.delete(category);
+        }
+    }
 
 
     //Product-related

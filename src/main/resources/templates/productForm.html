@@ -12,7 +12,7 @@
         <div class="itemViewListHead">
             <div class="headStyle" th:text="${product.productId == 0 ? 'New Product' : 'Edit'}"></div>
         </div>
-        <div class="itemViewList">
+        <div class="itemViewList grid-form_returnButton-parent">
             <form th:action="@{/assortment/products/save}" method="post" th:object="${product}">
                 <ul class="unordered-list">
                     <li>
@@ -43,11 +43,12 @@
                                 <input type="hidden" th:field="*{categoryDto.categoryName}">
                                 <input type="submit" value="Save product">
                             </div>
-                            <button onclick="history.back()">Return</button>
+
                         </div>
                     </li>
                 </ul>
             </form>
+            <button onclick="history.back()">Return</button>
         </div>
     </div>
 </div>
