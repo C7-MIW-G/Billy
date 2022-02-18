@@ -59,6 +59,8 @@
             <a id="delete" class="modalButton buttonConfirm-warning"
                th:href="@{/assortment/products/delete/{productId}(productId=${product.productId})}">Delete</a>
         </div>
+    </div>
+</div>
 <div th:replace="fragments/general :: bottomScripts"></div>
     <script type="text/javascript" th:src="@{/js/deleteConfirm.js}"></script>
 </body>
