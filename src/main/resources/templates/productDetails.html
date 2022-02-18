@@ -27,10 +27,16 @@
                     </div>
                 </li>
                 <li>
+                    <div class="grid-item-parent">
+                        <div>Category:</div>
+                        <div th:text="${product.getCategoryDto().getCategoryName()}"></div>
+                    </div>
+                </li>
+                <li>
                     <div class="item-buttons grid-buttons-parent">
                         <div>
-                            <a th:href="@{/products/update/{productId}(productId=${product.productId})}"><button>Edit</button></a>
-                            <a th:href="@{/products/delete/{productId}(productId=${product.productId})}"><button>Delete</button></a>
+                            <a th:href="@{/assortment/products/update/{productId}(productId=${product.productId})}"><button>Edit</button></a>
+                            <a th:href="@{/assortment/products/delete/{productId}(productId=${product.productId})}"><button>Delete</button></a>
                         </div>
                         <button onclick="history.back()">Return</button>
                     </div>

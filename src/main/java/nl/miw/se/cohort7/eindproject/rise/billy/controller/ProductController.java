@@ -22,53 +22,5 @@ import java.util.Optional;
 @RequestMapping("/products")
 public class ProductController {
 
-    private ProductService productService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @GetMapping("")
-    protected String showProductOverview(Model model) {
-        model.addAttribute("allProducts", productService.findAll());
-        return "productOverview";
-    }
-
-    @GetMapping("/new")
-    protected String showProductForm(Model model) {
-        model.addAttribute("product", new Product());
-        model.addAttribute("headerText", "New Product");
-        return "productForm";
-    }
-
-    @PostMapping("/new")
-    protected String saveOrUpdateProduct(@Valid @ModelAttribute("product") Product product, BindingResult result) {
-        if (result.hasErrors()) {
-            return "productForm";
-        }
-        productService.save(product);
-        return "redirect:/products";
-    }
-
-    @GetMapping("/update/{productId}")
-    protected String showProductForm(@PathVariable("productId") Long productId, Model model) {
-        Optional<Product> product = productService.findByProductId(productId);
-        model.addAttribute("product", product.get());
-        model.addAttribute("headerText", "Edit");
-        return "productForm";
-    }
-
-    @GetMapping("/details/{productId}")
-    protected String showProductDetails(@PathVariable("productId") Long productId, Model model) {
-        Optional<Product> product = productService.findByProductId(productId);
-        model.addAttribute("product", product.get());
-        return "productDetails";
-    }
-
-    @GetMapping("/delete/{productId}")
-    protected String deleteProduct(@PathVariable("productId") Long productId) {
-        Optional<Product> product = productService.findByProductId(productId);
-        productService.delete(product.get());
-        return "redirect:/products";
-    }
 }

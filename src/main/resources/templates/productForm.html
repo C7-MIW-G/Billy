@@ -10,10 +10,10 @@
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
         <div class="itemViewListHead">
-            <div class="headStyle" th:text="${headerText}"></div>
+            <div class="headStyle" th:text="${product.productId == 0 ? 'New Product' : 'Edit'}"></div>
         </div>
         <div class="itemViewList">
-            <form th:action="@{/products/new}" method="post" th:object="${product}">
+            <form th:action="@{/assortment/products/save}" method="post" th:object="${product}">
                 <ul class="unordered-list">
                     <li>
                         <div class="grid-item-parent">
@@ -39,6 +39,8 @@
                         <div class="item-buttons grid-buttons-parent">
                             <div>
                                 <input type="hidden" th:field="*{productId}">
+                                <input type="hidden" th:field="*{categoryDto.categoryId}">
+                                <input type="hidden" th:field="*{categoryDto.categoryName}">
                                 <input type="submit" value="Save product">
                             </div>
                             <button onclick="history.back()">Return</button>

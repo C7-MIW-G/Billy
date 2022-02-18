@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-    <title>Product Overview</title>
+    <title>CHANGE THIS!</title>
 </head>
 <body>
-<nav th:replace="fragments/general :: navbar"></nav>
+<div th:replace="fragments/general :: navbar"></div>
 <div th:replace="fragments/general :: logoutModal"></div>
+
 
 <div class="billyContainer">
     <div class="overview grid-overview-parent">
         <div class="overviewListHead grid-overviewListHead-parent">
-            <div></div>
-            <div>
+            <div th:text="${category == null ? '' : category.categoryName}"></div>
+            <div class="new-button" th:style="${category == null ? 'display:none' : 'visible'}">
+                <a  th:href="@{/assortment/products/new/{categoryId}(categoryId=${category.categoryId})}"><button>+</button></a>
             </div>
         </div>
         <div class="overviewList">
-            <ul class="unordered-list" th:each="product : ${allProducts}">
-                <li><a th:href="@{/assortment/products/details/{productId}(productId=${product.productId})}">
+            <ul class="unordered-list" th:each="product : ${productList}">
+                <li><a th:href="@{/assortment/products/details/{productId}(productId=${product.getProductId()})}">
                     <div class="grid-product-parent">
                         <div class="productName fontBold" th:text="${product.getProductName()}"></div>
                         <div class="productPrice" th:text="${product.getPriceDisplayString(product.productPrice)}"></div>
@@ -26,6 +28,8 @@
         </div>
     </div>
 </div>
+
+
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
 </html>

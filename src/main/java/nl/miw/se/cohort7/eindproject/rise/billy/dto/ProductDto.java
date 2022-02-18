@@ -1,26 +1,23 @@
-package nl.miw.se.cohort7.eindproject.rise.billy.model;
+package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
-import lombok.Setter;
 import lombok.Getter;
-import javax.persistence.*;
+import lombok.Setter;
+
+import javax.persistence.Column;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * @author Martijn Gäbler <m.gabler@st.hanze.nl>
- * Date created: 27/01/2022
- * Describes a product that can be ordered at the bar.
+ * @author Jordy Pragt <j.pragt@st.hanze.nl>
+ * Product object for the front-end
  */
 
-@Entity
-@Getter
-@Setter
-public class Product {
+@Getter @Setter
+public class ProductDto {
 
-    @Id
-    @GeneratedValue
     private long productId;
 
     @Size(min = 1, message = "The name of the product should be at least 1 character")
@@ -34,8 +31,9 @@ public class Product {
     private double productPrice;
 
     @ManyToOne
-    private Category category;
+    private CategoryDto categoryDto;
 
+    public String getPriceDisplayString(double price){
+        return String.format("\u20ac %.2f", price);
+    }
 }
-
-

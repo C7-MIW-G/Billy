@@ -14,16 +14,16 @@
         <div class="overviewListHead grid-overviewListHead-parent">
             <div></div>
             <div class="new-button">
-                <a  th:href="@{/assortment/new}"><button>+</button></a>
+                <a  th:href="@{/assortment/categories/new}"><button>+</button></a>
             </div>
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="category : ${allCategories}">
-                <li>
+                <li><a th:href="@{/assortment/categories/{categoryId}(categoryId=${category.categoryId})}">
 
                     <div class="productName fontBold" th:text="${category.getCategoryName()}"></div>
 
-                </li>
+                </a></li>
             </ul>
         </div>
     </div>
