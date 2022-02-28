@@ -82,24 +82,28 @@
 <div id="accountPayModal" class="customModal">
     <div class="modalContainer">
         <div class="modalHeader">Account pay</div>
-        <p>Please select a customer</p>
-        <form th:action="@{/orders/accountPay}" method="post" th:object="${selectedUser}">
-            <select th:field="*{userId}">
-                <option th:each="user : ${allUsers}" th:text="${user.getName()}" th:value="${user.getUserId()}"></option>
-            </select>
-            <p>
-                <span class="totalPrice">Total Price:</span>
-                <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
-            </p>
+            <form th:action="@{/orders/accountPay}" method="post" th:object="${selectedUser}">
+                <div class="account-pay-modal-body">
+                    <div>
+                        <p>Please select a customer</p>
+                        <select th:field="*{userId}" size="10">
+                            <option class="text-monospace" th:each="userDto : ${allUsers}" th:value="${userDto.getUserId()}" th:text="${userDto.getUserDisplayString()}"></option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>
+                            <span class="totalPrice">Total Price:</span>
+                            <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+                        </p>
+                        <div class="grid-modalButtons-parent">
+                            <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
+                            <input type="submit" class="modalButton buttonConfirm-warning" value="Confirm">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
 
-            <div class="grid-modalButtons-parent">
-                <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
-
-                <input type="submit" class="modalButton buttonConfirm-warning" value="Confirm">
-
-            </div>
-
-        </form>
     </div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>

@@ -123,3 +123,11 @@
     margin-bottom: 5px;
     height: calc(10rem - 5px);
 }
+.account-pay-modal-body{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.grid-user-parent{
+    display: grid;
+    grid-template-columns: 80% 20%;
+}

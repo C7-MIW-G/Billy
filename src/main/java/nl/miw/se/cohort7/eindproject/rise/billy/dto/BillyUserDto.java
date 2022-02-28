@@ -63,4 +63,21 @@ public class BillyUserDto {
 
     }
 
+    public String getUserDisplayString() {
+        int userDisplayStringLength = 40;
+        StringBuilder userDisplayStringBuilder = new StringBuilder();
+
+        for (int i = 0; i < userDisplayStringLength; i++) {
+            if (i < this.name.length()) {
+                userDisplayStringBuilder.append(this.name.charAt(i));
+            } else {
+                userDisplayStringBuilder.append(".");
+            }
+        }
+
+        userDisplayStringBuilder.append("€").append(this.accountBalance);
+
+        return userDisplayStringBuilder.toString();
+    }
+
 }
