@@ -12,7 +12,7 @@
         <div class="itemViewListHead">
             <div class="headStyle" th:text="${product.productId == 0 ? 'New Product' : 'Edit'}"></div>
         </div>
-        <div class="itemViewList grid-form_returnButton-parent">
+        <div class="itemViewList">
             <form th:action="@{/assortment/products/save}" method="post" th:object="${product}">
                 <ul class="unordered-list">
                     <li>
@@ -44,7 +44,7 @@
                                 <input type="submit" value="Save product">
                             </div>
                             <div>
-                                <a class="returnButton" th:href="@{/assortment/categories/{categoryId}(categoryId=${product.categoryDto.categoryId})}" th:text="Return"></a>
+                                <a class="returnButton button_temporary" th:href="@{/assortment/categories/{categoryId}(categoryId=${product.categoryDto.categoryId})}" th:text="Return"></a>
                             </div>
                         </div>
                     </li>

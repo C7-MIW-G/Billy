@@ -5,6 +5,26 @@ html, body {
     font-family: Verdana, sans-serif;
 }
 
+.button_temporary {
+    font-family: Arial;
+    font-size: 13px;
+    text-align: center;
+
+    /*margin-top:15px;*/
+    max-width:90px;
+    background-color:#eee;
+    border-color:#888888;
+    color:#333;
+    text-decoration:none;
+    cursor:default;
+    -webkit-appearence: push-button;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 2px;
+    padding: 5% 5px;
+    width: 100%;
+}
+
 /*navbar*/
 .navTop{
     margin: 0;
@@ -168,7 +188,6 @@ html, body {
 }
 .returnButton{
     margin-top: auto;
-    padding-bottom: 0.5rem;
 }
 
 /*links*/
@@ -248,8 +267,9 @@ a:visited {
     left: 45%;
 }
 
+
+/*error*/
 .center-emoji {
-    font-size: 50px;
     position: relative;
     left: 46%;
     top: 20%;
