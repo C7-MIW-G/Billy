@@ -7,6 +7,8 @@
 <div th:replace="fragments/general :: navbar"></div>
 <div th:replace="fragments/general :: logoutModal"></div>
 
+<script type="text/javascript" th:src="@{/js/deleteCategory.js}"></script>
+
 
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
@@ -29,18 +31,21 @@
 
                     <li>
                         <div class="item-buttons grid-buttons-parent">
-                            <div>
+                            <div class="grid-categoryButtonSaveDelete-parent">
                                 <div>
                                     <input type="hidden" th:field="*{categoryId}">
                                     <input type="submit" value="Save">
                                 </div>
-                                <a th:href="@{/assortment/categories/delete/{categoryId}(categoryId=${category.categoryId})}"
-                                th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
-                                th:text="Delete">
-                                </a>
+                                <div><a th:class="${productListSize > 0 ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
+                                   id="deleteButton"
+                                   th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
+                                   th:href="@{/assortment/categories/delete/{categoryId}(categoryId=${category.categoryId})}"
+                                   th:text="Delete">
+                                </a><span class="billyTooltip">Please delete all product before deleting the Category</span></div>
                             </div>
                             <div>
-                                <a class="returnButton button_temporary" th:href="@{/assortment/categories}" th:text="Return"></a>
+                                <a class="returnButton button_temporary"
+                                   th:href="@{/assortment/categories}" th:text="Return"></a>
                             </div>
                         </div>
                     </li>
@@ -50,6 +55,18 @@
     </div>
 </div>
 
+
+<script>
+    let disabledButton = document.getElementById("deleteButton");
+
+    window.addEventListener("load", disableLink);
+
+    function disableLink(){
+        if (disabledButton.classList.contains('buttonIsDisabled')){
+            disabledButton.removeAttribute('href');
+        }
+    }
+</script>
 
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

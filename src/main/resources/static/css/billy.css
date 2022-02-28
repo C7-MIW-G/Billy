@@ -5,25 +5,54 @@ html, body {
     font-family: Verdana, sans-serif;
 }
 
+/*temporary*/
+.grid-categoryButtonSaveDelete-parent{
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+}
 .button_temporary {
-    font-family: Arial;
+    /*font-family: Arial;*/
     font-size: 13px;
     text-align: center;
 
-    /*margin-top:15px;*/
-    max-width:90px;
     background-color:#eee;
     border-color:#888888;
     color:#333;
     text-decoration:none;
     cursor:default;
-    -webkit-appearence: push-button;
     border-style: solid;
     border-width: 1px;
     border-radius: 2px;
-    padding: 5% 5px;
-    width: 100%;
+    padding: 1px 5px 3.5px;
+    width: auto;
 }
+.buttonIsDisabled{
+    color: #6e6e6e !important;
+    background-color: #bebebe;
+}
+
+.billyTooltip{
+    opacity: 0;
+
+    width: auto;
+    text-align: center;
+    background-color:#ffa;
+    border:1px solid #cc9;
+    padding:3px;
+    font-size:10px;
+    -moz-box-shadow: 2px 2px 11px #666;
+    -webkit-box-shadow: 2px 2px 11px #666;
+
+    position: absolute;
+    z-index: 1;
+
+    transition: opacity 300ms;
+}
+.buttonIsDisabled:hover + .billyTooltip{
+    opacity: 1;
+}
+
 
 /*navbar*/
 .navTop{
