@@ -7,8 +7,6 @@
 <div th:replace="fragments/general :: navbar"></div>
 <div th:replace="fragments/general :: logoutModal"></div>
 
-<script type="text/javascript" th:src="@{/js/deleteCategory.js}"></script>
-
 
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
@@ -39,7 +37,6 @@
                                 <div><a th:class="${productListSize > 0 ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
                                    id="deleteButton"
                                    th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
-                                   th:href="@{/assortment/categories/delete/{categoryId}(categoryId=${category.categoryId})}"
                                    th:text="Delete">
                                 </a><span class="billyTooltip">Please delete all product before deleting the Category</span></div>
                             </div>
@@ -55,18 +52,24 @@
     </div>
 </div>
 
+<div id="deleteModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Delete</div>
+        <p>
+            <span class="text-center">Are you sure you want to delete </span>
+            <span class="text-center" th:text="${category.categoryName}"></span>
+            <span class="text-center">?</span>
+        </p>
+        <div class="grid-modalButtons-parent">
+            <div id="modalCancel" class="modalButton buttonCancel">Cancel</div>
+            <a id="delete" class="modalButton buttonConfirm-warning" th:href="@{/assortment/categories/delete/{categoryId}(categoryId=${category.categoryId})}">Delete</a>
+        </div>
+    </div>
+</div>
 
-<script>
-    let disabledButton = document.getElementById("deleteButton");
 
-    window.addEventListener("load", disableLink);
+<script type="text/javascript" th:src="@{/js/deleteCategory.js}"></script>
 
-    function disableLink(){
-        if (disabledButton.classList.contains('buttonIsDisabled')){
-            disabledButton.removeAttribute('href');
-        }
-    }
-</script>
 
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

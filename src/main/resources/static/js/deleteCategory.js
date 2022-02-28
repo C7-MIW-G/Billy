@@ -1,9 +1,19 @@
-let disabledButton = document.getElementById("deleteButton");
+let deleteButton = document.getElementById("deleteButton");
+let deleteModal = document.getElementById("deleteModal");
+let modalCancel = document.getElementById("modalCancel");
 
-window.addEventListener("load", disableLink);
-
-function disableLink(){
-    if (disabledButton.classList.contains('buttonIsDisabled')){
-        disabledButton.removeAttribute('href');
+function openModal(modal){
+    modal.style.display = "block";
+}
+function closeModal(modal){
+    modal.style.display = "none";
+}
+deleteButton.onclick = function (){
+    if ((deleteButton.classList.contains('buttonIsDisabled')) === false){
+        openModal(deleteModal);
     }
 }
+modalCancel.onclick = function (){
+    closeModal(deleteModal);
+}
+
