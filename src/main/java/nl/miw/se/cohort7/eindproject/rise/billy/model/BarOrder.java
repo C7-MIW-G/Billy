@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
- * This is an Order, it exist out multiple products.
+ * This is an Order, it contains multiple products.
  */
 
 @Getter @Setter
