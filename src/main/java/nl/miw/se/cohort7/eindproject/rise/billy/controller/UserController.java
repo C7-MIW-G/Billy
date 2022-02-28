@@ -2,10 +2,12 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -115,8 +117,14 @@ public class UserController {
 
     @GetMapping("/delete/{billyUserId}")
     protected String deleteUser(@PathVariable("billyUserId") Long billyUserId) {
-        userService.delete(billyUserId);
-        return "redirect:/users";
+        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        principal.getUserId();
+        if (billyUserId.equals(principal.getUserId())){
+            return "redirect:/users/details/{billyUserId}";
+        } else {
+            userService.delete(billyUserId);
+            return "redirect:/users";
+        }
     }
 
     @GetMapping("/changePassword/{billyUserId}")
