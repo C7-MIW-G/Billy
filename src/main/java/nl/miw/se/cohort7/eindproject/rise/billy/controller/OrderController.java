@@ -2,12 +2,13 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,10 +30,12 @@ import java.util.Optional;
 @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
 public class OrderController {
 
+    private BarOrderService barOrderService;
     private ProductService productService;
     private UserService userService;
 
-    public OrderController(ProductService productService, UserService userService) {
+    public OrderController(BarOrderService barOrderService, ProductService productService, UserService userService) {
+        this.barOrderService = barOrderService;
         this.productService = productService;
         this.userService = userService;
     }
@@ -82,6 +85,16 @@ public class OrderController {
             return "redirect:/orders/new";
         }
         userService.subtractFromBalance(selectedUser.getUserId(), BarOrderDto.activeOrder.calculateTotalOrderPrice());
+
+
+        BillyUserPrincipal principal =
+                (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        BillyUserDto bartender = userService.findByUserId(principal.getUserId());
+        BarOrderDto.activeOrder.setBartender(bartender);
+        BarOrderDto.activeOrder.setCustomer(selectedUser);
+        barOrderService.saveBarOrder(BarOrderDto.activeOrder);
+
+
         BarOrderDto.clearActiveOrder();
         return "redirect:/orders/new";
     }

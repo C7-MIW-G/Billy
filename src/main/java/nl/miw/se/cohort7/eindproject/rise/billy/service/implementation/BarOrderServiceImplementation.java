@@ -116,4 +116,9 @@ public class BarOrderServiceImplementation implements BarOrderService {
         }
         return barOrderViewDtoList;
     }
+
+    @Override
+    public void saveBarOrder(BarOrderDto barOrderDto) {
+        barOrderRepository.save(convertDtoToBarOrder(barOrderDto));
+    }
 }
