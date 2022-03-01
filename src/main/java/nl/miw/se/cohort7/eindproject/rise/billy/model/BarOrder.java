@@ -3,6 +3,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -36,6 +37,7 @@ public class BarOrder {
     @NotNull
     private double totalPrice;
 
+    @Column(length = 2147483646) //max String size -1
     private String productList; //json
 }
 
