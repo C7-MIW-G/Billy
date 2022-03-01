@@ -19,6 +19,10 @@ public class BarOrderDto {
     public static BarOrderDto activeOrder = null;
 
     private LocalDateTime dateTime;
+    
+    private BillyUserDto bartender;
+    
+    private BillyUserDto customer;
 
     private List<Product> productList = new ArrayList<>();
 

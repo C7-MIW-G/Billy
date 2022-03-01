@@ -3,7 +3,10 @@ package nl.miw.se.cohort7.eindproject.rise.billy.service.implementation;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductViewDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.BarOrderRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
@@ -54,5 +57,42 @@ public class BarOrderServiceImplementation implements BarOrderService {
     private List<ProductViewDto> convertJsonToList(String productList){
         Type listType = new TypeToken<ArrayList<ProductViewDto>>(){}.getType();
         return new Gson().fromJson(productList, listType);
+    }
+
+    private BarOrder convertDtoToBarOrder(BarOrderDto barOrderDto){
+        BarOrder barOrder = new BarOrder();
+
+        barOrder.setDateTime(barOrderDto.getDateTime());
+        barOrder.setTotalPrice(barOrderDto.calculateTotalOrderPrice());
+
+        barOrder.setBartenderId(barOrderDto.getBartender().getUserId());
+        barOrder.setBartenderName(barOrderDto.getBartender().getName());
+
+        barOrder.setCustomerId(barOrderDto.getCustomer().getUserId());
+        barOrder.setCustomerName(barOrderDto.getCustomer().getName());
+
+        List<ProductViewDto> productList = convertMapsToProductView(barOrderDto.getProductMap(),
+                                                                    barOrderDto.getDiscountMap());
+        barOrder.setProductList(convertListToJson(productList));
+
+        return barOrder;
+    }
+
+    private BarOrderViewDto convertBarOrderToDto(BarOrder barOrder){
+        BarOrderViewDto barOrderDto = new BarOrderViewDto();
+
+        barOrderDto.setOrderId(barOrder.getOrderId());
+        barOrderDto.setDateTime(barOrder.getDateTime());
+        barOrderDto.setTotalPrice(barOrder.getTotalPrice());
+
+        barOrderDto.setBartenderId(barOrder.getBartenderId());
+        barOrderDto.setBartenderName(barOrder.getBartenderName());
+
+        barOrderDto.setCustomerId(barOrder.getCustomerId());
+        barOrderDto.setCustomerName(barOrder.getCustomerName());
+
+        barOrderDto.setProductList(convertJsonToList(barOrder.getProductList()));
+
+        return barOrderDto;
     }
 }
