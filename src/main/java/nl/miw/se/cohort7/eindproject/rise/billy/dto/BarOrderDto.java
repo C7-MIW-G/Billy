@@ -2,7 +2,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 
 import java.time.LocalDateTime;
@@ -24,6 +23,9 @@ public class BarOrderDto {
     private List<Product> productList = new ArrayList<>();
 
     private Map<Product, Integer> productMap = new HashMap<>();
+
+    private Map<Product, Double> discountMap = new HashMap<>();
+
 
     public double calculateTotalOrderPrice(){
         double totalOrderPrice = DEFAULT_ORDER_PRICE;
