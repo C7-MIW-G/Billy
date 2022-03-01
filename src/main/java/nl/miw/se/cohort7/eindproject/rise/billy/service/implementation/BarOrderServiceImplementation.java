@@ -7,25 +7,33 @@ import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.BarOrderRepository;
+import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
+import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * @author Jordy Pragt <j.pragt@st.hanze.nl>
  * The service layer that connects the front- and back-end of the BarOrder objects
  */
+
+@Service
 public class BarOrderServiceImplementation implements BarOrderService {
 
     private BarOrderRepository barOrderRepository;
+    private UserRepository userRepository;
 
-    public BarOrderServiceImplementation(BarOrderRepository barOrderRepository) {
+    public BarOrderServiceImplementation(BarOrderRepository barOrderRepository, UserRepository userRepository) {
         this.barOrderRepository = barOrderRepository;
+        this.userRepository = userRepository;
     }
 
     private List<ProductViewDto> convertMapsToProductView(Map<Product, Integer> productMap,
@@ -94,5 +102,18 @@ public class BarOrderServiceImplementation implements BarOrderService {
         barOrderDto.setProductList(convertJsonToList(barOrder.getProductList()));
 
         return barOrderDto;
+    }
+
+    @Override
+    public List<BarOrderViewDto> findAllBarOrderOfUser(Long id) {
+        Optional<BillyUser> optionalBillyUser = userRepository.findById(id);
+        List<BarOrderViewDto> barOrderViewDtoList = new ArrayList<>();
+        if (optionalBillyUser.isPresent()) {
+            List<BarOrder> barOrderList = barOrderRepository.findAllByCustomerId(id);
+            for (BarOrder barOrder : barOrderList) {
+                barOrderViewDtoList.add(convertBarOrderToDto(barOrder));
+            }
+        }
+        return barOrderViewDtoList;
     }
 }
