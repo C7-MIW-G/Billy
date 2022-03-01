@@ -1,5 +1,6 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
@@ -38,11 +39,11 @@ public class OrderController {
 
     @GetMapping({"/", "/orders/new"})
     protected String setupOrder(Model model) {
-        if (BarOrder.activeOrder == null){
-            BarOrder.openNewActiveOrder();
-            BarOrder.activeOrder.setDateTime(LocalDateTime.now());
+        if (BarOrderDto.activeOrder == null){
+            BarOrderDto.openNewActiveOrder();
+            BarOrderDto.activeOrder.setDateTime(LocalDateTime.now());
         }
-        model.addAttribute("barOrder", BarOrder.activeOrder);
+        model.addAttribute("barOrder", BarOrderDto.activeOrder);
         model.addAttribute("allProducts", productService.findAll());
         model.addAttribute("allUsers", userService.findAll());
         model.addAttribute("selectedUser", new BillyUserDto());
@@ -55,7 +56,7 @@ public class OrderController {
         if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }
-        BarOrder.addProductToOrder(optionalProduct.get());
+        BarOrderDto.addProductToOrder(optionalProduct.get());
         return "redirect:/orders/new";
     }
 
@@ -65,13 +66,13 @@ public class OrderController {
         if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }
-        BarOrder.removeProductFromOrder(optionalProduct.get());
+        BarOrderDto.removeProductFromOrder(optionalProduct.get());
         return "redirect:/orders/new";
     }
 
     @GetMapping("/orders/directPay")
     protected String doDirectPay() {
-        BarOrder.clearActiveOrder();
+        BarOrderDto.clearActiveOrder();
         return "redirect:/orders/new";
     }
 
@@ -80,8 +81,8 @@ public class OrderController {
         if (result.hasErrors()) {
             return "redirect:/orders/new";
         }
-        userService.subtractFromBalance(selectedUser.getUserId(), BarOrder.activeOrder.calculateTotalOrderPrice());
-        BarOrder.clearActiveOrder();
+        userService.subtractFromBalance(selectedUser.getUserId(), BarOrderDto.activeOrder.calculateTotalOrderPrice());
+        BarOrderDto.clearActiveOrder();
         return "redirect:/orders/new";
     }
 }
