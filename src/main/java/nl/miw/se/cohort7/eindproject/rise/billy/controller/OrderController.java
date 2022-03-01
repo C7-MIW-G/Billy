@@ -75,12 +75,9 @@ public class OrderController {
         return "redirect:/orders/new";
     }
 
-    @PostMapping("/orders/accountPay")
-    protected String doAccountPay(@ModelAttribute("selectedUser") BillyUserDto selectedUser, BindingResult result) {
-        if (result.hasErrors()) {
-            return "redirect:/orders/new";
-        }
-        userService.subtractFromBalance(selectedUser.getUserId(), BarOrder.activeOrder.calculateTotalOrderPrice());
+    @GetMapping("/orders/accountPay/{userId}")
+    protected String doAccountPay(@PathVariable("userId") Long userId) {
+        userService.subtractFromBalance(userId, BarOrder.activeOrder.calculateTotalOrderPrice());
         BarOrder.clearActiveOrder();
         return "redirect:/orders/new";
     }

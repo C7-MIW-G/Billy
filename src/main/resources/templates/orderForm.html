@@ -80,30 +80,43 @@
     </div>
 </div>
 <div id="accountPayModal" class="customModal">
-    <div class="modalContainer">
+    <div class="modalContainer account-pay-modal-container">
         <div class="modalHeader">Account pay</div>
-            <form th:action="@{/orders/accountPay}" method="post" th:object="${selectedUser}">
-                <div class="account-pay-modal-body">
-                    <div>
-                        <p>Please select a customer</p>
-                        <select th:field="*{userId}" size="10">
-                            <option class="text-monospace" th:each="userDto : ${allUsers}" th:value="${userDto.getUserId()}" th:text="${userDto.getUserDisplayString()}"></option>
-                        </select>
-                    </div>
-                    <div>
-                        <p>
-                            <span class="totalPrice">Total Price:</span>
-                            <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
-                        </p>
-                        <div class="grid-modalButtons-parent">
-                            <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
-                            <input type="submit" class="modalButton buttonConfirm-warning" value="Confirm">
-                        </div>
-                    </div>
+        <div class="account-pay-modal-body">
+            <div class="overviewList">
+                <p>Please select a customer</p>
+                <ul class="unordered-list" th:each="userDto : ${allUsers}">
+                    <li>
+                        <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay">
+                            <div class="grid-user-account-pay">
+                                <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
+                                <span class="grid-user-child-right" th:text="${userDto.getAccountBalanceDisplayString(userDto.getAccountBalance())}"></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="account-pay-modal-body-order-info">
+                <div class="receipt-ProductsList">
+                    <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
+                        <li>
+                            <div class="grid-orderList-parent">
+                                <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
+                                <div class="grid-product-parent">
+                                    <div class="productName" th:text="${product.productName}"></div>
+                                    <div class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </form>
+                <div class="totalPrice">
+                    <span class="totalPrice">Total Price:</span>
+                    <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+                </div>
+                <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
+            </div>
         </div>
-
     </div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
