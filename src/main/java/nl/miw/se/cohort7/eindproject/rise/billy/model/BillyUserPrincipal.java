@@ -25,7 +25,7 @@ public class BillyUserPrincipal implements UserDetails {
         List<GrantedAuthority> authorityList = new ArrayList<>();
 
         authorityList.add(new SimpleGrantedAuthority(billyUser.getUserRole()));
-        authorityList.add(new SimpleGrantedAuthority("ROLE_NOT_ADMIN")); ///remove when there is no longer a admin
+        authorityList.add(new SimpleGrantedAuthority("ROLE_NOT_ADMIN")); ///remove when there is no longer an admin
         return authorityList;
     }
 
