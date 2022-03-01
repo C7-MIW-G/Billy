@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-    <title>CHANGE THIS!</title>
+    <title>Category form</title>
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
@@ -29,18 +29,20 @@
 
                     <li>
                         <div class="item-buttons grid-buttons-parent">
-                            <div>
+                            <div class="grid-categoryButtonSaveDelete-parent">
                                 <div>
                                     <input type="hidden" th:field="*{categoryId}">
                                     <input type="submit" value="Save">
                                 </div>
-                                <a th:href="@{/assortment/categories/delete/{categoryId}(categoryId=${category.categoryId})}"
-                                th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
-                                th:text="Delete">
-                                </a>
+                                <div><a th:class="${productListSize > 0 ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
+                                   id="deleteButton"
+                                   th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
+                                   th:text="Delete">
+                                </a><span class="billyTooltip">Please delete all product before deleting the Category</span></div>
                             </div>
                             <div>
-                                <a class="returnButton" th:href="@{/assortment/categories}" th:text="Return"></a>
+                                <a class="returnButton button_temporary"
+                                   th:href="@{/assortment/categories}" th:text="Return"></a>
                             </div>
                         </div>
                     </li>
@@ -49,6 +51,24 @@
         </div>
     </div>
 </div>
+
+<div id="deleteModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Delete</div>
+        <p>
+            <span class="text-center">Are you sure you want to delete </span>
+            <span class="text-center" th:text="${category.categoryName}"></span>
+            <span class="text-center">?</span>
+        </p>
+        <div class="grid-modalButtons-parent">
+            <div id="modalCancel" class="modalButton buttonCancel">Cancel</div>
+            <a id="delete" class="modalButton buttonConfirm-warning" th:href="@{/assortment/categories/delete/{categoryId}(categoryId=${category.categoryId})}">Delete</a>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" th:src="@{/js/deleteCategory.js}"></script>
 
 
 <div th:replace="fragments/general :: bottomScripts"></div>

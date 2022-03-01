@@ -40,6 +40,7 @@ public class AssortmentController {
     @GetMapping("/categories/new")
     protected String showCategoryForm(Model model) {
         model.addAttribute("category", new CategoryDto());
+        model.addAttribute("productListSize", 0);
         return "assortmentForm";
     }
 
@@ -78,6 +79,8 @@ public class AssortmentController {
         Optional<CategoryDto> optionalCategory = assortmentService.findCategoryById(categoryId);
         if (optionalCategory.isPresent()){
             model.addAttribute("category", optionalCategory.get());
+            int productListSize = assortmentService.findAllProductOfCategory(categoryId).size();
+            model.addAttribute("productListSize", productListSize);
             return "assortmentForm";
         }
         return "redirect:/assortment";

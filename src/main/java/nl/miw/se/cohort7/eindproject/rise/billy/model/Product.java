@@ -22,7 +22,7 @@ public class Product {
 
     @Id
     @GeneratedValue
-    private long productId;
+    private Long productId;
 
     @Size(min = 1, message = "The name of the product should be at least 1 character")
     @Size(max = 64, message = "The name of the product should be less than 65 characters")
