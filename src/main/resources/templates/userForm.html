@@ -59,8 +59,9 @@
                         <div class="grid-item-parent">
                             <div><label for="roles">Role </label></div>
                             <div>
-                                <select th:disabled="${billyUserId eq #authentication.getPrincipal().getUserId()}"
-                                        id="roles" th:field="*{userRole}">
+                                <select id="roles" th:field="*{userRole}">
+                                    //uncommented this code because it's not possible to create users with the admin account
+<!--                                        th:disabled="${billyUserId eq #authentication.getPrincipal().getUserId()}"-->
                                     <option value="ROLE_CUSTOMER" selected>Customer</option>
                                     <option value="ROLE_BARTENDER" >Bartender</option>
                                 <option value="ROLE_BAR MANAGER">Bar Manager</option>
