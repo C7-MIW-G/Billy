@@ -11,9 +11,12 @@ function closeModal(modal){
 }
 
 deleteButton.onclick = function (){
+    if ((deleteButton.classList.contains('buttonIsDisabled')) === false){
     openModal(deleteModal);
+    }
 }
 
 modalCancel.onclick = function (){
     closeModal(deleteModal);
 }
+
