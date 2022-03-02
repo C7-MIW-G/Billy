@@ -33,7 +33,6 @@ public class UserServiceImplementation implements UserService {
             return null;
         }
         return convertToDto(billyUser.get());
-
     }
 
     public Optional<BillyUser> findByUsername(String userName) {
