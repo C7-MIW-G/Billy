@@ -53,7 +53,6 @@
                  id="deleteButton"
                  sec:authoirze="hasRole('ROLE_BAR MANAGER')"
                  th:text="Delete"></a><span class="billyTooltip">Users cannot delete themself</span></div>
-
               <a th:href="@{/users/changePassword/{billyUserId}(billyUserId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')">
                 <button>Password change</button></a>
