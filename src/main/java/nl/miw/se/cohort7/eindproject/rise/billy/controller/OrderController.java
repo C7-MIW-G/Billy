@@ -91,7 +91,8 @@ public class OrderController {
                 (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         BillyUserDto bartender = userService.findByUserId(principal.getUserId());
         BarOrderDto.activeOrder.setBartender(bartender);
-        BarOrderDto.activeOrder.setCustomer(selectedUser);
+        BillyUserDto customer = userService.findByUserId(selectedUser.getUserId());
+        BarOrderDto.activeOrder.setCustomer(customer);
         barOrderService.saveBarOrder(BarOrderDto.activeOrder);
 
 
