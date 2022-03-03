@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.service;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.CategoryDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;

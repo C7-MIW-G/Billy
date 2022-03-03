@@ -1,10 +1,9 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
-import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.Instant;
 import java.util.Date;
-import java.util.Optional;
 
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
@@ -31,11 +29,13 @@ import java.util.Optional;
 public class UserController {
 
     private UserService userService;
+    private BarOrderService barOrderService;
     PasswordEncoder passwordEncoder;
 
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, BarOrderService barOrderService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.barOrderService = barOrderService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -64,6 +64,8 @@ public class UserController {
     @PostMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String saveOrUpdateUser(@Valid @ModelAttribute("billyUser") BillyUser billyUser, BindingResult result) {
+        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        principal.getUserId();
         if (result.hasErrors()) {
             return "userForm";
         }
@@ -73,6 +75,10 @@ public class UserController {
         }
         if (billyUser.getUserRole() == null) {
             billyUser.setUserRole("ROLE_CUSTOMER");
+            return "userForm";
+        }
+        if (billyUser.getUserId() == principal.getUserId()){
+            return "redirect:/users";
         }
         if (billyUser.getUserRole().equals("ROLE_CUSTOMER") || billyUser.getPassword().equals("")) {
             billyUser.setRandomPassword();
@@ -139,7 +145,8 @@ public class UserController {
     }
 
     @PostMapping("/changePassword/{billyUserId}")
-    protected String changePassword(@Valid @ModelAttribute("changePassword") ChangePassword changePassword, BindingResult result) {
+    protected String changePassword(@Valid @ModelAttribute("changePassword") ChangePassword changePassword,
+                                    BindingResult result) {
         if (result.hasErrors()) {
             return "changePasswordForm";
         }
@@ -152,4 +159,11 @@ public class UserController {
         userService.updatePassword(changePassword);
         return "redirect:/users";
             }
+
+    @GetMapping("/details/{billyUserId}/orderHistory")
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
+    protected String seeOrderHistory(@PathVariable("billyUserId") Long billyUserId, Model model) {
+        model.addAttribute("OrdersByUser", barOrderService.findAllBarOrderOfUser(billyUserId));
+        return "userOrderHistory";
+    }
 }

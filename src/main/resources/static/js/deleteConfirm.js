@@ -1,6 +1,6 @@
-var deleteModal = document.getElementById('deleteModal');
-var deleteButton = document.getElementById('deleteButton');
-var modalCancel = document.getElementById('cancelDelete');
+let deleteModal = document.getElementById('deleteModal');
+let deleteButton = document.getElementById('deleteButton');
+let cancelDelete = document.getElementById('cancelDelete');
 
 
 function openModal(modal){
@@ -9,11 +9,12 @@ function openModal(modal){
 function closeModal(modal){
     modal.style.display = "none";
 }
-
-deleteButton.onclick = function (){
-    openModal(deleteModal);
+deleteButton.onclick = function () {
+    if ((deleteButton.classList.contains('buttonIsDisabled')) === false) {
+        openModal(deleteModal);
+    }
 }
-
-modalCancel.onclick = function (){
+cancelDelete.onclick = function (){
     closeModal(deleteModal);
 }
+
