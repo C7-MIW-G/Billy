@@ -1,4 +1,5 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.Instant;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
@@ -158,12 +160,26 @@ public class UserController {
         changePassword.setNewPassword(passwordEncoder.encode(changePassword.getNewPassword()));
         userService.updatePassword(changePassword);
         return "redirect:/users";
-            }
+    }
 
     @GetMapping("/details/{billyUserId}/orderHistory")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String seeOrderHistory(@PathVariable("billyUserId") Long billyUserId, Model model) {
+        model.addAttribute("allBillyUsers", userService.findAll());
         model.addAttribute("OrdersByUser", barOrderService.findAllBarOrderOfUser(billyUserId));
         return "userOrderHistory";
     }
+
+    @GetMapping("/details/{billyUserId}/orderHistory/{orderId}")
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
+    protected String SeeOrderHistoryDetails(@PathVariable ("billyUserId") Long billyUserId,
+                                            @PathVariable("orderId") Long barOrderId, Model model) {
+        Optional<BarOrderViewDto> optionalBarOrderViewDto = barOrderService.findBarOrderById(barOrderId);
+        if (optionalBarOrderViewDto.isPresent()) {
+            model.addAttribute("barOrderDetail", optionalBarOrderViewDto.get());
+            return "userOrderHistoryDetails";
+        }
+        return "redirect:/users";
+    }
+
 }

@@ -18,4 +18,12 @@ public class ProductViewDto {
     private double productPrice;
 
     private double discountPrice;
+
+    public double subTotal() {
+        return amount * productPrice;
+    }
+
+    public String subTotalDisplayString() {
+        return String.format("\u20ac %.2f", subTotal());
+    }
 }
