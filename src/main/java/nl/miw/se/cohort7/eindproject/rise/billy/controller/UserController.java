@@ -80,7 +80,7 @@ public class UserController {
             return "userForm";
         }
         if (billyUser.getUserId() == principal.getUserId()){
-            return "redirect:/users";
+            billyUser.setUserRole(userService.findByUserId(billyUser.getUserId()).getUserRole());
         }
         if (billyUser.getUserRole().equals("ROLE_CUSTOMER") || billyUser.getPassword().equals("")) {
             billyUser.setRandomPassword();
