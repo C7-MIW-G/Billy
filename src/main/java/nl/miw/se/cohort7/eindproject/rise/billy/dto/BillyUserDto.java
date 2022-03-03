@@ -32,6 +32,8 @@ public class BillyUserDto {
 
     private double accountBalance;
 
+    private double maxCredit;
+
     public String userRoleDisplayString() {
         switch (userRole) {
             case "ROLE_BAR MANAGER":
@@ -50,6 +52,10 @@ public class BillyUserDto {
         return String.format("%s\u20ac %.2f", accountBalance < 0 ? " -" : " ", Math.abs(accountBalance));
     }
 
+    public String getMaxCreditDisplayString(double maxCredit) {
+        return String.format("\u20ac %.2f", maxCredit);
+    }
+
 
     public void payFromBalance(double amount) {
         if (amount < 0) {
@@ -63,7 +69,6 @@ public class BillyUserDto {
             return;
         }
         this.accountBalance += amount;
-
     }
 
     public String getUserDisplayString() {

@@ -57,6 +57,8 @@ public class BillyUser {
 
     private double accountBalance;
 
+    private double maxCredit;
+
     public void setRandomPassword() {
         StringBuilder randomPasswordBuilder = new StringBuilder();
         for (int i = 0; i < RANDOM_PASSWORD_LENGTH; i++) {
