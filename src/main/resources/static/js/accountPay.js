@@ -16,3 +16,12 @@ accountPayButton.onclick = function (){
 modalCancelAccountPayment.onclick = function (){
     closeModal(accountPayModal);
 }
+
+var confirmationElements = document.getElementsByClassName('confirm-account-pay');
+
+var confirmIt = function (hyperlink) {
+    if (!confirm('Please confirm')) hyperlink.preventDefault();
+};
+for (var i = 0; i < confirmationElements.length; i++) {
+    confirmationElements[i].addEventListener('click', confirmIt, false);
+}

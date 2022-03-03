@@ -29,7 +29,7 @@
 
                     <li>
                         <div class="item-buttons grid-buttons-parent">
-                            <div class="grid-categoryButtonSaveDelete-parent">
+                            <div class="grid-buttonRow-parent">
                                 <div>
                                     <input type="hidden" th:field="*{categoryId}">
                                     <input type="submit" value="Save">
@@ -61,14 +61,14 @@
             <span class="text-center">?</span>
         </p>
         <div class="grid-modalButtons-parent">
-            <div id="modalCancel" class="modalButton buttonCancel">Cancel</div>
+            <div id="cancelDelete" class="modalButton buttonCancel">Cancel</div>
             <a id="delete" class="modalButton buttonConfirm-warning" th:href="@{/assortment/categories/delete/{categoryId}(categoryId=${category.categoryId})}">Delete</a>
         </div>
     </div>
 </div>
 
 
-<script type="text/javascript" th:src="@{/js/deleteCategory.js}"></script>
+<script type="text/javascript" th:src="@{/js/deleteConfirm.js}"></script>
 
 
 <div th:replace="fragments/general :: bottomScripts"></div>

@@ -66,6 +66,8 @@ public class UserController {
     @PostMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String saveOrUpdateUser(@Valid @ModelAttribute("billyUser") BillyUser billyUser, BindingResult result) {
+        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        principal.getUserId();
         if (result.hasErrors()) {
             return "userForm";
         }
@@ -75,6 +77,10 @@ public class UserController {
         }
         if (billyUser.getUserRole() == null) {
             billyUser.setUserRole("ROLE_CUSTOMER");
+            return "userForm";
+        }
+        if (billyUser.getUserId() == principal.getUserId()){
+            return "redirect:/users";
         }
         if (billyUser.getUserRole().equals("ROLE_CUSTOMER") || billyUser.getPassword().equals("")) {
             billyUser.setRandomPassword();

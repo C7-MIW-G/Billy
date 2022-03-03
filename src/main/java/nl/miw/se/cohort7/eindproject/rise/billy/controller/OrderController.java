@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
@@ -11,11 +12,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -79,19 +77,15 @@ public class OrderController {
         return "redirect:/orders/new";
     }
 
-    @PostMapping("/orders/accountPay")
-    protected String doAccountPay(@ModelAttribute("selectedUser") BillyUserDto selectedUser, BindingResult result) {
-        if (result.hasErrors()) {
-            return "redirect:/orders/new";
-        }
-        userService.subtractFromBalance(selectedUser.getUserId(), BarOrderDto.activeOrder.calculateTotalOrderPrice());
-
+    @GetMapping("/orders/accountPay/{userId}")
+    protected String doAccountPay(@PathVariable("userId") Long userId) {
+        userService.subtractFromBalance(userId, BarOrderDto.activeOrder.calculateTotalOrderPrice());
 
         BillyUserPrincipal principal =
                 (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         BillyUserDto bartender = userService.findByUserId(principal.getUserId());
         BarOrderDto.activeOrder.setBartender(bartender);
-        BillyUserDto customer = userService.findByUserId(selectedUser.getUserId());
+        BillyUserDto customer = userService.findByUserId(userId);
         BarOrderDto.activeOrder.setCustomer(customer);
         barOrderService.saveBarOrder(BarOrderDto.activeOrder);
 

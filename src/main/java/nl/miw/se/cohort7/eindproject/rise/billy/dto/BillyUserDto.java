@@ -15,6 +15,8 @@ import java.util.Date;
 @Getter @Setter
 public class BillyUserDto {
 
+    private static final int USER_DISPLAY_STRING_LENGTH = 20;
+
     private Long userId;
 
     private String userRole;
@@ -44,7 +46,8 @@ public class BillyUserDto {
     }
 
     public String getAccountBalanceDisplayString(double accountBalance) {
-        return String.format("\u20ac %.2f", accountBalance);
+
+        return String.format("%s\u20ac %.2f", accountBalance < 0 ? " -" : " ", Math.abs(accountBalance));
     }
 
 
@@ -61,6 +64,22 @@ public class BillyUserDto {
         }
         this.accountBalance += amount;
 
+    }
+
+    public String getUserDisplayString() {
+        StringBuilder userDisplayStringBuilder = new StringBuilder();
+
+        for (int i = 0; i < USER_DISPLAY_STRING_LENGTH; i++) {
+            if (i < this.name.length()) {
+                userDisplayStringBuilder.append(this.name.charAt(i));
+            } else {
+                userDisplayStringBuilder.append("_");
+            }
+        }
+
+        userDisplayStringBuilder.append(this.getAccountBalanceDisplayString(accountBalance));
+
+        return userDisplayStringBuilder.toString();
     }
 
 }

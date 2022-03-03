@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
   <title>User details</title>
 </head>
@@ -45,16 +46,16 @@
         </li>
         <li>
           <div class="item-buttons grid-buttons-parent">
-            <div>
-              <a th:href="@{/users/details/{userId}/orderHistory(userId=${billyUserDto.userId})}">
-                <button>Order History</button>
-              </a>
+            <div class="grid-buttonRow-parent">
               <a th:href="@{/users/update/{userId}(userId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Edit</button></a>
-              <a id="deleteButton"
-                 sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Delete</button></a>
+              <div><a th:class="${billyUserId == #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
+                 id="deleteButton"
+                 sec:authoirze="hasRole('ROLE_BAR MANAGER')"
+                 th:text="Delete"></a><span class="billyTooltip">Users cannot delete themself</span></div>
               <a th:href="@{/users/changePassword/{billyUserId}(billyUserId=${billyUserDto.userId})}"
-                 sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Password change</button></a>
+                 sec:authorize="hasRole('ROLE_BAR MANAGER')">
+                <button>Password change</button></a>
             </div>
             <button onclick="history.back()">Return</button>
           </div>

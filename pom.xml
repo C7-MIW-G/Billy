@@ -82,6 +82,24 @@
 			<artifactId>javax.el</artifactId>
 			<version>3.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.nikeo.jsonBuilder</groupId>
+			<artifactId>jsonBuilder</artifactId>
+			<version>0.2.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.github.holgerbrandl</groupId>
+			<artifactId>jsonbuilder</artifactId>
+			<version>0.9</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.51degrees</groupId>
+			<artifactId>pipeline.jsonbuilder</artifactId>
+			<version>4.3.8</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
