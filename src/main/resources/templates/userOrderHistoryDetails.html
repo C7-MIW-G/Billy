@@ -6,15 +6,37 @@
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 <div th:replace="fragments/general :: logoutModal"></div>
+<div class="billyContainer">
+
+    <div class="overview grid-overview-parent">
+        <div class="overviewOrderHistoryList grid-overviewOrderHistoryListHead-parent">
+            <div class="grid-user-child-left fontBold">Product</div>
+            <div class="grid-user-child-left fontBold">Amount</div>
+            <div class="grid-user-child-right fontBold">Price</div>
+        </div>
+        <div class="overviewList">
+            <ul class="unordered-list" th:each="product : ${barOrderDetail.productList}">
+                <li>
+                    <div class="grid-orderHistory-parent">
+                        <div class="grid-user-child-left"  th:text="${product.productName}"></div>
+                        <div class="grid-user-child-left"  th:text="${product.amount}"></div>
+                        <div class="grid-user-child-right" th:text="${product.subTotalDisplayString()}"></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="grid-user-child-right fontBold" th:text="${barOrderDetail.getTotalPriceDisplayString(barOrderDetail.totalPrice)}"></div>
+        </div>
+    </div>
+</div>
 
 <div>
-<ul th:text="${barOrderDetail.productList}">
-
-</ul>
+    <ul>
+        <li th:text="${#temporals.format(barOrderDetail.getDateTime(), 'dd-MM-yyyy HH:mm')}"></li>
+    </ul>
 </div>
 
 
-    <!--  HERE COMES YOUR ACTUAl PAGE  -->
+<!--  HERE COMES YOUR ACTUAl PAGE  -->
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
