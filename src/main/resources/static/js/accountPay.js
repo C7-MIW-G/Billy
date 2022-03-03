@@ -17,10 +17,11 @@ modalCancelAccountPayment.onclick = function (){
     closeModal(accountPayModal);
 }
 
-var elems = document.getElementsByClassName('confirm-account-pay');
-var confirmIt = function (e) {
-    if (!confirm('Please confirm')) e.preventDefault();
+var confirmationElements = document.getElementsByClassName('confirm-account-pay');
+
+var confirmIt = function (hyperlink) {
+    if (!confirm('Please confirm')) hyperlink.preventDefault();
 };
-for (var i = 0, l = elems.length; i < l; i++) {
-    elems[i].addEventListener('click', confirmIt, false);
+for (var i = 0; i < confirmationElements.length; i++) {
+    confirmationElements[i].addEventListener('click', confirmIt, false);
 }

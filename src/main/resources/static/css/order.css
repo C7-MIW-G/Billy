@@ -131,11 +131,16 @@
 .account-pay-modal-body{
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
     height: 100%;
 }
 .grid-user-account-pay{
     display: grid;
     grid-template-columns: 70% 30%;
+}
+.account-pay-modal-body-select-customer{
+    display: grid;
+    grid-template-rows: 10% 80%;
 }
 .account-pay-modal-body-order-info{
     display: grid;
