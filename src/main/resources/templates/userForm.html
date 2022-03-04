@@ -57,12 +57,12 @@
                     </li>
                     <li sec:authorize="hasRole('ROLE_BAR MANAGER')">
                         <div class="grid-item-parent">
-                            <div><label for="roles">Role </label></div>
+<!--                            <div><label for="roles">Role </label></div>-->
                             <div>
-                                <select th:disabled="${billyUserId eq #authentication.getPrincipal().getUserId()}"
-                                        th:class="${billyUserId eq #authentication.getPrincipal().getUserId() ?
-                                        'buttonIsDisabled' : ''}"
-                                        id="roles" th:field="*{userRole}">
+<!--                                <select th:disabled="${billyUserId eq #authentication.getPrincipal().getUserId()}"-->
+<!--                                        th:class="${billyUserId eq #authentication.getPrincipal().getUserId() ?-->
+<!--                                        'buttonIsDisabled' : ''}"-->
+<!--                                        id="roles" th:field="*{userRole}">-->
                                     <option value="ROLE_CUSTOMER" selected>Customer</option>
                                     <option value="ROLE_BARTENDER" >Bartender</option>
                                     <option value="ROLE_BAR MANAGER">Bar Manager</option>
