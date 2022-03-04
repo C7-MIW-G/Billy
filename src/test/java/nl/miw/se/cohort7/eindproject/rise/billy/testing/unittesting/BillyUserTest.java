@@ -1,5 +1,6 @@
-package nl.miw.se.cohort7.eindproject.rise.billy.model;
+package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittesting;
 
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
