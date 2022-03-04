@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Assortment</title>
+</head>
+<link rel="stylesheet" type="text/css" href="/css/combinedOverview.css">
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+<div th:replace="fragments/general :: logoutModal"></div>
+
+
+<div class="billyContainer2 flex-combined-parent">
+
+    <h1>Search for product by category</h1>
+    <form id="search-product-form">
+        <select id="choiceBox" th:onchange="fire_ajax_getProducts()">
+            <option th:each="category : ${allCategories}"
+                    th:text="${category.categoryName}" th:value="${category.categoryId}"></option>
+        </select>
+        <input type="hidden" id="token" th:value="${_csrf.getToken()}">
+    </form>
+
+    <span id="feedback" th:text="${_csrf.getToken()}"></span>
+
+</div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>
+
+<script type="text/javascript" th:src="@{/js/ajaxTest.js}"></script>
+
+
+</html>

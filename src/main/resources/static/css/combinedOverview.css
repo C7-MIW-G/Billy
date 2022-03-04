@@ -1,0 +1,22 @@
+.billyContainer2{
+    width: calc(100%);
+    height: calc(100% - 4rem + 10px);
+
+    background: linear-gradient(180deg, #d9d9d9 0%, #f0f0f0 15%, #ffffff 100%);
+}
+.flex-combined-parent{
+    display: flex;
+    flex-direction: row;
+}
+.categoryBar{
+    background-color: deeppink;
+
+    height: 100%;
+    width: max(17.5%, 10rem);
+}
+.productBar{
+    background-color: greenyellow;
+
+    height: 100%;
+    width: max(17.5%, 10rem);
+}
