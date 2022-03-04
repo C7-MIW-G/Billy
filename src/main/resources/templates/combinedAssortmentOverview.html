@@ -17,10 +17,11 @@
             <option th:each="category : ${allCategories}"
                     th:text="${category.categoryName}" th:value="${category.categoryId}"></option>
         </select>
+        <input type="hidden" id="header" th:value="${_csrf.getHeaderName()}">
         <input type="hidden" id="token" th:value="${_csrf.getToken()}">
     </form>
 
-    <span id="feedback" th:text="${_csrf.getToken()}"></span>
+    <span id="feedback" th:text="${_csrf.getParameterName()}"></span>
 
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>

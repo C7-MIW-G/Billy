@@ -8,15 +8,25 @@ $(document).ready(function () {
     });
 });
 
+$(function () {
+    let header = $("#header").val();
+    let token = $("#token").val();
+    $(document).ajaxSend(function(e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+});
+
 function fire_ajax_getProducts(){
 
     let searchData = {};
     searchData["id"] = $("#choiceBox").val();
 
-    let token = $("#token").val();
-    console.log("TOKEN: ", token);
-
     $("#choiceBox").prop("disabled", true);
+
+    let header = $("#header").val();
+    let token = $("#token").val();
+    console.log("HEADER: ", header);
+    console.log("TOKEN: ", token);
 
     $.ajax({
         type: "POST",
