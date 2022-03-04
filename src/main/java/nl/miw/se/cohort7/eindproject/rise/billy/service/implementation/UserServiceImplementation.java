@@ -2,7 +2,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.service.implementation;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
@@ -33,7 +32,6 @@ public class UserServiceImplementation implements UserService {
             return null;
         }
         return convertToDto(billyUser.get());
-
     }
 
     public Optional<BillyUser> findByUsername(String userName) {

@@ -142,10 +142,20 @@ html, body {
     padding: 0.75rem 0.75rem;
     border-bottom: 1px solid dimgrey;
 }
+.overviewOrderHistoryList{
+    padding: 0.75rem 0.75rem;
+    border-bottom: 1px solid dimgrey;
+}
 .grid-overviewListHead-parent{
     display: grid;
     grid-template-columns: calc(100% - 8rem) 8rem;
 }
+
+.grid-overviewOrderHistoryListHead-parent{
+    display: grid;
+    grid-template-columns: calc(42.5%) calc(15%) calc(42.5%);
+}
+
 .new-button{
     margin-left: auto;
 }

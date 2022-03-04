@@ -10,15 +10,13 @@ import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.BarOrderRepository;
+import nl.miw.se.cohort7.eindproject.rise.billy.repository.ProductRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Jordy Pragt <j.pragt@st.hanze.nl>
@@ -28,8 +26,10 @@ import java.util.Optional;
 @Service
 public class BarOrderServiceImplementation implements BarOrderService {
 
+
     private BarOrderRepository barOrderRepository;
     private UserRepository userRepository;
+    private ProductRepository productRepository;
 
     public BarOrderServiceImplementation(BarOrderRepository barOrderRepository, UserRepository userRepository) {
         this.barOrderRepository = barOrderRepository;
@@ -116,6 +116,13 @@ public class BarOrderServiceImplementation implements BarOrderService {
         }
         return barOrderViewDtoList;
     }
+
+    @Override
+    public Optional<BarOrderViewDto> findBarOrderById(Long id) {
+        Optional<BarOrder> optionalBarOrder = barOrderRepository.findById(id);
+        return optionalBarOrder.map(this::convertBarOrderToDto);
+    }
+
 
     @Override
     public void saveBarOrder(BarOrderDto barOrderDto) {
