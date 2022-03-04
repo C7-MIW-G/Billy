@@ -10,18 +10,34 @@
 
 
 <div class="billyContainer2 flex-combined-parent">
+    <div class="categoryBar">
+        <div class="overviewList">
+            <ul class="unordered-list" >
+                <li>
+                    <div class="productName fontBold" th:text="All"></div>
+                </li>
+            </ul>
+            <ul class="unordered-list" th:each="category : ${allCategories}">
+                <li th:onclick="fire_ajax_getProducts([[${category.categoryId}]])">
 
-    <h1>Search for product by category</h1>
-    <form id="search-product-form">
-        <select id="choiceBox" th:onchange="fire_ajax_getProducts()">
-            <option th:each="category : ${allCategories}"
-                    th:text="${category.categoryName}" th:value="${category.categoryId}"></option>
-        </select>
-        <input type="hidden" id="header" th:value="${_csrf.getHeaderName()}">
-        <input type="hidden" id="token" th:value="${_csrf.getToken()}">
-    </form>
+                    <div class="productName fontBold" th:text="${category.getCategoryName()}"></div>
 
-    <span id="feedback" th:text="${_csrf.getParameterName()}"></span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="productBar">
+        <div id="productList" class="overviewList">
+
+        </div>
+    </div>
+
+    <span id="feedback" th:text="${_csrf.getToken()}"></span>
+
+
+    <input type="hidden" id="header" th:value="${_csrf.getHeaderName()}">
+    <input type="hidden" id="token" th:value="${_csrf.getToken()}">
 
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>

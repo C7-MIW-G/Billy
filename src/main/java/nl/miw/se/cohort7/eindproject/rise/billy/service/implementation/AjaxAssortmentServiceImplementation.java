@@ -29,8 +29,8 @@ public class AjaxAssortmentServiceImplementation implements AjaxAssortmentServic
     private MinProductAjaxDto convertProductToDto(Product product){
         MinProductAjaxDto ajaxProduct = new MinProductAjaxDto();
 
-        ajaxProduct.setProductId(product.getProductId());
-        ajaxProduct.setProductName(product.getProductName());
+        ajaxProduct.setId(product.getProductId());
+        ajaxProduct.setName(product.getProductName());
 
         return ajaxProduct;
     }

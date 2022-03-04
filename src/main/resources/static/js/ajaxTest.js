@@ -16,10 +16,10 @@ $(function () {
     });
 });
 
-function fire_ajax_getProducts(){
+function fire_ajax_getProducts(id){
 
-    let id = $("#choiceBox").val();
-    $("#choiceBox").prop("disabled", true);
+    // let id = $("#choiceBox").val();
+    // $("#choiceBox").prop("disabled", true);
 
     $.ajax({
         type: "POST",
@@ -34,6 +34,8 @@ function fire_ajax_getProducts(){
                 + JSON.stringify(resultData, null, 4);
             $('#feedback').html(json);
 
+            fillProductList(resultData)
+
             console.log("SUCCESS : ", resultData);
             $("#choiceBox").prop("disabled", false);
         },
@@ -47,4 +49,29 @@ function fire_ajax_getProducts(){
             $("#choiceBox").prop("disabled", false);
         }
     });
+}
+
+function fillProductList(data){
+    let new_listBody = document.createElement('ul-products');
+
+    data.productList.forEach(product => {
+
+        let pName = document.createTextNode(product.name);
+
+        let inner = document.createElement('div');
+        inner.setAttribute('class', 'productName fontBold');
+
+        let item = document.createElement('li');
+        item.setAttribute('value', product.id);
+
+        inner.appendChild(pName);
+        item.appendChild(inner);
+        new_listBody.appendChild(item);
+    });
+
+    let old_listBody = document.getElementById("productList").firstChild;
+
+    new_listBody.setAttribute('class', 'unordered-list');
+
+    document.getElementById("productList").replaceChild(new_listBody, old_listBody);
 }

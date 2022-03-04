@@ -9,6 +9,6 @@ import lombok.Setter;
  */
 @Getter @Setter
 public class MinProductAjaxDto {
-    private long productId;
-    private String productName;
+    private long id;
+    private String name;
 }
