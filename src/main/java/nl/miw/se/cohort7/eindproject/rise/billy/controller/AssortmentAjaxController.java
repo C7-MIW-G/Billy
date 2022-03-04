@@ -1,24 +1,15 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.IdSearchDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.MinProductAjaxDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductListAjaxResponse;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.AjaxAssortmentService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 /**
@@ -30,30 +21,20 @@ import java.util.stream.Collectors;
 @RequestMapping("/a-api")
 public class AssortmentAjaxController {
 
-    private AssortmentService assortmentService;
+    private AjaxAssortmentService assortmentService;
 
     @Autowired
-    public AssortmentAjaxController(AssortmentService assortmentService) {
+    public AssortmentAjaxController(AjaxAssortmentService assortmentService) {
         this.assortmentService = assortmentService;
     }
 
-    @PostMapping("/getProducts")
-    public ResponseEntity<?> getProductsFromCategory(@Valid @RequestBody IdSearchDto searchData, Errors errors) {
+
+    @PostMapping("/getProducts/{id}")
+    public ResponseEntity<?> getProductsFromCategory(@PathVariable("id") Long id) {
         ProductListAjaxResponse response = new ProductListAjaxResponse();
 
-        if (errors.hasErrors()){
-            response.setMessage(errors.getAllErrors()
-                    .stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .collect(Collectors.joining(",")));
+        List<MinProductAjaxDto> productList = assortmentService.findAllProductOfCategory(id);
 
-            return ResponseEntity.badRequest().body(response);
-        }
-
-        List<ProductDto> productList = new ArrayList<>();
-
-        if(searchData.getId() != null){
-            productList = assortmentService.findAllProductOfCategory(searchData.getId());
-        }
         response.setProductList(productList);
 
         return ResponseEntity.ok(response);

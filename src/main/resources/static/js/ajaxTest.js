@@ -18,22 +18,13 @@ $(function () {
 
 function fire_ajax_getProducts(){
 
-    let searchData = {};
-    searchData["id"] = $("#choiceBox").val();
-
+    let id = $("#choiceBox").val();
     $("#choiceBox").prop("disabled", true);
-
-    let header = $("#header").val();
-    let token = $("#token").val();
-    console.log("HEADER: ", header);
-    console.log("TOKEN: ", token);
 
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/a-api/getProducts",
-        data: JSON.stringify(searchData),
-        dataType: 'json',
+        url: "/a-api/getProducts/" + id,
         cache: false,
         timeout: 600000,
 
@@ -43,9 +34,7 @@ function fire_ajax_getProducts(){
                 + JSON.stringify(resultData, null, 4);
             $('#feedback').html(json);
 
-            console.log("GET: ", searchData);
             console.log("SUCCESS : ", resultData);
-
             $("#choiceBox").prop("disabled", false);
         },
 
@@ -54,7 +43,6 @@ function fire_ajax_getProducts(){
                 + e.status + "</pre>";
             $('#feedback').html(json);
 
-            console.log("GET: ", searchData);
             console.log("ERROR: ", e)
             $("#choiceBox").prop("disabled", false);
         }

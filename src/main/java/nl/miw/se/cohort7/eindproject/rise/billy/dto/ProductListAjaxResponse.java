@@ -13,7 +13,7 @@ import java.util.List;
 @Getter @Setter
 public class ProductListAjaxResponse {
 
-    private List<ProductDto> productList;
+    private List<MinProductAjaxDto> productList;
 
     private String message;
 }
