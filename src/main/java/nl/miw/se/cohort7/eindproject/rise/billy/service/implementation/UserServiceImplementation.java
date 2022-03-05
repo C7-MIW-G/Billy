@@ -53,6 +53,7 @@ public class UserServiceImplementation implements UserService {
         billyUserDto.setUserRole(billyUser.getUserRole());
         billyUserDto.setName(billyUser.getName());
         billyUserDto.setUsername(billyUser.getUsername());
+        billyUserDto.setMaxCredit(billyUser.getMaxCredit());
         billyUserDto.setBirthdate(billyUser.getBirthdate());
         billyUserDto.setAccountBalance(billyUser.getAccountBalance());
 

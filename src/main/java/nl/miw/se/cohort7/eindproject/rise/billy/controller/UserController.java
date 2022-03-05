@@ -66,7 +66,10 @@ public class UserController {
     @PostMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String saveOrUpdateUser(@Valid @ModelAttribute("billyUser") BillyUser billyUser, BindingResult result) {
-        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
         principal.getUserId();
         if (result.hasErrors()) {
             return "userForm";
@@ -96,7 +99,6 @@ public class UserController {
             return "userForm";
         }
         billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
-        billyUser.setAccountBalance(0.0);
         userService.save(billyUser);
         return "redirect:/users";
     }
@@ -125,7 +127,10 @@ public class UserController {
 
     @GetMapping("/delete/{billyUserId}")
     protected String deleteUser(@PathVariable("billyUserId") Long billyUserId) {
-        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
         principal.getUserId();
         if (billyUserId.equals(principal.getUserId())){
             return "redirect:/users/details/{billyUserId}";

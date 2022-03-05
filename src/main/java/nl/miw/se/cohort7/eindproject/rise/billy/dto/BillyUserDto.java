@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NegativeOrZero;
 import java.util.Date;
 
 /**
@@ -32,6 +33,7 @@ public class BillyUserDto {
 
     private double accountBalance;
 
+    @NegativeOrZero(message = "Please insert a negative number")
     private double maxCredit;
 
     public String userRoleDisplayString() {
@@ -52,7 +54,7 @@ public class BillyUserDto {
         return String.format("%s\u20ac %.2f", accountBalance < 0 ? " -" : " ", Math.abs(accountBalance));
     }
 
-    public String getMaxCreditDisplayString(double maxCredit) {
+    public String getCreditDisplayString(double maxCredit) {
         return String.format("\u20ac %.2f", maxCredit);
     }
 

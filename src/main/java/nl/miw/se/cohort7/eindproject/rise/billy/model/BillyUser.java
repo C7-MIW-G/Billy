@@ -6,10 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.*;
 import java.util.Date;
 
@@ -57,6 +54,7 @@ public class BillyUser {
 
     private double accountBalance;
 
+    @NegativeOrZero(message = "Please insert a negative number")
     private double maxCredit;
 
     public void setRandomPassword() {
