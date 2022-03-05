@@ -54,7 +54,7 @@ public class BillyUser {
 
     private double accountBalance;
 
-    @NegativeOrZero(message = "Please insert a negative number")
+    @NegativeOrZero(message = "Please insert a negative number or 0")
     private double maxCredit;
 
     public void setRandomPassword() {

@@ -79,17 +79,17 @@ public class OrderController {
 
     @GetMapping("/orders/accountPay/{userId}")
     protected String doAccountPay(@PathVariable("userId") Long userId) {
+        BillyUserDto customer = userService.findByUserId(userId);
         userService.subtractFromBalance(userId, BarOrderDto.activeOrder.calculateTotalOrderPrice());
-
         BillyUserPrincipal principal =
                 (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (!userService.checkAccountBalance(customer)) {
+            return "redirect:/users/details";
+        }
         BillyUserDto bartender = userService.findByUserId(principal.getUserId());
         BarOrderDto.activeOrder.setBartender(bartender);
-        BillyUserDto customer = userService.findByUserId(userId);
         BarOrderDto.activeOrder.setCustomer(customer);
         barOrderService.saveBarOrder(BarOrderDto.activeOrder);
-
-
         BarOrderDto.clearActiveOrder();
         return "redirect:/orders/new";
     }

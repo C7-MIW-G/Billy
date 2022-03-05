@@ -98,6 +98,9 @@ public class UserController {
                     , "Please fill out a date in the past");
             return "userForm";
         }
+        if (billyUser.getMaxCredit() > 0) {
+            result.rejectValue("maxCredit", "error.maxCredit");
+        }
         billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
         userService.save(billyUser);
         return "redirect:/users";

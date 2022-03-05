@@ -33,7 +33,7 @@ public class BillyUserDto {
 
     private double accountBalance;
 
-    @NegativeOrZero(message = "Please insert a negative number")
+    @NegativeOrZero(message = "Please insert a negative number or 0")
     private double maxCredit;
 
     public String userRoleDisplayString() {
@@ -57,6 +57,8 @@ public class BillyUserDto {
     public String getCreditDisplayString(double maxCredit) {
         return String.format("\u20ac %.2f", maxCredit);
     }
+
+
 
 
     public void payFromBalance(double amount) {
@@ -89,4 +91,7 @@ public class BillyUserDto {
         return userDisplayStringBuilder.toString();
     }
 
+    public double getAccountBalanceWithActiveOrder() {
+        return (accountBalance + BarOrderDto.activeOrder.calculateTotalOrderPrice());
+    }
 }

@@ -104,4 +104,15 @@ public class UserServiceImplementation implements UserService {
         billyUser.payFromBalance(amount);
         userRepository.save(billyUser);
     }
+
+    @Override
+    public boolean checkAccountBalance(BillyUserDto billyUserDto) {
+        if ((billyUserDto.getAccountBalanceWithActiveOrder())
+                < billyUserDto.getMaxCredit()) {
+            return false;
+        }
+        return true;
+    }
+
+
 }
