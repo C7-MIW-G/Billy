@@ -35,7 +35,7 @@
         <li>
           <div class="grid-item-parent">
             <div>Role:</div>
-            <div th:text="${billyUserDto.userRoleDisplayString()}"></div>
+            <div th:text="${billyUserDto.userRoleDisplayStringDetails()}"></div>
           </div>
         </li>
         <li>
@@ -60,7 +60,7 @@
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Edit</button></a>
               <div><a th:class="${billyUserId == #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
                       id="deleteButton"
-                      sec:authoirze="hasRole('ROLE_BAR MANAGER')"
+                      sec:authorize="hasRole('ROLE_BAR MANAGER')"
                       th:text="Delete"></a><span class="billyTooltip">Users cannot delete themselves</span></div>
               <a th:href="@{/users/changePassword/{billyUserId}(billyUserId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')">

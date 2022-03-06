@@ -38,32 +38,27 @@
                 </ul>
             </div>
             <div class="grid-footer-receipt receipt-TotalPrice">
-                <div>
-                <span class="bartender">Bartender:</span>
-                <span th:href="@{/users/details/{userId}(userId=${#authentication.getPrincipal().getUserId()})}"
-                      th:text="${#authentication.getPrincipal().getDisplayName()}"></span>
+                <div class="totalPrice">
+                    <span class="totalPrice">Total Price:</span>
+                    <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+                </div>
             </div>
-            <div class="totalPrice">
-                <span class="totalPrice">Total Price:</span>
-                <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
-            </div>
-        </div>
-        <div class="receipt-child receipt-paymentSection">
-            <div class="new-button">
-                <a id="directPayButton">
-                    <button>Direct pay</button>
-                </a>
-            </div>
-            <div>
+            <div class="receipt-child receipt-paymentSection">
                 <div class="new-button">
-                    <a id="accountPayButton">
-                        <button>Account pay</button>
+                    <a id="directPayButton">
+                        <button>Direct pay</button>
                     </a>
+                </div>
+                <div>
+                    <div class="new-button">
+                        <a id="accountPayButton">
+                            <button>Account pay</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <div id="directPayModal" class="customModal">
     <div class="modalContainer">

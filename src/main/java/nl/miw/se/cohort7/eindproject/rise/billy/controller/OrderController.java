@@ -79,7 +79,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/accountPay/{userId}")
-    protected String doAccountPay(@PathVariable("userId") Long userId, BindingResult result) {
+    protected String doAccountPay(@PathVariable("userId") Long userId) {
         BillyUserDto customer = userService.findByUserId(userId);
         if (!userService.checkAccountBalance(customer)) {
             return "redirect:/orders/new";

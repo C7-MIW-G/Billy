@@ -1,5 +1,6 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittesting;
 
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -70,5 +71,17 @@ class BillyUserTest {
 
         // Assert
         assertFalse(illegalCharacterFound);
+    }
+
+    @Test
+    void testCheckAccountBalance() {
+        // Arrange
+        BillyUserDto billyUser1 = new BillyUserDto();
+
+        // Activate
+        billyUser1.setAccountBalance(1000);
+
+        // Assert
+        assertEquals(1000, billyUser1.getAccountBalance());
     }
 }
