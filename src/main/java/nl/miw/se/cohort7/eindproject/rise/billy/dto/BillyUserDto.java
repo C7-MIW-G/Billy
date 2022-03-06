@@ -92,6 +92,6 @@ public class BillyUserDto {
     }
 
     public double getAccountBalanceWithActiveOrder() {
-        return (accountBalance + BarOrderDto.activeOrder.calculateTotalOrderPrice());
+        return (accountBalance + (BarOrderDto.activeOrder.calculateTotalOrderPrice() * -1));
     }
 }

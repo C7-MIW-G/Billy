@@ -12,6 +12,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -78,14 +79,14 @@ public class OrderController {
     }
 
     @GetMapping("/orders/accountPay/{userId}")
-    protected String doAccountPay(@PathVariable("userId") Long userId) {
+    protected String doAccountPay(@PathVariable("userId") Long userId, BindingResult result) {
         BillyUserDto customer = userService.findByUserId(userId);
+        if (!userService.checkAccountBalance(customer)) {
+            return "redirect:/orders/new";
+        }
         userService.subtractFromBalance(userId, BarOrderDto.activeOrder.calculateTotalOrderPrice());
         BillyUserPrincipal principal =
                 (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (!userService.checkAccountBalance(customer)) {
-            return "redirect:/users/details";
-        }
         BillyUserDto bartender = userService.findByUserId(principal.getUserId());
         BarOrderDto.activeOrder.setBartender(bartender);
         BarOrderDto.activeOrder.setCustomer(customer);
