@@ -53,7 +53,7 @@ public class BarOrderDto {
         activeOrder = new BarOrderDto();
     }
 
-    public static void addProductToOrder(Product product){
+    public static void addProductToOrder(ProductDto product){
         if (activeOrder.productMap.containsKey(product)) {
             activeOrder.productMap.put(product, activeOrder.productMap.get(product) + 1);
         } else {
@@ -61,7 +61,7 @@ public class BarOrderDto {
         }
     }
 
-    public static void removeProductFromOrder(Product product) {
+    public static void removeProductFromOrder(ProductDto product) {
         if (activeOrder.productMap.get(product) == 1) {
             activeOrder.productMap.remove(product);
         } else {

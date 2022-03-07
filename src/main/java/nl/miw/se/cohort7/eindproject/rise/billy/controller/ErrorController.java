@@ -27,14 +27,12 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
                 model.addAttribute("error", "It looks like you tried to access a page which" +
                         " is non-existent.");
                 model.addAttribute("error2", "Please go back to one of the other screens");
-            }
-            else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
+            } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                 model.addAttribute("errorCode", "Error status 500 - Internal server error");
                 model.addAttribute("error", "Oopsie... Server died. What now?");
                 model.addAttribute("error2", "You might want to go back to " +
                         "one of the other screens");
-            }
-            else if(statusCode == HttpStatus.FORBIDDEN.value()) {
+            } else if(statusCode == HttpStatus.FORBIDDEN.value()) {
                 model.addAttribute("errorCode", "Error status 403 - Access denied");
                 model.addAttribute("error", "You are not authorized for this feature!");
                 model.addAttribute("error2", "If you feel like you should, please contact " +

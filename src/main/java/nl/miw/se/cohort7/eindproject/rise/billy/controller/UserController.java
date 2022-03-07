@@ -58,7 +58,7 @@ public class UserController {
     @GetMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
-        model.addAttribute("billyUser", new BillyUser());
+        model.addAttribute("billyUser", new BillyUserDto());
         model.addAttribute("headerText", "New User");
         return "userForm";
     }
@@ -99,7 +99,7 @@ public class UserController {
             return "userForm";
         }
         if (billyUser.getMaxCredit() > 0) {
-            result.rejectValue("maxCredit", "error.maxCredit"); 
+            result.rejectValue("maxCredit", "error.maxCredit");
         }
 
         if (billyUser.getUserId() > 0) {
@@ -186,8 +186,8 @@ public class UserController {
 
     @GetMapping("/details/{billyUserId}/orderHistory/{orderId}")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
-    protected String SeeOrderHistoryDetails(@PathVariable ("billyUserId") Long billyUserId,
-                                            @PathVariable("orderId") Long barOrderId, Model model) {
+    protected String seeOrderHistoryDetails(@PathVariable("orderId") Long barOrderId, Model model,
+                                            @PathVariable String billyUserId) {
         Optional<BarOrderViewDto> optionalBarOrderViewDto = barOrderService.findBarOrderById(barOrderId);
         if (optionalBarOrderViewDto.isPresent()) {
             model.addAttribute("barOrderDetail", optionalBarOrderViewDto.get());
@@ -195,5 +195,4 @@ public class UserController {
         }
         return "redirect:/users";
     }
-
 }

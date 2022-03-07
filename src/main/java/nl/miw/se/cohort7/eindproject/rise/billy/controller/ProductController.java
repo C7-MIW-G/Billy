@@ -66,7 +66,7 @@ public class ProductController {
             model.addAttribute("product", optionalProduct.get());
             return "productForm";
         }
-        return "redirect:/assortment";
+        return "redirect:/assortmentOverview";
     }
 
     @GetMapping("/details/{productId}")
@@ -76,7 +76,7 @@ public class ProductController {
             model.addAttribute("product", optionalProduct.get());
             return "productDetails";
         }
-        return "redirect:/assortment";
+        return "redirect:/assortmentOverview";
     }
 
     @GetMapping("/delete/{productId}")
@@ -87,6 +87,6 @@ public class ProductController {
             assortmentService.deleteProduct(product);
             return "redirect:/assortment/categories/" + product.getCategoryDto().getCategoryId();
         }
-        return "redirect:/assortment";
+        return "redirect:/assortmentOverview";
     }
 }
