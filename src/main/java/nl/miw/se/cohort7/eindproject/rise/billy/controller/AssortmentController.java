@@ -46,7 +46,7 @@ public class AssortmentController {
 
     @PostMapping("/categories/new")
     protected String saveOrUpdateCategory(@Valid @ModelAttribute("category") CategoryDto category,
-                                         BindingResult result) {
+                                          BindingResult result) {
         if (result.hasErrors()) {
             return "assortmentForm";
         }

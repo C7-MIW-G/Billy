@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
@@ -52,7 +53,7 @@ public class OrderController {
 
     @GetMapping("/orders/add/{productId}")
     protected String addProductToOrder(@PathVariable("productId") Long productId) {
-        Optional<Product> optionalProduct = productService.findByProductId(productId);
+        Optional<ProductDto> optionalProduct = productService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }
@@ -62,7 +63,7 @@ public class OrderController {
 
     @GetMapping("/orders/remove/{productId}")
     protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
-        Optional<Product> optionalProduct = productService.findByProductId(productId);
+        Optional<ProductDto> optionalProduct = productService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }
