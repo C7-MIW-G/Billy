@@ -153,6 +153,7 @@
     cursor: not-allowed;
     pointer-events: none;
     opacity: 50%;
+    background: transparent;
 }
 
 .overviewList isDisabled ul li:hover{
