@@ -81,6 +81,7 @@
     height: calc(100% - 2rem);
     overflow: hidden;
     overflow-y: auto;
+    font-family: "Courier New", Verdana, sans-serif ;
 }
 .receipt-ProductsList ul li a{
     display: block;
@@ -103,6 +104,7 @@
     height: 2rem;
     padding-right: 0.5rem;
     width: calc(100% - 0.5rem);
+    font-family: "Courier New", Verdana, sans-serif ;
 }
 .totalPrice{
     text-align: right;
@@ -135,7 +137,7 @@
 }
 .grid-user-account-pay{
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 60% 25% 15%;
 }
 .account-pay-modal-body-select-customer{
     display: grid;
@@ -145,4 +147,22 @@
     display: grid;
     grid-template-rows: 70% 15% 5%;
     align-items: center;
+}
+
+.isDisabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 50%;
+}
+
+.overviewList isDisabled ul li:hover{
+    background-color: white;
+}
+
+.visible{
+    visibility: visible;
+}
+
+.invisible{
+    visibility: hidden;
 }

@@ -24,6 +24,6 @@ public interface UserService {
 
     void subtractFromBalance(Long userId, double calculateTotalOrderPrice);
 
-    boolean checkAccountBalance(BillyUserDto billyUserDto);
+    boolean hasEnoughBalance(BillyUserDto billyUserDto);
 }
 

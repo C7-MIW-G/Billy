@@ -83,9 +83,12 @@
                 <div class="overviewList">
                     <ul class="unordered-list" th:each="userDto : ${allUsers}">
                         <li>
-                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay">
+                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.getAccountBalanceWithActiveOrder()
+                            < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
                                 <div class="grid-user-account-pay">
                                     <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
+                                    <span th:class="${userDto.getAccountBalanceWithActiveOrder()
+                            < userDto.maxCredit ? 'visible' : 'invisible'}">Credit insufficient</span>
                                     <span class="grid-user-child-right" th:text="${userDto.getAccountBalanceDisplayString(userDto.getAccountBalance())}"></span>
                                 </div>
                             </a>
@@ -94,7 +97,7 @@
                 </div>
             </div>
             <div class="account-pay-modal-body-order-info">
-                <div class="receipt-ProductsList">
+                <div class="receipt-ProductsList receipt">
                     <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
                         <li>
                             <div class="grid-orderList-parent">

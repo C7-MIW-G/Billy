@@ -99,7 +99,7 @@ public class UserController {
             return "userForm";
         }
         if (billyUser.getMaxCredit() > 0) {
-            result.rejectValue("maxCredit", "error.maxCredit");
+            result.rejectValue("maxCredit", "error.maxCredit"); 
         }
         billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
         userService.save(billyUser);

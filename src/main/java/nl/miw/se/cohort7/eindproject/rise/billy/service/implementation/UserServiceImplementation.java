@@ -106,7 +106,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public boolean checkAccountBalance(BillyUserDto billyUserDto) {
+    public boolean hasEnoughBalance(BillyUserDto billyUserDto) {
         if ((billyUserDto.getAccountBalanceWithActiveOrder())
                 < billyUserDto.getMaxCredit()) {
             return false;

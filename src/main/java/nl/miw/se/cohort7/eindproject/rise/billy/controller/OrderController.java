@@ -2,7 +2,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
@@ -12,7 +11,6 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -81,7 +79,7 @@ public class OrderController {
     @GetMapping("/orders/accountPay/{userId}")
     protected String doAccountPay(@PathVariable("userId") Long userId) {
         BillyUserDto customer = userService.findByUserId(userId);
-        if (!userService.checkAccountBalance(customer)) {
+        if (!userService.hasEnoughBalance(customer)) {
             return "redirect:/orders/new";
         }
         userService.subtractFromBalance(userId, BarOrderDto.activeOrder.calculateTotalOrderPrice());
