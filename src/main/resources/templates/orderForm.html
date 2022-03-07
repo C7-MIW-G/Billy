@@ -108,11 +108,6 @@
                     </ul>
                 </div>
                 <div class="grid-footer-receipt receipt-TotalPrice">
-                    <div class="grid-user-child-left">
-                        <span class="bartender">Bartender:</span>
-                        <span th:href="@{/users/details/{userId}(userId=${#authentication.getPrincipal().getUserId()})}"
-                              th:text="${#authentication.getPrincipal().getDisplayName()}"></span>
-                    </div>
                     <div class="totalPrice">
                         <span class="totalPrice">Total Price:</span>
                         <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
