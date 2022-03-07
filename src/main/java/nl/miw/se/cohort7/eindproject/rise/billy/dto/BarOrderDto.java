@@ -24,11 +24,11 @@ public class BarOrderDto {
     
     private BillyUserDto customer;
 
-    private List<Product> productList = new ArrayList<>();
+    private List<ProductDto> productList = new ArrayList<>();
 
-    private Map<Product, Integer> productMap = new HashMap<>();
+    private Map<Product, Integer> productMap = new HashMap<Product, Integer>();
 
-    private Map<Product, Double> discountMap = new HashMap<>();
+    private Map<ProductDto, Double> discountMap = new HashMap<>();
 
 
     public double calculateTotalOrderPrice(){
@@ -53,7 +53,7 @@ public class BarOrderDto {
         activeOrder = new BarOrderDto();
     }
 
-    public static void addProductToOrder(ProductDto product){
+    public static void addProductToOrder(Product product){
         if (activeOrder.productMap.containsKey(product)) {
             activeOrder.productMap.put(product, activeOrder.productMap.get(product) + 1);
         } else {
@@ -61,7 +61,7 @@ public class BarOrderDto {
         }
     }
 
-    public static void removeProductFromOrder(ProductDto product) {
+    public static void removeProductFromOrder(Product product) {
         if (activeOrder.productMap.get(product) == 1) {
             activeOrder.productMap.remove(product);
         } else {

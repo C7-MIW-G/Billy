@@ -53,7 +53,7 @@ public class OrderController {
 
     @GetMapping("/orders/add/{productId}")
     protected String addProductToOrder(@PathVariable("productId") Long productId) {
-        Optional<ProductDto> optionalProduct = productService.findByProductId(productId);
+        Optional<Product> optionalProduct = productService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }
@@ -63,7 +63,7 @@ public class OrderController {
 
     @GetMapping("/orders/remove/{productId}")
     protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
-        Optional<ProductDto> optionalProduct = productService.findByProductId(productId);
+        Optional<Product> optionalProduct = productService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }
