@@ -20,7 +20,6 @@ public interface AssortmentService {
 
     void deleteCategory(CategoryDto categoryDto);
 
-
     Optional<ProductDto> findByProductId(Long id);
 
     List<ProductDto> findAllProducts();

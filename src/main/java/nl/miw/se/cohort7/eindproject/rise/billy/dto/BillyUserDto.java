@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Calendar;
@@ -18,6 +19,7 @@ import java.util.Date;
 public class BillyUserDto {
 
     private static final int USER_DISPLAY_STRING_LENGTH = 20;
+    public static final int MIN_AGE_FOR_PRODUCTS_OF_AGE = 18;
 
     private Long userId;
 
@@ -72,9 +74,6 @@ public class BillyUserDto {
         return String.format("%s\u20ac %.2f", maxCredit < 0 ? " -" : " ", Math.abs(maxCredit));
     }
 
-
-
-
     public void payFromBalance(double amount) {
         if (amount < 0) {
             return;
@@ -108,6 +107,26 @@ public class BillyUserDto {
     public double getAccountBalanceWithActiveOrder() {
         return (accountBalance + (BarOrderDto.activeOrder.calculateTotalOrderPrice() * -1));
     }
+
+    public static int getAge(Date dateOfBirth) {
+        Calendar today = Calendar.getInstance();
+        Calendar birthDate = Calendar.getInstance();
+        int age = 0;
+
+        birthDate.setTime(dateOfBirth);
+        if (birthDate.after(today)) {
+            throw new IllegalArgumentException("Can't be born in the future");
+        }
+
+        age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+
+        return age;
+    }
+
+    public boolean isOfAge () {
+        return getAge(this.birthdate) >= MIN_AGE_FOR_PRODUCTS_OF_AGE;
+    }
+
 }
 
 

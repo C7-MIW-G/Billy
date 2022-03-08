@@ -80,7 +80,6 @@ public class UserController {
         }
         if (billyUser.getUserRole() == null) {
             billyUser.setUserRole("ROLE_CUSTOMER");
-            return "userForm";
         }
         if (billyUser.getUserId() == principal.getUserId()){
             billyUser.setUserRole(userService.findByUserId(billyUser.getUserId()).getUserRole());

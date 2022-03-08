@@ -2,7 +2,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.model;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
@@ -27,6 +26,7 @@ public class BillyUser {
     public static final int RANDOM_PASSWORD_LENGTH = 64;
     public static final int RANDOMIZATION_POOL_LENGTH = 94;
     public static final int START_USABLE_ASCII_CHARACTERS = 33;
+
 
     @Id
     @GeneratedValue
@@ -90,26 +90,6 @@ public class BillyUser {
             return;
         }
         this.accountBalance -= amount;
-    }
-
-    public static int getAge(Date dateOfBirth) {
-        Calendar today = Calendar.getInstance();
-        Calendar birthDate = Calendar.getInstance();
-        int age = 0;
-
-        birthDate.setTime(dateOfBirth);
-        if (birthDate.after(today)) {
-            throw new IllegalArgumentException("Can't be born in the future");
-        }
-
-        age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
-
-        return age;
-    }
-
-    public boolean isOfAge (BillyUser billyUser) {
-        return getAge(billyUser.birthdate) >= MIN_AGE_FOR_PRODUCTS_OF_AGE;
-
     }
 
 }
