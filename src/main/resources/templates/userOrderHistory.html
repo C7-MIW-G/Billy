@@ -14,7 +14,7 @@
         <div class="overviewOrderHistoryList grid-overviewOrderHistoryListHead-parent">
             <div class="grid-user-child-left fontBold">Date and time</div>
             <div class="grid-user-child-left fontBold">Price</div>
-            <div class="grid-user-child-right fontBold">Bartender</div>
+            <div class="grid-user-child-left fontBold">Bartender</div>
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="barOrder : ${OrdersByUser}">
@@ -22,8 +22,8 @@
                     <a th:href="@{/users/details/{userId}/orderHistory/{orderId}(orderId=${barOrder.orderId}, userId=${billyUserId})}">
                         <div class="grid-orderHistory-parent">
                             <div class="grid-user-child-left"  th:text="${#temporals.format(barOrder.getDateTime(), 'dd-MM-yyyy HH:mm')}"></div>
-                            <div class="grid-user-child-left"  th:text="${barOrder.(barOrder.getTotalPrice())}"></div>
-                            <div class="grid-user-child-right" th:text="${barOrder.getBartenderName()}"></div>
+                            <div class="grid-user-child-left"  th:text="${barOrder.getTotalPriceDisplayString(barOrder.getTotalPrice())}"></div>
+                            <div class="grid-user-child-left" th:text="${barOrder.getBartenderName()}"></div>
                         </div>
                     </a>
                 </li>

@@ -72,6 +72,15 @@ public class BillyUserDto {
         return String.format("%s\u20ac %.2f", maxCredit < 0 ? " -" : " ", Math.abs(maxCredit));
     }
 
+    public double getRemainingCredit(double accountBalance, double maxCredit){
+        return (maxCredit - accountBalance);
+    }
+
+    public String getRemainingCreditDisplayString(){
+        return String.format("%s\u20ac %.2f", getRemainingCredit(accountBalance, maxCredit) < 0 ? " -" : " ",
+                (getRemainingCredit(accountBalance, maxCredit)*-1));
+    }
+
 
 
 
