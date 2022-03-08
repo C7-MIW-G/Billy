@@ -37,8 +37,14 @@ public class Seeder {
 
     @EventListener
     public void seed(ContextRefreshedEvent refreshedEvent){
-        seedUsers();
-        seedCategory();
+        if (userService.findAll().isEmpty()){
+            seedUsers();
+        }
+        if (assortmentService.findAllCategories().isEmpty()
+                && assortmentService.findAllProducts().isEmpty()){
+            seedCategory();
+            seedProducts();
+        }
     }
 
     private void seedUsers(){
@@ -55,11 +61,15 @@ public class Seeder {
         defaultUser.setUserRole("ROLE_BAR MANAGER");
         userService.saveNewUser(defaultUser);
 
+        defaultUser.setUserId(0);
+
         defaultUser.setName("Bartender");
         defaultUser.setUsername("billy2@rise.nl");
         defaultUser.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
         defaultUser.setUserRole("ROLE_BARTENDER");
         userService.saveNewUser(defaultUser);
+
+        defaultUser.setUserId(0);
 
         defaultUser.setName("Customer");
         defaultUser.setUsername("billy3@rise.nl");
@@ -82,13 +92,13 @@ public class Seeder {
     }
 
     private void seedProducts(){
-        Optional<CategoryDto> optionalPatat = assortmentService.findCategoryByName("Patat");
+        Optional<CategoryDto> optionalPatat = assortmentService.findCategoryByName("Patat").stream().findFirst();
         optionalPatat.ifPresent(this::seedPatat);
 
-        Optional<CategoryDto> optionalSnacks = assortmentService.findCategoryByName("Snacks");
+        Optional<CategoryDto> optionalSnacks = assortmentService.findCategoryByName("Snacks").stream().findFirst();
         optionalSnacks.ifPresent(this::seedSnacks);
 
-        Optional<CategoryDto> optionalDranken = assortmentService.findCategoryByName("Dranken");
+        Optional<CategoryDto> optionalDranken = assortmentService.findCategoryByName("Dranken").stream().findFirst();
         optionalDranken.ifPresent(this::seedDranken);
     }
 
@@ -131,9 +141,11 @@ public class Seeder {
         defaultDrank.setProductName("Coca Cola");
         defaultDrank.setProductPrice(1.75);
         defaultDrank.setProductOfAge(false);
+        assortmentService.saveProduct(defaultDrank);
 
         defaultDrank.setProductName("Heineken");
         defaultDrank.setProductPrice(1.85);
         defaultDrank.setProductOfAge(true);
+        assortmentService.saveProduct(defaultDrank);
     }
 }
