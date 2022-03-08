@@ -29,7 +29,6 @@ public class AssortmentController {
         this.assortmentService = assortmentService;
     }
 
-
     //categories
     @GetMapping({"", "/", "/categories"})
     protected String showCategoryOverview(Model model) {

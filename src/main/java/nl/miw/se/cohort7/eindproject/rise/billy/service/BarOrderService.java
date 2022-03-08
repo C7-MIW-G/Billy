@@ -15,4 +15,6 @@ public interface BarOrderService {
 
     void saveBarOrder(BarOrderDto barOrderDto);
 
+    List<BarOrderViewDto> findAll();
 }
+

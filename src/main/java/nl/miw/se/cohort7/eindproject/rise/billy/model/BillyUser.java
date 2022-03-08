@@ -19,7 +19,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class BillyUser {
+public class  BillyUser {
 
     public static final int MINIMUM_PASSWORD_LENGTH = 8;
     public static final int MIN_AGE_FOR_PRODUCTS_OF_AGE = 18;
@@ -42,7 +42,7 @@ public class BillyUser {
 
     @NotBlank
     @Email(message = "Please enter a valid email address")
-    @Size(min = 1, message = "Please enter a email address")
+    @Size(min = 1, message = "Please enter an email address")
     @Size(max = 64, message = "The email of the user should be less than 65 characters")
     @Column(nullable = false, unique = true)
     private String username;

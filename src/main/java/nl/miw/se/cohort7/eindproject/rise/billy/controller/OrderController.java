@@ -94,4 +94,10 @@ public class OrderController {
         BarOrderDto.clearActiveOrder();
         return "redirect:/orders/new";
     }
+
+    @GetMapping("/orderHistory")
+    protected String showOrderHistory(Model model) {
+        model.addAttribute("allOrders", barOrderService.findAll());
+        return "completeOrderHistory";
+    }
 }
