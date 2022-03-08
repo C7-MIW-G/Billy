@@ -159,9 +159,17 @@ html, body {
     grid-template-columns: calc(42.5%) calc(15%) calc(42.5%);
 }
 
+.grid-overviewCompleteOrderHistoryListHead-parent{
+    display: grid;
+    grid-template-columns: calc(24.5%) calc(24.5%) calc(24.5%) calc(25%);
+    border-bottom: 1px solid dimgrey;
+}
+
 .new-button{
     margin-left: auto;
 }
+
+.return
 
 .balance-button {
     margin-left: auto;
@@ -233,6 +241,15 @@ html, body {
     margin-top: auto;
 }
 
+.returnButtonOrderHistory{
+    margin-left: calc(20%);
+}
+
+.returnButtonOrderHistoryDetails{
+    margin-top: calc(20%);
+
+}
+
 /*links*/
 a {
     color: black;
@@ -249,6 +266,11 @@ a:visited {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.unordered-listReceipt{
+    padding: 0;
+    margin-top: calc(5%);
 }
 .fontBold{
     font-weight: 590;

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Jordy Pragt <j.pragt@st.hanze.nl>
@@ -128,5 +129,13 @@ public class BarOrderServiceImplementation implements BarOrderService {
     @Override
     public void saveBarOrder(BarOrderDto barOrderDto) {
         barOrderRepository.save(convertDtoToBarOrder(barOrderDto));
+    }
+
+    @Override
+    public List<BarOrderViewDto> findAll() {
+        return barOrderRepository.findAll()
+                .stream()
+                .map(this::convertBarOrderToDto)
+                .collect(Collectors.toList());
     }
 }
