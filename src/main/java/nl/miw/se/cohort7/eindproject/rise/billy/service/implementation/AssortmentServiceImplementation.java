@@ -103,6 +103,7 @@ public class AssortmentServiceImplementation implements AssortmentService {
         productDto.setProductId(product.getProductId());
         productDto.setProductName(product.getProductName());
         productDto.setProductPrice(product.getProductPrice());
+        productDto.setProductOfAge(product.isProductOfAge());
 
         productDto.setCategoryDto(convertCategoryToDto(product.getCategory()));
 
@@ -115,6 +116,7 @@ public class AssortmentServiceImplementation implements AssortmentService {
         product.setProductId(productDto.getProductId());
         product.setProductName(productDto.getProductName());
         product.setProductPrice(productDto.getProductPrice());
+        product.setProductOfAge(productDto.isProductOfAge());
 
         Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategoryDto().getCategoryId());
         optionalCategory.ifPresent(product::setCategory);

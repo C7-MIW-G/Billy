@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Calendar;
 import javax.validation.constraints.NegativeOrZero;
 import java.util.Date;
 
@@ -108,3 +109,5 @@ public class BillyUserDto {
         return (accountBalance + (BarOrderDto.activeOrder.calculateTotalOrderPrice() * -1));
     }
 }
+
+
