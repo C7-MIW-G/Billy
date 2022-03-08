@@ -76,6 +76,12 @@ public class AssortmentServiceImplementation implements AssortmentService {
     }
 
     @Override
+    public Optional<CategoryDto> findCategoryByName(String name) {
+        Optional<Category> optionalCategory = categoryRepository.findByCategoryName(name);
+        return optionalCategory.map(this::convertCategoryToDto);
+    }
+
+    @Override
     public List<ProductDto> findAllProductOfCategory(Long id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
         List<ProductDto> productList = new ArrayList<>();
