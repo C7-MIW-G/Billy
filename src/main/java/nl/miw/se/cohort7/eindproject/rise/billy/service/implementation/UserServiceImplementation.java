@@ -61,7 +61,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void save(BillyUser billyUser) {
+    public void saveNewUser(BillyUser billyUser) {
         userRepository.save(billyUser);
     }
 
@@ -114,5 +114,13 @@ public class UserServiceImplementation implements UserService {
         return true;
     }
 
-
+    @Override
+    public void updateUser(BillyUser billyUser) {
+        Optional<BillyUser> optionalBillyUser = userRepository.findById(billyUser.getUserId());
+        if (optionalBillyUser.isEmpty()) {
+            return;
+        }
+        billyUser.setPassword(optionalBillyUser.get().getPassword());
+        userRepository.save(billyUser);
+    }
 }

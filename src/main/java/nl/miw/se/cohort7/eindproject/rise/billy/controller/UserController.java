@@ -85,10 +85,10 @@ public class UserController {
         if (billyUser.getUserId() == principal.getUserId()){
             billyUser.setUserRole(userService.findByUserId(billyUser.getUserId()).getUserRole());
         }
-        if (billyUser.getUserRole().equals("ROLE_CUSTOMER") || billyUser.getPassword().equals("")) {
+        if (billyUser.getUserRole().equals("ROLE_CUSTOMER")) {
             billyUser.setRandomPassword();
         }
-        if (billyUser.getPassword().length() < BillyUser.MINIMUM_PASSWORD_LENGTH) {
+        if (billyUser.getPassword().length() < BillyUser.MINIMUM_PASSWORD_LENGTH && billyUser.getUserId() == 0) {
             result.rejectValue("password", "error.user"
                     , "Please fill out a password with a minimum of 8 characters.");
             return "userForm";
@@ -101,8 +101,14 @@ public class UserController {
         if (billyUser.getMaxCredit() > 0) {
             result.rejectValue("maxCredit", "error.maxCredit");
         }
-        billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
-        userService.save(billyUser);
+
+        if (billyUser.getUserId() > 0) {
+            userService.updateUser(billyUser);
+        } else {
+            billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
+            userService.saveNewUser(billyUser);
+        }
+
         return "redirect:/users";
     }
 

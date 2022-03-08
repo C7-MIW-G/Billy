@@ -14,7 +14,9 @@ public interface UserService {
 
     List<BillyUserDto> findAll();
 
-    void save(BillyUser billyUser);
+    void saveNewUser(BillyUser billyUser);
+
+    void updateUser(BillyUser billyUser);
 
     boolean mayWriteToDB(BillyUser billyUser);
 
