@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderViewDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
@@ -37,7 +38,7 @@ public class BarOrderServiceImplementation implements BarOrderService {
     }
 
     private List<ProductViewDto> convertMapsToProductView(Map<Product, Integer> productMap,
-                                                          Map<Product, Double> discountMap){
+                                                          Map<ProductDto, Double> discountMap){
         List<ProductViewDto> productViewList = new ArrayList<>();
 
         for (Product product : productMap.keySet()) {

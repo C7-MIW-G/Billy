@@ -58,7 +58,7 @@ public class UserController {
     @GetMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
-        model.addAttribute("billyUser", new BillyUser());
+        model.addAttribute("billyUser", new BillyUserDto());
         model.addAttribute("headerText", "New User");
         return "userForm";
     }
@@ -66,7 +66,10 @@ public class UserController {
     @PostMapping("/new")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String saveOrUpdateUser(@Valid @ModelAttribute("billyUser") BillyUser billyUser, BindingResult result) {
-        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
         principal.getUserId();
         if (result.hasErrors()) {
             return "userForm";
@@ -95,8 +98,10 @@ public class UserController {
                     , "Please fill out a date in the past");
             return "userForm";
         }
+        if (billyUser.getMaxCredit() > 0) {
+            result.rejectValue("maxCredit", "error.maxCredit");
+        }
         billyUser.setPassword(passwordEncoder.encode(billyUser.getPassword()));
-        billyUser.setAccountBalance(0.0);
         userService.save(billyUser);
         return "redirect:/users";
     }
@@ -125,7 +130,10 @@ public class UserController {
 
     @GetMapping("/delete/{billyUserId}")
     protected String deleteUser(@PathVariable("billyUserId") Long billyUserId) {
-        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        BillyUserPrincipal principal = (BillyUserPrincipal) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
         principal.getUserId();
         if (billyUserId.equals(principal.getUserId())){
             return "redirect:/users/details/{billyUserId}";
@@ -172,8 +180,8 @@ public class UserController {
 
     @GetMapping("/details/{billyUserId}/orderHistory/{orderId}")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
-    protected String SeeOrderHistoryDetails(@PathVariable ("billyUserId") Long billyUserId,
-                                            @PathVariable("orderId") Long barOrderId, Model model) {
+    protected String seeOrderHistoryDetails(@PathVariable("orderId") Long barOrderId, Model model,
+                                            @PathVariable String billyUserId) {
         Optional<BarOrderViewDto> optionalBarOrderViewDto = barOrderService.findBarOrderById(barOrderId);
         if (optionalBarOrderViewDto.isPresent()) {
             model.addAttribute("barOrderDetail", optionalBarOrderViewDto.get());
@@ -181,5 +189,4 @@ public class UserController {
         }
         return "redirect:/users";
     }
-
 }

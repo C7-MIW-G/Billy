@@ -23,4 +23,7 @@ public interface UserService {
     void updatePassword(ChangePassword changePassword);
 
     void subtractFromBalance(Long userId, double calculateTotalOrderPrice);
+
+    boolean hasEnoughBalance(BillyUserDto billyUserDto);
 }
+

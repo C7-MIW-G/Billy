@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Calendar;
+import javax.validation.constraints.NegativeOrZero;
 import java.util.Date;
 
 /**
@@ -33,6 +34,7 @@ public class BillyUserDto {
 
     private double accountBalance;
 
+    @NegativeOrZero(message = "Please insert a negative number or 0")
     private double maxCredit;
 
     public String userRoleDisplayString() {
@@ -48,14 +50,29 @@ public class BillyUserDto {
         }
     }
 
+    public String userRoleDisplayStringDetails() {
+        switch (userRole) {
+            case "ROLE_BAR MANAGER":
+                return "Bar manager";
+            case "ROLE_BARTENDER":
+                return "Bartender";
+            case "ROLE_CUSTOMER":
+                return "Customer";
+            default:
+                return "Unknown";
+        }
+    }
+
     public String getAccountBalanceDisplayString(double accountBalance) {
 
         return String.format("%s\u20ac %.2f", accountBalance < 0 ? " -" : " ", Math.abs(accountBalance));
     }
 
-    public String getMaxCreditDisplayString(double maxCredit) {
-        return String.format("\u20ac %.2f", maxCredit);
+    public String getCreditDisplayString(double maxCredit) {
+        return String.format("%s\u20ac %.2f", maxCredit < 0 ? " -" : " ", Math.abs(maxCredit));
     }
+
+
 
 
     public void payFromBalance(double amount) {
@@ -86,6 +103,10 @@ public class BillyUserDto {
         userDisplayStringBuilder.append(this.getAccountBalanceDisplayString(accountBalance));
 
         return userDisplayStringBuilder.toString();
+    }
+
+    public double getAccountBalanceWithActiveOrder() {
+        return (accountBalance + (BarOrderDto.activeOrder.calculateTotalOrderPrice() * -1));
     }
 }
 

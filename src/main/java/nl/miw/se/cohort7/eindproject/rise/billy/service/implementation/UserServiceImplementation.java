@@ -53,6 +53,7 @@ public class UserServiceImplementation implements UserService {
         billyUserDto.setUserRole(billyUser.getUserRole());
         billyUserDto.setName(billyUser.getName());
         billyUserDto.setUsername(billyUser.getUsername());
+        billyUserDto.setMaxCredit(billyUser.getMaxCredit());
         billyUserDto.setBirthdate(billyUser.getBirthdate());
         billyUserDto.setAccountBalance(billyUser.getAccountBalance());
 
@@ -103,4 +104,15 @@ public class UserServiceImplementation implements UserService {
         billyUser.payFromBalance(amount);
         userRepository.save(billyUser);
     }
+
+    @Override
+    public boolean hasEnoughBalance(BillyUserDto billyUserDto) {
+        if ((billyUserDto.getAccountBalanceWithActiveOrder())
+                < billyUserDto.getMaxCredit()) {
+            return false;
+        }
+        return true;
+    }
+
+
 }

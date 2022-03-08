@@ -24,11 +24,11 @@ public class BarOrderDto {
     
     private BillyUserDto customer;
 
-    private List<Product> productList = new ArrayList<>();
+    private List<ProductDto> productList = new ArrayList<>();
 
-    private Map<Product, Integer> productMap = new HashMap<>();
+    private Map<Product, Integer> productMap = new HashMap<Product, Integer>();
 
-    private Map<Product, Double> discountMap = new HashMap<>();
+    private Map<ProductDto, Double> discountMap = new HashMap<>();
 
 
     public double calculateTotalOrderPrice(){
@@ -67,6 +67,13 @@ public class BarOrderDto {
         } else {
             activeOrder.productMap.put(product, activeOrder.productMap.get(product) - 1);
         }
+    }
+
+    public boolean checkAccountBalance() {
+        if (BarOrderDto.activeOrder.calculateTotalOrderPrice() + customer.getAccountBalance() < customer.getMaxCredit()){
+            return false;
+        }
+        return true;
     }
 
     public static void clearActiveOrder() {

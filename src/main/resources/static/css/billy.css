@@ -126,9 +126,12 @@ html, body {
     overflow-y: auto;
 }
 .overviewList ul li a:focus,
+
 .overviewList ul li:hover{
     background-color: #e0e0e0;
+    opacity: 100;
 }
+
 .overviewList ul li a{
     display: block;
     padding: 0.5rem 0.75rem;

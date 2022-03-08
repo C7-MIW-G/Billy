@@ -7,10 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.*;
 import java.util.Date;
 
@@ -26,10 +23,10 @@ import java.util.Date;
 public class BillyUser {
 
     public static final int MINIMUM_PASSWORD_LENGTH = 8;
-    private static final int RANDOM_PASSWORD_LENGTH = 64;
-    private static final int RANDOMIZATION_POOL_LENGTH = 94;
-    private static final int START_USABLE_ASCII_CHARACTERS = 33;
     public static final int MIN_AGE_FOR_PRODUCTS_OF_AGE = 18;
+    public static final int RANDOM_PASSWORD_LENGTH = 64;
+    public static final int RANDOMIZATION_POOL_LENGTH = 94;
+    public static final int START_USABLE_ASCII_CHARACTERS = 33;
 
     @Id
     @GeneratedValue
@@ -59,6 +56,7 @@ public class BillyUser {
 
     private double accountBalance;
 
+    @NegativeOrZero(message = "Please insert a negative number or 0")
     private double maxCredit;
 
     public void setRandomPassword() {

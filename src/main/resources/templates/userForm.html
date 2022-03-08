@@ -55,13 +55,22 @@
                             <div th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></div>
                         </div>
                     </li>
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="maxCredit">Max credit</label></div>
+                            <div><input id="maxCredit" type="number" th:field="*{maxCredit}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('maxCredit')}" th:errorclass="error" th:errors="*{maxCredit}"></div>
+                        </div>
+                    </li>
                     <li sec:authorize="hasRole('ROLE_BAR MANAGER')">
                         <div class="grid-item-parent">
                             <div><label for="roles">Role </label></div>
                             <div>
                                 <select th:disabled="${billyUserId eq #authentication.getPrincipal().getUserId()}"
-                                        th:class="${billyUserId eq #authentication.getPrincipal().getUserId() ?
-                                        'buttonIsDisabled' : ''}"
+                                        th:class="${billyUserId eq #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled' : ''}"
                                         id="roles" th:field="*{userRole}">
                                     <option value="ROLE_CUSTOMER" selected>Customer</option>
                                     <option value="ROLE_BARTENDER" >Bartender</option>
