@@ -27,16 +27,19 @@ public class Seeder {
     private AssortmentService assortmentService;
     private UserService userService;
     private PasswordEncoder passwordEncoder;
+    private Date currentDate;
 
     @Autowired
     public Seeder(AssortmentService assortmentService, UserService userService, PasswordEncoder passwordEncoder) {
         this.assortmentService = assortmentService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.currentDate = Date.from(Instant.now());
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent refreshedEvent){
+        //TODO find by user role
         if (userService.findAll().isEmpty()){
             seedUsers();
         }
@@ -47,21 +50,25 @@ public class Seeder {
         }
     }
 
-    private void seedUsers(){
-        Date currentDate = Date.from(Instant.now());
+    private void seedManager(){
+        BillyUser managerUser = new BillyUser();
 
+        managerUser.setBirthdate(currentDate);
+        managerUser.setAccountBalance(0);
+        managerUser.setMaxCredit(0);
+
+        managerUser.setName("Bar Manager");
+        managerUser.setUsername("billy1@rise.nl");
+        managerUser.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
+        managerUser.setUserRole("ROLE_BAR MANAGER");
+        userService.saveNewUser(managerUser);
+    }
+
+    private void seedUsers(){
         BillyUser defaultUser = new BillyUser();
         defaultUser.setBirthdate(currentDate);
         defaultUser.setAccountBalance(0);
         defaultUser.setMaxCredit(0);
-
-        defaultUser.setName("Bar Manager");
-        defaultUser.setUsername("billy1@rise.nl");
-        defaultUser.setPassword(passwordEncoder.encode(DEFAULT_PASSWORD));
-        defaultUser.setUserRole("ROLE_BAR MANAGER");
-        userService.saveNewUser(defaultUser);
-
-        defaultUser.setUserId(0);
 
         defaultUser.setName("Bartender");
         defaultUser.setUsername("billy2@rise.nl");
