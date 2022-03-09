@@ -13,7 +13,7 @@
             <div class="headStyle" th:text="${headerText}"></div>
         </div>
         <div class="itemViewList grid-form_returnButton-parent">
-            <form th:action="@{/users/new}" method="post" th:object="${billyUser}">
+            <form th:action="@{/users/new}" method="post" th:object="${billyUserDto}">
                 <ul class="unordered-list">
                     <li>
                         <div class="grid-item-parent">
@@ -25,7 +25,7 @@
                             <div th:if="${#fields.hasErrors('username')}" th:errorclass="error" th:errors="*{username}"></div>
                         </div>
                     </li>
-                    <li th:style="${billyUser.getUserId() == 0 ? 'visible' : 'display:none'}">
+                    <li th:style="${billyUserDto.getUserId() == 0 ? 'visible' : 'display:none'}">
                         <div class="grid-item-parent">
                             <div><label for="password">Password</label></div>
                             <div><input id="password" type="password" th:field="*{password}" placeholder="Type password"></div>
@@ -82,8 +82,7 @@
                     <li>
                         <div class="item-buttons">
                             <div>
-                                <input type="hidden" th:disabled="${billyUserId != #authentication.getPrincipal().getUserId()}"
-                                       th:field="*{userRole}" th:value="${billyUser.getUserRole()}"  >
+                                <input type="hidden" th:disabled="${billyUserId != #authentication.getPrincipal().getUserId()}" th:field="*{userRole}" th:value="${billyUserDto.getUserRole()}"  >
                                 <input type="hidden" th:field="*{userId}">
                                 <input type="submit" value="Save user">
                             </div>

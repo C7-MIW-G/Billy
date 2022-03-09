@@ -17,13 +17,13 @@
         <li>
           <div class="grid-item-parent">
             <div>Name:</div>
-            <div th:text="${billyUserDto.name}"></div>
+            <div th:text="${billyUserDto.getName()}"></div>
           </div>
         </li>
         <li>
           <div class="grid-item-parent">
             <div>E-mail:</div>
-            <div th:text="${billyUserDto.username}"></div>
+            <div th:text="${billyUserDto.getUsername()}"></div>
           </div>
         </li>
         <li>
@@ -35,19 +35,19 @@
         <li>
           <div class="grid-item-parent">
             <div>Role:</div>
-            <div th:text="${billyUserDto.userRoleDisplayStringDetails()}"></div>
+            <div th:text="${billyUserDto.getUserRoleDisplayString()}"></div>
           </div>
         </li>
         <li>
           <div class="grid-item-parent">
             <div>Account balance:</div>
-            <div th:text="${billyUserDto.getAccountBalanceDisplayString(billyUserDto.accountBalance)}"></div>
+            <div th:text="${billyUserDto.getAccountBalanceDisplayString()}"></div>
           </div>
         </li>
         <li>
           <div class="grid-item-parent">
             <div>Max credit:</div>
-            <div th:text="${billyUserDto.getCreditDisplayString(billyUserDto.maxCredit)}"></div>
+            <div th:text="${billyUserDto.getCreditDisplayString()}"></div>
           </div>
         </li>
         <li>

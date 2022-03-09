@@ -4,7 +4,11 @@ import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.DtoConverter.BillyUserDtoConverter;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -20,9 +24,12 @@ import java.util.stream.Collectors;
 public class UserServiceImplementation implements UserService {
 
     private UserRepository userRepository;
+    private BillyUserDtoConverter billyUserDtoConverter = new BillyUserDtoConverter();
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImplementation(UserRepository userRepository) {
+    public UserServiceImplementation(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -31,50 +38,51 @@ public class UserServiceImplementation implements UserService {
         if (billyUser.isEmpty()) {
             return null;
         }
-        return convertToDto(billyUser.get());
-    }
-
-    public Optional<BillyUser> findByUsername(String userName) {
-        return userRepository.findByUsername(userName);
+        return billyUserDtoConverter.convertToDto(billyUser.get());
     }
 
     @Override
     public List<BillyUserDto> findAll() {
         return userRepository.findAll()
                 .stream()
-                .map(this::convertToDto)
+                .map(billyUserDtoConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 
-    private BillyUserDto convertToDto(BillyUser billyUser) {
-        BillyUserDto billyUserDto = new BillyUserDto();
-
-        billyUserDto.setUserId(billyUser.getUserId());
-        billyUserDto.setUserRole(billyUser.getUserRole());
-        billyUserDto.setName(billyUser.getName());
-        billyUserDto.setUsername(billyUser.getUsername());
-        billyUserDto.setMaxCredit(billyUser.getMaxCredit());
-        billyUserDto.setBirthdate(billyUser.getBirthdate());
-        billyUserDto.setAccountBalance(billyUser.getAccountBalance());
-
-        return billyUserDto;
-    }
-
     @Override
-    public void saveNewUser(BillyUser billyUser) {
-        userRepository.save(billyUser);
-    }
+    public void saveNewUser(BillyUserDto billyUserDto) {
+        BillyUser newUser = billyUserDtoConverter.toBillyUser(billyUserDto);
 
-    @Override
-    public boolean mayWriteToDB(BillyUser billyUser) {
-        Optional<BillyUser> optionalBillyUser = userRepository.findByUsername(billyUser.getUsername());
-        if(optionalBillyUser.isEmpty()){
-            return true;
-        } else if (optionalBillyUser.get().equals(billyUser)) {
-            return true;
-        } else {
-            return false;
+        if (newUser.getUserRole().equals("Customer")) {
+            newUser.setRandomPassword();
         }
+
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+
+        userRepository.save(newUser);
+    }
+
+    @Override
+    public void updateUser(BillyUserDto billyUserDto) {
+        Optional<BillyUser> optionalBillyUser = userRepository.findById(billyUserDto.getUserId());
+        if (optionalBillyUser.isEmpty()) {
+            return;
+        }
+        BillyUser userToUpdate = billyUserDtoConverter.toBillyUser(billyUserDto);
+        userToUpdate.setPassword(optionalBillyUser.get().getPassword());
+        userRepository.save(userToUpdate);
+    }
+
+    @Override
+    public void updatePassword(ChangePassword changePassword) {
+        Optional<BillyUser> optionalBillyUser = userRepository.findById(changePassword.getUserId());
+        if (optionalBillyUser.isEmpty()) {
+            return;
+        }
+        BillyUser userWithNewPassword = optionalBillyUser.get();
+
+        userWithNewPassword.setPassword(passwordEncoder.encode(changePassword.getNewPassword()));
+        userRepository.save(userWithNewPassword);
     }
 
     @Override
@@ -84,43 +92,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void updatePassword(ChangePassword changePassword) {
-        Optional<BillyUser> billyUser = userRepository.findById(changePassword.getUserId());
-        if (billyUser.isEmpty()) {
-            return;
-        }
-        BillyUser billyUser1 = billyUser.get();
-        billyUser1.setPassword(changePassword.getNewPassword());
-        userRepository.save(billyUser1);
-    }
-
-    @Override
-    public void subtractFromBalance(Long userId, double amount) {
-        Optional<BillyUser> billyUserOpt = userRepository.findById(userId);
-        if (billyUserOpt.isEmpty()) {
-            return;
-        }
-        BillyUser billyUser = billyUserOpt.get();
-        billyUser.payFromBalance(amount);
-        userRepository.save(billyUser);
-    }
-
-    @Override
-    public boolean hasEnoughBalance(BillyUserDto billyUserDto) {
-        if ((billyUserDto.getAccountBalanceWithActiveOrder())
-                < billyUserDto.getMaxCredit()) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public void updateUser(BillyUser billyUser) {
-        Optional<BillyUser> optionalBillyUser = userRepository.findById(billyUser.getUserId());
-        if (optionalBillyUser.isEmpty()) {
-            return;
-        }
-        billyUser.setPassword(optionalBillyUser.get().getPassword());
-        userRepository.save(billyUser);
+    public boolean existsUsername(String username) {
+        return userRepository.findByUsername(username).isEmpty();
     }
 }

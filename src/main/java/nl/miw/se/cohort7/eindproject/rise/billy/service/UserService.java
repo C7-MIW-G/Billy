@@ -14,18 +14,15 @@ public interface UserService {
 
     List<BillyUserDto> findAll();
 
-    void saveNewUser(BillyUser billyUser);
+    void saveNewUser(BillyUserDto billyUserDto);
 
-    void updateUser(BillyUser billyUser);
-
-    boolean mayWriteToDB(BillyUser billyUser);
+    void updateUser(BillyUserDto billyUserDto);
 
     void delete(Long userId);
 
     void updatePassword(ChangePassword changePassword);
 
-    void subtractFromBalance(Long userId, double calculateTotalOrderPrice);
+    boolean existsUsername(String username);
 
-    boolean hasEnoughBalance(BillyUserDto billyUserDto);
 }
 

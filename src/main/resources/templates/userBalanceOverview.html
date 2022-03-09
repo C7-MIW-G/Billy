@@ -14,8 +14,7 @@
                 <li><a th:href="@{/users/details/{userId}(userId=${billyUserDto.userId})}">
                     <div class="grid-user-parent">
                         <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
-                        <div class="grid-user-child-right" th:text=
-                                "${billyUserDto.getAccountBalanceDisplayString(billyUserDto.accountBalance)}"></div>
+                        <div class="grid-user-child-right" th:text="${billyUserDto.getAccountBalanceDisplayString()}"></div>
                     </div>
                 </a></li>
             </ul>

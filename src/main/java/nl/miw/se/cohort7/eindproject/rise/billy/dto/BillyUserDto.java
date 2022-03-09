@@ -2,9 +2,10 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.miw.se.cohort7.eindproject.rise.billy.customConstraintValidation.UniqueUsername;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.NegativeOrZero;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 /**
@@ -16,19 +17,27 @@ import java.util.Date;
 @Getter @Setter
 public class BillyUserDto {
 
-    private static final int USER_DISPLAY_STRING_LENGTH = 20;
-
     private Long userId;
 
+    @NotEmpty
     private String userRole;
 
+    @Size(min = 1, message = "Please enter a name")
+    @Size(max = 64, message = "The name of the user should be shorter than 65 characters")
     private String name;
 
+    @NotBlank
+    @Email(message = "Please enter a valid email address")
+    @Size(min = 1, message = "Please enter an email address")
+    @Size(max = 64, message = "The email of the user should be less than 65 characters")
+    @UniqueUsername
     private String username;
 
     private String password;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Please provide a date.")
+    @Past(message = "Please select a date in the past.")
     private Date birthdate;
 
     private double accountBalance;
@@ -36,7 +45,7 @@ public class BillyUserDto {
     @NegativeOrZero(message = "Please insert a negative number or 0")
     private double maxCredit;
 
-    public String userRoleDisplayString() {
+    public String getUserRoleDisplayString() {
         switch (userRole) {
             case "ROLE_BAR MANAGER":
                 return "Bar manager";
@@ -49,62 +58,23 @@ public class BillyUserDto {
         }
     }
 
-    public String userRoleDisplayStringDetails() {
-        switch (userRole) {
-            case "ROLE_BAR MANAGER":
-                return "Bar manager";
-            case "ROLE_BARTENDER":
-                return "Bartender";
-            case "ROLE_CUSTOMER":
-                return "Customer";
-            default:
-                return "Unknown";
-        }
+    public String getAccountBalanceDisplayString() {
+        return formatAsEuro(accountBalance);
     }
 
-    public String getAccountBalanceDisplayString(double accountBalance) {
-
-        return String.format("%s\u20ac %.2f", accountBalance < 0 ? " -" : " ", Math.abs(accountBalance));
+    public String getCreditDisplayString() {
+        return formatAsEuro(maxCredit);
     }
 
-    public String getCreditDisplayString(double maxCredit) {
-        return String.format("%s\u20ac %.2f", maxCredit < 0 ? " -" : " ", Math.abs(maxCredit));
+    private String formatAsEuro(double amount) {
+        return String.format("%s\u20ac %.2f", amount < 0 ? " -" : " ", Math.abs(amount));
     }
 
-
-
-
-    public void payFromBalance(double amount) {
-        if (amount < 0) {
-            return;
-        }
-        this.accountBalance -= amount;
+    public boolean canPayForOrder() {
+        return maxCredit > accountBalance - BarOrderDto.activeOrder.calculateTotalOrderPrice();
     }
 
-    public void makeDeposit(double amount) {
-        if (amount < 0) {
-            return;
-        }
-        this.accountBalance += amount;
-    }
-
-    public String getUserDisplayString() {
-        StringBuilder userDisplayStringBuilder = new StringBuilder();
-
-        for (int i = 0; i < USER_DISPLAY_STRING_LENGTH; i++) {
-            if (i < this.name.length()) {
-                userDisplayStringBuilder.append(this.name.charAt(i));
-            } else {
-                userDisplayStringBuilder.append("_");
-            }
-        }
-
-        userDisplayStringBuilder.append(this.getAccountBalanceDisplayString(accountBalance));
-
-        return userDisplayStringBuilder.toString();
-    }
-
-    public double getAccountBalanceWithActiveOrder() {
-        return (accountBalance + (BarOrderDto.activeOrder.calculateTotalOrderPrice() * -1));
+    public void payOrder(double amount) {
+        accountBalance -= amount;
     }
 }

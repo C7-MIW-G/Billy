@@ -17,12 +17,11 @@
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="billyUserDto : ${allBillyUsers}">
-                <li><a th:href="@{/users/details/{userId}(userId=${billyUserDto.userId})}">
+                <li><a th:href="@{/users/details/{userId}(userId=${billyUserDto.getUserId()})}">
                     <div class="grid-user-parent">
                         <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
-                        <div class="grid-user-child-left" th:text="${billyUserDto.userRoleDisplayString()}" ></div>
-                        <div class="grid-user-child-right"  th:text="${billyUserDto.getAccountBalanceDisplayString
-                        (billyUserDto.accountBalance)}" sec:authorize="hasRole('ROLE_BAR MANAGER')"></div>
+                        <div class="grid-user-child-left" th:text="${billyUserDto.getUserRoleDisplayString()}" ></div>
+                        <div class="grid-user-child-right"  th:text="${billyUserDto.getAccountBalanceDisplayString()}" sec:authorize="hasRole('ROLE_BAR MANAGER')"></div>
                     </div>
                 </a></li>
             </ul>

@@ -2,7 +2,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
@@ -79,17 +78,23 @@ public class OrderController {
 
     @GetMapping("/orders/accountPay/{userId}")
     protected String doAccountPay(@PathVariable("userId") Long userId) {
+        // make payment
         BillyUserDto customer = userService.findByUserId(userId);
-        if (!userService.hasEnoughBalance(customer)) {
+        if (!customer.canPayForOrder()) {
             return "redirect:/orders/new";
         }
-        userService.subtractFromBalance(userId, BarOrderDto.activeOrder.calculateTotalOrderPrice());
+        customer.payOrder(BarOrderDto.activeOrder.calculateTotalOrderPrice());
+        userService.updateUser(customer);
+
+        // update administration
         BillyUserPrincipal principal =
                 (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         BillyUserDto bartender = userService.findByUserId(principal.getUserId());
         BarOrderDto.activeOrder.setBartender(bartender);
         BarOrderDto.activeOrder.setCustomer(customer);
         barOrderService.saveBarOrder(BarOrderDto.activeOrder);
+
+        // open new order
         BarOrderDto.clearActiveOrder();
         return "redirect:/orders/new";
     }
