@@ -37,10 +37,13 @@
                     </li>
                     <li>
                         <div class="grid-item-parent">
-                            <div><label for="isOfAge">18+</label>
-                            <input id="isOfAge" type="checkbox" value="yes" name="yes">
-                            <input id="isNotOfAge" type="hidden" value="no" name="no">
-                        </div>
+                            <div><label for="isOfAge">18+</label></div>
+                            <div>
+                                <select id="isOfAge" th:field="*{productOfAge}">
+                                    <option value="False" selected>No</option>
+                                    <option value="True" >Yes</option>
+                                </select>
+                            </div>
                         </div>
                     </li>
                     <li>
