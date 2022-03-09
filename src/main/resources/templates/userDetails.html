@@ -38,6 +38,7 @@
             <div th:text="${billyUserDto.userRoleDisplayStringDetails()}"></div>
           </div>
         </li>
+        <li></li>
         <li>
           <div class="grid-item-parent">
             <div>Account balance:</div>
@@ -48,6 +49,12 @@
           <div class="grid-item-parent">
             <div>Max credit:</div>
             <div th:text="${billyUserDto.getCreditDisplayString(billyUserDto.maxCredit)}"></div>
+          </div>
+        </li>
+        <li>
+          <div class="grid-item-parent">
+            <div>Remaining credit:</div>
+            <div th:text="${billyUserDto.getRemainingCreditDisplayString()}"></div>
           </div>
         </li>
         <li>
