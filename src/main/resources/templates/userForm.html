@@ -83,7 +83,7 @@
                         <div class="item-buttons">
                             <div>
                                 <input type="hidden" th:disabled="${billyUserId != #authentication.getPrincipal().getUserId()}"
-                                       th:field="*{userRole}" th:value="${billyUser.getUserRole()}"  >
+                                       th:field="*{userRole}" th:value="${billyUser.getUserRole()}">
                                 <input type="hidden" th:field="*{userId}">
                                 <input type="submit" value="Save user">
                             </div>
