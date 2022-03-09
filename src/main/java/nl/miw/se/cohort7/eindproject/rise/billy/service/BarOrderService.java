@@ -16,3 +16,4 @@ public interface BarOrderService {
 
     List<BarOrderViewDto> findAll();
 }
+

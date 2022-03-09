@@ -39,6 +39,14 @@ public class BarOrderDto {
         return totalOrderPrice;
     }
 
+    public boolean checkIfOrderIsOfAge(BillyUserDto billyUserDto) {
+        for (Product product : productMap.keySet()) {
+            if (product.isProductOfAge() && !billyUserDto.isOfAge())
+                return false;
+        }
+        return true;
+    }
+
     public double getSubTotal(Product product) {
         int amount = activeOrder.productMap.get(product);
 
@@ -79,4 +87,5 @@ public class BarOrderDto {
     public static void clearActiveOrder() {
         activeOrder = null;
     }
+
 }
