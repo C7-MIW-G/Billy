@@ -71,7 +71,7 @@ public class BillyUserDto {
     }
 
     public String getCreditDisplayString(double maxCredit) {
-        return String.format("%s\u20ac %.2f", maxCredit < 0 ? " -" : " ", Math.abs(maxCredit));
+        return String.format("%s\u20ac %.2f", maxCredit < 0 ? " -" : " ", Math.abs(maxCredit * -1));
     }
 
     public double getRemainingCredit(double accountBalance, double maxCredit){
@@ -79,8 +79,8 @@ public class BillyUserDto {
     }
 
     public String getRemainingCreditDisplayString(){
-        return String.format("%s\u20ac %.2f", getRemainingCredit(accountBalance, maxCredit) < 0 ? " -" : " ",
-                (getRemainingCredit(accountBalance, maxCredit)*-1));
+        return String.format("\u20ac %.2f",
+                (getRemainingCredit(accountBalance, maxCredit) * -1));
     }
 
 
