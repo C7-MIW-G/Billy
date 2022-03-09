@@ -15,6 +15,7 @@ import java.util.Date;
  */
 
 @Getter @Setter
+@UniqueUsername
 public class BillyUserDto {
 
     private Long userId;
@@ -30,7 +31,6 @@ public class BillyUserDto {
     @Email(message = "Please enter a valid email address")
     @Size(min = 1, message = "Please enter an email address")
     @Size(max = 64, message = "The email of the user should be less than 65 characters")
-    @UniqueUsername
     private String username;
 
     private String password;

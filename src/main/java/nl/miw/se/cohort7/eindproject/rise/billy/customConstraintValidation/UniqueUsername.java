@@ -14,10 +14,12 @@ import java.lang.annotation.Target;
  */
 
 @Constraint(validatedBy = UniqueUsernameValidator.class)
-@Target(ElementType.FIELD)
+@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniqueUsername {
     String message() default "A user with this email address is already registered";
-    Class<?>[] groups() default { };
-    Class<? extends Payload>[] payload() default { };
+
+    Class<?>[] groups() default {};
+
+    Class<? extends Payload>[] payload() default {};
 }

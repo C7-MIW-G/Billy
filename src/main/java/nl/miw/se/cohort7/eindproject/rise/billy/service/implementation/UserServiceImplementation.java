@@ -92,7 +92,19 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public boolean existsUsername(String username) {
-        return userRepository.findByUsername(username).isEmpty();
+    public boolean isUsernameUnique(BillyUserDto billyUserDto) {
+        Optional<BillyUser> optionalBillyUser = userRepository.findByUsername(billyUserDto.getUsername());
+
+        if (optionalBillyUser.isEmpty()) {
+            return true;
+        } else if (billyUserDto.getUserId() == null) {
+            // New user, so he/she may not register with this username.
+            return false;
+        } else if (optionalBillyUser.get().getUserId() == billyUserDto.getUserId()) {
+            // In this case he/she is the same user, so may update
+            return true;
+        } else {
+            return false;
+        }
     }
 }

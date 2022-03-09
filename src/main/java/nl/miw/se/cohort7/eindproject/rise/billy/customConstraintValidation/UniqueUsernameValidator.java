@@ -1,5 +1,6 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.customConstraintValidation;
 
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +14,7 @@ import javax.validation.ConstraintValidatorContext;
  */
 
 @Component
-public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, String> {
+public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, BillyUserDto> {
 
     UserService userService;
 
@@ -22,7 +23,15 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
     }
 
     @Override
-    public boolean isValid(String username, ConstraintValidatorContext constraintValidatorContext) {
-        return userService.existsUsername(username);
+    public boolean isValid(BillyUserDto billyUserDto, ConstraintValidatorContext context) {
+        boolean isValid = userService.isUsernameUnique(billyUserDto);
+
+        if(!isValid) {
+            context.disableDefaultConstraintViolation();
+            context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                    .addPropertyNode("username").addConstraintViolation();
+        }
+
+        return isValid;
     }
 }
