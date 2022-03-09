@@ -95,17 +95,17 @@
                         <div class="grid-user-child-right ">Balance</div>
                     </div>
                     <ul class="unordered-list" th:each="userDto : ${allUsers}">
-                            <li th:class="${userDto.canPayForOrder() ? 'confirm-account-pay' : 'isDisabled'}">
-                                <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() ? 'confirm-account-pay' : 'isDisabled'}">
-                                    <div class="grid-user-account-pay">
-                                        <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
-                                        <span></span>
-                                        <span th:class="${userDto.canPayForOrder() ? 'displayNone' : 'visible grid-user-child-left'}">Credit insufficient</span>
-                                        <span th:class="${userDto.canPayForOrder() ? 'visible grid-user-child-left' : 'displayNone'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
-                                        <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
-                                    </div>
-                                </a>
-                            </li>
+                        <li th:class="${userDto.canPayForOrder() && barOrder.checkIfOrderIsOfAge(userDto) ? 'confirm-account-pay' : 'isDisabled'}">
+                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() ? 'confirm-account-pay' : 'isDisabled'}">
+                                <div class="grid-user-account-pay">
+                                    <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
+                                    <span th:class="${barOrder.checkIfOrderIsOfAge(userDto) ? 'invisible' : 'visible grid-user-child-left'}">Customers must be at least 18 years</span>
+                                    <span th:class="${userDto.canPayForOrder() ? 'displayNone' : 'visible grid-user-child-left'}">Credit insufficient</span>
+                                    <span th:class="${userDto.canPayForOrder() ? 'visible grid-user-child-left' : 'displayNone'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
+                                    <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
