@@ -14,6 +14,8 @@ public interface UserService {
 
     List<BillyUserDto> findAll();
 
+    List<BillyUserDto> findUsersByRole(String role);
+
     void saveNewUser(BillyUser billyUser);
 
     void updateUser(BillyUser billyUser);

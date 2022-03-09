@@ -39,10 +39,13 @@ public class Seeder {
 
     @EventListener
     public void seed(ContextRefreshedEvent refreshedEvent){
-        //TODO find by user role
-        if (userService.findAll().isEmpty()){
-            seedUsers();
+        if (userService.findUsersByRole("ROLE_BAR MANAGER").isEmpty()){
+            if (userService.findAll().isEmpty()){
+                seedUsers();
+            }
+            seedManager();
         }
+
         if (assortmentService.findAllCategories().isEmpty()
                 && assortmentService.findAllProducts().isEmpty()){
             seedCategory();
@@ -114,15 +117,15 @@ public class Seeder {
         defaultPatat.setCategoryDto(patat);
         defaultPatat.setProductOfAge(false);
 
-        defaultPatat.setProductName("Zonder");
+        defaultPatat.setProductName("Patat Zonder");
         defaultPatat.setProductPrice(2.00);
         assortmentService.saveProduct(defaultPatat);
 
-        defaultPatat.setProductName("Mayo");
+        defaultPatat.setProductName("Patat Mayo");
         defaultPatat.setProductPrice(2.40);
         assortmentService.saveProduct(defaultPatat);
 
-        defaultPatat.setProductName("Oorlog");
+        defaultPatat.setProductName("Patat Oorlog");
         defaultPatat.setProductPrice(2.60);
         assortmentService.saveProduct(defaultPatat);
     }

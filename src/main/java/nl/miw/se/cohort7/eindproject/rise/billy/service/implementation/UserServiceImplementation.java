@@ -46,6 +46,14 @@ public class UserServiceImplementation implements UserService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<BillyUserDto> findUsersByRole(String role) {
+        return userRepository.findByUserRole(role)
+                .stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
+    }
+
     private BillyUserDto convertToDto(BillyUser billyUser) {
         BillyUserDto billyUserDto = new BillyUserDto();
 
