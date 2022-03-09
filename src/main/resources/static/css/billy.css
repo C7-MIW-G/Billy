@@ -171,14 +171,12 @@ html, body {
 }
 
 .new-button{
+    margin-left: auto;
+}
+
+.paymentButtons{
     margin-left: 25px;
 }
-
-.clear-button{
-    margin-left: calc(50%);
-}
-
-.return
 
 .balance-button {
     margin-left: auto;
