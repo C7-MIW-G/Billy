@@ -100,7 +100,6 @@
                            th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}"></a>
                             <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}"></a>
                             <!--                                   th:class="${barOrder.checkIfOrderIsOfAge(barOrder.customer.userId) == true ? 'isDisabled' : 'confirm-account-pay'}">-->
-
                             <li th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
                                 <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
                                     <div class="grid-user-account-pay">
