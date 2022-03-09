@@ -140,6 +140,7 @@
 
 .grid-footer-receipt{
     display: grid;
+    background-color: white;
 }
 .receipt-paymentSection{
     display: grid;

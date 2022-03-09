@@ -101,8 +101,9 @@
                                 <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
                                     <div class="grid-user-account-pay">
                                         <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
-                                        <span th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'visible grid-user-child-left' : 'invisible'}">Credit insufficient</span>
-                                        <span th:class="${userDto.getAccountBalanceWithActiveOrder() > userDto.maxCredit ? 'visible grid-user-child-left' : 'invisible'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
+                                        <span></span>
+                                        <span th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'visible grid-user-child-left' : 'displayNone'}">Credit insufficient</span>
+                                        <span th:class="${userDto.getAccountBalanceWithActiveOrder() > userDto.maxCredit ? 'visible grid-user-child-left' : 'displayNone'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
                                         <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString(userDto.getAccountBalance())}"></span>
                                         <!--                                    <span th:class="${barOrder.checkIfOrderIsOfAge(barOrder.customer.userId) == true  ? 'visible' : 'invisible'}">customers must be at least xx years old</span>-->
                                     </div>

@@ -22,6 +22,10 @@
     overflow: hidden;
 }
 
+.displayNone{
+    display: none;
+}
+
 .grid-user-child-center{
     text-align: center;
     overflow: hidden;
