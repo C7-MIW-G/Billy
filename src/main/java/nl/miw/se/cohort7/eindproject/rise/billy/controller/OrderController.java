@@ -101,6 +101,7 @@ public class OrderController {
     }
 
     @GetMapping("/orderHistory")
+    @Secured({"ROLE_BAR MANAGER"})
     protected String showOrderHistory(Model model) {
         model.addAttribute("allOrders", barOrderService.findAll());
         return "completeOrderHistory";
