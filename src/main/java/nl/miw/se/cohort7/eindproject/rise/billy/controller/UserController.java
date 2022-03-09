@@ -144,9 +144,13 @@ public class UserController {
     @GetMapping("/details/{billyUserId}/orderHistory")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String seeOrderHistory(@PathVariable("billyUserId") Long billyUserId, Model model) {
-        model.addAttribute("allBillyUsers", userService.findAll());
-        model.addAttribute("OrdersByUser", barOrderService.findAllBarOrderOfUser(billyUserId));
-        return "userOrderHistory";
+        if (barOrderService.findAllBarOrderOfUser(billyUserId).isEmpty()) {
+            return "noOrderHistory";
+        } else {
+            model.addAttribute("allBillyUsers", userService.findAll());
+            model.addAttribute("OrdersByUser", barOrderService.findAllBarOrderOfUser(billyUserId));
+            return "userOrderHistory";
+        }
     }
 
     @GetMapping("/details/{billyUserId}/orderHistory/{orderId}")
