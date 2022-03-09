@@ -33,6 +33,9 @@ public class ProductDto {
     @ManyToOne
     private CategoryDto categoryDto;
 
+    @NotNull
+    private boolean isProductOfAge;
+
     public String getPriceDisplayString(double price){
         return String.format("\u20ac %.2f", price);
     }

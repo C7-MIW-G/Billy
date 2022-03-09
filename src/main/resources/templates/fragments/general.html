@@ -14,8 +14,9 @@
 <ul class="navTop" th:fragment="navbar">
     <div>
         <li><a class="navTop-items navTop-left" th:href="@{/}">Order</a></li>
-        <li><a class="navTop-items navTop-left"th:href="@{/assortment}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Products</a></li>
-        <li><a class="navTop-items navTop-left"th:href="@{/users}">Users</a> </li>
+        <li><a class="navTop-items navTop-left" th:href="@{/assortment}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Products</a></li>
+        <li><a class="navTop-items navTop-left" th:href="@{/users}">Users</a></li>
+        <li><a class="navTop-items navTop-left" th:href="@{/orderHistory}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Orders</a></li>
     </div>
     <div>
         <li><a class="navTop-items"

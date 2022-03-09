@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Order history</title>
+</head>
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+<div th:replace="fragments/general :: logoutModal"></div>
+
+
+<div class="billyContainer">
+    <div class="overview grid-overview-parent">
+        <div class="overviewOrderHistoryList grid-overviewCompleteOrderHistoryListHead-parent">
+            <div class="grid-user-child-left fontBold">Date and time</div>
+            <div class="grid-user-child-left fontBold">Price</div>
+            <div class="grid-user-child-left fontBold">Customer</div>
+            <div class="grid-user-child-left fontBold">Bartender</div>
+        </div>
+        <div class="overviewList">
+            <ul class="unordered-list" th:each="orders : ${allOrders}">
+                <li>
+                    <a th:href="@{/users/details/{userId}/orderHistory/{orderId}(orderId=${orders.orderId}, userId=${orders.getCustomerId()})}">
+                        <div class="grid-completeOrderHistory-parent">
+                            <div class="grid-user-child-left"   th:text="${#temporals.format(orders.getDateTime(), 'dd-MM-yyyy HH:mm')}"></div>
+                            <div class="grid-user-child-left" th:text="${orders.getTotalPriceDisplayString(orders.totalPrice)}"></div>
+                            <div class="grid-user-child-left" th:text="${orders.customerName}"></div>
+                            <div class="grid-user-child-left"  th:text="${orders.bartenderName}"></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>
+</html>

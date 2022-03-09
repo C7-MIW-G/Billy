@@ -14,6 +14,8 @@ public interface UserService {
 
     void saveNewUser(BillyUserDto billyUserDto);
 
+    List<BillyUserDto> findUsersByRole(String role);
+
     void updateUser(BillyUserDto billyUserDto);
 
     void delete(Long userId);

@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
- * This is an Order, it exist out multiple products.
+ * This is an Order, it contains multiple products.
  */
 
 @Getter @Setter
@@ -37,6 +37,14 @@ public class BarOrderDto {
             totalOrderPrice += getSubTotal(product);
         }
         return totalOrderPrice;
+    }
+
+    public boolean checkIfOrderIsOfAge(BillyUserDto billyUserDto) {
+        for (Product product : productMap.keySet()) {
+            if (product.isProductOfAge() && !billyUserDto.isOfAge())
+                return false;
+        }
+        return true;
     }
 
     public double getSubTotal(Product product) {
@@ -79,4 +87,5 @@ public class BarOrderDto {
     public static void clearActiveOrder() {
         activeOrder = null;
     }
+
 }

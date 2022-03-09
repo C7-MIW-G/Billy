@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
-    <title>CHANGE THIS!</title>
+    <title th:text="${barOrderDetail.getCustomerName()} + ' order ' + ${barOrderDetail.getOrderId()}"></title>
 </head>
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 <div th:replace="fragments/general :: logoutModal"></div>
 <div class="billyContainer">
-
-    <div class="overview grid-overview-parent">
-        <div class="overviewOrderHistoryList grid-overviewOrderHistoryListHead-parent">
-            <div class="grid-user-child-left fontBold">Product</div>
-            <div class="grid-user-child-left fontBold">Amount</div>
-            <div class="grid-user-child-right fontBold">Price</div>
-        </div>
-        <div class="overviewList">
-            <ul class="unordered-list" th:each="product : ${barOrderDetail.productList}">
-                <li>
-                    <div class="grid-orderHistory-parent">
-                        <div class="grid-user-child-left"  th:text="${product.productName}"></div>
-                        <div class="grid-user-child-left"  th:text="${product.amount}"></div>
-                        <div class="grid-user-child-right" th:text="${product.subTotalDisplayString()}"></div>
+    <div class="orderHistoryContainer  grid-orderHistoryDetails-parent">
+        <div class="receipt grid-orderPage-child">
+            <div class="receipt-child receipt-orderList">
+                <div class="receipt-ProductsList">
+                    <ul class="unordered-listReceipt" th:each="product : ${barOrderDetail.productList}">
+                        <li>
+                            <div class="grid-orderList-parent">
+                                <div class="productAmount" th:text="${product.amount}"></div>
+                                <div class="grid-product-parent">
+                                    <div class="productName" th:text="${product.productName}"></div>
+                                    <div class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(product.productPrice)}"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid-footer-receipt receipt-TotalPrice">
+                    <div class="totalPrice">
+                        <span class="totalPrice">Total Price:</span>
+                        <span class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(barOrderDetail.totalPrice)}"></span>
                     </div>
-                </li>
-            </ul>
-            <div class="grid-user-child-right fontBold" th:text="${barOrderDetail.getTotalPriceDisplayString(barOrderDetail.totalPrice)}"></div>
+                    <div class="returnButtonOrderHistoryDetails"> <button onclick="history.back()">Return</button></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<div>
-    <ul>
-        <li th:text="${#temporals.format(barOrderDetail.getDateTime(), 'dd-MM-yyyy HH:mm')}"></li>
-    </ul>
-</div>
-
-
-<!--  HERE COMES YOUR ACTUAl PAGE  -->
-</div>
-<div th:replace="fragments/general :: bottomScripts"></div>
+    <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
 </html>

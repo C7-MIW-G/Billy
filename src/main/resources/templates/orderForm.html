@@ -44,15 +44,22 @@
                 </div>
             </div>
             <div class="receipt-child receipt-paymentSection">
-                <div class="new-button">
+                <div class="paymentButtons">
                     <a id="directPayButton">
                         <button>Direct pay</button>
                     </a>
                 </div>
                 <div>
-                    <div class="new-button">
+                    <div class="paymentButtons">
                         <a id="accountPayButton">
                             <button>Account pay</button>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <div class="paymentButtons">
+                        <a th:href="@{/orders/directPay}">
+                            <button>Clear order</button>
                         </a>
                     </div>
                 </div>
@@ -76,21 +83,29 @@
 </div>
 <div id="accountPayModal" class="customModal">
     <div class="modalContainer account-pay-modal-container">
-        <div class="modalHeader">Account pay</div>
+        <div class="modalHeader"></div>
         <div class="account-pay-modal-body">
             <div class="account-pay-modal-body-select-customer">
                 <p>Please select a customer</p>
                 <div class="overviewList">
+                    <div class="overviewOrderHistoryList grid-modalAccountPayListHead-parent">
+                        <div class="grid-user-child-left fontBold"></div>
+                        <div class="grid-user-child-left fontBold"></div>
+                        <div class="grid-user-child-left ">Credit</div>
+                        <div class="grid-user-child-right ">Balance</div>
+                    </div>
                     <ul class="unordered-list" th:each="userDto : ${allUsers}">
-                        <li th:class="${userDto.canPayForOrder() ? 'confirm-account-pay' : 'isDisabled'}">
-                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() ? 'confirm-account-pay' : 'isDisabled'}">
-                                <div class="grid-user-account-pay">
-                                    <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
-                                    <span th:class="${userDto.canPayForOrder() ? 'invisible' : 'visible'}">Credit insufficient</span>
-                                    <span class="grid-user-child-right" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
-                                </div>
-                            </a>
-                        </li>
+                            <li th:class="${userDto.canPayForOrder() ? 'confirm-account-pay' : 'isDisabled'}">
+                                <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() ? 'confirm-account-pay' : 'isDisabled'}">
+                                    <div class="grid-user-account-pay">
+                                        <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
+                                        <span></span>
+                                        <span th:class="${userDto.canPayForOrder() ? 'displayNone' : 'visible grid-user-child-left'}">Credit insufficient</span>
+                                        <span th:class="${userDto.canPayForOrder() ? 'visible grid-user-child-left' : 'displayNone'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
+                                        <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
+                                    </div>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>

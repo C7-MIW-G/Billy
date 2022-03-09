@@ -51,6 +51,12 @@
           </div>
         </li>
         <li>
+          <div class="grid-item-parent">
+            <div>Remaining credit:</div>
+            <div th:text="${billyUserDto.getRemainingCreditDisplayString()}"></div>
+          </div>
+        </li>
+        <li>
           <div class="item-buttons grid-buttons-parent">
             <div class="grid-buttonRow-parent">
               <a th:href="@{/users/details/{userId}/orderHistory(userId=${billyUserDto.userId})}">

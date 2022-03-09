@@ -5,7 +5,6 @@ import lombok.Setter;
 
 
 import javax.persistence.*;
-import java.util.*;
 import java.util.Date;
 
 /**
@@ -59,5 +58,3 @@ public class BillyUser {
         return (char) randomInt;
     }
 }
-    
-

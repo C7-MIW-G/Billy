@@ -37,6 +37,9 @@ public class Product {
     @ManyToOne
     private Category category;
 
+    @NotNull
+    private boolean isProductOfAge;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -46,6 +46,7 @@ public class OrderController {
         model.addAttribute("barOrder", BarOrderDto.activeOrder);
         model.addAttribute("allProducts", productService.findAll());
         model.addAttribute("allUsers", userService.findAll());
+        model.addAttribute("order", barOrderService.findAll());
         model.addAttribute("selectedUser", new BillyUserDto());
         return "orderForm";
     }
@@ -97,5 +98,11 @@ public class OrderController {
         // open new order
         BarOrderDto.clearActiveOrder();
         return "redirect:/orders/new";
+    }
+
+    @GetMapping("/orderHistory")
+    protected String showOrderHistory(Model model) {
+        model.addAttribute("allOrders", barOrderService.findAll());
+        return "completeOrderHistory";
     }
 }

@@ -33,6 +33,12 @@
                     </div>
                 </li>
                 <li>
+                    <div class="grid-item-parent">
+                        <div>18+:</div>
+                        <div th:text="${product.isProductOfAge()}"></div>
+                    </div>
+                </li>
+                <li>
                     <div class="item-buttons grid-buttons-parent">
                         <div>
                             <a th:href="@{/assortment/products/update/{productId}(productId=${product.productId})}"><button>Edit</button></a>

@@ -6,6 +6,8 @@ import nl.miw.se.cohort7.eindproject.rise.billy.customConstraintValidation.Uniqu
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
+import java.util.Calendar;
+import javax.validation.constraints.NegativeOrZero;
 import java.util.Date;
 
 /**
@@ -17,6 +19,9 @@ import java.util.Date;
 @Getter @Setter
 @UniqueUsername
 public class BillyUserDto {
+
+    private static final int USER_DISPLAY_STRING_LENGTH = 20;
+    public static final int MIN_AGE_FOR_PRODUCTS_OF_AGE = 18;
 
     private Long userId;
 
@@ -62,8 +67,12 @@ public class BillyUserDto {
         return formatAsEuro(accountBalance);
     }
 
+    public String getRemainingCreditDisplayString(){
+        return formatAsEuro(accountBalance - maxCredit);
+    }
+
     public String getCreditDisplayString() {
-        return formatAsEuro(maxCredit);
+        return formatAsEuro(maxCredit * -1);
     }
 
     private String formatAsEuro(double amount) {
@@ -71,10 +80,32 @@ public class BillyUserDto {
     }
 
     public boolean canPayForOrder() {
-        return maxCredit > accountBalance - BarOrderDto.activeOrder.calculateTotalOrderPrice();
+        return maxCredit < accountBalance - BarOrderDto.activeOrder.calculateTotalOrderPrice();
     }
 
     public void payOrder(double amount) {
         accountBalance -= amount;
     }
+
+    public static int getAge(Date dateOfBirth) {
+        Calendar today = Calendar.getInstance();
+        Calendar birthDate = Calendar.getInstance();
+        int age = 0;
+
+        birthDate.setTime(dateOfBirth);
+        if (birthDate.after(today)) {
+            throw new IllegalArgumentException("Can't be born in the future");
+        }
+
+        age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
+
+        return age;
+    }
+
+    public boolean isOfAge () {
+        return getAge(this.birthdate) >= MIN_AGE_FOR_PRODUCTS_OF_AGE;
+    }
+
 }
+
+

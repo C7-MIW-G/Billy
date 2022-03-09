@@ -4,11 +4,24 @@
     height: calc(100% - 4rem);
     max-height: calc(100% - 4rem);
 }
+
+.orderHistoryContainer{
+    margin: 5px;
+    height: calc(100% - 4rem);
+    max-height: calc(100% - 4rem);
+    place-items: center;
+}
+
 .grid-orderPage-parent{
     display: grid;
     gap: 1rem;
     grid-template-columns: 6fr 4fr;
 }
+
+.grid-orderHistory-parent{
+    display: grid;
+}
+
 .grid-orderPage-child{
     margin: 5px;
 }
@@ -72,16 +85,24 @@
 .receipt-orderList{
     margin-top: 5px;
     height: calc(100% - 10rem - 5px);
-
     font-family: "Courier New", Verdana, sans-serif ;
     font-size: 1rem;
     line-height: 1.5;
+}
+
+.receipt-orderHistory{
+    padding: 0.75rem;
+    font-family: "Courier New", Verdana, sans-serif ;
+    font-size: 1rem;
+    line-height: 1.5;
+
 }
 .receipt-ProductsList{
     height: calc(100% - 2rem);
     overflow: hidden;
     overflow-y: auto;
     font-family: "Courier New", Verdana, sans-serif ;
+    background-color: white;
 }
 .receipt-ProductsList ul li a{
     display: block;
@@ -119,10 +140,14 @@
 
 .grid-footer-receipt{
     display: grid;
+    background-color: white;
 }
 .receipt-paymentSection{
+    display: grid;
+    grid-template-columns: calc(33%) calc(33%) calc(33%);
     margin-bottom: 5px;
     height: calc(10rem - 5px);
+    margin-top: 5%;
 }
 .account-pay-modal-container{
     width: auto;
@@ -131,13 +156,13 @@
 }
 .account-pay-modal-body{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     grid-gap: 10px;
     height: 100%;
 }
 .grid-user-account-pay{
     display: grid;
-    grid-template-columns: 60% 25% 15%;
+    grid-template-columns: calc(40%) calc(25%) calc(21%) calc(10%);
 }
 .account-pay-modal-body-select-customer{
     display: grid;
