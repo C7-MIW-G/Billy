@@ -171,7 +171,11 @@ html, body {
 }
 
 .new-button{
-    margin-left: auto;
+    margin-left: 25px;
+}
+
+.clear-button{
+    margin-left: calc(50%);
 }
 
 .return

@@ -142,8 +142,11 @@
     display: grid;
 }
 .receipt-paymentSection{
+    display: grid;
+    grid-template-columns: calc(33%) calc(33%) calc(33%);
     margin-bottom: 5px;
     height: calc(10rem - 5px);
+    margin-top: 5%;
 }
 .account-pay-modal-container{
     width: auto;

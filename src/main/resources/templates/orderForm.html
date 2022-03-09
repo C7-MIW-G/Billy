@@ -56,6 +56,13 @@
                         </a>
                     </div>
                 </div>
+                <div>
+                    <div class="new-button">
+                        <a th:href="@{/orders/directPay}">
+                            <button>Clear order</button>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -88,25 +95,25 @@
                         <div class="grid-user-child-right ">Balance</div>
                     </div>
                     <ul class="unordered-list" th:each="userDto : ${allUsers}">
-<!--                        <li th:each="barOrder : ${order}">-->
-                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay"
-                               th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
-                                <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}"></a>
-<!--                                   th:class="${barOrder.checkIfOrderIsOfAge(barOrder.customer.userId) == true ? 'isDisabled' : 'confirm-account-pay'}">-->
+                        <!--                        <li th:each="barOrder : ${order}">-->
+                        <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay"
+                           th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}"></a>
+                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}"></a>
+                            <!--                                   th:class="${barOrder.checkIfOrderIsOfAge(barOrder.customer.userId) == true ? 'isDisabled' : 'confirm-account-pay'}">-->
 
-                        <li th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
-                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
-                                <div class="grid-user-account-pay">
-                                    <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
-                                    <span th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'visible grid-user-child-left' : 'invisible'}">Credit insufficient</span>
-                                    <span th:class="${userDto.getAccountBalanceWithActiveOrder() > userDto.maxCredit ? 'visible grid-user-child-left' : 'invisible'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
-                                    <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString(userDto.getAccountBalance())}"></span>
-<!--                                    <span th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'visible' : 'invisible'}">Credit insufficient</span>-->
-<!--                                    <span th:class="${barOrder.checkIfOrderIsOfAge(barOrder.customer.userId) == true  ? 'visible' : 'invisible'}">customers must be at least xx years old</span>-->
-<!--                                    <span class="grid-user-child-right" th:text="${userDto.getAccountBalanceDisplayString(userDto.getAccountBalance())}"></span>-->
-                                </div>
-                            </a>
-                        </li>
+                            <li th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
+                                <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'isDisabled' : 'confirm-account-pay'}">
+                                    <div class="grid-user-account-pay">
+                                        <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
+                                        <span th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'visible grid-user-child-left' : 'invisible'}">Credit insufficient</span>
+                                        <span th:class="${userDto.getAccountBalanceWithActiveOrder() > userDto.maxCredit ? 'visible grid-user-child-left' : 'invisible'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
+                                        <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString(userDto.getAccountBalance())}"></span>
+                                        <!--                                    <span th:class="${userDto.getAccountBalanceWithActiveOrder() < userDto.maxCredit ? 'visible' : 'invisible'}">Credit insufficient</span>-->
+                                        <!--                                    <span th:class="${barOrder.checkIfOrderIsOfAge(barOrder.customer.userId) == true  ? 'visible' : 'invisible'}">customers must be at least xx years old</span>-->
+                                        <!--                                    <span class="grid-user-child-right" th:text="${userDto.getAccountBalanceDisplayString(userDto.getAccountBalance())}"></span>-->
+                                    </div>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
