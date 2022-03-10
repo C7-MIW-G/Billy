@@ -18,3 +18,9 @@ cancelDelete.onclick = function (){
     closeModal(deleteModal);
 }
 
+window.onclick = function(event) {
+    if (event.target === deleteModal) {
+        deleteModal.style.display = "none";
+    }
+}
+
