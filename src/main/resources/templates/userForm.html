@@ -84,6 +84,7 @@
                             <div>
                                 <input type="hidden" th:disabled="${billyUserId != #authentication.getPrincipal().getUserId()}" th:field="*{userRole}" th:value="${billyUserDto.getUserRole()}">
                                 <input type="hidden" th:field="*{userId}">
+                                <input type="hidden" th:field="*{accountBalance}">
                                 <input type="submit" value="Save user">
                             </div>
                         </div>
