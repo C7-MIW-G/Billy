@@ -1,13 +1,11 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.service.implementation;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.PasswordDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.DtoConverter.BillyUserDtoConverter;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -82,14 +80,14 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public void updatePassword(ChangePassword changePassword) {
-        Optional<BillyUser> optionalBillyUser = userRepository.findById(changePassword.getUserId());
+    public void updatePassword(PasswordDto passwordDto) {
+        Optional<BillyUser> optionalBillyUser = userRepository.findById(passwordDto.getUserId());
         if (optionalBillyUser.isEmpty()) {
             return;
         }
         BillyUser userWithNewPassword = optionalBillyUser.get();
 
-        userWithNewPassword.setPassword(passwordEncoder.encode(changePassword.getNewPassword()));
+        userWithNewPassword.setPassword(passwordEncoder.encode(passwordDto.getNewPassword()));
         userRepository.save(userWithNewPassword);
     }
 

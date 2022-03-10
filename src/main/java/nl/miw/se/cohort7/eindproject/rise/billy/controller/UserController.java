@@ -1,8 +1,8 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.PasswordDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
@@ -117,26 +117,26 @@ public class UserController {
     @GetMapping("/changePassword/{billyUserId}")
     protected String changePassword(@PathVariable("billyUserId") Long billyUserId, Model model) {
 
-        ChangePassword changePassword = new ChangePassword();
-        changePassword.setUserId(billyUserId);
+        PasswordDto passwordDto = new PasswordDto();
+        passwordDto.setUserId(billyUserId);
 
-        model.addAttribute("changePassword", changePassword);
+        model.addAttribute("changePassword", passwordDto);
 
         return "changePasswordForm";
     }
 
     @PostMapping("/changePassword/{billyUserId}")
-    protected String changePassword(@Valid @ModelAttribute("changePassword") ChangePassword changePassword,
+    protected String changePassword(@Valid @ModelAttribute("changePassword") PasswordDto passwordDto,
                                     BindingResult result) {
         if (result.hasErrors()) {
             return "changePasswordForm";
         }
-        if (!changePassword.confirmNewPassword()) {
+        if (!passwordDto.confirmNewPassword()) {
             result.rejectValue("newPasswordConfirmation", "error.newPasswordConfirmation",
                     "Passwords should match");
             return "changePasswordForm";
         }
-        userService.updatePassword(changePassword);
+        userService.updatePassword(passwordDto);
         return "redirect:/users";
     }
 

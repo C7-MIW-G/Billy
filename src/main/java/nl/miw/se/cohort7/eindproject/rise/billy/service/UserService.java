@@ -1,7 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.service;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.ChangePassword;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.PasswordDto;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface UserService {
 
     void delete(Long userId);
 
-    void updatePassword(ChangePassword changePassword);
+    void updatePassword(PasswordDto passwordDto);
 
     boolean isUsernameUnique(BillyUserDto billyUserDto);
 

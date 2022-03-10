@@ -1,4 +1,4 @@
-package nl.miw.se.cohort7.eindproject.rise.billy.model;
+package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
  */
 
 @Getter @Setter
-public class ChangePassword {
+public class PasswordDto {
     private Long userId;
 
     @Size(min = 8, message = "Password should be min 8 characters long")
