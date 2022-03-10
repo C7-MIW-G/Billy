@@ -177,12 +177,8 @@
 .isDisabled {
     cursor: not-allowed;
     pointer-events: none;
-    opacity: 50%;
+    opacity: 50% !important;
     background: white;
-}
-
-.isDisabledEmoji {
-    opacity: 100% !important;
 }
 
 .overviewList isDisabled ul li:hover{
@@ -198,6 +194,6 @@
 }
 
 .ageSign{
-    opacity: 100%;
+    opacity: 200%;
     font-size: 25px;
 }
