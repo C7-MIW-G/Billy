@@ -102,7 +102,7 @@ public class BillyUserDto {
         return age;
     }
 
-    public boolean isOfAge () {
+    public boolean isUserEighteenPlus() {
         return getAge(this.birthdate) >= MIN_AGE_FOR_PRODUCTS_OF_AGE;
     }
 

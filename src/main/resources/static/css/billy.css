@@ -347,6 +347,14 @@ a:visited {
     top: 20%;
     font-size: 100px;
 }
+
+.error-emoji {
+    position: relative;
+    /*left: 46%;*/
+    /*top: 20%;*/
+    font-size: 100px;
+}
+
 .error-code-center {
     text-align: center !important;
     position: relative;

@@ -39,9 +39,9 @@ public class BarOrderDto {
         return totalOrderPrice;
     }
 
-    public boolean checkIfOrderIsOfAge(BillyUserDto billyUserDto) {
+    public boolean canUserBuyTheProduct(BillyUserDto billyUserDto) {
         for (Product product : productMap.keySet()) {
-            if (product.isProductOfAge() && !billyUserDto.isOfAge())
+            if (product.isProductOfAge() && !billyUserDto.isUserEighteenPlus())
                 return false;
         }
         return true;

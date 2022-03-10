@@ -33,9 +33,8 @@
                     </div>
                 </li>
                 <li>
-                    <div class="grid-item-parent">
-                        <div>18+:</div>
-                        <div th:text="${product.isProductOfAge()}"></div>
+                    <div th:class="${product.isProductOfAge() == false ? 'invisible' : 'visible grid-user-child-left'}" class="grid-item-parent">
+                        <div>&#128286;</div>
                     </div>
                 </li>
                 <li>
