@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.miw.se.cohort7.eindproject.rise.billy.customConstraintValidation.MatchingPasswords;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -14,6 +15,7 @@ import javax.validation.constraints.Size;
  */
 
 @Getter @Setter
+@MatchingPasswords
 public class PasswordDto {
     private Long userId;
 

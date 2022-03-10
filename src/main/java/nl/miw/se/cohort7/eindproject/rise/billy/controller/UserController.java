@@ -131,11 +131,6 @@ public class UserController {
         if (result.hasErrors()) {
             return "changePasswordForm";
         }
-        if (!passwordDto.confirmNewPassword()) {
-            result.rejectValue("newPasswordConfirmation", "error.newPasswordConfirmation",
-                    "Passwords should match");
-            return "changePasswordForm";
-        }
         userService.updatePassword(passwordDto);
         return "redirect:/users";
     }
