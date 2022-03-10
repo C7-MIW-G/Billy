@@ -53,7 +53,6 @@ public class UserController {
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
         model.addAttribute("billyUserDto", new BillyUserDto());
-        model.addAttribute("headerText", "New User");
         return "userForm";
     }
 
@@ -85,7 +84,6 @@ public class UserController {
             return "redirect:/users";
         }
         model.addAttribute("billyUserDto", billyUserDto);
-        model.addAttribute("headerText", "Edit");
         return "userForm";
     }
 
