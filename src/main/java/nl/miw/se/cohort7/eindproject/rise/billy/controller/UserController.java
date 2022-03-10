@@ -120,13 +120,13 @@ public class UserController {
         PasswordDto passwordDto = new PasswordDto();
         passwordDto.setUserId(billyUserId);
 
-        model.addAttribute("changePassword", passwordDto);
+        model.addAttribute("passwordDto", passwordDto);
 
         return "changePasswordForm";
     }
 
     @PostMapping("/changePassword/{billyUserId}")
-    protected String changePassword(@Valid @ModelAttribute("changePassword") PasswordDto passwordDto,
+    protected String changePassword(@Valid @ModelAttribute("passwordDto") PasswordDto passwordDto,
                                     BindingResult result) {
         if (result.hasErrors()) {
             return "changePasswordForm";
