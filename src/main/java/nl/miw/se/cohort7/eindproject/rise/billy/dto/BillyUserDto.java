@@ -61,6 +61,19 @@ public class BillyUserDto {
         }
     }
 
+    public String getUserRoleDisplayString() {
+        switch (userRole) {
+            case "ROLE_BAR MANAGER":
+                return "Bar manager";
+            case "ROLE_BARTENDER":
+                return "Bartender";
+            case "ROLE_CUSTOMER":
+                return "Customer";
+            default:
+                return "Unknown";
+        }
+    }
+
     public String getAccountBalanceDisplayString() {
         return formatAsEuro(accountBalance);
     }
