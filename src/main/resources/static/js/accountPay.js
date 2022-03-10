@@ -25,3 +25,9 @@ var confirmIt = function (hyperlink) {
 for (var i = 0; i < confirmationElements.length; i++) {
     confirmationElements[i].addEventListener('click', confirmIt, false);
 }
+
+window.onclick = function(event) {
+    if (event.target === accountPayModal) {
+        accountPayModal.style.display = "none";
+    }
+}

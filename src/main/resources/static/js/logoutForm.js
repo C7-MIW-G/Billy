@@ -17,3 +17,9 @@ logoutButton.onclick = function (){
 modalCancel.onclick = function (){
     closeModal(logoutModal);
 }
+
+window.onclick = function(event) {
+    if (event.target === logoutModal) {
+        logoutModal.style.display = "none";
+    }
+}

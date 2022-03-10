@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -53,7 +54,6 @@ public class UserController {
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserForm(Model model) {
         model.addAttribute("billyUserDto", new BillyUserDto());
-        model.addAttribute("headerText", "New User");
         return "userForm";
     }
 
@@ -85,7 +85,6 @@ public class UserController {
             return "redirect:/users";
         }
         model.addAttribute("billyUserDto", billyUserDto);
-        model.addAttribute("headerText", "Edit");
         return "userForm";
     }
 
@@ -144,9 +143,15 @@ public class UserController {
     @GetMapping("/details/{billyUserId}/orderHistory")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String seeOrderHistory(@PathVariable("billyUserId") Long billyUserId, Model model) {
-        model.addAttribute("allBillyUsers", userService.findAll());
-        model.addAttribute("OrdersByUser", barOrderService.findAllBarOrderOfUser(billyUserId));
-        return "userOrderHistory";
+        List <BarOrderViewDto> barOrderViewDtoList = barOrderService.findAllBarOrderOfUser(billyUserId);
+        if (barOrderViewDtoList.isEmpty()) {
+            model.addAttribute("userDto", userService.findByUserId(billyUserId));
+            return "noOrderHistory";
+        } else {
+            model.addAttribute("allBillyUsers", userService.findAll());
+            model.addAttribute("OrdersByUser", barOrderViewDtoList);
+            return "userOrderHistory";
+        }
     }
 
     @GetMapping("/details/{billyUserId}/orderHistory/{orderId}")

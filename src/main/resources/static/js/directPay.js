@@ -16,3 +16,9 @@ directPayButton.onclick = function (){
 modalCancelPayment.onclick = function (){
     closeModal(directPayModal);
 }
+
+directPayModal.onclick = function(event) {
+    if (event.target === directPayModal) {
+        directPayModal.style.display = "none";
+    }
+}
