@@ -145,6 +145,8 @@ public class UserController {
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String seeOrderHistory(@PathVariable("billyUserId") Long billyUserId, Model model) {
         if (barOrderService.findAllBarOrderOfUser(billyUserId).isEmpty()) {
+            model.addAttribute("userDto", userService.findByUserId(billyUserId));
+
             return "noOrderHistory";
         } else {
             model.addAttribute("allBillyUsers", userService.findAll());

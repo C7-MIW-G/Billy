@@ -7,11 +7,17 @@
 <div th:replace="fragments/general :: navbar"></div>
 <div th:replace="fragments/general :: logoutModal"></div>
 
-
 <div class="billyContainer">
-
-    <h1 class="">There is no order history yet</h1>
-
+    <div class="overviewNoHistory grid-overview-parent">
+        <div class="overviewOrderHistoryList grid-overviewOrderHistoryListHead-parent">
+            <div class="grid-user-child-left fontBold">Date and time</div>
+            <div class="grid-user-child-left fontBold">Price</div>
+            <div class="grid-user-child-left fontBold">Bartender</div>
+        </div>
+        <h3 class="center-msg" th:text="${userDto.getName()} + ' has no orders yet!'"></h3>
+    </div>
+    <button class="returnButtonOrderHistory" onclick="history.back()">Return</button>
+</div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

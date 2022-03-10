@@ -114,9 +114,19 @@ html, body {
     max-height: calc(80vh - 10px);
     border: 2px solid dimgrey;
     background-color: #fcfcfc;
-
     overflow: hidden;
 }
+
+.overviewNoHistory{
+    margin: max(5vh, 0.25rem) auto;
+    width: max(60%, 18rem);
+    height:calc(80%);
+    max-height: calc(80vh - 10px);
+    border: 2px solid dimgrey;
+    background-color: #fcfcfc;
+    overflow: hidden;
+}
+
 .grid-overview-parent{
     display: grid;
     grid-template-rows: 2.875rem calc(100% - 2.875rem);
@@ -181,6 +191,7 @@ html, body {
 .balance-button {
     margin-left: auto;
 }
+
 
 /*details*/
 .itemView{
@@ -346,6 +357,13 @@ a:visited {
     left: 46%;
     top: 20%;
     font-size: 100px;
+}
+
+.center-msg {
+    font-size: 20px;
+    margin: max(5vh, 0.25rem) auto;
+    color: black;
+    font-family: "Courier new", Verdana, sans-serif;
 }
 .error-code-center {
     text-align: center !important;
