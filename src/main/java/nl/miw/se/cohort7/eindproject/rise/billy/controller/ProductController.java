@@ -2,9 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.CategoryDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
-import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

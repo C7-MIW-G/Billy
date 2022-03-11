@@ -77,13 +77,6 @@ public class BarOrderDto {
         }
     }
 
-    public boolean checkAccountBalance() {
-        if (BarOrderDto.activeOrder.calculateTotalOrderPrice() + customer.getAccountBalance() < customer.getMaxCredit()){
-            return false;
-        }
-        return true;
-    }
-
     public static void clearActiveOrder() {
         activeOrder = null;
     }
