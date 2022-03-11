@@ -46,20 +46,20 @@
             <div class="receipt-child receipt-paymentSection">
                 <div class="paymentButtons">
                     <a id="directPayButton">
-                        <button>Direct pay</button>
+                        <button class="paymentButtons">Direct pay</button>
                     </a>
                 </div>
                 <div>
                     <div class="paymentButtons">
                         <a id="accountPayButton">
-                            <button>Account pay</button>
+                            <button class="paymentButtons">Account pay</button>
                         </a>
                     </div>
                 </div>
                 <div>
                     <div class="paymentButtons">
                         <a th:href="@{/orders/directPay}">
-                            <button>Clear order</button>
+                            <button class="paymentButtons">Clear order</button>
                         </a>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
         </div>
     </div>
 </div>
-<div id="directPayModal" class="customModal">
+<div id="directPayModal" class="modal">
     <div class="modalContainer">
         <div class="modalHeader">Direct pay</div>
         <p>Please confirm direct pay</p>

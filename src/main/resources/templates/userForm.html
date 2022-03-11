@@ -67,7 +67,9 @@
                     </li>
                     <li sec:authorize="hasRole('ROLE_BAR MANAGER')">
                         <div class="grid-item-parent">
-                            <div><label for="roles">Role </label></div>
+                            <div>
+                                <label for="roles">Role</label>
+                            </div>
                             <div>
                                 <select th:disabled="${billyUserId eq #authentication.getPrincipal().getUserId()}"
                                         th:class="${billyUserId eq #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled' : ''}"
@@ -75,7 +77,8 @@
                                     <option value="ROLE_CUSTOMER" selected>Customer</option>
                                     <option value="ROLE_BARTENDER" >Bartender</option>
                                     <option value="ROLE_BAR MANAGER">Bar Manager</option>
-                                </select> <span class="billyTooltip">Users cannot edit their own role</span>
+                                </select>
+                                <span class="billyTooltip">Users cannot edit their own role</span>
                             </div>
                         </div>
                     </li>
@@ -85,13 +88,13 @@
                                 <input type="hidden" th:disabled="${billyUserId != #authentication.getPrincipal().getUserId()}" th:field="*{userRole}" th:value="${billyUserDto.getUserRole()}">
                                 <input type="hidden" th:field="*{userId}">
                                 <input type="hidden" th:field="*{accountBalance}">
-                                <input type="submit" value="Save user">
+                                <button class="detailsButtons" type="submit" value="Save user">Save</button>
                             </div>
                         </div>
                     </li>
                 </ul>
             </form>
-            <a class="returnButton" th:href="@{/users}"><button>Return</button></a>
+            <a th:href="@{/users}"><button class="returnButton">Return</button></a>
         </div>
     </div>
 </div>
