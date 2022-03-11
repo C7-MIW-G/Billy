@@ -30,6 +30,10 @@ public class Product {
 
     private boolean isProductOfAge;
 
+    public String getPriceDisplayString() {
+        return String.format("%.2f", productPrice);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

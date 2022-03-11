@@ -1,11 +1,15 @@
 .grid-product-parent{
     display: grid;
-    grid-template-columns: calc(100% - 6em) 6em;
+    grid-template-columns: calc(100% - 7em) 1rem 6rem;
 }
 .productName{
     text-align: left;
     overflow: hidden;
 }
 .productPrice{
+    text-align: right;
+}
+
+.euro-sign {
     text-align: right;
 }

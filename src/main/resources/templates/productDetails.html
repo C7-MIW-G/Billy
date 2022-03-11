@@ -23,7 +23,7 @@
                 <li>
                     <div class="grid-item-parent">
                         <div>Price:</div>
-                        <div th:text="${product.getPriceDisplayString(product.getProductPrice())}"></div>
+                        <div th:text="'€ ' + ${product.getPriceDisplayString()}"></div>
                     </div>
                 </li>
                 <li>

@@ -34,7 +34,7 @@ public class ProductDto {
     @NotNull
     private boolean isProductOfAge;
 
-    public String getPriceDisplayString(double price){
-        return String.format("\u20ac %.2f", price);
+    public String getPriceDisplayString() {
+        return String.format("%.2f", productPrice);
     }
 }
