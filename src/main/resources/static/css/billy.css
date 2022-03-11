@@ -64,6 +64,10 @@ button{
     font-size: x-large;
 }
 
+button:focus{
+    background-color: #A0B4CE
+}
+
 .detailsButtons{
     font-size: medium;
     min-width: 85px;

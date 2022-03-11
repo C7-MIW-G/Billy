@@ -31,18 +31,20 @@
                         <div class="item-buttons grid-buttons-parent">
                             <div class="grid-buttonRow-parent">
                                 <div>
-                                    <input type="hidden" th:field="*{categoryId}">
-                                    <input type="submit" value="Save">
+                                    <button class="detailsButtons">
+                                        <input type="hidden" th:field="*{categoryId}">
+                                        <input type="submit" value="Save">
+                                    </button>
                                 </div>
                                 <div><a th:class="${productListSize > 0 ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
-                                   id="deleteButton"
-                                   th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
-                                   th:text="Delete">
+                                        id="deleteButton"
+                                        th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
+                                        th:text="Delete">
                                 </a><span class="billyTooltip">Please delete all product before deleting the Category</span></div>
                             </div>
                             <div>
-                                <a class="returnButton button_temporary"
-                                   th:href="@{/assortment/categories}" th:text="Return"></a>
+                                <button class="detailsButtons"
+                                        th:href="@{/assortment/categories}" th:text="Return"></button>
                             </div>
                         </div>
                     </li>

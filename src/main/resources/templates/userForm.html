@@ -89,12 +89,12 @@
                                 <input type="hidden" th:field="*{userId}">
                                 <input type="hidden" th:field="*{accountBalance}">
                                 <button class="detailsButtons" type="submit" value="Save user">Save</button>
+                                <button onclick="history.back()" class="detailsButtons">Return</button>
                             </div>
                         </div>
                     </li>
                 </ul>
             </form>
-            <a th:href="@{/users}"><button class="returnButton">Return</button></a>
         </div>
     </div>
 </div>

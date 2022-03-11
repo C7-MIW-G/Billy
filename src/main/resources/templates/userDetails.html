@@ -60,7 +60,7 @@
           <div class="item-buttons grid-buttons-parent">
             <div class="grid-buttonRow-parent">
               <a th:href="@{/users/details/{userId}/orderHistory(userId=${billyUserDto.userId})}">
-                <button class="detailsButtons">Order History</button>
+                <button class="detailsButtons">Order history</button>
               </a>
               <a th:href="@{/users/update/{userId}(userId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button class="detailsButtons">Edit</button>
