@@ -22,7 +22,6 @@ public class ProductDto {
 
     @Size(min = 1, message = "The name of the product should be at least 1 character")
     @Size(max = 64, message = "The name of the product should be less than 65 characters")
-    @Column(nullable = false)
     private String productName;
 
     @NotNull
@@ -30,7 +29,6 @@ public class ProductDto {
     @Max(value = Long.MAX_VALUE, message = "Please try a smaller number.")
     private double productPrice;
 
-    @ManyToOne
     private CategoryDto categoryDto;
 
     @NotNull
