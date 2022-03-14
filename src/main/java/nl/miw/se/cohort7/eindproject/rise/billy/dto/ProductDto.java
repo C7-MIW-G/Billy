@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 
 import javax.persistence.Column;
 import javax.persistence.ManyToOne;
@@ -9,6 +10,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 /**
  * @author Jordy Pragt <j.pragt@st.hanze.nl>
@@ -36,5 +38,18 @@ public class ProductDto {
 
     public String getPriceDisplayString() {
         return String.format("%.2f", productPrice);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductDto that = (ProductDto) o;
+        return productId.equals(that.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(productId);
     }
 }
