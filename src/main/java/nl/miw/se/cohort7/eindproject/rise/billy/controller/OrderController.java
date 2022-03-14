@@ -2,10 +2,10 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
-import nl.miw.se.cohort7.eindproject.rise.billy.service.ProductService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,13 +28,13 @@ import java.util.Optional;
 public class OrderController {
 
     private BarOrderService barOrderService;
-    private ProductService productService;
     private UserService userService;
+    private AssortmentService assortmentService;
 
-    public OrderController(BarOrderService barOrderService, ProductService productService, UserService userService) {
+    public OrderController(BarOrderService barOrderService, UserService userService, AssortmentService assortmentService) {
         this.barOrderService = barOrderService;
-        this.productService = productService;
         this.userService = userService;
+        this.assortmentService = assortmentService;
     }
 
     @GetMapping({"/", "/orders/new"})
@@ -44,7 +44,7 @@ public class OrderController {
             BarOrderDto.activeOrder.setDateTime(LocalDateTime.now());
         }
         model.addAttribute("barOrder", BarOrderDto.activeOrder);
-        model.addAttribute("allProducts", productService.findAll());
+        model.addAttribute("allCategories", assortmentService.findAllCategories());
         model.addAttribute("allUsers", userService.findAll());
         model.addAttribute("order", barOrderService.findAll());
         model.addAttribute("selectedUser", new BillyUserDto());
@@ -53,7 +53,7 @@ public class OrderController {
 
     @GetMapping("/orders/add/{productId}")
     protected String addProductToOrder(@PathVariable("productId") Long productId) {
-        Optional<Product> optionalProduct = productService.findByProductId(productId);
+        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }
@@ -63,7 +63,7 @@ public class OrderController {
 
     @GetMapping("/orders/remove/{productId}")
     protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
-        Optional<Product> optionalProduct = productService.findByProductId(productId);
+        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
         if (optionalProduct.isEmpty()) {
             return "redirect:/orders/new";
         }

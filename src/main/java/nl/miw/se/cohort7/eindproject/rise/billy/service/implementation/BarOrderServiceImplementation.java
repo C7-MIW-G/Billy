@@ -38,11 +38,11 @@ public class BarOrderServiceImplementation implements BarOrderService {
         this.userRepository = userRepository;
     }
 
-    private List<ProductViewDto> convertMapsToProductView(Map<Product, Integer> productMap,
+    private List<ProductViewDto> convertMapsToProductView(Map<ProductDto, Integer> productMap,
                                                           Map<ProductDto, Double> discountMap){
         List<ProductViewDto> productViewList = new ArrayList<>();
 
-        for (Product product : productMap.keySet()) {
+        for (ProductDto product : productMap.keySet()) {
             ProductViewDto productViewDto = new ProductViewDto();
 
             productViewDto.setAmount(productMap.get(product));

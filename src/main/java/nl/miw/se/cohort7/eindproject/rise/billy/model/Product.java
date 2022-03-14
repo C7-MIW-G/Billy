@@ -29,23 +29,6 @@ public class Product {
     private Category category;
 
     private boolean isProductOfAge;
-
-    public String getPriceDisplayString() {
-        return String.format("%.2f", productPrice);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return productId == product.productId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(productId);
-    }
 }
 
 
