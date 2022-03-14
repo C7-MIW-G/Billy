@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import nl.miw.se.cohort7.eindproject.rise.billy.customConstraintValidation.MatchingPasswords;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 /**
@@ -27,7 +25,4 @@ public class PasswordDto {
 
     private String newPasswordConfirmation;
 
-    public boolean confirmNewPassword() {
-        return newPassword.equals(newPasswordConfirmation);
-    }
 }

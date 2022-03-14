@@ -53,8 +53,13 @@ public class BarOrderDto {
         return amount * product.getProductPrice();
     }
 
-    public String getPriceDisplayString(double price){
-        return String.format("\u20ac %.2f", price);
+    public String getSubTotalDisplayString(Product product){
+        double subTotal = getSubTotal(product);
+        return String.format("%.2f", subTotal);
+    }
+
+    public String getTotalPriceDisplayString() {
+        return String.format("%.2f", calculateTotalOrderPrice());
     }
 
     public static void openNewActiveOrder(){
@@ -75,13 +80,6 @@ public class BarOrderDto {
         } else {
             activeOrder.productMap.put(product, activeOrder.productMap.get(product) - 1);
         }
-    }
-
-    public boolean checkAccountBalance() {
-        if (BarOrderDto.activeOrder.calculateTotalOrderPrice() + customer.getAccountBalance() < customer.getMaxCredit()){
-            return false;
-        }
-        return true;
     }
 
     public static void clearActiveOrder() {

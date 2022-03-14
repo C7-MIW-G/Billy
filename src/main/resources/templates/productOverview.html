@@ -19,7 +19,8 @@
                 <li><a th:href="@{/assortment/products/details/{productId}(productId=${product.productId})}">
                     <div class="grid-product-parent">
                         <div class="productName fontBold" th:text="${product.getProductName()}"></div>
-                        <div class="productPrice" th:text="${product.getPriceDisplayString(product.productPrice)}"></div>
+                        <div class="euro-sign">€</div>
+                        <div class="productPrice" th:text="${product.getPriceDisplayString()}"></div>
                     </div>
                 </a></li>
             </ul>

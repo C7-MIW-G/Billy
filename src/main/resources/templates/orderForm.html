@@ -15,7 +15,8 @@
                 <li><a th:href="@{/orders/add/{productId}(productId=${product.productId})}">
                     <div class="grid-product-parent">
                         <div class="productName" th:text="${product.getProductName()}"></div>
-                        <div class="productPrice" th:text="${barOrder.getPriceDisplayString(product.getProductPrice())}"></div>
+                        <div class="euro-sign">€</div>
+                        <div class="productPrice" th:text="${product.getPriceDisplayString}"></div>
                     </div>
                 </a>
                 </li>
@@ -31,7 +32,8 @@
                             <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
                             <div class="grid-product-parent">
                                 <div class="productName" th:text="${product.productName}"></div>
-                                <div class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></div>
+                                <div class="euro-sign">€</div>
+                                <div class="productPrice" th:text="${barOrder.getSubTotalDisplayString(product)}"></div>
                             </div>
                         </div>
                     </a></li>
@@ -40,7 +42,7 @@
             <div class="grid-footer-receipt receipt-TotalPrice">
                 <div class="totalPrice">
                     <span class="totalPrice">Total Price:</span>
-                    <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+                    <span class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
                 </div>
             </div>
             <div class="receipt-child receipt-paymentSection">
@@ -73,7 +75,7 @@
         <p>Please confirm direct pay</p>
         <p>
             <span class="totalPrice">Total Price:</span>
-            <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+            <span class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
         </p>
         <div class="grid-modalButtons-parent">
             <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
@@ -117,7 +119,8 @@
                                 <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
                                 <div class="grid-product-parent">
                                     <div class="productName" th:text="${product.productName}"></div>
-                                    <div class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.getSubTotal(product))}"></div>
+                                    <div class="euro-sign">€</div>
+                                    <div class="productPrice" th:text="${barOrder.getSubTotalDisplayString(product)}"></div>
                                 </div>
                             </div>
                         </li>
@@ -126,7 +129,8 @@
                 <div class="grid-footer-receipt receipt-TotalPrice">
                     <div class="totalPrice">
                         <span class="totalPrice">Total Price:</span>
-                        <span class="productPrice" th:text="${barOrder.getPriceDisplayString(barOrder.calculateTotalOrderPrice())}"></span>
+                        <span class="euro-sign">€</span>
+                        <span class="productPrice" th:text="${barOrder.getTotalPriceDisplayString()}"></span>
                     </div>
                 </div>
                 <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
