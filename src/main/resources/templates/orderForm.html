@@ -9,18 +9,26 @@
 
 <div class="orderContainer  grid-orderPage-parent">
     <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
-        <div class="productCategoryList grid-productAssortment-child"></div>
-        <div class="productList grid-productAssortment-child">
-            <ul class="unordered-list" th:each="product : ${allProducts}">
-                <li><a th:href="@{/orders/add/{productId}(productId=${product.productId})}">
-                    <div class="grid-product-parent">
-                        <div class="productName" th:text="${product.getProductName()}"></div>
-                        <div class="euro-sign">€</div>
-                        <div class="productPrice" th:text="${product.getPriceDisplayString}"></div>
+        <div class="productCategoryList grid-productAssortment-child">
+            <ul class="unordered-list" th:each="category : ${allCategories}">
+                <li>
+                    <div>
+                        <div class="productName" th:text="${category.categoryName}"></div>
                     </div>
-                </a>
                 </li>
             </ul>
+        </div>
+        <div class="productList grid-productAssortment-child">
+<!--            <ul class="unordered-list" th:each="product : ${allProducts}">-->
+<!--                <li><a th:href="@{/orders/add/{productId}(productId=${product.productId})}">-->
+<!--                    <div class="grid-product-parent">-->
+<!--                        <div class="productName" th:text="${product.getProductName()}"></div>-->
+<!--                        <div class="euro-sign">€</div>-->
+<!--                        <div class="productPrice" th:text="${product.getPriceDisplayString}"></div>-->
+<!--                    </div>-->
+<!--                </a>-->
+<!--                </li>-->
+<!--            </ul>-->
         </div>
     </div>
     <div class="receipt grid-orderPage-child">
