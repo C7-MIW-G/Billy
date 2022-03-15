@@ -216,27 +216,36 @@ function fillOrderList(data) {
     document.getElementById("receiptProductList").replaceChild(new_listBody, old_listBody);
 }
 
-function fillTotalPrice(data) {
-    fillDirectPayTotalPrice(data.totalOrderPrice);
 
+function fillTotalPrice(data) {
+    let totalPrice = data.totalOrderPrice;
+    fillReceiptTotalPrice(totalPrice);
+    fillAccountPayTotalPrice(totalPrice);
+    fillDirectPayTotalPrice(totalPrice);
+}
+function setupTotalPrice(price){
     let new_totalPrice = document.createElement('span');
     new_totalPrice.setAttribute('class', 'productPrice');
-    new_totalPrice.setAttribute('id', 'totalPrice');
 
-    let tPrice = document.createTextNode(data.totalOrderPrice);
+    let tPrice = document.createTextNode(price);
     new_totalPrice.appendChild(tPrice);
 
+    return new_totalPrice;
+}
+function fillReceiptTotalPrice(tPrice) {
+    let new_totalPrice = setupTotalPrice(tPrice);
+    new_totalPrice.setAttribute('id', 'totalPrice');
     document.getElementById("totalPrice").replaceWith(new_totalPrice);
 }
+function fillAccountPayTotalPrice(tPrice){
+    let new_totalPrice = setupTotalPrice(tPrice);
+    new_totalPrice.setAttribute('id', 'accountTotalPrice');
+    document.getElementById("accountTotalPrice").replaceWith(new_totalPrice);
 
-function fillDirectPayTotalPrice(price){
-    let new_totalPrice = document.createElement('span');
-    new_totalPrice.setAttribute('class', 'productPrice');
+}
+function fillDirectPayTotalPrice(tPrice){
+    let new_totalPrice = setupTotalPrice("Total Price € " + tPrice);
     new_totalPrice.setAttribute('id', 'directTotalPrice');
-
-    let tPrice = document.createTextNode("Total Price € " + price);
-    new_totalPrice.appendChild(tPrice);
-
     document.getElementById("directTotalPrice").replaceWith(new_totalPrice);
 }
 
