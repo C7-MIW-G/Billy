@@ -59,12 +59,14 @@
             </div>
         </div>
     </div>
+</div>
+
     <div id="directPayModal" class="modal">
         <div class="modalContainer">
             <div class="modalHeader">Direct pay</div>
             <p>Please confirm direct pay</p>
             <p>
-                <span class="productPrice" th:text="'Total Price: € ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+                <span id="directTotalPrice" class="productPrice" th:text="'Total Price: € ' + ${barOrder.getTotalPriceDisplayString()}"></span>
             </p>
             <div class="grid-modalButtons-parent">
                 <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
