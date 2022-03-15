@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
  * <p>
- * [omschrijving van code]
+ * Manages different error codes
  */
 
 @Controller
