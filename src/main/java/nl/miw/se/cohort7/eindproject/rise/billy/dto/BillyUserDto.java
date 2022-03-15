@@ -54,9 +54,11 @@ public class BillyUserDto {
     public String getUserRoleEmoticon() {
         switch (userRole) {
             case "ROLE_BAR MANAGER":
-                return new String(Character.toChars(0x1F3A9));
+                return new String(Character.toChars(0x039c));
             case "ROLE_BARTENDER":
-                return new String(Character.toChars(0x1F377));
+                return new String(Character.toChars(0x03a4));
+            case "ROLE_CUSTOMER":
+                return new String(Character.toChars(0x2800));
             default:
                 return "";
         }

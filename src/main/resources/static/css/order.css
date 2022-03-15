@@ -204,7 +204,7 @@
 
 .ageSign{
     opacity: 200%;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 /* The Modal (background) */
@@ -248,7 +248,6 @@
     cursor: pointer;
 }
 
-
 .clear-order-button {
     float: right;
     background-color: transparent;
@@ -261,3 +260,4 @@
     border-width: 1px;
     border-radius: 10px;
 }
+
