@@ -155,18 +155,29 @@
 }
 .account-pay-modal-container{
     width: auto;
+    max-width: 50rem;
     height: 75%;
-    margin: 5%;
+    margin: 5vh max(1%, auto);
 }
 .account-pay-modal-body{
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-gap: 10px;
+    grid-template-columns: 3fr max(35%, 12rem);
+    grid-gap: max(5%, 4rem);
     height: 100%;
 }
 .grid-user-account-pay{
     display: grid;
-    grid-template-columns: calc(40%) calc(25%) calc(21%) calc(10%);
+    grid-template-columns: calc(40%) calc(25%) calc(31%);
+}
+.flex-user-accountBalance{
+    display: flex;
+    flex-direction: row-reverse;
+    width: 100%;
+}
+.flex-user-accountBalance-first-child{
+    min-width: 4rem;
+    width: auto;
+    max-width: calc(100% - 0.5rem);
 }
 .account-pay-modal-body-select-customer{
     display: grid;

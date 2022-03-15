@@ -81,10 +81,9 @@
             <div class="account-pay-modal-body-select-customer">
                 <p>Please select a customer</p>
                 <div class="overviewList">
-                    <div class="overviewOrderHistoryList grid-modalAccountPayListHead-parent">
+                    <div class="overviewOrderHistoryList grid-user-account-pay">
                         <div class="grid-user-child-left fontBold"></div>
                         <div class="grid-user-child-left fontBold"></div>
-                        <div class="grid-user-child-left ">Credit</div>
                         <div class="grid-user-child-right ">Balance</div>
                     </div>
                     <ul class="unordered-list" th:each="userDto : ${allUsers}">
@@ -96,9 +95,10 @@
                                 <div class="grid-user-account-pay">
                                     <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
                                     <span th:class="${barOrder.canUserBuyTheProduct(userDto) ? 'invisible' : 'visible grid-user-child-left ageSign'}">&#128286;</span>
-                                    <span th:class="${userDto.canPayForOrder() ? 'displayNone' : 'visible grid-user-child-left'}">Credit insufficient</span>
-                                    <span th:class="${userDto.canPayForOrder() ? 'visible grid-user-child-left' : 'displayNone'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
-                                    <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
+                                    <div class="flex-user-accountBalance grid-user-child-right">
+                                        <span class="flex-user-accountBalance-first-child" th:text="${userDto.getAccountBalance()}"></span>
+                                        <span>€</span>
+                                    </div>
                                 </div>
                             </a>
                         </li>
