@@ -15,7 +15,7 @@
 .grid-orderPage-parent{
     display: grid;
     gap: 1rem;
-    grid-template-columns: 6fr 4fr;
+    grid-template-columns: 7fr 3fr;
 }
 
 .grid-orderHistory-parent{
@@ -23,6 +23,8 @@
 }
 
 .grid-orderPage-child{
+    display: grid;
+    grid-template-rows: 6% 84% 10%;
     margin: 5px;
 }
 .productAssortment{
@@ -145,7 +147,7 @@
 }
 .receipt-paymentSection{
     display: grid;
-    grid-template-columns: calc(33%) calc(33%) calc(33%);
+    grid-template-columns: calc(50%) calc(50%);
     margin-bottom: 5px;
 }
 .account-pay-modal-container{
@@ -240,4 +242,21 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.clear-order-button-container {
+
+}
+
+.clear-order-button {
+    float: right;
+    background-color: transparent;
+    border: none;
+}
+.clear-order-button:hover {
+    background-color: #d70000;
+    border-color:#888888;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
 }
