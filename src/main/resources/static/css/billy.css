@@ -43,6 +43,7 @@ html, body {
     border-style: outset;
     border-color: rgb(118, 118, 118);
     text-align: center;
+    padding: 6px 1px;
 
 }
 
@@ -333,13 +334,19 @@ button:hover {
     margin-right: 0.625rem;
 }
 
+.formButtonsGrid {
+    display: grid;
+    grid-template-columns: 15% 70%;
+    margin-top: 3%;
+}
+
 /*forms*/
 .error-inputField{
     font-size: 0.5rem;
     color: red;
 }
 .grid-form_returnButton-parent{
-    }
+}
 
 .returnButton{
     font-size: medium;
@@ -485,4 +492,25 @@ a:visited {
 .error-code-center {
     text-align: center !important;
     position: relative;
+}
+
+a.button {
+    min-height: 10mm;
+    background-color: lightsteelblue;
+    color: #4e4f4d;
+    border-radius: 10px;
+    box-shadow: #6e6e6e;
+    min-width: 85px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-width: 2px;
+    border-style: outset;
+    border-color: rgb(118, 118, 118) rgb(133, 133, 133);
+    border-image: initial;
+    padding: 7px;
+    text-align: center;
+}
+
+a.button:hover {
+    background-color: #A0B4CE;
 }
