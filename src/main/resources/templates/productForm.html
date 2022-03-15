@@ -50,7 +50,8 @@
                                 <button class="detailsButtons" type="submit" value="Save product">Save</button>
                             </div>
                             <div>
-                                <a class="button" th:href="@{/assortment/categories/{categoryId}(categoryId=${product.categoryDto.categoryId})}" th:text="Return"></a>
+                                <a th:class="${product.productId == null ? 'displayNone' : 'button'}" th:href="@{/assortment/products/details/{productId} (productId = ${product.productId})}" class="button">Return</a>
+                                <a th:class="${product.productId != null ? 'displayNone' : 'button'}" th:href="@{/assortment/categories/{categoryId} (categoryId = ${product.getCategoryDto().categoryId})}" class="button">Return</a>
                             </div>
                         </div>
                     </li>

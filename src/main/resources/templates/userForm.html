@@ -91,7 +91,8 @@
                                 <button class="detailsButtons" type="submit" value="Save user">Save</button>
                             </div>
                             <div>
-                                <a th:href="@{/users/details/{userId} (userId = ${billyUserDto.userId})}" class="button">Return</a>
+                                <a th:class="${billyUserDto.userId == null ? 'displayNone' : 'button'}" th:href="@{/users/details/{userId} (userId = ${billyUserDto.userId})}" class="button">Return</a>
+                                <a th:class="${billyUserDto.userId != null ? 'displayNone' : 'button'}" th:href="@{/users}" class="button">Return</a>
                             </div>
                         </div>
                     </li>
