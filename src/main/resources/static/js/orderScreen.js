@@ -221,7 +221,7 @@ function fillTotalPrice(data) {
     new_totalPrice.setAttribute('class', 'productPrice');
     new_totalPrice.setAttribute('id', 'totalPrice');
 
-    let tPrice = document.createTextNode('€ ' + data.totalOrderPrice);
+    let tPrice = document.createTextNode(data.totalOrderPrice);
     new_totalPrice.appendChild(tPrice);
 
     document.getElementById("totalPrice").replaceWith(new_totalPrice);
