@@ -28,7 +28,7 @@
 
 .grid-receipt-parent {
     display: grid;
-    grid-template-rows: 5% 84% 11%;
+    grid-template-rows: 2.25rem calc(89% - 2.25rem) 11%;
 }
 .productAssortment{
     height: calc(95%);
