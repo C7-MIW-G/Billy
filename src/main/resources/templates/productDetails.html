@@ -46,7 +46,7 @@
                             <a th:href="@{/assortment/products/delete/{productId}(productId=${product.productId})}">
                                 <button class="detailsButtons">Delete</button>
                             </a>
-                            <button onclick="history.back()" class="detailsButtons">Return</button>
+                            <a th:href="@{/assortment/categories/{categoryId} (categoryId = ${product.getCategoryDto().categoryId})}" class="button">Return</a>
                         </div>
                     </div>
                 </li>

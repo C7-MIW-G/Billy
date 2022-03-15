@@ -29,6 +29,7 @@ html, body {
 }
 
 .buttonIsDisabled{
+    opacity: 50%;
 }
 
 .formReturnButton {
@@ -65,9 +66,24 @@ html, body {
     transition: opacity 300ms;
 }
 
-.billyTooltipRole{
+.billyTooltipCategory {
     opacity: 0;
 
+    width: auto;
+    text-align: center;
+    background-color: #ffa;
+    border: 1px solid #cc9;
+    padding: 3px;
+    font-size: 10px;
+    -moz-box-shadow: 2px 2px 11px #666;
+    -webkit-box-shadow: 2px 2px 11px #666;
+    position: absolute;
+    z-index: -1;
+    transition: opacity 300ms;
+}
+
+.billyTooltipRole{
+    opacity: 0;
     width: auto;
     text-align: center;
     background-color:#ffa;
@@ -78,15 +94,20 @@ html, body {
     -webkit-box-shadow: 2px 2px 11px #666;
     position: absolute;
     z-index: -1;
-
     transition: opacity 300ms;
-
 }
 
 .buttonIsDisabled:hover + .billyTooltipRole{
     opacity: 1;
     z-index: 1;
 }
+
+.buttonIsDisabled:hover + .billyTooltipCategory{
+    opacity: 1;
+    z-index: 1;
+}
+
+
 
 .buttonIsDisabled:hover + .billyTooltip{
     opacity: 1;
@@ -336,7 +357,7 @@ button:hover {
 
 .formButtonsGrid {
     display: grid;
-    grid-template-columns: 15% 70%;
+    grid-template-columns: 15% 15% 70%;
     margin-top: 3%;
 }
 

@@ -28,25 +28,23 @@
                     </li>
 
                     <li>
-                        <div class="item-buttons grid-buttons-parent">
+                        <div class="formButtonsGrid grid-buttons-parent">
                             <div class="grid-buttonRow-parent">
                                 <div>
                                     <input type="hidden" th:field="*{categoryId}">
                                     <button class="detailsButtons"  value="Save">Save</button>
                                 </div>
-                                <a class="" th:href="@{/assortment/categories}" th:text="Return">
-                                    <div>
-                                        <button class="formReturnButton">
-                                            Return
-                                        </button>
-                                    </div>
+                                <div>
+                                    <a th:href="@{/assortment/categories}" th:class="button">Return</a>
+                                </div>
+                                <div><a class="button" th:class="${productListSize > 0 ? 'buttonIsDisabled button' : 'button'}"
+                                        id="deleteButton"
+                                        th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
+                                        th:text="Delete">
                                 </a>
+                                    <span class="billyTooltipCategory">Please delete all products before deleting the category</span>
+                                </div>
                             </div>
-                            <div><a th:class="${productListSize > 0 ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
-                                    id="deleteButton"
-                                    th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
-                                    th:text="Delete">
-                            </a><span class="billyTooltip">Please delete all product before deleting the Category</span></div>
                         </div>
                     </li>
                 </ul>
