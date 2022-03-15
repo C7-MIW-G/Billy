@@ -81,6 +81,10 @@ public class BillyUserDto {
         return String.format("%.2f", accountBalance);
     }
 
+    public String getAccountBalanceEuroString() {
+        return formatAsEuro(accountBalance);
+    }
+
     public String getRemainingCreditDisplayString(){
         return formatAsEuro(accountBalance - maxCredit);
     }
@@ -90,7 +94,7 @@ public class BillyUserDto {
     }
 
     private String formatAsEuro(double amount) {
-        return String.format("%s\u20ac %.2f", amount < 0 ? " -" : " ", Math.abs(amount));
+        return String.format("\u20ac %s%.2f", amount < 0 ? " -" : " ", Math.abs(amount));
     }
 
     public boolean canPayForOrder() {
