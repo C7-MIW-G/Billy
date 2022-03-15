@@ -371,8 +371,8 @@ button:hover {
     line-height: 1.5;
     border-style: solid;
     border-width: thin;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
 
 .returnButtonOrderHistoryDetails{
     margin-top: calc(10%);
@@ -507,7 +507,7 @@ a.button {
     border-style: outset;
     border-color: rgb(118, 118, 118) rgb(133, 133, 133);
     border-image: initial;
-    padding: 7px;
+    padding: 6px 1px;
     text-align: center;
 }
 

@@ -31,6 +31,6 @@ public class BarOrderViewDto {
     private List<ProductViewDto> productList = new ArrayList<>();
 
     public String getTotalPriceDisplayString(double price){
-        return String.format("\u20ac %.2f", price);
+        return String.format("%.2f", price);
     }
 }

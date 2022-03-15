@@ -42,15 +42,15 @@
                         </div>
                     </li>
                     <li>
-                        <div class="item-buttons grid-buttons-parent">
+                        <div class="formButtonsGrid grid-buttons-parent">
                             <div>
                                 <input type="hidden" th:field="*{productId}">
                                 <input type="hidden" th:field="*{categoryDto.categoryId}">
                                 <input type="hidden" th:field="*{categoryDto.categoryName}">
-                                <input type="submit" value="Save product">
+                                <button class="detailsButtons" type="submit" value="Save product">Save</button>
                             </div>
                             <div>
-                                <a class="returnButton button_temporary" th:href="@{/assortment/categories/{categoryId}(categoryId=${product.categoryDto.categoryId})}" th:text="Return"></a>
+                                <a class="button" th:href="@{/assortment/categories/{categoryId}(categoryId=${product.categoryDto.categoryId})}" th:text="Return"></a>
                             </div>
                         </div>
                     </li>

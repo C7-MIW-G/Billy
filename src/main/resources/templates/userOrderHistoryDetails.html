@@ -17,7 +17,7 @@
                                 <div class="productAmount" th:text="${product.amount}"></div>
                                 <div class="grid-product-parent">
                                     <div class="productName" th:text="${product.productName}"></div>
-                                    <div></div>
+                                    <div class="euro-sign">€</div>
                                     <div class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(product.productPrice)}"></div>
                                 </div>
                             </div>
@@ -28,6 +28,7 @@
                  receipt-TotalPrice">
                     <div class="totalPrice">
                         <span class="totalPrice">Total Price:</span>
+                        <div class="euro-sign">€</div>
                         <span class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(barOrderDetail.totalPrice)}"></span>
                     </div>
                 </div>
