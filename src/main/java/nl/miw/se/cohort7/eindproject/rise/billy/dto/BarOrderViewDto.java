@@ -33,4 +33,8 @@ public class BarOrderViewDto {
     public String getTotalPriceDisplayString(double price){
         return String.format("%.2f", price);
     }
+
+    public String getTotalPriceEuroString(double price) {
+        return String.format("€ %.2f", price);
+    }
 }

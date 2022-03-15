@@ -78,7 +78,7 @@ public class BillyUserDto {
     }
 
     public String getAccountBalanceDisplayString() {
-        return formatAsEuro(accountBalance);
+        return String.format("%.2f", accountBalance);
     }
 
     public String getRemainingCreditDisplayString(){
