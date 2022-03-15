@@ -1,6 +1,6 @@
 .grid-user-parent{
     display: grid;
-    grid-template-columns: 10% 60% 30%;
+    grid-template-columns: 7% 58% 20% 15%;
 }
 
 .grid-completeOrderHistory-parent{
@@ -43,5 +43,9 @@
 
 .grid-user-grandparent {
     display: grid;
-    grid-template-columns: 92% 8%;
+    grid-template-columns: calc(100% - 2.375rem) 2.375rem;
+}
+
+.buttonAddCredit{
+    padding: 1px !important;
 }

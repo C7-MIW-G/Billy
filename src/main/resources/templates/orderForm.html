@@ -7,69 +7,69 @@
 <nav th:replace="fragments/general :: navbar"></nav>
 <div th:replace="fragments/general :: logoutModal"></div>
 
-<div class="orderContainer  grid-orderPage-parent">
-    <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
-        <div class="productCategoryList grid-productAssortment-child">
-            <ul class="unordered-list" th:each="category : ${allCategories}">
-                <li>
-                    <div th:onclick="fire_ajax_getProducts([[${category.categoryId}]])">
-                        <div class="productName" th:text="${category.categoryName}"></div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="productList grid-productAssortment-child" id="productList">
-            <ul></ul>
-        </div>
-    </div>
-    <div class="receipt grid-orderPage-child grid-receipt-parent">
-        <div class="clear-order-button-container">
-            <a th:href="@{/orders/directPay}">
-                <button class="clear-order-button">&#x2716</button>
-            </a>
-        </div>
-        <div class="receipt-child receipt-orderList">
-            <div class="receipt-ProductsList" id="receiptProductList">
+<div class="billyContainer">
+    <div class="orderContainer  grid-orderPage-parent">
+        <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
+            <div class="productCategoryList grid-productAssortment-child">
+                <ul class="unordered-list" th:each="category : ${allCategories}">
+                    <li>
+                        <div th:onclick="fire_ajax_getProducts([[${category.categoryId}]])">
+                            <div class="productName" th:text="${category.categoryName}"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="productList grid-productAssortment-child" id="productList">
                 <ul></ul>
             </div>
-            <div class="grid-footer-receipt receipt-TotalPrice">
-                <div class="totalPrice">
-                    <span>Total Price:</span>
-                    <div class="euro-sign">€</div>
-                    <span id="totalPrice" class="productPrice" th:text="${barOrder.getTotalPriceDisplayString()}"></span>
-                </div>
-            </div>
         </div>
-        <div class="receipt-child receipt-paymentSection">
-            <div class="paymentButtons">
-                <a id="directPayButton">
-                    <button class="paymentButtons">Direct pay</button>
+        <div class="receipt grid-orderPage-child grid-receipt-parent">
+            <div class="clear-order-button-container">
+                <a th:href="@{/orders/directPay}">
+                    <button class="clear-order-button">&#x2716</button>
                 </a>
             </div>
-            <div>
+            <div class="receipt-child receipt-orderList">
+                <div class="receipt-ProductsList" id="receiptProductList">
+                    <ul></ul>
+                </div>
+                <div class="grid-footer-receipt receipt-TotalPrice">
+                    <div class="totalPrice">
+                        <span>Total Price:</span>
+                        <div class="euro-sign">€</div>
+                        <span id="totalPrice" class="productPrice" th:text="${barOrder.getTotalPriceDisplayString()}"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="receipt-child receipt-paymentSection">
                 <div class="paymentButtons">
-                    <a id="accountPayButton">
-                        <button class="paymentButtons">Account pay</button>
+                    <a id="directPayButton">
+                        <button class="paymentButtons">Direct pay</button>
                     </a>
+                </div>
+                <div>
+                    <div class="paymentButtons">
+                        <a id="accountPayButton">
+                            <button class="paymentButtons">Account pay</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div id="directPayModal" class="modal">
-    <div class="modalContainer">
-        <div class="modalHeader">Direct pay</div>
-        <p>Please confirm direct pay</p>
-        <p>
-            <span id="directTotalPrice" class="productPrice" th:text="'Total Price € ' + ${barOrder.getTotalPriceDisplayString()}"></span>
-        </p>
-        <div class="grid-modalButtons-parent">
-            <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
-            <a id="modalDirectPay" class="modalButton buttonConfirm-warning" th:href="@{/orders/directPay}">Confirm</a>
+    <div id="directPayModal" class="modal">
+        <div class="modalContainer">
+            <div class="modalHeader">Direct pay</div>
+            <p>Please confirm direct pay</p>
+            <p>
+                <span class="productPrice" th:text="'Total Price: € ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+            </p>
+            <div class="grid-modalButtons-parent">
+                <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
+                <a id="modalDirectPay" class="modalButton buttonConfirm-warning" th:href="@{/orders/directPay}">Confirm</a>
+            </div>
         </div>
     </div>
-</div>
 
 
 <!--TODO barOrder for Modal-->

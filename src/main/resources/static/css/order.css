@@ -28,7 +28,7 @@
 
 .grid-receipt-parent {
     display: grid;
-    grid-template-rows: 5% 84% 11%;
+    grid-template-rows: 2.25rem calc(89% - 2.25rem) 11%;
 }
 .productAssortment{
     height: calc(95%);
@@ -99,8 +99,9 @@
     font-family: "Courier New", Verdana, sans-serif ;
     font-size: 1rem;
     line-height: 1.5;
-
+    height: calc(90%);
 }
+
 .receipt-ProductsList{
     height: calc(100% - 2rem);
     overflow: hidden;
@@ -214,7 +215,7 @@
 
 .ageSign{
     opacity: 200%;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 /* The Modal (background) */
@@ -258,7 +259,6 @@
     cursor: pointer;
 }
 
-
 .clear-order-button {
     float: right;
     background-color: transparent;
@@ -271,3 +271,4 @@
     border-width: 1px;
     border-radius: 10px;
 }
+

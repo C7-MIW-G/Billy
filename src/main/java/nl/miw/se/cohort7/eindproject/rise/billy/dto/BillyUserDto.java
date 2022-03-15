@@ -54,9 +54,11 @@ public class BillyUserDto {
     public String getUserRoleEmoticon() {
         switch (userRole) {
             case "ROLE_BAR MANAGER":
-                return new String(Character.toChars(0x1F3A9));
+                return new String(Character.toChars(0x039c));
             case "ROLE_BARTENDER":
-                return new String(Character.toChars(0x1F377));
+                return new String(Character.toChars(0x03a4));
+            case "ROLE_CUSTOMER":
+                return new String(Character.toChars(0x2800));
             default:
                 return "";
         }
@@ -76,6 +78,10 @@ public class BillyUserDto {
     }
 
     public String getAccountBalanceDisplayString() {
+        return String.format("%.2f", accountBalance);
+    }
+
+    public String getAccountBalanceEuroString() {
         return formatAsEuro(accountBalance);
     }
 
@@ -88,7 +94,7 @@ public class BillyUserDto {
     }
 
     private String formatAsEuro(double amount) {
-        return String.format("%s\u20ac %.2f", amount < 0 ? " -" : " ", Math.abs(amount));
+        return String.format("\u20ac %s%.2f", amount < 0 ? " -" : " ", Math.abs(amount));
     }
 
     public boolean canPayForOrder() {

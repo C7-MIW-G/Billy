@@ -41,7 +41,7 @@
         <li>
           <div class="grid-item-parent">
             <div>Account balance:</div>
-            <div th:text="${billyUserDto.getAccountBalanceDisplayString()}"></div>
+            <div th:text="${billyUserDto.getAccountBalanceEuroString()}"></div>
           </div>
         </li>
         <li>
@@ -73,7 +73,7 @@
                  sec:authorize="hasRole('ROLE_BAR MANAGER')">
                 <button class="detailsButtons">Password change</button>
               </a>
-              <button onclick="history.back()" class="detailsButtons">Return</button>
+              <a th:href="@{/users}" th:class="button">Return</a>
             </div>
           </div>
         </li>

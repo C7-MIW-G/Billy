@@ -22,7 +22,7 @@
                     <a th:href="@{/users/details/{userId}/orderHistory/{orderId}(orderId=${orders.orderId}, userId=${orders.getCustomerId()})}">
                         <div class="grid-completeOrderHistory-parent">
                             <div class="grid-user-child-left"   th:text="${#temporals.format(orders.getDateTime(), 'dd-MM-yyyy HH:mm')}"></div>
-                            <div class="grid-user-child-left" th:text="${orders.getTotalPriceDisplayString(orders.totalPrice)}"></div>
+                            <div class="grid-user-child-left" th:text="${orders.getTotalPriceEuroString(orders.totalPrice)}"></div>
                             <div class="grid-user-child-left" th:text="${orders.customerName}"></div>
                             <div class="grid-user-child-left"  th:text="${orders.bartenderName}"></div>
                         </div>
