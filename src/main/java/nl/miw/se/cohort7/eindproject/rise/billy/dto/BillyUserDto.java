@@ -3,6 +3,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 import lombok.Getter;
 import lombok.Setter;
 import nl.miw.se.cohort7.eindproject.rise.billy.customConstraintValidation.UniqueUsername;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
@@ -96,6 +97,10 @@ public class BillyUserDto {
 
     public void payOrder(double amount) {
         accountBalance -= amount;
+    }
+
+    public void calculateNewCredit(double addCredit){
+        accountBalance += addCredit;
     }
 
     public static int getAge(Date dateOfBirth) {

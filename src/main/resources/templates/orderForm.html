@@ -23,6 +23,11 @@
         </div>
     </div>
     <div class="receipt grid-orderPage-child">
+        <div class="clear-order-button-container">
+            <a th:href="@{/orders/directPay}">
+                <button class="clear-order-button">&#x2716</button>
+            </a>
+        </div>
         <div class="receipt-child receipt-orderList">
             <div class="receipt-ProductsList" id="receiptProductList">
                 <ul></ul>
@@ -33,31 +38,24 @@
                     <span id="totalPrice" class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
                 </div>
             </div>
-            <div class="receipt-child receipt-paymentSection">
+        </div>
+        <div class="receipt-child receipt-paymentSection">
+            <div class="paymentButtons">
+                <a id="directPayButton">
+                    <button class="paymentButtons">Direct pay</button>
+                </a>
+            </div>
+            <div>
                 <div class="paymentButtons">
-                    <a id="directPayButton">
-                        <button>Direct pay</button>
+                    <a id="accountPayButton">
+                        <button class="paymentButtons">Account pay</button>
                     </a>
-                </div>
-                <div>
-                    <div class="paymentButtons">
-                        <a id="accountPayButton">
-                            <button>Account pay</button>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <div class="paymentButtons">
-                        <a th:href="@{/orders/directPay}">
-                            <button>Clear order</button>
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="directPayModal" class="customModal">
+<div id="directPayModal" class="modal">
     <div class="modalContainer">
         <div class="modalHeader">Direct pay</div>
         <p>Please confirm direct pay</p>

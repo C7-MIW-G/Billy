@@ -78,10 +78,10 @@ public class OrderController {
     }
 
     @GetMapping("/orders/accountPay/{userId}")
-    protected String doAccountPay(@PathVariable("userId") Long userId) {
+    protected String doAccountPay(@PathVariable("userId") Long userId, BillyUserDto billyUserDto, ProductDto productDto) {
         // make payment
         BillyUserDto customer = userService.findByUserId(userId);
-        if (!customer.canPayForOrder()) {
+        if (!customer.canPayForOrder() || (productDto.isProductOfAge() && !billyUserDto.isUserEighteenPlus())) {
             return "redirect:/orders/new";
         }
         customer.payOrder(BarOrderDto.activeOrder.calculateTotalOrderPrice());
