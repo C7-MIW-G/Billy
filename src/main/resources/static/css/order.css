@@ -28,7 +28,7 @@
 
 .grid-receipt-parent {
     display: grid;
-    grid-template-rows: 2.25rem calc(89% - 2.25rem) 11%;
+    grid-template-rows: 10mm calc(89% - 10mm) 11%;
 }
 .productAssortment{
     height: calc(95%);
@@ -36,10 +36,10 @@
 .grid-productAssortment-parent{
     display: grid;
     grid-template-columns: 2fr 5fr;
+    gap: 20px;
     overflow: hidden;
 }
 .grid-productAssortment-child{
-    height: calc(100%);
 }
 
 /*category*/
@@ -54,17 +54,21 @@
 
     overflow: hidden;
     overflow-y: scroll;
+
+    border: 2px solid dimgrey;
+    background-color: #fcfcfc;
 }
-.productList ul:first-child{
-    border-top: 1px solid black;
-}
+
 .productList ul li{
     border-bottom: 1px solid black;
 }
 .productList ul li:hover,
 .productList ul li a:focus{
     background-color: #e0e0e0;
+    cursor: pointer;
 }
+
+.category-list ul li a,
 .productList ul li a{
     display: block;
     text-align: center;
@@ -74,24 +78,29 @@
     font-weight: bold;
 }
 
+.category-list {
+    border: 2px solid dimgrey;
+    background-color: #e0e0e0;
+}
+
+.category-list-item:hover {
+    background-color: lightsteelblue;
+}
+
+
+
 /*receipt*/
 .receipt{
     height: 95%;
     overflow: hidden;
-    background-color: white;
 }
-.receipt-child{
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    width: calc(100% - 10px);
-}
+
 .receipt-orderList{
-    margin-top: 5px;
     height: calc(87%);
     font-family: "Courier New", Verdana, sans-serif ;
     font-size: 1rem;
     line-height: 1.5;
+    background: #fffdd0;
 }
 
 .receipt-orderHistory{
@@ -106,8 +115,8 @@
     overflow: hidden;
     overflow-y: auto;
     font-family: "Courier New", Verdana, sans-serif ;
-    background-color: white;
 }
+
 .receipt-ProductsList ul li a{
     display: block;
     text-align: center;
@@ -121,6 +130,10 @@
     grid-template-columns: 2em calc(100% - 2em);
     gap: 0.5rem;
 }
+.grid-orderList-parent:hover{
+    cursor: pointer;
+}
+
 .productAmount{
     text-align: right;
 }
@@ -146,7 +159,6 @@
 
 .grid-footer-receipt{
     display: grid;
-    background-color: white;
 }
 .receipt-paymentSection{
     display: grid;
@@ -245,6 +257,10 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.clear-order-button-container {
+    background-color: #fffdd0;
 }
 
 
