@@ -24,8 +24,6 @@ public class BarOrderDto {
     
     private BillyUserDto customer;
 
-    private List<ProductDto> productList = new ArrayList<>();
-
     private Map<ProductDto, Integer> productMap = new HashMap<>();
 
     private Map<ProductDto, Double> discountMap = new HashMap<>();

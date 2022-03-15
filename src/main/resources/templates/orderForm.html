@@ -7,41 +7,38 @@
 <nav th:replace="fragments/general :: navbar"></nav>
 <div th:replace="fragments/general :: logoutModal"></div>
 
-<div class="orderContainer  grid-orderPage-parent">
-    <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
-        <div class="productCategoryList grid-productAssortment-child">
-            <ul class="unordered-list" th:each="category : ${allCategories}">
-                <li>
-                    <div th:onclick="fire_ajax_getProducts([[${category.categoryId}]])">
-                        <div class="productName" th:text="${category.categoryName}"></div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="productList grid-productAssortment-child" id="productList">
-            <ul></ul>
-        </div>
-    </div>
-    <div class="receipt grid-orderPage-child">
-        <div class="receipt-child receipt-orderList">
-            <div class="receipt-ProductsList">
-                <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
-                    <li><a th:href="@{/orders/remove/{productId}(productId=${product.productId})}">
-                        <div class="grid-orderList-parent">
-                            <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
-                            <div class="grid-product-parent">
-                                <div class="productName" th:text="${product.productName}"></div>
-                                <div class="euro-sign">€</div>
-                                <div class="productPrice" th:text="${barOrder.getSubTotalDisplayString(product)}"></div>
-                            </div>
+<div class="billyContainer">
+    <div class="orderContainer  grid-orderPage-parent">
+        <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
+            <div class="productCategoryList grid-productAssortment-child">
+                <ul class="unordered-list" th:each="category : ${allCategories}">
+                    <li>
+                        <div th:onclick="fire_ajax_getProducts([[${category.categoryId}]])">
+                            <div class="productName" th:text="${category.categoryName}"></div>
                         </div>
-                    </a></li>
+                    </li>
                 </ul>
             </div>
-            <div class="grid-footer-receipt receipt-TotalPrice">
-                <div class="totalPrice">
-                    <span class="totalPrice">Total Price:</span>
-                    <span class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+            <div class="productList grid-productAssortment-child" id="productList">
+                <ul></ul>
+            </div>
+        </div>
+        <div class="receipt grid-orderPage-child grid-receipt-parent">
+            <div class="clear-order-button-container">
+                <a th:href="@{/orders/directPay}">
+                    <button class="clear-order-button">&#x2716</button>
+                </a>
+            </div>
+            <div class="receipt-child receipt-orderList">
+                <div class="receipt-ProductsList" id="receiptProductList">
+                    <ul></ul>
+                </div>
+                <div class="grid-footer-receipt receipt-TotalPrice">
+                    <div class="totalPrice">
+                        <span>Total Price:</span>
+                        <div class="euro-sign">€</div>
+                        <span id="totalPrice" class="productPrice" th:text="${barOrder.getTotalPriceDisplayString()}"></span>
+                    </div>
                 </div>
             </div>
             <div class="receipt-child receipt-paymentSection">
@@ -57,82 +54,84 @@
                         </a>
                     </div>
                 </div>
-                <div>
-                    <div class="paymentButtons">
-                        <a th:href="@{/orders/directPay}">
-                            <button class="paymentButtons">Clear order</button>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
-</div>
-<div id="directPayModal" class="modal">
-    <div class="modalContainer">
-        <div class="modalHeader">Direct pay</div>
-        <p>Please confirm direct pay</p>
-        <p>
-            <span class="totalPrice">Total Price:</span>
-            <span class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
-        </p>
-        <div class="grid-modalButtons-parent">
-            <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
-            <a id="modalDirectPay" class="modalButton buttonConfirm-warning" th:href="@{/orders/directPay}">Confirm</a>
+    <div id="directPayModal" class="modal">
+        <div class="modalContainer">
+            <div class="modalHeader">Direct pay</div>
+            <p>Please confirm direct pay</p>
+            <p>
+                <span class="productPrice" th:text="'Total Price: € ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+            </p>
+            <div class="grid-modalButtons-parent">
+                <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
+                <a id="modalDirectPay" class="modalButton buttonConfirm-warning" th:href="@{/orders/directPay}">Confirm</a>
+            </div>
         </div>
     </div>
-</div>
-<div id="accountPayModal" class="customModal">
-    <div class="modalContainer account-pay-modal-container">
-        <div class="modalHeader"></div>
-        <div class="account-pay-modal-body">
-            <div class="account-pay-modal-body-select-customer">
-                <p>Please select a customer</p>
-                <div class="overviewList">
-                    <div class="overviewOrderHistoryList grid-modalAccountPayListHead-parent">
-                        <div class="grid-user-child-left fontBold"></div>
-                        <div class="grid-user-child-left fontBold"></div>
-                        <div class="grid-user-child-left ">Credit</div>
-                        <div class="grid-user-child-right ">Balance</div>
-                    </div>
-                    <ul class="unordered-list" th:each="userDto : ${allUsers}">
-                        <li>
-                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() && barOrder.canUserBuyTheProduct(userDto) ? 'confirm-account-pay' : 'isDisabled'}">
-                                <div class="grid-user-account-pay">
-                                    <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
-                                    <span th:class="${barOrder.canUserBuyTheProduct(userDto) ? 'invisible' : 'visible grid-user-child-left ageSign'}">&#128286;</span>
-                                    <span th:class="${userDto.canPayForOrder() ? 'displayNone' : 'visible grid-user-child-left'}">Credit insufficient</span>
-                                    <span th:class="${userDto.canPayForOrder() ? 'visible grid-user-child-left' : 'displayNone'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
-                                    <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="account-pay-modal-body-order-info">
-                <div class="receipt-ProductsList receipt">
-                    <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
-                        <li>
-                            <div class="grid-orderList-parent">
-                                <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
-                                <div class="grid-product-parent">
-                                    <div class="productName" th:text="${product.productName}"></div>
-                                    <div class="euro-sign">€</div>
-                                    <div class="productPrice" th:text="${barOrder.getSubTotalDisplayString(product)}"></div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="grid-footer-receipt receipt-TotalPrice">
-                    <div class="totalPrice">
-                        <span class="totalPrice">Total Price:</span>
-                        <span class="euro-sign">€</span>
-                        <span class="productPrice" th:text="${barOrder.getTotalPriceDisplayString()}"></span>
+
+
+    <!--TODO barOrder for Modal-->
+
+    <div id="accountPayModal" class="customModal">
+        <div class="modalContainer account-pay-modal-container">
+            <div class="modalHeader"></div>
+            <div class="account-pay-modal-body">
+                <div class="account-pay-modal-body-select-customer">
+                    <p>Please select a customer</p>
+                    <div class="overviewList">
+                        <div class="overviewOrderHistoryList grid-modalAccountPayListHead-parent">
+                            <div class="grid-user-child-left fontBold"></div>
+                            <div class="grid-user-child-left fontBold"></div>
+                            <div class="grid-user-child-left ">Credit</div>
+                            <div class="grid-user-child-right ">Balance</div>
+                        </div>
+                        <ul class="unordered-list" th:each="userDto : ${allUsers}">
+                            <li>
+
+    <!--                            TODO barOrder-->
+
+                                <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() && barOrder.canUserBuyTheProduct(userDto) ? 'confirm-account-pay' : 'isDisabled'}">
+                                    <div class="grid-user-account-pay">
+                                        <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
+                                        <span th:class="${barOrder.canUserBuyTheProduct(userDto) ? 'invisible' : 'visible grid-user-child-left ageSign'}">&#128286;</span>
+                                        <span th:class="${userDto.canPayForOrder() ? 'displayNone' : 'visible grid-user-child-left'}">Credit insufficient</span>
+                                        <span th:class="${userDto.canPayForOrder() ? 'visible grid-user-child-left' : 'displayNone'}" th:text="${userDto.getRemainingCreditDisplayString()}"></span>
+                                        <span class="grid-user-child-left" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
+                <div class="account-pay-modal-body-order-info">
+                    <div class="receipt-ProductsList receipt">
+
+    <!--                    TODO barOrder-->
+
+                        <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
+                            <li>
+                                <div class="grid-orderList-parent">
+                                    <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
+                                    <div class="grid-product-parent">
+                                        <div class="productName" th:text="${product.productName}"></div>
+                                        <div class="euro-sign">€</div>
+                                        <div class="productPrice" th:text="${barOrder.getSubTotalDisplayString(product)}"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="grid-footer-receipt receipt-TotalPrice">
+                        <div class="totalPrice">
+                            <span>Total Price:</span>
+                            <span class="euro-sign">€</span>
+                            <span class="productPrice" th:text="${barOrder.getTotalPriceDisplayString()}"></span>
+                        </div>
+                    </div>
+                    <div id="modalCancelAccountPayment" class="modalButton buttonCancel">Cancel</div>
+                </div>
             </div>
         </div>
     </div>
