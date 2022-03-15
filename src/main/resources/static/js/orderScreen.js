@@ -276,3 +276,8 @@ function fillDirectPayTotalPrice(tPrice){
 }
 
 
+// for displaying category list
+$('.category-list').on('click', 'li', function(){
+    $('.category-list-item').not(this).css('background', 'transparent');
+    $(this).css('background','#b0c4de');
+});

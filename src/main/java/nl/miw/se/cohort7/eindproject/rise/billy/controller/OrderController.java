@@ -71,7 +71,7 @@ public class OrderController {
         return "redirect:/orders/new";
     }
 
-    @GetMapping("/orders/directPay")
+    @GetMapping({"/orders/directPay","/orders/clearOrder"})
     protected String doDirectPay() {
         BarOrderDto.clearActiveOrder();
         return "redirect:/orders/new";

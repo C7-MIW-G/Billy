@@ -10,12 +10,14 @@
 <div class="billyContainer">
     <div class="orderContainer  grid-orderPage-parent">
         <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
-            <div class="productCategoryList grid-productAssortment-child">
+            <div id="category-list" class="category-list grid-productAssortment-child">
                 <ul class="unordered-list" th:each="category : ${allCategories}">
-                    <li>
-                        <div th:onclick="fire_ajax_getProducts([[${category.categoryId}]])">
-                            <div class="productName" th:text="${category.categoryName}"></div>
-                        </div>
+                    <li class="category-list-item">
+                        <a th:onclick="fire_ajax_getProducts([[${category.categoryId}]])">
+                            <div>
+                                <div class="productName" th:text="${category.categoryName}"></div>
+                            </div>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -25,7 +27,7 @@
         </div>
         <div class="receipt grid-orderPage-child grid-receipt-parent">
             <div class="clear-order-button-container">
-                <a th:href="@{/orders/directPay}">
+                <a th:href="@{/orders/clearOrder}">
                     <button class="clear-order-button">&#x2716</button>
                 </a>
             </div>
