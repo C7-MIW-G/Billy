@@ -217,6 +217,8 @@ function fillOrderList(data) {
 }
 
 function fillTotalPrice(data) {
+    fillDirectPayTotalPrice(data.totalOrderPrice);
+
     let new_totalPrice = document.createElement('span');
     new_totalPrice.setAttribute('class', 'productPrice');
     new_totalPrice.setAttribute('id', 'totalPrice');
@@ -225,6 +227,17 @@ function fillTotalPrice(data) {
     new_totalPrice.appendChild(tPrice);
 
     document.getElementById("totalPrice").replaceWith(new_totalPrice);
+}
+
+function fillDirectPayTotalPrice(price){
+    let new_totalPrice = document.createElement('span');
+    new_totalPrice.setAttribute('class', 'productPrice');
+    new_totalPrice.setAttribute('id', 'directTotalPrice');
+
+    let tPrice = document.createTextNode("Total Price € " + price);
+    new_totalPrice.appendChild(tPrice);
+
+    document.getElementById("directTotalPrice").replaceWith(new_totalPrice);
 }
 
 
