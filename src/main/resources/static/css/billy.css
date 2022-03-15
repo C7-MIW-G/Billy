@@ -9,7 +9,7 @@ html, body {
 .grid-buttonRow-parent{
     display: flex;
     flex-direction: row;
-    column-gap: 5px;
+    column-gap: 15px;
 }
 .button_temporary {
     /*font-family: Arial;*/
@@ -27,9 +27,8 @@ html, body {
     padding: 1px 5px 3.5px;
     width: auto;
 }
+
 .buttonIsDisabled{
-    color: #6e6e6e !important;
-    background-color: #bebebe;
 }
 
 .billyTooltip{
@@ -43,15 +42,69 @@ html, body {
     font-size:10px;
     -moz-box-shadow: 2px 2px 11px #666;
     -webkit-box-shadow: 2px 2px 11px #666;
+    position: absolute;
+    z-index: -1;
+    margin-left: 20%;
 
+    transition: opacity 300ms;
+}
+
+.billyTooltipRole{
+    opacity: 0;
+
+    width: auto;
+    text-align: center;
+    background-color:#ffa;
+    border:1px solid #cc9;
+    padding:3px;
+    font-size:10px;
+    -moz-box-shadow: 2px 2px 11px #666;
+    -webkit-box-shadow: 2px 2px 11px #666;
     position: absolute;
     z-index: -1;
 
     transition: opacity 300ms;
+
 }
+
+.buttonIsDisabled:hover + .billyTooltipRole{
+    opacity: 1;
+    z-index: 1;
+}
+
 .buttonIsDisabled:hover + .billyTooltip{
     opacity: 1;
     z-index: 1;
+}
+
+button{
+    min-height: 10mm;
+    min-width: 10mm;
+    background-color: lightsteelblue;
+    color: #4e4f4d;
+    border-radius: 10px;
+    box-shadow: #6e6e6e;
+    cursor: pointer;
+    font-size: x-large;
+}
+
+button:focus{
+    background-color: #A0B4CE
+}
+
+.detailsButtons{
+    font-size: medium;
+    min-width: 85px;
+}
+
+.detailsButtonsOverview{
+    font-size: medium;
+    min-width: 85px;
+    margin-left: 20%;
+}
+
+button:hover {
+    background-color: #A0B4CE;
 }
 
 
@@ -79,7 +132,7 @@ html, body {
     float: left;
 }
 .navTop div li a{
-    color: #4e4f4d;
+    color: #4e4f4d ;
 }
 .navTop-items{
     display: block;
@@ -93,6 +146,7 @@ html, body {
 .navTop-right{
     border-left: 2px solid #A0B4CE;
 }
+
 .navTop div li a:hover,
 .navTop div li a:focus{
     background-color: #A0B4CE;
@@ -152,7 +206,6 @@ html, body {
     padding-bottom: 0.125rem;
 }
 .overviewListHead{
-    padding: 0.75rem 0.75rem;
     border-bottom: 1px solid dimgrey;
 }
 .overviewOrderHistoryList{
@@ -181,11 +234,20 @@ html, body {
 }
 
 .new-button{
-    margin-left: auto;
+    margin-left: 65%;
+    margin-top: 3%;
+
 }
 
 .paymentButtons{
-    margin-left: 25px;
+    text-align: center;
+    font-size: larger;
+    height: 4rem;
+    width: calc(90%);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: normal;
+
 }
 
 .balance-button {
@@ -239,7 +301,7 @@ html, body {
 }
 .grid-buttons-parent{
     display: grid;
-    grid-template-columns: calc(100% - 3.5rem) 3.5rem;
+    grid-template-columns: 100%;
 }
 .item-buttons{
     padding-top: 0.5rem;
@@ -252,11 +314,10 @@ html, body {
     color: red;
 }
 .grid-form_returnButton-parent{
-    display: grid;
-    grid-template-columns: calc(100% - 3.875rem) 3.25rem;
-}
+    }
+
 .returnButton{
-    margin-top: auto;
+    font-size: medium;
 }
 
 .returnButtonOrderHistory{
@@ -264,7 +325,7 @@ html, body {
 }
 
 .returnButtonOrderHistoryDetails{
-    margin-top: calc(20%);
+    margin-top: calc(10%);
 
 }
 

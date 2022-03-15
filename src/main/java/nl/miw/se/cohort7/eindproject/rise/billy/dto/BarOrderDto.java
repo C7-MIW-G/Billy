@@ -26,34 +26,34 @@ public class BarOrderDto {
 
     private List<ProductDto> productList = new ArrayList<>();
 
-    private Map<Product, Integer> productMap = new HashMap<Product, Integer>();
+    private Map<ProductDto, Integer> productMap = new HashMap<>();
 
     private Map<ProductDto, Double> discountMap = new HashMap<>();
 
 
     public double calculateTotalOrderPrice(){
         double totalOrderPrice = DEFAULT_ORDER_PRICE;
-        for (Product product : productMap.keySet()) {
+        for (ProductDto product : productMap.keySet()) {
             totalOrderPrice += getSubTotal(product);
         }
         return totalOrderPrice;
     }
 
     public boolean canUserBuyTheProduct(BillyUserDto billyUserDto) {
-        for (Product product : productMap.keySet()) {
+        for (ProductDto product : productMap.keySet()) {
             if (product.isProductOfAge() && !billyUserDto.isUserEighteenPlus())
                 return false;
         }
         return true;
     }
 
-    public double getSubTotal(Product product) {
+    public double getSubTotal(ProductDto product) {
         int amount = activeOrder.productMap.get(product);
 
         return amount * product.getProductPrice();
     }
 
-    public String getSubTotalDisplayString(Product product){
+    public String getSubTotalDisplayString(ProductDto product){
         double subTotal = getSubTotal(product);
         return String.format("%.2f", subTotal);
     }
@@ -66,7 +66,7 @@ public class BarOrderDto {
         activeOrder = new BarOrderDto();
     }
 
-    public static void addProductToOrder(Product product){
+    public static void addProductToOrder(ProductDto product){
         if (activeOrder.productMap.containsKey(product)) {
             activeOrder.productMap.put(product, activeOrder.productMap.get(product) + 1);
         } else {
@@ -74,7 +74,7 @@ public class BarOrderDto {
         }
     }
 
-    public static void removeProductFromOrder(Product product) {
+    public static void removeProductFromOrder(ProductDto product) {
         if (activeOrder.productMap.get(product) == 1) {
             activeOrder.productMap.remove(product);
         } else {

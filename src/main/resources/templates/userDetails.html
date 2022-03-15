@@ -60,19 +60,21 @@
           <div class="item-buttons grid-buttons-parent">
             <div class="grid-buttonRow-parent">
               <a th:href="@{/users/details/{userId}/orderHistory(userId=${billyUserDto.userId})}">
-                <button>Order History</button>
+                <button class="detailsButtons">Order history</button>
               </a>
               <a th:href="@{/users/update/{userId}(userId=${billyUserDto.userId})}"
-                 sec:authorize="hasRole('ROLE_BAR MANAGER')"><button>Edit</button></a>
-              <div><a th:class="${billyUserId == #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
-                      id="deleteButton"
-                      sec:authorize="hasRole('ROLE_BAR MANAGER')"
-                      th:text="Delete"></a><span class="billyTooltip">Users cannot delete themselves</span></div>
+                 sec:authorize="hasRole('ROLE_BAR MANAGER')"><button class="detailsButtons">Edit</button>
+              </a>
+              <a th:class="${billyUserId == #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled ' : ''}" id="deleteButton" sec:authorize="hasRole('ROLE_BAR MANAGER')">
+                <button class="detailsButtons">Delete</button>
+              </a>
+              <span class="billyTooltip">Users cannot delete themselves</span>
               <a th:href="@{/users/changePassword/{billyUserId}(billyUserId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')">
-                <button>Password change</button></a>
+                <button class="detailsButtons">Password change</button>
+              </a>
+              <button onclick="history.back()" class="detailsButtons">Return</button>
             </div>
-            <button onclick="history.back()">Return</button>
           </div>
         </li>
       </ul>

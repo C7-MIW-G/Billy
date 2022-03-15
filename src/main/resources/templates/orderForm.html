@@ -9,19 +9,17 @@
 
 <div class="orderContainer  grid-orderPage-parent">
     <div class="productAssortment grid-orderPage-child grid-productAssortment-parent">
-        <div class="productCategoryList grid-productAssortment-child"></div>
-        <div class="productList grid-productAssortment-child">
-            <ul class="unordered-list" th:each="product : ${allProducts}">
+        <div class="productCategoryList grid-productAssortment-child">
+            <ul class="unordered-list" th:each="category : ${allCategories}">
                 <li>
-                    <a th:href="@{/orders/add/{productId}(productId=${product.productId})}">
-                        <div class="grid-product-parent">
-                            <div class="productName" th:text="${product.getProductName()}"></div>
-                            <div class="euro-sign">€</div>
-                            <div class="productPrice" th:text="${product.getPriceDisplayString()}"></div>
-                        </div>
-                    </a>
+                    <div th:onclick="fire_ajax_getProducts([[${category.categoryId}]])">
+                        <div class="productName" th:text="${category.categoryName}"></div>
+                    </div>
                 </li>
             </ul>
+        </div>
+        <div class="productList grid-productAssortment-child" id="productList">
+            <ul></ul>
         </div>
     </div>
     <div class="receipt grid-orderPage-child">
@@ -49,20 +47,20 @@
             <div class="receipt-child receipt-paymentSection">
                 <div class="paymentButtons">
                     <a id="directPayButton">
-                        <button>Direct pay</button>
+                        <button class="paymentButtons">Direct pay</button>
                     </a>
                 </div>
                 <div>
                     <div class="paymentButtons">
                         <a id="accountPayButton">
-                            <button>Account pay</button>
+                            <button class="paymentButtons">Account pay</button>
                         </a>
                     </div>
                 </div>
                 <div>
                     <div class="paymentButtons">
                         <a th:href="@{/orders/directPay}">
-                            <button>Clear order</button>
+                            <button class="paymentButtons">Clear order</button>
                         </a>
                     </div>
                 </div>
@@ -70,7 +68,7 @@
         </div>
     </div>
 </div>
-<div id="directPayModal" class="customModal">
+<div id="directPayModal" class="modal">
     <div class="modalContainer">
         <div class="modalHeader">Direct pay</div>
         <p>Please confirm direct pay</p>
@@ -139,7 +137,12 @@
         </div>
     </div>
 </div>
+
+<input type="hidden" id="header" th:value="${_csrf.getHeaderName()}">
+<input type="hidden" id="token" th:value="${_csrf.getToken()}">
+
 <div th:replace="fragments/general :: bottomScripts"></div>
+<script type="text/javascript" th:src="@{/js/orderScreen.js}"></script>
 <script type="text/javascript" th:src="@{/js/directPay.js}"></script>
 <script type="text/javascript" th:src="@{/js/accountPay.js}"></script>
 </body>

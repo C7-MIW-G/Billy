@@ -1,6 +1,6 @@
 .grid-user-parent{
     display: grid;
-    grid-template-columns: calc(100% - 50rem) 43rem 7rem;
+    grid-template-columns: 10% 60% 30%;
 }
 
 .grid-completeOrderHistory-parent{
@@ -39,4 +39,9 @@
 .RoleSign{
     opacity: 100%;
     font-size: 18px;
+}
+
+.grid-user-grandparent {
+    display: grid;
+    grid-template-columns: 92% 8%;
 }

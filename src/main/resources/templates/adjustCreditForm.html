@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Change password</title>
+</head>
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+<div th:replace="fragments/general :: logoutModal"></div>
+
+<div class="billyContainer">
+    <div class="itemView grid-itemView-parent">
+        <div class="itemViewListHead">
+            <div class="headStyle">Add credit</div>
+        </div>
+        <div class="itemViewList">
+            <form th:action="@{/users/update/balance/{userId}(userId=${billyuserDto.getUserId()})}" method="post" name="adjustCreditForm" id="adjustCreditForm" th:object="${addCredit}">
+                <ul class="unordered-list">
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label class="inputLabel" for="addCredit">amount:</label></div>
+                            <div><input type="number" id="addCredit" name="addCredit" th:field="*{value}"></div>
+                        </div>
+                        <div class="grid-item-parent">
+                            <div>Account balance:</div>
+                            <div th:text="${billyuserDto.getAccountBalanceDisplayString()}"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-buttons grid-buttons-parent">
+                            <div>
+                                <input type="submit" value="Add credit">
+                            </div>
+                            <button onclick="history.back()">Return</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>
+</html>

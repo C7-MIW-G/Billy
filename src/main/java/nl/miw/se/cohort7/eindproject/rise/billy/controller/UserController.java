@@ -1,7 +1,5 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderViewDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.PasswordDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.*;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
@@ -43,11 +41,32 @@ public class UserController {
         return "userOverview";
     }
 
-    @GetMapping("/balances")
-    @Secured("ROLE_BAR MANAGER")
-    protected String showUserBalanceOverview(Model model) {
-        model.addAttribute("allBillyUsers", userService.findAll());
-        return "userBalanceOverview";
+    @GetMapping("/update/balance/{billyUserId}")
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BAR_MANAGER"})
+    protected String updateUserBalance(@PathVariable("billyUserId") Long userId, Model model) {
+        BillyUserDto billyuserDto = userService.findByUserId(userId);
+        if (billyuserDto == null) {
+            return "redirect:/users";
+        }
+        AddCreditDto addCredit = new AddCreditDto();
+        model.addAttribute("billyuserDto", billyuserDto);
+        model.addAttribute("addCredit", addCredit);
+        return "adjustCreditForm";
+    }
+
+    @PostMapping("/update/balance/{billyUserId}")
+    protected String updateUserBalance(@Valid @ModelAttribute("addCredit") AddCreditDto addCredit, BindingResult result,
+    @PathVariable("billyUserId") Long userId){
+        if (result.hasErrors()) {
+            return "adjustCreditForm";
+        }
+        BillyUserDto billyUserDto = userService.findByUserId(userId);
+            if (billyUserDto != null){
+                billyUserDto.calculateNewCredit(addCredit.getValue());
+                userService.updateUser(billyUserDto);
+                System.out.println(addCredit);
+            }
+        return "redirect:/users";
     }
 
     @GetMapping("/new")
