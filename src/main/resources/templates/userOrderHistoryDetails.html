@@ -8,8 +8,8 @@
 <div th:replace="fragments/general :: logoutModal"></div>
 <div class="billyContainer">
     <div class="orderHistoryContainer  grid-orderHistoryDetails-parent">
-        <div class="receipt grid-orderPage-child">
-            <div class="receipt-child receipt-orderList">
+        <div class="receipt-orderHistory grid-orderPage-child">
+            <div class="receipt-child receipt-orderHistoryDetails">
                 <div class="receipt-ProductsList">
                     <ul class="unordered-listReceipt" th:each="product : ${barOrderDetail.productList}">
                         <li>
@@ -17,23 +17,26 @@
                                 <div class="productAmount" th:text="${product.amount}"></div>
                                 <div class="grid-product-parent">
                                     <div class="productName" th:text="${product.productName}"></div>
+                                    <div></div>
                                     <div class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(product.productPrice)}"></div>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="grid-footer-receipt receipt-TotalPrice">
+                <div class="
+                 receipt-TotalPrice">
                     <div class="totalPrice">
                         <span class="totalPrice">Total Price:</span>
                         <span class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(barOrderDetail.totalPrice)}"></span>
                     </div>
-                    <div class="detailsButtonsOverview"> <button onclick="history.back()">Return</button></div>
                 </div>
             </div>
+            <button class="returnButtonOrderHistory" onclick="history.back()">Return</button>
         </div>
+
     </div>
 </div>
-    <div th:replace="fragments/general :: bottomScripts"></div>
+<div th:replace="fragments/general :: bottomScripts"></div>
 </body>
 </html>

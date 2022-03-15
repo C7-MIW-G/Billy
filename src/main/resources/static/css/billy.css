@@ -31,6 +31,21 @@ html, body {
 .buttonIsDisabled{
 }
 
+.formReturnButton {
+    font-size: medium;
+    min-width: 85px;
+    background-color: lightsteelblue;
+    color: #4e4f4d !important;
+    border-radius: 10px;
+    box-shadow: #6e6e6e;
+    cursor: pointer;
+    border-width: 2px;
+    border-style: outset;
+    border-color: rgb(118, 118, 118);
+    text-align: center;
+
+}
+
 .billyTooltip{
     opacity: 0;
 
@@ -131,9 +146,11 @@ button:hover {
     width: auto;
     float: left;
 }
+
 .navTop div li a{
     color: #4e4f4d ;
 }
+
 .navTop-items{
     display: block;
     text-align: center;
@@ -321,12 +338,29 @@ button:hover {
 }
 
 .returnButtonOrderHistory{
-    margin-left: calc(20%);
+    font-size: medium;
+    margin-top: calc(5%);
+    margin-left: 5px;
 }
+
+.receiptHistoryDetails {
+    height: calc(90%);
+    max-height: calc(90%);
+    overflow: hidden;
+}
+.receipt-orderHistoryDetails {
+    margin-top: 5px;
+    height: calc(87%);
+    font-family: "Courier New", Verdana, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-style: solid;
+    border-width: thin;
+}
+
 
 .returnButtonOrderHistoryDetails{
     margin-top: calc(10%);
-
 }
 
 /*links*/

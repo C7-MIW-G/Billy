@@ -96,8 +96,9 @@
     font-family: "Courier New", Verdana, sans-serif ;
     font-size: 1rem;
     line-height: 1.5;
-
+    height: calc(90%);
 }
+
 .receipt-ProductsList{
     height: calc(100% - 2rem);
     overflow: hidden;

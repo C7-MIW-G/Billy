@@ -32,10 +32,15 @@
                             <div class="grid-buttonRow-parent">
                                 <div>
                                     <input type="hidden" th:field="*{categoryId}">
-                                    <button class="detailsButtons" type="submit" value="Save">Save</button>
+                                    <button class="detailsButtons"  value="Save">Save</button>
                                 </div>
-                                <button class="detailsButtons"
-                                        onclick="history.back()">Return</button>
+                                <a class="" th:href="@{/assortment/categories}" th:text="Return">
+                                    <div>
+                                        <button class="formReturnButton">
+                                            Return
+                                        </button>
+                                    </div>
+                                </a>
                             </div>
                             <div><a th:class="${productListSize > 0 ? 'buttonIsDisabled button_temporary' : 'button_temporary'}"
                                     id="deleteButton"
@@ -43,14 +48,11 @@
                                     th:text="Delete">
                             </a><span class="billyTooltip">Please delete all product before deleting the Category</span></div>
                         </div>
-                        <div>
-                        </div>
+                    </li>
+                </ul>
+            </form>
         </div>
-        </li>
-        </ul>
-        </form>
     </div>
-</div>
 </div>
 
 <div id="deleteModal" class="customModal">
