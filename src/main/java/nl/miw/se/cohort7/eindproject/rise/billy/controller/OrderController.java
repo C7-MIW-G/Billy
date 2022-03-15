@@ -46,7 +46,7 @@ public class OrderController {
         model.addAttribute("barOrder", BarOrderDto.activeOrder);
         model.addAttribute("allCategories", assortmentService.findAllCategories());
         model.addAttribute("allUsers", userService.findAll());
-        model.addAttribute("order", barOrderService.findAll());
+//        model.addAttribute("order", barOrderService.findAll());
         model.addAttribute("selectedUser", new BillyUserDto());
         return "orderForm";
     }
