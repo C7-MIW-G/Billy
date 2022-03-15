@@ -40,13 +40,14 @@ function fire_ajax_addProduct(id){
     $.ajax({
         type: "POST",
         contentType: "application/json",
-        url: "/a-api/addProduct/" + id,
+        url: "/o-api/addProduct/" + id,
         cache: false,
         timeout: 600000,
 
         success: function (resultData){
 
-            //TODO fillOrderList(resultData)
+            fillOrderList(resultData);
+            fillTotalPrice(resultData);
 
             console.log("SUCCESS : ", resultData);
             // $("#assortmentPage").removeClass('disabledPage');
@@ -60,6 +61,33 @@ function fire_ajax_addProduct(id){
     });
 }
 
+function fire_ajax_removeProduct(id){
+
+    // $("#assortmentPage").addClass('disabledPage');
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/o-api/removeProduct/" + id,
+        cache: false,
+        timeout: 600000,
+
+        success: function (resultData){
+
+            fillOrderList(resultData);
+            fillTotalPrice(resultData);
+
+            console.log("SUCCESS : ", resultData);
+            // $("#assortmentPage").removeClass('disabledPage');
+        },
+
+        error: function (e){
+
+            console.log("ERROR: ", e)
+            // $("#assortmentPage").removeClass('disabledPage');
+        }
+    });
+}
 
 function fillProductList(data){
     let new_listBody = document.createElement('ul');
@@ -84,12 +112,14 @@ function fillProductList(data){
         priceDiv.setAttribute('class', 'productPrice');
 
 
-        let desiredLink = "/orders/add/" + product.productId;
-        let aRef = document.createElement('a');
-        aRef.setAttribute('href', desiredLink)
-
         let outer = document.createElement('div');
         outer.setAttribute('class', 'grid-product-parent');
+
+
+        let desiredFunction = "fire_ajax_addProduct([[" + product.productId + "]])";
+        let aRef = document.createElement('a');
+        aRef.setAttribute('onclick', desiredFunction);
+
 
         let item = document.createElement('li');
 
@@ -121,8 +151,62 @@ function fillOrderList(data) {
 
     data.receiptList.forEach(receiptProduct => {
 
-        //TODO
+        let subPrice = document.createTextNode(receiptProduct.priceDisplay);
 
+        let priceDiv = document.createElement('div');
+        priceDiv.setAttribute('class', 'productPrice');
+
+
+        let eSign = document.createTextNode("€");
+
+        let euroDiv = document.createElement('div');
+        euroDiv.setAttribute('class', 'euro-sign');
+
+
+        let pName = document.createTextNode(receiptProduct.product.productName);
+
+        let nameDiv = document.createElement('div');
+        nameDiv.setAttribute('class', 'productName');
+
+
+        let productDiv = document.createElement('div');
+        productDiv.setAttribute('class', 'grid-product-parent');
+
+
+        let pAmount = document.createTextNode(receiptProduct.amount);
+
+        let amountDiv = document.createElement('div');
+        amountDiv.setAttribute('class', 'productAmount');
+
+
+        let outer = document.createElement('div');
+        outer.setAttribute('class', 'grid-orderList-parent');
+
+        let desiredFunction = "fire_ajax_removeProduct([[" + receiptProduct.product.productId + "]])";
+        let aRef = document.createElement('a');
+        aRef.setAttribute('onclick', desiredFunction);
+
+
+        let item = document.createElement('li');
+
+        nameDiv.appendChild(pName);
+        euroDiv.appendChild(eSign);
+        priceDiv.appendChild(subPrice);
+
+        productDiv.appendChild(nameDiv);
+        productDiv.appendChild(euroDiv);
+        productDiv.appendChild(priceDiv);
+
+        amountDiv.appendChild(pAmount);
+
+        outer.appendChild(amountDiv);
+        outer.appendChild(productDiv);
+
+        aRef.appendChild(outer);
+
+        item.appendChild(aRef);
+
+        new_listBody.appendChild(item);
     });
 
     let old_listBody = document.getElementById("receiptProductList").firstChild;
@@ -131,4 +215,16 @@ function fillOrderList(data) {
 
     document.getElementById("receiptProductList").replaceChild(new_listBody, old_listBody);
 }
+
+function fillTotalPrice(data) {
+    let new_totalPrice = document.createElement('span');
+    new_totalPrice.setAttribute('class', 'productPrice');
+    new_totalPrice.setAttribute('id', 'totalPrice');
+
+    let tPrice = document.createTextNode('€ ' + data.totalOrderPrice);
+    new_totalPrice.appendChild(tPrice);
+
+    document.getElementById("totalPrice").replaceWith(new_totalPrice);
+}
+
 

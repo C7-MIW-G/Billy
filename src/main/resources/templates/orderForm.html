@@ -25,23 +25,12 @@
     <div class="receipt grid-orderPage-child">
         <div class="receipt-child receipt-orderList">
             <div class="receipt-ProductsList" id="receiptProductList">
-                <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
-                    <li><a th:href="@{/orders/remove/{productId}(productId=${product.productId})}">
-                        <div class="grid-orderList-parent">
-                            <div class="productAmount" th:text="${barOrder.productMap.get(product)}"></div>
-                            <div class="grid-product-parent">
-                                <div class="productName" th:text="${product.productName}"></div>
-                                <div class="euro-sign">€</div>
-                                <div class="productPrice" th:text="${barOrder.getSubTotalDisplayString(product)}"></div>
-                            </div>
-                        </div>
-                    </a></li>
-                </ul>
+                <ul></ul>
             </div>
             <div class="grid-footer-receipt receipt-TotalPrice">
                 <div class="totalPrice">
                     <span class="totalPrice">Total Price:</span>
-                    <span class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+                    <span id="totalPrice" class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
                 </div>
             </div>
             <div class="receipt-child receipt-paymentSection">
