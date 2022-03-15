@@ -83,13 +83,16 @@
                         </div>
                     </li>
                     <li>
-                        <div class="item-buttons">
+                        <div class="formButtonsGrid">
                             <div>
                                 <input type="hidden" th:disabled="${billyUserId != #authentication.getPrincipal().getUserId()}" th:field="*{userRole}" th:value="${billyUserDto.getUserRole()}">
                                 <input type="hidden" th:field="*{userId}">
                                 <input type="hidden" th:field="*{accountBalance}">
                                 <button class="detailsButtons" type="submit" value="Save user">Save</button>
-                                <button onclick="history.back()" class="detailsButtons">Return</button>
+                            </div>
+                            <div>
+                                <a th:class="${billyUserDto.userId == null ? 'displayNone' : 'button'}" th:href="@{/users/details/{userId} (userId = ${billyUserDto.userId})}" class="button">Return</a>
+                                <a th:class="${billyUserDto.userId != null ? 'displayNone' : 'button'}" th:href="@{/users}" class="button">Return</a>
                             </div>
                         </div>
                     </li>

@@ -29,6 +29,23 @@ html, body {
 }
 
 .buttonIsDisabled{
+    opacity: 50%;
+}
+
+.formReturnButton {
+    font-size: medium;
+    min-width: 85px;
+    background-color: lightsteelblue;
+    color: #4e4f4d !important;
+    border-radius: 10px;
+    box-shadow: #6e6e6e;
+    cursor: pointer;
+    border-width: 2px;
+    border-style: outset;
+    border-color: rgb(118, 118, 118);
+    text-align: center;
+    padding: 6px 1px;
+
 }
 
 .billyTooltip{
@@ -49,9 +66,24 @@ html, body {
     transition: opacity 300ms;
 }
 
-.billyTooltipRole{
+.billyTooltipCategory {
     opacity: 0;
 
+    width: auto;
+    text-align: center;
+    background-color: #ffa;
+    border: 1px solid #cc9;
+    padding: 3px;
+    font-size: 10px;
+    -moz-box-shadow: 2px 2px 11px #666;
+    -webkit-box-shadow: 2px 2px 11px #666;
+    position: absolute;
+    z-index: -1;
+    transition: opacity 300ms;
+}
+
+.billyTooltipRole{
+    opacity: 0;
     width: auto;
     text-align: center;
     background-color:#ffa;
@@ -62,15 +94,20 @@ html, body {
     -webkit-box-shadow: 2px 2px 11px #666;
     position: absolute;
     z-index: -1;
-
     transition: opacity 300ms;
-
 }
 
 .buttonIsDisabled:hover + .billyTooltipRole{
     opacity: 1;
     z-index: 1;
 }
+
+.buttonIsDisabled:hover + .billyTooltipCategory{
+    opacity: 1;
+    z-index: 1;
+}
+
+
 
 .buttonIsDisabled:hover + .billyTooltip{
     opacity: 1;
@@ -131,9 +168,11 @@ button:hover {
     width: auto;
     float: left;
 }
+
 .navTop div li a{
     color: #4e4f4d ;
 }
+
 .navTop-items{
     display: block;
     text-align: center;
@@ -185,6 +224,11 @@ button:hover {
     display: grid;
     grid-template-rows: 2.875rem calc(100% - 2.875rem);
 }
+
+.grid-overview-noHistoryParent{
+    display: grid;
+    grid-template-rows: calc(10%) calc(80%) calc(10%);
+}
 .overviewList{
     max-height: calc(80vh - 10px - 2.875rem);
     overflow-y: auto;
@@ -211,6 +255,9 @@ button:hover {
 .overviewOrderHistoryList{
     padding: 0.75rem 0.75rem;
     border-bottom: 1px solid dimgrey;
+}
+
+.overviewListFooter{
 }
 .grid-overviewListHead-parent{
     display: grid;
@@ -308,25 +355,53 @@ button:hover {
     margin-right: 0.625rem;
 }
 
+.formButtonsGrid {
+    display: grid;
+    grid-template-columns: 15% 15% 70%;
+    margin-top: 3%;
+}
+
 /*forms*/
 .error-inputField{
     font-size: 0.5rem;
     color: red;
 }
 .grid-form_returnButton-parent{
-    }
+}
 
 .returnButton{
     font-size: medium;
 }
 
 .returnButtonOrderHistory{
-    margin-left: calc(20%);
+    font-size: medium;
+    margin-top: calc(5%);
+    margin-left: 5px;
+}
+
+.receiptHistoryDetails {
+    height: calc(90%);
+    max-height: calc(90%);
+    overflow: hidden;
+}
+.receipt-orderHistoryDetails {
+    margin-top: 5px;
+    height: calc(87%);
+    font-family: "Courier New", Verdana, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-style: solid;
+    border-width: thin;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .returnButtonOrderHistoryDetails{
     margin-top: calc(10%);
+}
 
+.returnButtonFooter{
+    font-size: medium;
+    margin: 1%;
 }
 
 /*links*/
@@ -432,9 +507,31 @@ a:visited {
     margin: max(5vh, 0.25rem) auto;
     color: black;
     font-family: "Courier new", Verdana, sans-serif;
+    text-align: center;
 }
 
 .error-code-center {
     text-align: center !important;
     position: relative;
+}
+
+a.button {
+    min-height: 10mm;
+    background-color: lightsteelblue;
+    color: #4e4f4d;
+    border-radius: 10px;
+    box-shadow: #6e6e6e;
+    min-width: 85px;
+    display: inline-block;
+    box-sizing: border-box;
+    border-width: 2px;
+    border-style: outset;
+    border-color: rgb(118, 118, 118) rgb(133, 133, 133);
+    border-image: initial;
+    padding: 6px 1px;
+    text-align: center;
+}
+
+a.button:hover {
+    background-color: #A0B4CE;
 }

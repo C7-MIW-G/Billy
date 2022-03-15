@@ -8,16 +8,22 @@
 <div th:replace="fragments/general :: logoutModal"></div>
 
 <div class="billyContainer">
-    <div class="overviewNoHistory grid-overview-parent">
+    <div class="overviewNoHistory grid-overview-noHistoryParent">
         <div class="overviewOrderHistoryList grid-overviewOrderHistoryListHead-parent">
             <div class="grid-user-child-left fontBold">Date and time</div>
             <div class="grid-user-child-left fontBold">Price</div>
             <div class="grid-user-child-left fontBold">Bartender</div>
         </div>
-        <h3 class="center-msg" th:text="${userDto.getName()} + ' has no orders yet!'"></h3>
+        <div>
+            <h3 class="center-msg" th:text="${userDto.getName()} + ' has no orders yet!'"></h3>
+        </div>
+
+        <div class="overviewListFooter">
+            <button class="returnButtonFooter" onclick="history.back()">Return</button>
+        </div>
     </div>
-    <button class="detailsButtonsOverview" onclick="history.back()">Return</button>
 </div>
+
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>

@@ -108,8 +108,9 @@
     font-family: "Courier New", Verdana, sans-serif ;
     font-size: 1rem;
     line-height: 1.5;
-
+    height: calc(90%);
 }
+
 .receipt-ProductsList{
     height: calc(100% - 2rem);
     overflow: hidden;
@@ -215,7 +216,7 @@
 
 .ageSign{
     opacity: 200%;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 /* The Modal (background) */
@@ -262,7 +263,6 @@
 .clear-order-button-container {
     background-color: #fffdd0;
 }
-
 
 .clear-order-button {
     float: right;

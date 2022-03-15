@@ -60,6 +60,10 @@ public class BarOrderDto {
         return String.format("%.2f", calculateTotalOrderPrice());
     }
 
+    public String getUserCreditDisplayString() {
+        return String.format("%.2f", customer.getAccountBalance());
+    }
+
     public static void openNewActiveOrder(){
         activeOrder = new BarOrderDto();
     }

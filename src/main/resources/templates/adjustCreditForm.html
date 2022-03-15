@@ -26,11 +26,11 @@
                         </div>
                     </li>
                     <li>
-                        <div class="item-buttons grid-buttons-parent">
+                        <div class="formButtonsGrid grid-buttons-parent">
                             <div>
-                                <input type="submit" value="Add credit">
+                                <button th:class="detailsButtons" type="submit" value="Add credit">Add credit</button>
                             </div>
-                            <button onclick="history.back()">Return</button>
+                            <a th:href="@{/users}" th:class="button">Return</a>
                         </div>
                     </li>
                 </ul>
