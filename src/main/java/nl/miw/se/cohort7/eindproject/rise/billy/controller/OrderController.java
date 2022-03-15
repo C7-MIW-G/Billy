@@ -46,7 +46,7 @@ public class OrderController {
         model.addAttribute("barOrder", BarOrderDto.activeOrder);
         model.addAttribute("allCategories", assortmentService.findAllCategories());
         model.addAttribute("allUsers", userService.findAll());
-        model.addAttribute("order", barOrderService.findAll());
+//        model.addAttribute("order", barOrderService.findAll());
         model.addAttribute("selectedUser", new BillyUserDto());
         return "orderForm";
     }
@@ -78,10 +78,10 @@ public class OrderController {
     }
 
     @GetMapping("/orders/accountPay/{userId}")
-    protected String doAccountPay(@PathVariable("userId") Long userId) {
+    protected String doAccountPay(@PathVariable("userId") Long userId, BillyUserDto billyUserDto, ProductDto productDto) {
         // make payment
         BillyUserDto customer = userService.findByUserId(userId);
-        if (!customer.canPayForOrder()) {
+        if (!customer.canPayForOrder() || (productDto.isProductOfAge() && !billyUserDto.isUserEighteenPlus())) {
             return "redirect:/orders/new";
         }
         customer.payOrder(BarOrderDto.activeOrder.calculateTotalOrderPrice());
