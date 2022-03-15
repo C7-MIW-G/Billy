@@ -198,7 +198,7 @@
 
 .ageSign{
     opacity: 200%;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 /* The Modal (background) */
@@ -241,3 +241,5 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+
