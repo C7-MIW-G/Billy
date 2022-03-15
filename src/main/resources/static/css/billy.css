@@ -236,7 +236,6 @@ button:hover {
 }
 
 .overviewListFooter{
-    height: calc(10%);
 }
 .grid-overviewListHead-parent{
     display: grid;

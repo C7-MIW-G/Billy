@@ -40,8 +40,10 @@
                 <li>
                     <div class="item-buttons grid-buttons-parent">
                         <div>
-                            <a th:href="@{/assortment/products/update/{productId}(productId=${product.productId})}"><button class="detailsButtons">Edit</button></a>
-                            <a>
+                            <a th:href="@{/assortment/products/update/{productId}(productId=${product.productId})}">
+                                <button class="detailsButtons">Edit</button>
+                            </a>
+                            <a th:href="@{/assortment/products/delete/{productId}(productId=${product.productId})}">
                                 <button class="detailsButtons">Delete</button>
                             </a>
                             <button onclick="history.back()" class="detailsButtons">Return</button>
