@@ -49,6 +49,8 @@ function fire_ajax_addProduct(id){
             fillOrderList(resultData);
             fillTotalPrice(resultData);
 
+            fillAccountOrderList(resultData);
+
             console.log("SUCCESS : ", resultData);
             // $("#assortmentPage").removeClass('disabledPage');
         },
@@ -76,6 +78,8 @@ function fire_ajax_removeProduct(id){
 
             fillOrderList(resultData);
             fillTotalPrice(resultData);
+
+            fillAccountOrderList(resultData);
 
             console.log("SUCCESS : ", resultData);
             // $("#assortmentPage").removeClass('disabledPage');
@@ -145,62 +149,18 @@ function fillProductList(data){
     document.getElementById("productList").replaceChild(new_listBody, old_listBody);
 }
 
-
 function fillOrderList(data) {
     let new_listBody = document.createElement('ul');
 
     data.receiptList.forEach(receiptProduct => {
 
-        let subPrice = document.createTextNode(receiptProduct.priceDisplay);
-
-        let priceDiv = document.createElement('div');
-        priceDiv.setAttribute('class', 'productPrice');
-
-
-        let eSign = document.createTextNode("€");
-
-        let euroDiv = document.createElement('div');
-        euroDiv.setAttribute('class', 'euro-sign');
-
-
-        let pName = document.createTextNode(receiptProduct.product.productName);
-
-        let nameDiv = document.createElement('div');
-        nameDiv.setAttribute('class', 'productName');
-
-
-        let productDiv = document.createElement('div');
-        productDiv.setAttribute('class', 'grid-product-parent');
-
-
-        let pAmount = document.createTextNode(receiptProduct.amount);
-
-        let amountDiv = document.createElement('div');
-        amountDiv.setAttribute('class', 'productAmount');
-
-
-        let outer = document.createElement('div');
-        outer.setAttribute('class', 'grid-orderList-parent');
+        let outer = fillProductOfOrder(receiptProduct);
 
         let desiredFunction = "fire_ajax_removeProduct([[" + receiptProduct.product.productId + "]])";
         let aRef = document.createElement('a');
         aRef.setAttribute('onclick', desiredFunction);
 
-
         let item = document.createElement('li');
-
-        nameDiv.appendChild(pName);
-        euroDiv.appendChild(eSign);
-        priceDiv.appendChild(subPrice);
-
-        productDiv.appendChild(nameDiv);
-        productDiv.appendChild(euroDiv);
-        productDiv.appendChild(priceDiv);
-
-        amountDiv.appendChild(pAmount);
-
-        outer.appendChild(amountDiv);
-        outer.appendChild(productDiv);
 
         aRef.appendChild(outer);
 
@@ -209,11 +169,77 @@ function fillOrderList(data) {
         new_listBody.appendChild(item);
     });
 
+    new_listBody.setAttribute('class', 'unordered-list');
+
     let old_listBody = document.getElementById("receiptProductList").firstChild;
+    document.getElementById("receiptProductList").replaceChild(new_listBody, old_listBody);
+}
+function fillAccountOrderList(data){
+    let new_listBody = document.createElement('ul');
+
+    data.receiptList.forEach(receiptProduct => {
+
+        let outer = fillProductOfOrder(receiptProduct);
+
+        let item = document.createElement('li');
+
+        item.appendChild(outer);
+
+        new_listBody.appendChild(item);
+    });
 
     new_listBody.setAttribute('class', 'unordered-list');
 
-    document.getElementById("receiptProductList").replaceChild(new_listBody, old_listBody);
+    let old_listBody = document.getElementById("accountPayReceipt").firstChild;
+    document.getElementById("accountPayReceipt").replaceChild(new_listBody, old_listBody);
+}
+
+function fillProductOfOrder(receiptProduct){
+    let subPrice = document.createTextNode(receiptProduct.priceDisplay);
+
+    let priceDiv = document.createElement('div');
+    priceDiv.setAttribute('class', 'productPrice');
+
+
+    let eSign = document.createTextNode("€");
+
+    let euroDiv = document.createElement('div');
+    euroDiv.setAttribute('class', 'euro-sign');
+
+
+    let pName = document.createTextNode(receiptProduct.product.productName);
+
+    let nameDiv = document.createElement('div');
+    nameDiv.setAttribute('class', 'productName');
+
+
+    let productDiv = document.createElement('div');
+    productDiv.setAttribute('class', 'grid-product-parent');
+
+
+    let pAmount = document.createTextNode(receiptProduct.amount);
+
+    let amountDiv = document.createElement('div');
+    amountDiv.setAttribute('class', 'productAmount');
+
+
+    let outer = document.createElement('div');
+    outer.setAttribute('class', 'grid-orderList-parent');
+
+    nameDiv.appendChild(pName);
+    euroDiv.appendChild(eSign);
+    priceDiv.appendChild(subPrice);
+
+    productDiv.appendChild(nameDiv);
+    productDiv.appendChild(euroDiv);
+    productDiv.appendChild(priceDiv);
+
+    amountDiv.appendChild(pAmount);
+
+    outer.appendChild(amountDiv);
+    outer.appendChild(productDiv);
+
+    return outer;
 }
 
 
