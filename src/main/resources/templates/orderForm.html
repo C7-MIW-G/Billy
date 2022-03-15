@@ -24,7 +24,7 @@
     </div>
     <div class="receipt grid-orderPage-child">
         <div class="receipt-child receipt-orderList">
-            <div class="receipt-ProductsList">
+            <div class="receipt-ProductsList" id="receiptProductList">
                 <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
                     <li><a th:href="@{/orders/remove/{productId}(productId=${product.productId})}">
                         <div class="grid-orderList-parent">
@@ -82,6 +82,10 @@
         </div>
     </div>
 </div>
+
+
+<!--TODO barOrder for Modal-->
+
 <div id="accountPayModal" class="customModal">
     <div class="modalContainer account-pay-modal-container">
         <div class="modalHeader"></div>
@@ -97,6 +101,9 @@
                     </div>
                     <ul class="unordered-list" th:each="userDto : ${allUsers}">
                         <li>
+
+<!--                            TODO barOrder-->
+
                             <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() && barOrder.canUserBuyTheProduct(userDto) ? 'confirm-account-pay' : 'isDisabled'}">
                                 <div class="grid-user-account-pay">
                                     <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
@@ -112,6 +119,9 @@
             </div>
             <div class="account-pay-modal-body-order-info">
                 <div class="receipt-ProductsList receipt">
+
+<!--                    TODO barOrder-->
+
                     <ul class="unordered-list" th:each="product : ${barOrder.productMap.keySet()}">
                         <li>
                             <div class="grid-orderList-parent">
@@ -137,6 +147,7 @@
         </div>
     </div>
 </div>
+
 
 <input type="hidden" id="header" th:value="${_csrf.getHeaderName()}">
 <input type="hidden" id="token" th:value="${_csrf.getToken()}">

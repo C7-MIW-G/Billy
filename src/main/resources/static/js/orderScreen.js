@@ -8,7 +8,7 @@ $(function () {
 
 function fire_ajax_getProducts(id){
 
-    $("#assortmentPage").addClass('disabledPage');
+    // $("#assortmentPage").addClass('disabledPage');
 
     $.ajax({
         type: "POST",
@@ -22,16 +22,44 @@ function fire_ajax_getProducts(id){
             fillProductList(resultData)
 
             console.log("SUCCESS : ", resultData);
-            $("#assortmentPage").removeClass('disabledPage');
+            // $("#assortmentPage").removeClass('disabledPage');
         },
 
         error: function (e){
 
             console.log("ERROR: ", e)
-            $("#assortmentPage").removeClass('disabledPage');
+            // $("#assortmentPage").removeClass('disabledPage');
         }
     });
 }
+
+function fire_ajax_addProduct(id){
+
+    // $("#assortmentPage").addClass('disabledPage');
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/a-api/addProduct/" + id,
+        cache: false,
+        timeout: 600000,
+
+        success: function (resultData){
+
+            //TODO fillOrderList(resultData)
+
+            console.log("SUCCESS : ", resultData);
+            // $("#assortmentPage").removeClass('disabledPage');
+        },
+
+        error: function (e){
+
+            console.log("ERROR: ", e)
+            // $("#assortmentPage").removeClass('disabledPage');
+        }
+    });
+}
+
 
 function fillProductList(data){
     let new_listBody = document.createElement('ul');
@@ -85,8 +113,22 @@ function fillProductList(data){
     new_listBody.setAttribute('class', 'unordered-list');
 
     document.getElementById("productList").replaceChild(new_listBody, old_listBody);
+}
 
-    $("#productBar").removeClass('productBar_default');
 
+function fillOrderList(data) {
+    let new_listBody = document.createElement('ul');
+
+    data.receiptList.forEach(receiptProduct => {
+
+        //TODO
+
+    });
+
+    let old_listBody = document.getElementById("receiptProductList").firstChild;
+
+    new_listBody.setAttribute('class', 'unordered-list');
+
+    document.getElementById("receiptProductList").replaceChild(new_listBody, old_listBody);
 }
 
