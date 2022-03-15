@@ -202,6 +202,11 @@ button:hover {
     display: grid;
     grid-template-rows: 2.875rem calc(100% - 2.875rem);
 }
+
+.grid-overview-noHistoryParent{
+    display: grid;
+    grid-template-rows: calc(10%) calc(80%) calc(10%);
+}
 .overviewList{
     max-height: calc(80vh - 10px - 2.875rem);
     overflow-y: auto;
@@ -228,6 +233,10 @@ button:hover {
 .overviewOrderHistoryList{
     padding: 0.75rem 0.75rem;
     border-bottom: 1px solid dimgrey;
+}
+
+.overviewListFooter{
+    height: calc(10%);
 }
 .grid-overviewListHead-parent{
     display: grid;
@@ -363,6 +372,11 @@ button:hover {
     margin-top: calc(10%);
 }
 
+.returnButtonFooter{
+    font-size: medium;
+    margin: 1%;
+}
+
 /*links*/
 a {
     color: black;
@@ -466,6 +480,7 @@ a:visited {
     margin: max(5vh, 0.25rem) auto;
     color: black;
     font-family: "Courier new", Verdana, sans-serif;
+    text-align: center;
 }
 
 .error-code-center {
