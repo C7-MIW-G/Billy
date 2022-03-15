@@ -22,7 +22,7 @@
             <ul></ul>
         </div>
     </div>
-    <div class="receipt grid-orderPage-child">
+    <div class="receipt grid-orderPage-child grid-receipt-parent">
         <div class="clear-order-button-container">
             <a th:href="@{/orders/directPay}">
                 <button class="clear-order-button">&#x2716</button>
@@ -45,8 +45,9 @@
             </div>
             <div class="grid-footer-receipt receipt-TotalPrice">
                 <div class="totalPrice">
-                    <span class="totalPrice">Total Price:</span>
-                    <span class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+                    <span>Total Price:</span>
+                    <div class="euro-sign">€</div>
+                    <span class="productPrice" th:text="${barOrder.getTotalPriceDisplayString()}"></span>
                 </div>
             </div>
         </div>
@@ -125,7 +126,7 @@
                 </div>
                 <div class="grid-footer-receipt receipt-TotalPrice">
                     <div class="totalPrice">
-                        <span class="totalPrice">Total Price:</span>
+                        <span>Total Price:</span>
                         <span class="euro-sign">€</span>
                         <span class="productPrice" th:text="${barOrder.getTotalPriceDisplayString()}"></span>
                     </div>

@@ -23,13 +23,15 @@
 }
 
 .grid-orderPage-child{
-    display: grid;
-    grid-template-rows: 6% 84% 10%;
     margin: 5px;
 }
+
+.grid-receipt-parent {
+    display: grid;
+    grid-template-rows: 5% 84% 11%;
+}
 .productAssortment{
-    height: calc(90% - 10px);
-    max-height: calc(90% - 10px);
+    height: calc(95%);
 }
 .grid-productAssortment-parent{
     display: grid;
@@ -74,8 +76,7 @@
 
 /*receipt*/
 .receipt{
-    height: calc(90%);
-    max-height: calc(90%);
+    height: 95%;
     overflow: hidden;
     background-color: white;
 }
@@ -131,6 +132,8 @@
     font-family: "Courier New", Verdana, sans-serif ;
 }
 .totalPrice{
+    display: grid;
+    grid-template-columns: calc(100% - 7em) 1rem 6rem;
     text-align: right;
 }
 
@@ -244,9 +247,6 @@
     cursor: pointer;
 }
 
-.clear-order-button-container {
-
-}
 
 .clear-order-button {
     float: right;
