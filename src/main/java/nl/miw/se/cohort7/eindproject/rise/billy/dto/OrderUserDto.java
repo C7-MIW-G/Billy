@@ -3,6 +3,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ public class OrderUserDto {
 
     private boolean canBuy;
 
-    private List<String> restrictions;
+    private List<String> restrictions = new ArrayList<>();
 
 
     public void userCanBuy(double maxCredit, Date dateOfBirth){
@@ -31,7 +32,7 @@ public class OrderUserDto {
 
     private boolean canPayForOrder(double maxCredit) {
         if(maxCredit > (this.accountBalance - BarOrderDto.activeOrder.calculateTotalOrderPrice())){
-            this.restrictions.add("&#xf4e9;"); //no money icon
+            this.restrictions.add("fab fa-creative-commons-nc-eu"); //no money icon
             return false;
         }
         return true;
@@ -39,9 +40,10 @@ public class OrderUserDto {
 
     private boolean isOfAgeForOrder(Date dateOfBirth){
         for (ProductDto product : BarOrderDto.activeOrder.getProductMap().keySet()) {
-            if (product.isProductOfAge() && !isUserEighteenPlus(dateOfBirth))
-                this.restrictions.add("&#128286;"); //not 18+
+            if (product.isProductOfAge() && !isUserEighteenPlus(dateOfBirth)) {
+                this.restrictions.add("fas fa-wine-bottle"); //not drinking age
                 return false;
+            }
         }
         return true;
     }

@@ -93,6 +93,32 @@ function fire_ajax_removeProduct(id){
     });
 }
 
+function fire_ajax_getUsers(){
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/o-api/getUsers",
+        cache: false,
+        timeout: 600000,
+
+        success: function (resultData){
+
+            fillUserListAccountPay(resultData);
+
+            console.log("SUCCESS : ", resultData);
+            // $("#assortmentPage").removeClass('disabledPage');
+        },
+
+        error: function (e){
+
+            console.log("ERROR: ", e)
+            // $("#assortmentPage").removeClass('disabledPage');
+        }
+    });
+}
+
+
+//productList of Category
 function fillProductList(data){
     let new_listBody = document.createElement('ul');
 
@@ -149,6 +175,8 @@ function fillProductList(data){
     document.getElementById("productList").replaceChild(new_listBody, old_listBody);
 }
 
+
+//orderlist
 function fillOrderList(data) {
     let new_listBody = document.createElement('ul');
 
@@ -242,7 +270,7 @@ function fillProductOfOrder(receiptProduct){
     return outer;
 }
 
-
+//total price
 function fillTotalPrice(data) {
     let totalPrice = data.totalOrderPrice;
     fillReceiptTotalPrice(totalPrice);
@@ -273,6 +301,74 @@ function fillDirectPayTotalPrice(tPrice){
     let new_totalPrice = setupTotalPrice("Total Price € " + tPrice);
     new_totalPrice.setAttribute('id', 'directTotalPrice');
     document.getElementById("directTotalPrice").replaceWith(new_totalPrice);
+}
+
+
+//users
+function fillUserListAccountPay(data) {
+    let new_listBody = document.createElement('ul');
+
+    data.userList.forEach(user => {
+
+        let euroSign = document.createTextNode('€');
+        let euroSpan = document.createElement('span');
+
+        let balanceAmount = document.createTextNode(user.accountBalance.toFixed(2));
+        let amountSpan = document.createElement('span');
+        amountSpan.setAttribute('class', 'flex-user-accountBalance-first-child');
+
+        let balanceDiv = document.createElement('div');
+        balanceDiv.setAttribute('class', 'flex-user-accountBalance grid-user-child-right');
+
+        let restrictionSpan = document.createElement('div');
+        user.restrictions.forEach(restriction => {
+            let icon = document.createElement('span');
+            icon.setAttribute('class', restriction);
+            restrictionSpan.appendChild(icon);
+        })
+
+        let uName = document.createTextNode(user.displayName);
+        let nameSpan = document.createElement('span');
+        nameSpan.setAttribute('class', 'grid-user-child-left');
+
+        let outer = document.createElement('div');
+        outer.setAttribute('class', 'grid-user-account-pay');
+
+        let aRef = document.createElement('a');
+
+        let item = document.createElement('li');
+
+
+        if(user.canBuy){
+            aRef.setAttribute('class', 'confirm-account-pay');
+        } else {
+            aRef.setAttribute('class', 'isDisabled');
+            restrictionSpan.setAttribute('class', 'grid-user-child-left ageSign');
+        }
+
+
+
+        nameSpan.appendChild(uName);
+        outer.appendChild(nameSpan);
+
+        outer.appendChild(restrictionSpan);
+        outer.appendChild(balanceDiv);
+
+        amountSpan.appendChild(balanceAmount);
+        balanceDiv.appendChild(amountSpan);
+
+        euroSpan.appendChild(euroSign);
+        balanceDiv.appendChild(euroSpan);
+
+        aRef.appendChild(outer);
+        item.appendChild(aRef);
+        new_listBody.appendChild(item);
+    });
+
+    new_listBody.setAttribute('class', 'unordered-list');
+
+    let old_listBody = document.getElementById("userList").lastChild;
+    document.getElementById("userList").replaceChild(new_listBody, old_listBody);
 }
 
 

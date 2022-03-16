@@ -15,6 +15,7 @@ function closeModal(modal){
 }
 
 accountPayButton.onclick = function (){
+    fire_ajax_getUsers();
     openModal(accountPayModal);
 }
 
