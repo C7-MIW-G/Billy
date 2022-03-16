@@ -36,7 +36,7 @@
                     <div class="grid-item-parent">
                         <div>Restrictions:</div>
                         <div th:class="${product.isProductOfAge() == false ? 'displayNone' : 'visible grid-user-child-left'}" class="grid-item-parent">&#128286;</div>
-                        <div th:class="${product.isProductOfAge() == true ? 'displayNone' : 'visible grid-user-child-left'}" class="grid-item-parent">None</div>
+                        <div th:class="${product.isProductOfAge() == true  ? 'displayNone' : 'visible grid-user-child-left'}" class="grid-item-parent">None</div>
                     </div>
                 </li>
                 <li>
