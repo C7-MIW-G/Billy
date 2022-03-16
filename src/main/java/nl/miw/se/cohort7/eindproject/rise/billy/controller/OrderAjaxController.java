@@ -3,13 +3,12 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ReceiptAjaxResponse;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.UserListAjaxResponse;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -22,10 +21,12 @@ import java.util.Optional;
 public class OrderAjaxController {
 
     private AssortmentService assortmentService;
+    private UserService userService;
 
     @Autowired
-    public OrderAjaxController(AssortmentService assortmentService) {
+    public OrderAjaxController(AssortmentService assortmentService, UserService userService) {
         this.assortmentService = assortmentService;
+        this.userService = userService;
     }
 
     @PostMapping("/addProduct/{id}")
@@ -63,5 +64,14 @@ public class OrderAjaxController {
     private void setReceiptResponse(ReceiptAjaxResponse response){
         response.createReceiptList();
         response.setTotalOrderPrice(BarOrderDto.activeOrder.getTotalPriceDisplayString());
+    }
+
+    @GetMapping("/getUsers")
+    public ResponseEntity<?> getAllUserForOrder(){
+        UserListAjaxResponse response = new UserListAjaxResponse();
+
+        response.setUserList(userService.getAllForOrder());
+
+        return ResponseEntity.ok(response);
     }
 }

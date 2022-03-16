@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.OrderUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
@@ -78,12 +79,13 @@ public class OrderController {
     }
 
     @GetMapping("/orders/accountPay/{userId}")
-    protected String doAccountPay(@PathVariable("userId") Long userId, BillyUserDto billyUserDto, ProductDto productDto) {
+    protected String doAccountPay(@PathVariable("userId") Long userId) {
         // make payment
-        BillyUserDto customer = userService.findByUserId(userId);
-        if (!customer.canPayForOrder() || (productDto.isProductOfAge() && !billyUserDto.isUserEighteenPlus())) {
+        Optional<OrderUserDto> optionalCustomer = userService.getOneForOrder(userId);
+        if(optionalCustomer.isEmpty() || !optionalCustomer.get().isCanBuy()){
             return "redirect:/orders/new";
         }
+        BillyUserDto customer = userService.findByUserId(optionalCustomer.get().getUserId());
         customer.payOrder(BarOrderDto.activeOrder.calculateTotalOrderPrice());
         userService.updateUser(customer);
 

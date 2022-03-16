@@ -2,7 +2,6 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -15,6 +14,7 @@ import java.util.*;
 @Getter @Setter
 public class BarOrderDto {
     public static final int DEFAULT_ORDER_PRICE = 0;
+    public static final int MIN_AGE_FOR_PRODUCTS_OF_AGE = 18;
 
     public static BarOrderDto activeOrder = null;
 
@@ -35,14 +35,6 @@ public class BarOrderDto {
             totalOrderPrice += getSubTotal(product);
         }
         return totalOrderPrice;
-    }
-
-    public boolean canUserBuyTheProduct(BillyUserDto billyUserDto) {
-        for (ProductDto product : productMap.keySet()) {
-            if (product.isProductOfAge() && !billyUserDto.isUserEighteenPlus())
-                return false;
-        }
-        return true;
     }
 
     public double getSubTotal(ProductDto product) {

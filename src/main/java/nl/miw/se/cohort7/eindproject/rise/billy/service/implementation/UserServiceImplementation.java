@@ -1,6 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.service.implementation;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.OrderUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.PasswordDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
@@ -112,5 +113,19 @@ public class UserServiceImplementation implements UserService {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public List<OrderUserDto> getAllForOrder() {
+        return userRepository.findAll()
+                .stream()
+                .map(billyUserDtoConverter::convertToOrderUserDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<OrderUserDto> getOneForOrder(Long id) {
+        Optional<BillyUser> optionalUser = userRepository.findById(id);
+        return optionalUser.map(billyUser -> billyUserDtoConverter.convertToOrderUserDto(billyUser));
     }
 }

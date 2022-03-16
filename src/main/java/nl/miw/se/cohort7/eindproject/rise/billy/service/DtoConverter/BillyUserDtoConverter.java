@@ -1,6 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.service.DtoConverter;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.OrderUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 
 /**
@@ -40,5 +41,17 @@ public class BillyUserDtoConverter {
         billyUserDto.setAccountBalance(billyUser.getAccountBalance());
 
         return billyUserDto;
+    }
+
+    public OrderUserDto convertToOrderUserDto(BillyUser billyUser) {
+        OrderUserDto orderUser = new OrderUserDto();
+
+        orderUser.setUserId(billyUser.getUserId());
+        orderUser.setDisplayName(billyUser.getName());
+        orderUser.setAccountBalance(billyUser.getAccountBalance());
+
+        orderUser.userCanBuy(billyUser.getMaxCredit(), billyUser.getBirthdate());
+
+        return orderUser;
     }
 }

@@ -22,7 +22,6 @@ import java.util.Date;
 public class BillyUserDto {
 
     private static final int USER_DISPLAY_STRING_LENGTH = 20;
-    public static final int MIN_AGE_FOR_PRODUCTS_OF_AGE = 18;
 
     private Long userId;
 
@@ -97,35 +96,12 @@ public class BillyUserDto {
         return String.format("\u20ac %s%.2f", amount < 0 ? " -" : " ", Math.abs(amount));
     }
 
-    public boolean canPayForOrder() {
-        return maxCredit < accountBalance - BarOrderDto.activeOrder.calculateTotalOrderPrice();
-    }
-
     public void payOrder(double amount) {
         accountBalance -= amount;
     }
 
     public void calculateNewCredit(double addCredit){
         accountBalance += addCredit;
-    }
-
-    public static int getAge(Date dateOfBirth) {
-        Calendar today = Calendar.getInstance();
-        Calendar birthDate = Calendar.getInstance();
-        int age = 0;
-
-        birthDate.setTime(dateOfBirth);
-        if (birthDate.after(today)) {
-            throw new IllegalArgumentException("Can't be born in the future");
-        }
-
-        age = today.get(Calendar.YEAR) - birthDate.get(Calendar.YEAR);
-
-        return age;
-    }
-
-    public boolean isUserEighteenPlus() {
-        return getAge(this.birthdate) >= MIN_AGE_FOR_PRODUCTS_OF_AGE;
     }
 
 }

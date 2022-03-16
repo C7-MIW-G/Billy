@@ -3,6 +3,9 @@
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>Create order</title>
 </head>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<!--TODO werkt dit^-->
+
 <body data-role="touch" data-on-swipe-up="mySwipeFunction">
 <nav th:replace="fragments/general :: navbar"></nav>
 <div th:replace="fragments/general :: logoutModal"></div>
@@ -90,23 +93,23 @@
                         <div class="grid-user-child-left fontBold"></div>
                         <div class="grid-user-child-right ">Balance</div>
                     </div>
-                    <ul class="unordered-list" th:each="userDto : ${allUsers}">
-                        <li>
+<!--                    <ul class="unordered-list" th:each="userDto : ${allUsers}">-->
+<!--                        <li>-->
 
-<!--                            TODO barOrder-->
+<!--                          TODO barOrder-->
 
-                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() && barOrder.canUserBuyTheProduct(userDto) ? 'confirm-account-pay' : 'isDisabled'}">
-                                <div class="grid-user-account-pay">
-                                    <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
-                                    <span th:class="${barOrder.canUserBuyTheProduct(userDto) ? 'invisible' : 'visible grid-user-child-left ageSign'}">&#128286;</span>
-                                    <div class="flex-user-accountBalance grid-user-child-right">
-                                        <span class="flex-user-accountBalance-first-child" th:text="${userDto.getAccountBalance()}"></span>
-                                        <span>€</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
+<!--                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() && barOrder.canUserBuyTheProduct(userDto) ? 'confirm-account-pay' : 'isDisabled'}">-->
+<!--                                <div class="grid-user-account-pay">-->
+<!--                                    <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>-->
+<!--                                    <span th:class="${barOrder.canUserBuyTheProduct(userDto) ? 'invisible' : 'visible grid-user-child-left ageSign'}">&#128286;</span>-->
+<!--                                    <div class="flex-user-accountBalance grid-user-child-right">-->
+<!--                                        <span class="flex-user-accountBalance-first-child" th:text="${userDto.getAccountBalance()}"></span>-->
+<!--                                        <span>€</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
                 </div>
             </div>
             <div class="account-pay-modal-body-order-info">
