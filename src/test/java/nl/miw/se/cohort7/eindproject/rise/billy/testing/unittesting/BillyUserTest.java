@@ -99,6 +99,6 @@ class BillyUserTest {
         testUser.calculateNewCredit(topUp);
 
         // Assert
-        assertEquals((20 + 10), testUser.getAccountBalance());
+        assertEquals((10 + 20), testUser.getAccountBalance());
     }
 }
