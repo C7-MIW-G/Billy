@@ -52,32 +52,6 @@ public class OrderController {
         return "orderForm";
     }
 
-//    @GetMapping("/orders/add/{productId}")
-//    protected String addProductToOrder(@PathVariable("productId") Long productId) {
-//        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
-//        if (optionalProduct.isEmpty()) {
-//            return "redirect:/";
-//        }
-//        BarOrderDto.addProductToOrder(optionalProduct.get());
-//        return "redirect:/";
-//    }
-//
-//    @GetMapping("/orders/remove/{productId}")
-//    protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
-//        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
-//        if (optionalProduct.isEmpty()) {
-//            return "redirect:/";
-//        }
-//        BarOrderDto.removeProductFromOrder(optionalProduct.get());
-//        return "redirect:/";
-//    }
-
-    @GetMapping({"/orders/directPay","/orders/clearOrder"})
-    protected String doDirectPay() {
-        BarOrderDto.clearActiveOrder();
-        return "redirect:/";
-    }
-
     @GetMapping("/orders/accountPay/{userId}")
     protected String doAccountPay(@PathVariable("userId") Long userId) {
         BarOrderDto.activeOrder.setDateTime(LocalDateTime.now());
