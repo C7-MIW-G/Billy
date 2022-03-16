@@ -22,7 +22,7 @@
                         <div class="grid-user-parent">
                             <div class="grid-user-child-left RoleSign" th:text="${billyUserDto.getUserRoleEmoticon()}" ></div>
                             <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
-                            <div class="euro-sign">€</div>
+                            <div class="euro-sign" sec:authorize="hasRole('ROLE_BAR MANAGER')">€</div>
                             <div class="grid-user-child-right"  th:text="${billyUserDto.getAccountBalanceDisplayString()}" sec:authorize="hasRole('ROLE_BAR MANAGER')"></div>
                          </div>
                     </a>

@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/update/balance/{billyUserId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BAR_MANAGER"})
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String updateUserBalance(@PathVariable("billyUserId") Long userId, Model model) {
         BillyUserDto billyuserDto = userService.findByUserId(userId);
         if (billyuserDto == null) {
