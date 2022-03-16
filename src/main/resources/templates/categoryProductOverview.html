@@ -11,19 +11,25 @@
 <div class="billyContainer">
     <div class="overview grid-overview-parent">
         <div class="overviewListHead grid-overviewListHead-parent">
-            <div>
-                <a th:href="@{/assortment/categories/update/{categoryId}(categoryId=${category.categoryId})}"
-                   th:text="${category.categoryName}"></a>
+            <div class="category-products-header-grid">
+                <div class="category-name vertical-center">
+                    <span th:text="${category.getCategoryName()}"></span>
+                </div>
+                <div class="edit-button vertical-center">
+                    <a th:href="@{/assortment/categories/update/{categoryId}(categoryId=${category.categoryId})}">
+                        <button>&#x270F</button>
+                    </a>
+                </div>
             </div>
             <div class="new-button">
-                <a  th:href="@{/assortment/products/new/{categoryId}(categoryId=${category.categoryId})}"><button>+</button></a>
+                <a th:href="@{/assortment/products/new/{categoryId}(categoryId=${category.categoryId})}"><button>+</button></a>
             </div>
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="product : ${productList}">
                 <li><a th:href="@{/assortment/products/details/{productId}(productId=${product.getProductId()})}">
                     <div class="grid-product-parent">
-                        <div class="productName fontBold" th:text="${product.getProductName()}"></div>
+                        <div class="productName" th:text="${product.getProductName()}"></div>
                         <div class="euro-sign">€</div>
                         <div class="productPrice" th:text="${product.getPriceDisplayString()}"></div>
                     </div>
