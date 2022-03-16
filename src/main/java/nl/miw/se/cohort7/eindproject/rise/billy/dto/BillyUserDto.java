@@ -51,12 +51,14 @@ public class BillyUserDto {
     @NegativeOrZero(message = "Please insert a negative number or 0")
     private double maxCredit;
 
+
+
     public String getUserRoleEmoticon() {
         switch (userRole) {
             case "ROLE_BAR MANAGER":
-                return new String(Character.toChars(0x039c));
+                return new String(Character.toChars(0x1F454));
             case "ROLE_BARTENDER":
-                return new String(Character.toChars(0x03a4));
+                return new String(Character.toChars(0x1F935));
             case "ROLE_CUSTOMER":
                 return new String(Character.toChars(0x2800));
             default:
