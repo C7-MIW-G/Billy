@@ -1,6 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittesting;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -74,14 +75,30 @@ class BillyUserTest {
     }
 
     @Test
-    void testCheckAccountBalance() {
+    void testPayOrder() {  // Lars
         // Arrange
-        BillyUserDto billyUser1 = new BillyUserDto();
+        BillyUserDto testUser = new BillyUserDto();
+        testUser.setAccountBalance(50.00);
+        double orderPrice = 20.00;
 
         // Activate
-        billyUser1.setAccountBalance(1000);
+        testUser.payOrder(orderPrice);
 
         // Assert
-        assertEquals(1000, billyUser1.getAccountBalance());
+        assertEquals((50 - 20), testUser.getAccountBalance());
+    }
+
+    @Test
+    void testCalculateNewCredit() { // Lars
+        // Arrange
+        BillyUserDto testUser = new BillyUserDto();
+        testUser.setAccountBalance(10);
+        double topUp = 20;
+
+        // Activate
+        testUser.calculateNewCredit(topUp);
+
+        // Assert
+        assertEquals((20 + 10), testUser.getAccountBalance());
     }
 }
