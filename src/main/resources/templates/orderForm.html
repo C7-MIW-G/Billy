@@ -4,7 +4,6 @@
     <title>Create order</title>
 </head>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-<!--TODO werkt dit^-->
 
 <body data-role="touch" data-on-swipe-up="mySwipeFunction">
 <nav th:replace="fragments/general :: navbar"></nav>
@@ -78,9 +77,6 @@
         </div>
     </div>
 
-
-<!--TODO barOrder for Modal-->
-
 <div id="accountPayModal" class="customModal">
     <div class="modalContainer account-pay-modal-container">
         <div class="modalHeader"></div>
@@ -93,25 +89,6 @@
                         <div class="grid-user-child-left fontBold"></div>
                         <div class="grid-user-child-right ">Balance</div>
                     </div>
-
-
-<!--                    <ul class="unordered-list" th:each="userDto : ${allUsers}">-->
-<!--                        <li>-->
-
-<!--                            TODO barOrder-->
-
-<!--                            <a th:href="@{/orders/accountPay/{userId}(userId=${userDto.getUserId()})}" class="confirm-account-pay" th:class="${userDto.canPayForOrder() && barOrder.canUserBuyTheProduct(userDto) ? 'confirm-account-pay' : 'isDisabled'}">-->
-<!--                                <div class="grid-user-account-pay">-->
-<!--                                    <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>-->
-<!--                                    <span th:class="${barOrder.canUserBuyTheProduct(userDto) ? 'invisible' : 'visible grid-user-child-left ageSign'}">&#128286;</span>-->
-<!--                                    <div class="flex-user-accountBalance grid-user-child-right">-->
-<!--                                        <span class="flex-user-accountBalance-first-child" th:text="${userDto.getAccountBalance()}"></span>-->
-<!--                                        <span>€</span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </a>-->
-<!--                        </li>-->
-<!--                    </ul>-->
                 </div>
             </div>
             <div class="account-pay-modal-body-order-info">
@@ -131,16 +108,19 @@
     </div>
 </div>
 
+
 <div id="confirm-account-pay-modal" class="customModal">
     <div class="modalContainer">
         <div class="modalHeader">Account pay</div>
-        <p>Are you sure?</p>
-<!--        <p>-->
-<!--            <span id="accountTotalPrice" class="productPrice" th:text="'Total Price: € ' + ${barOrder.getTotalPriceDisplayString()}"></span>-->
-<!--        </p>-->
+        <p>
+            <span>Charge </span>
+            <span id="confirmUser"></span>
+            <span> for </span>
+            <span id="accountPayTotalPrice" class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+        </p>
         <div class="grid-modalButtons-parent">
             <div id="cancelButton" class="modalButton buttonCancel">Cancel</div>
-            <div id="confirmButton" class="modalButton buttonConfirm-warning">Confirm</div>
+            <a id="confirmButton" class="modalButton buttonConfirm-warning">Confirm</a>
         </div>
     </div>
 

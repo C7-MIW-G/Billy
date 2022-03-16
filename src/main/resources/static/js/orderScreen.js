@@ -117,6 +117,21 @@ function fire_ajax_getUsers(){
     });
 }
 
+//open AccountPay Confirm modal
+function openConfirmModal(id, userName){
+    let confirmButton = document.getElementById('confirmButton');
+    let payLink = "/orders/accountPay/" + id;
+    confirmButton.setAttribute('href', payLink);
+
+    let new_nameSpan = document.createElement('span');
+    new_nameSpan.setAttribute('id', 'confirmUser');
+    let confirmName = document.createTextNode(userName);
+    new_nameSpan.appendChild(confirmName);
+    document.getElementById('confirmUser').replaceWith(new_nameSpan);
+
+    openModal(confirmAccountPayModal);
+}
+
 
 //productList of Category
 function fillProductList(data){
@@ -276,6 +291,7 @@ function fillTotalPrice(data) {
     fillReceiptTotalPrice(totalPrice);
     fillAccountPayTotalPrice(totalPrice);
     fillDirectPayTotalPrice(totalPrice);
+    fillConfirmPayTotalPrice(totalPrice);
 }
 function setupTotalPrice(price){
     let new_totalPrice = document.createElement('span');
@@ -301,6 +317,11 @@ function fillDirectPayTotalPrice(tPrice){
     let new_totalPrice = setupTotalPrice("Total Price € " + tPrice);
     new_totalPrice.setAttribute('id', 'directTotalPrice');
     document.getElementById("directTotalPrice").replaceWith(new_totalPrice);
+}
+function fillConfirmPayTotalPrice(tPrice){
+    let new_totalPrice = setupTotalPrice("€ " + tPrice);
+    new_totalPrice.setAttribute('id', 'accountPayTotalPrice');
+    document.getElementById("accountPayTotalPrice").replaceWith(new_totalPrice);
 }
 
 
@@ -335,6 +356,8 @@ function fillUserListAccountPay(data) {
         outer.setAttribute('class', 'grid-user-account-pay');
 
         let aRef = document.createElement('a');
+        let openModalFunction = 'openConfirmModal([[' + user.userId + ']], [[\"' + user.displayName + '\"]])';
+        aRef.setAttribute('onclick', openModalFunction);
 
         let item = document.createElement('li');
 
