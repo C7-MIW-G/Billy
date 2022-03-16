@@ -79,10 +79,10 @@ class BillyUserTest {
         // Arrange
         BillyUserDto testUser = new BillyUserDto();
         testUser.setAccountBalance(50.00);
-        double amount = 20.00;
+        double orderPrice = 20.00;
 
         // Activate
-        testUser.payOrder(amount);
+        testUser.payOrder(orderPrice);
 
         // Assert
         assertEquals((50 - 20), testUser.getAccountBalance());

@@ -225,9 +225,16 @@ button:hover {
     grid-template-rows: 2.875rem calc(100% - 2.875rem);
 }
 
+.grid-overview-HistoryParent{
+    display: grid;
+    grid-template-rows: 8% 82% 10%;
+    height: calc(90%);
+}
+
 .grid-overview-noHistoryParent{
     display: grid;
-    grid-template-rows: calc(10%) calc(80%) calc(10%);
+    grid-template-rows: 8% 82% 10%;
+    height: calc(90%);
 }
 .overviewList{
     max-height: calc(80vh - 10px - 2.875rem);
@@ -258,7 +265,10 @@ button:hover {
 }
 
 .overviewListFooter{
+    overflow-y: hidden;
+    border-top: 1px solid dimgrey;
 }
+
 .grid-overviewListHead-parent{
     display: grid;
     grid-template-columns: calc(100% - 8rem) 8rem;
