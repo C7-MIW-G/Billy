@@ -100,7 +100,7 @@
                                     <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
                                     <span th:class="${barOrder.canUserBuyTheProduct(userDto) ? 'invisible' : 'visible grid-user-child-left ageSign'}">&#128286;</span>
                                     <div class="flex-user-accountBalance grid-user-child-right">
-                                        <span class="flex-user-accountBalance-first-child" th:text="${userDto.getAccountBalance()}"></span>
+                                        <span class="flex-user-accountBalance-first-child" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
                                         <span>€</span>
                                     </div>
                                 </div>
@@ -124,6 +124,21 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="confirm-account-pay-modal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Account pay</div>
+        <p>Are you sure?</p>
+<!--        <p>-->
+<!--            <span id="accountTotalPrice" class="productPrice" th:text="'Total Price: € ' + ${barOrder.getTotalPriceDisplayString()}"></span>-->
+<!--        </p>-->
+        <div class="grid-modalButtons-parent">
+            <div id="cancelButton" class="modalButton buttonCancel">Cancel</div>
+            <div id="confirmButton" class="modalButton buttonConfirm-warning">Confirm</div>
+        </div>
+    </div>
+
 </div>
 
 
