@@ -162,6 +162,7 @@ public class UserController {
             model.addAttribute("userDto", userService.findByUserId(billyUserId));
             return "noOrderHistory";
         } else {
+            Collections.sort(barOrderViewDtoList);
             model.addAttribute("allBillyUsers", userService.findAll());
             model.addAttribute("OrdersByUser", barOrderViewDtoList);
             return "userOrderHistory";

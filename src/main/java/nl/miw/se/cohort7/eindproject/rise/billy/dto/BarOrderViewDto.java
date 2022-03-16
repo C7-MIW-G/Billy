@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -13,7 +14,7 @@ import java.util.*;
 
 @Getter
 @Setter
-public class BarOrderViewDto {
+public class BarOrderViewDto implements Comparable <BarOrderViewDto> {
 
     private Long orderId;
 
@@ -29,7 +30,7 @@ public class BarOrderViewDto {
 
     private List<ProductViewDto> productList = new ArrayList<>();
 
-    public String getTotalPriceDisplayString(double price){
+    public String getTotalPriceDisplayString(double price) {
         return String.format("%.2f", price);
     }
 
@@ -38,15 +39,14 @@ public class BarOrderViewDto {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BarOrderViewDto that = (BarOrderViewDto) o;
-        return dateTime.equals(that.dateTime);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(dateTime);
+    public int compareTo(@NotNull BarOrderViewDto o) {
+        if (o.dateTime.isAfter(this.dateTime)) {
+            return 1;
+        } else if (o.dateTime.isBefore(this.dateTime)) {
+            return -1;
+        } else {
+            return 0;
+        }
     }
 }
+
