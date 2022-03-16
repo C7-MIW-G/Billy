@@ -29,7 +29,6 @@ public class ProductController {
         this.assortmentService = assortmentService;
     }
 
-    //products
     @GetMapping("")
     protected String showProductOverview(Model model) {
         model.addAttribute("allProducts", assortmentService.findAllProducts());
