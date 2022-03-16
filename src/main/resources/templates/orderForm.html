@@ -100,7 +100,7 @@
                                     <span class="grid-user-child-left" th:text="${userDto.getName()}"></span>
                                     <span th:class="${barOrder.canUserBuyTheProduct(userDto) ? 'invisible' : 'visible grid-user-child-left ageSign'}">&#128286;</span>
                                     <div class="flex-user-accountBalance grid-user-child-right">
-                                        <span class="flex-user-accountBalance-first-child" th:text="${userDto.getAccountBalance()}"></span>
+                                        <span class="flex-user-accountBalance-first-child" th:text="${userDto.getAccountBalanceDisplayString()}"></span>
                                         <span>€</span>
                                     </div>
                                 </div>
