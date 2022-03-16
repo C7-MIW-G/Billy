@@ -70,6 +70,17 @@ public class OrderAjaxController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/clearOrder")
+    public ResponseEntity<?> clearOrder(){
+        ReceiptAjaxResponse response = new ReceiptAjaxResponse();
+
+        BarOrderDto.clearActiveOrder();
+
+        setReceiptResponse(response);
+
+        return ResponseEntity.ok(response);
+    }
+
     private void setReceiptResponse(ReceiptAjaxResponse response){
         response.createReceiptList();
         response.setTotalOrderPrice(BarOrderDto.activeOrder.getTotalPriceDisplayString());

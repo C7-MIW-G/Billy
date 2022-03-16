@@ -4,7 +4,6 @@ import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.OrderUserDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
@@ -45,7 +44,6 @@ public class OrderController {
     protected String setupOrder(Model model) {
         if (BarOrderDto.activeOrder == null){
             BarOrderDto.openNewActiveOrder();
-            BarOrderDto.activeOrder.setDateTime(LocalDateTime.now());
         }
         model.addAttribute("barOrder", BarOrderDto.activeOrder);
         model.addAttribute("allCategories", assortmentService.findAllCategories());
@@ -58,38 +56,38 @@ public class OrderController {
 //    protected String addProductToOrder(@PathVariable("productId") Long productId) {
 //        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
 //        if (optionalProduct.isEmpty()) {
-//            return "redirect:/orders/new";
+//            return "redirect:/";
 //        }
 //        BarOrderDto.addProductToOrder(optionalProduct.get());
-//        return "redirect:/orders/new";
+//        return "redirect:/";
 //    }
 //
 //    @GetMapping("/orders/remove/{productId}")
 //    protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
 //        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
 //        if (optionalProduct.isEmpty()) {
-//            return "redirect:/orders/new";
+//            return "redirect:/";
 //        }
 //        BarOrderDto.removeProductFromOrder(optionalProduct.get());
-//        return "redirect:/orders/new";
+//        return "redirect:/";
 //    }
 
     @GetMapping({"/orders/directPay","/orders/clearOrder"})
     protected String doDirectPay() {
         BarOrderDto.clearActiveOrder();
-        return "redirect:/orders/new";
+        return "redirect:/";
     }
 
     @GetMapping("/orders/accountPay/{userId}")
     protected String doAccountPay(@PathVariable("userId") Long userId) {
-        // make payment
+        BarOrderDto.activeOrder.setDateTime(LocalDateTime.now());
+
+        // can make payment?
         Optional<OrderUserDto> optionalCustomer = userService.getOneForOrder(userId);
         if(optionalCustomer.isEmpty() || !optionalCustomer.get().isCanBuy()){
-            return "redirect:/orders/new";
+            return "redirect:/";
         }
         BillyUserDto customer = userService.findByUserId(optionalCustomer.get().getUserId());
-        customer.payOrder(BarOrderDto.activeOrder.calculateTotalOrderPrice());
-        userService.updateUser(customer);
 
         // update administration
         BillyUserPrincipal principal =
@@ -99,9 +97,12 @@ public class OrderController {
         BarOrderDto.activeOrder.setCustomer(customer);
         barOrderService.saveBarOrder(BarOrderDto.activeOrder);
 
+        customer.payOrder(BarOrderDto.activeOrder.calculateTotalOrderPrice());
+        userService.updateUser(customer);
+
         // open new order
         BarOrderDto.clearActiveOrder();
-        return "redirect:/orders/new";
+        return "redirect:/";
     }
 
     @GetMapping("/orderHistory")

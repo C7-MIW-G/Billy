@@ -29,7 +29,7 @@
         </div>
         <div class="receipt grid-orderPage-child grid-receipt-parent">
             <div class="clear-order-button-container">
-                <a th:href="@{/orders/clearOrder}">
+                <a onclick="fire_ajax_clearOrder()">
                     <button class="clear-order-button">&#x2716</button>
                 </a>
             </div>
@@ -72,7 +72,7 @@
             </p>
             <div class="grid-modalButtons-parent">
                 <div id="modalCancelPayment" class="modalButton buttonCancel">Cancel</div>
-                <a id="modalDirectPay" class="modalButton buttonConfirm-warning" th:href="@{/orders/directPay}">Confirm</a>
+                <a id="modalDirectPay" class="modalButton buttonConfirm-warning" onclick="fire_ajax_clearOrder()">Confirm</a>
             </div>
         </div>
     </div>

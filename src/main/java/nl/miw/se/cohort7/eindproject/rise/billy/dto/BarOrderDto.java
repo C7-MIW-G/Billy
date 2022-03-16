@@ -78,6 +78,7 @@ public class BarOrderDto {
 
     public static void clearActiveOrder() {
         activeOrder = null;
+        openNewActiveOrder();
     }
 
 }

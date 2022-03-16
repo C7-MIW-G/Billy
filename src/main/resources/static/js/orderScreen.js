@@ -52,11 +52,7 @@ function fire_ajax_addProduct(id){
 
         success: function (resultData){
 
-            fillOrderList(resultData);
-            fillTotalPrice(resultData);
-
-            fillAccountOrderList(resultData);
-
+            updateOrder(resultData);
             console.log("SUCCESS : ", resultData);
             // $("#assortmentPage").removeClass('disabledPage');
         },
@@ -82,11 +78,7 @@ function fire_ajax_getOrder(){
 
         success: function (resultData){
 
-            fillOrderList(resultData);
-            fillTotalPrice(resultData);
-
-            fillAccountOrderList(resultData);
-
+            updateOrder(resultData);
             console.log("SUCCESS : ", resultData);
             // $("#assortmentPage").removeClass('disabledPage');
         },
@@ -112,10 +104,34 @@ function fire_ajax_removeProduct(id){
 
         success: function (resultData){
 
-            fillOrderList(resultData);
-            fillTotalPrice(resultData);
+            updateOrder(resultData);
+            console.log("SUCCESS : ", resultData);
+            // $("#assortmentPage").removeClass('disabledPage');
+        },
 
-            fillAccountOrderList(resultData);
+        error: function (e){
+
+            console.log("ERROR: ", e)
+            // $("#assortmentPage").removeClass('disabledPage');
+        }
+    });
+}
+
+function fire_ajax_clearOrder(){
+
+    // $("#assortmentPage").addClass('disabledPage');
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/o-api/clearOrder/",
+        cache: false,
+        timeout: 600000,
+
+        success: function (resultData){
+
+            updateOrder(resultData);
+            closeModal(directPayModal);
 
             console.log("SUCCESS : ", resultData);
             // $("#assortmentPage").removeClass('disabledPage');
@@ -170,6 +186,14 @@ function openConfirmModal(id, userName){
 
 
 //productList of Category
+function updateOrder(data) {
+
+    fillOrderList(data);
+    fillTotalPrice(data);
+
+    fillAccountOrderList(data);
+}
+
 function fillProductList(data){
     let new_listBody = document.createElement('ul');
 

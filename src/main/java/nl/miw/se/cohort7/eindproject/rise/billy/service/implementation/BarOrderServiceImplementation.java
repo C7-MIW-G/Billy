@@ -9,9 +9,7 @@ import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
-import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.BarOrderRepository;
-import nl.miw.se.cohort7.eindproject.rise.billy.repository.ProductRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.UserRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
 import org.springframework.stereotype.Service;
@@ -31,7 +29,6 @@ public class BarOrderServiceImplementation implements BarOrderService {
 
     private BarOrderRepository barOrderRepository;
     private UserRepository userRepository;
-    private ProductRepository productRepository;
 
     public BarOrderServiceImplementation(BarOrderRepository barOrderRepository, UserRepository userRepository) {
         this.barOrderRepository = barOrderRepository;
