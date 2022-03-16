@@ -13,3 +13,19 @@
 .euro-sign {
     text-align: right;
 }
+
+.category-products-header-grid {
+    display: grid;
+    grid-template-columns: fit-content(50ch) auto;
+    justify-self: left;
+}
+
+.category-name {
+    margin-left: 10px;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.edit-button {
+    margin-left: 10px;
+}
