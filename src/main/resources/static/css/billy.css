@@ -470,6 +470,7 @@ a:visited {
     grid-template-columns: 1fr 1fr;
     width: fit-content;
     margin: 0.25rem auto;
+    column-gap: 20px;
 }
 .modalButton{
     padding: 0.5rem 2rem;
