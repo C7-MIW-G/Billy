@@ -1,5 +1,6 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.*;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BarOrder;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
@@ -11,8 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>

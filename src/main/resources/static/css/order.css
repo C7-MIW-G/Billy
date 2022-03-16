@@ -1,8 +1,7 @@
 .orderContainer{
     margin: 5px;
     width: calc(100% - 10px);
-    height: calc(100% - 4rem);
-    max-height: calc(100% - 4rem);
+    height: calc(100%);
 }
 
 .orderHistoryContainer{
@@ -28,7 +27,7 @@
 
 .grid-receipt-parent {
     display: grid;
-    grid-template-rows: 10mm calc(89% - 10mm) 11%;
+    grid-template-rows: 10mm calc(100% - 10mm - 4rem) 4rem;
 }
 .productAssortment{
     height: calc(95%);
@@ -81,6 +80,7 @@
 .category-list {
     border: 2px solid dimgrey;
     background-color: #e0e0e0;
+    overflow: auto;
 }
 
 .category-list-item:hover {
