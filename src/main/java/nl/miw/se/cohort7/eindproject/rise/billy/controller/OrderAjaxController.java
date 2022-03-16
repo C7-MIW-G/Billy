@@ -1,15 +1,16 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.ReceiptAjaxResponse;
-import nl.miw.se.cohort7.eindproject.rise.billy.dto.UserListAjaxResponse;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.*;
+import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUserPrincipal;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.BarOrderService;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -22,11 +23,14 @@ public class OrderAjaxController {
 
     private AssortmentService assortmentService;
     private UserService userService;
+    private BarOrderService barOrderService;
 
     @Autowired
-    public OrderAjaxController(AssortmentService assortmentService, UserService userService) {
+    public OrderAjaxController(AssortmentService assortmentService, UserService userService,
+                               BarOrderService barOrderService) {
         this.assortmentService = assortmentService;
         this.userService = userService;
+        this.barOrderService = barOrderService;
     }
 
     @GetMapping("/addProduct/{id}")
@@ -93,5 +97,33 @@ public class OrderAjaxController {
         response.setUserList(userService.getAllForOrder());
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/accountPay/{userId}")
+    protected ResponseEntity<?>  doAccountPay(@PathVariable("userId") Long userId) {
+        BarOrderDto.activeOrder.setDateTime(LocalDateTime.now());
+
+        // can make payment?
+        Optional<OrderUserDto> optionalCustomer = userService.getOneForOrder(userId);
+        if(optionalCustomer.isEmpty() || !optionalCustomer.get().isCanBuy()){
+            return ResponseEntity.badRequest().body("user not found");
+        }
+        BillyUserDto customer = userService.findByUserId(optionalCustomer.get().getUserId());
+
+        // update administration
+        BillyUserPrincipal principal =
+                (BillyUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        BillyUserDto bartender = userService.findByUserId(principal.getUserId());
+        BarOrderDto.activeOrder.setBartender(bartender);
+        BarOrderDto.activeOrder.setCustomer(customer);
+        barOrderService.saveBarOrder(BarOrderDto.activeOrder);
+
+        customer.payOrder(BarOrderDto.activeOrder.calculateTotalOrderPrice());
+        userService.updateUser(customer);
+
+        // open new order
+        BarOrderDto.clearActiveOrder();
+
+        return ResponseEntity.ok("");
     }
 }

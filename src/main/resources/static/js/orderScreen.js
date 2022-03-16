@@ -169,11 +169,37 @@ function fire_ajax_getUsers(){
     });
 }
 
+function fire_ajax_doAccountPay(id){
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/o-api/accountPay/" + id,
+        cache: false,
+        timeout: 600000,
+
+        success: function (resultData){
+
+            closeModal(confirmAccountPayModal);
+            closeModal(accountPayModal);
+            fire_ajax_getOrder();
+
+            console.log("SUCCESS : ", resultData);
+            // $("#assortmentPage").removeClass('disabledPage');
+        },
+
+        error: function (e){
+
+            console.log("ERROR: ", e)
+            // $("#assortmentPage").removeClass('disabledPage');
+        }
+    });
+}
+
 //open AccountPay Confirm modal
 function openConfirmModal(id, userName){
     let confirmButton = document.getElementById('confirmButton');
-    let payLink = "/orders/accountPay/" + id;
-    confirmButton.setAttribute('href', payLink);
+    let payFunction = "fire_ajax_doAccountPay([[" + id + "]])";
+    confirmButton.setAttribute('onclick', payFunction);
 
     let new_nameSpan = document.createElement('span');
     new_nameSpan.setAttribute('id', 'confirmUser');
