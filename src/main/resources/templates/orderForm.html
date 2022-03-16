@@ -126,6 +126,21 @@
     </div>
 </div>
 
+<div id="confirm-account-pay-modal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Account pay</div>
+        <p>Are you sure?</p>
+<!--        <p>-->
+<!--            <span id="accountTotalPrice" class="productPrice" th:text="'Total Price: € ' + ${barOrder.getTotalPriceDisplayString()}"></span>-->
+<!--        </p>-->
+        <div class="grid-modalButtons-parent">
+            <div id="cancelButton" class="modalButton buttonCancel">Cancel</div>
+            <div id="confirmButton" class="modalButton buttonConfirm-warning">Confirm</div>
+        </div>
+    </div>
+
+</div>
+
 
 <input type="hidden" id="header" th:value="${_csrf.getHeaderName()}">
 <input type="hidden" id="token" th:value="${_csrf.getToken()}">
