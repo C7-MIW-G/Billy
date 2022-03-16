@@ -33,8 +33,10 @@
                     </div>
                 </li>
                 <li>
-                    <div th:class="${product.isProductOfAge() == false ? 'invisible' : 'visible grid-user-child-left'}" class="grid-item-parent">
-                        <div>&#128286;</div>
+                    <div class="grid-item-parent">
+                        <div>Restrictions:</div>
+                        <div th:class="${product.isProductOfAge() == false ? 'displayNone' : 'visible grid-user-child-left'}" class="grid-item-parent">&#128286;</div>
+                        <div th:class="${product.isProductOfAge() == true  ? 'displayNone' : 'visible grid-user-child-left'}" class="grid-item-parent">None</div>
                     </div>
                 </li>
                 <li>
@@ -43,7 +45,7 @@
                             <a th:href="@{/assortment/products/update/{productId}(productId=${product.productId})}">
                                 <button class="detailsButtons">Edit</button>
                             </a>
-                            <a th:href="@{/assortment/products/delete/{productId}(productId=${product.productId})}">
+                            <a id="deleteButton">
                                 <button class="detailsButtons">Delete</button>
                             </a>
                             <a th:href="@{/assortment/categories/{categoryId} (categoryId = ${product.getCategoryDto().categoryId})}" class="button">Return</a>
@@ -56,10 +58,10 @@
 </div>
 <div id="deleteModal" class="customModal">
     <div class="modalContainer">
-        <div class="modalHeader">Delete</div>
+        <div class="modalHeader"></div>
         <p>
-            <span class="totalPrice">Are you sure you want to delete </span>
-            <span class="text" th:text="${product.getProductName()}"></span>
+            <span class="text-center">Are you sure you want to delete </span>
+            <span class="text-center" th:text="${product.getProductName()}"></span>
             <span class="text">?</span>
         </p>
         <div class="grid-modalButtons-parent">
@@ -68,8 +70,8 @@
                th:href="@{/assortment/products/delete/{productId}(productId=${product.productId})}">Delete</a>
         </div>
     </div>
+    <div th:replace="fragments/general :: bottomScripts"></div>
+    <script type="text/javascript" th:src="@{/js/deleteConfirm.js}"></script>
 </div>
-<div th:replace="fragments/general :: bottomScripts"></div>
-<script type="text/javascript" th:src="@{/js/deleteConfirm.js}"></script>
 </body>
 </html>

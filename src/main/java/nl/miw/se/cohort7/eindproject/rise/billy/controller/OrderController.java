@@ -1,6 +1,7 @@
 package nl.miw.se.cohort7.eindproject.rise.billy.controller;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderViewDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.OrderUserDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.ProductDto;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -105,7 +108,9 @@ public class OrderController {
     @GetMapping("/orderHistory")
     @Secured({"ROLE_BAR MANAGER"})
     protected String showOrderHistory(Model model) {
-        model.addAttribute("allOrders", barOrderService.findAll());
+        List<BarOrderViewDto> barOrderViewDtoList = barOrderService.findAll();
+        Collections.sort(barOrderViewDtoList);
+        model.addAttribute("allOrders", barOrderViewDtoList);
         return "completeOrderHistory";
     }
 }

@@ -73,32 +73,4 @@ class BillyUserTest {
         // Assert
         assertFalse(illegalCharacterFound);
     }
-
-    @Test
-    void testPayOrder() {  // Lars
-        // Arrange
-        BillyUserDto testUser = new BillyUserDto();
-        testUser.setAccountBalance(50.00);
-        double orderPrice = 20.00;
-
-        // Activate
-        testUser.payOrder(orderPrice);
-
-        // Assert
-        assertEquals((50 - 20), testUser.getAccountBalance());
-    }
-
-    @Test
-    void testCalculateNewCredit() { // Lars
-        // Arrange
-        BillyUserDto testUser = new BillyUserDto();
-        testUser.setAccountBalance(10);
-        double topUp = 20;
-
-        // Activate
-        testUser.calculateNewCredit(topUp);
-
-        // Assert
-        assertEquals((20 + 10), testUser.getAccountBalance());
-    }
 }

@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/update/balance/{billyUserId}")
-    @Secured({"ROLE_BAR MANAGER", "ROLE_BAR_MANAGER"})
+    @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String updateUserBalance(@PathVariable("billyUserId") Long userId, Model model) {
         BillyUserDto billyuserDto = userService.findByUserId(userId);
         if (billyuserDto == null) {
@@ -162,6 +162,7 @@ public class UserController {
             model.addAttribute("userDto", userService.findByUserId(billyUserId));
             return "noOrderHistory";
         } else {
+            Collections.sort(barOrderViewDtoList);
             model.addAttribute("allBillyUsers", userService.findAll());
             model.addAttribute("OrdersByUser", barOrderViewDtoList);
             return "userOrderHistory";

@@ -258,6 +258,7 @@ button:hover {
 }
 .overviewListHead{
     border-bottom: 1px solid dimgrey;
+    background-color: #d0d0d0;
 }
 .overviewOrderHistoryList{
     padding: 0.75rem 0.75rem;
@@ -289,7 +290,10 @@ button:hover {
 .new-button{
     margin-left: 65%;
     margin-top: 3%;
+}
 
+.vertical-center {
+    margin: auto;
 }
 
 .paymentButtons{
@@ -470,6 +474,7 @@ a:visited {
     grid-template-columns: 1fr 1fr;
     width: fit-content;
     margin: 0.25rem auto;
+    column-gap: 20px;
 }
 .modalButton{
     padding: 0.5rem 2rem;

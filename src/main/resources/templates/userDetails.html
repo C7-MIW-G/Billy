@@ -83,15 +83,16 @@
 </div>
 <div id="deleteModal" class="customModal">
   <div class="modalContainer">
-    <div class="modalHeader">Delete</div>
+    <div class="modalHeader"></div>
     <p>
-      <span class="totalPrice">Are you sure you want to delete </span>
-      <span class="text" th:text="${billyUserDto.getName()}"></span>
+      <span class="text-center">Are you sure you want to delete </span>
+      <span class="text-center" th:text="${billyUserDto.getName()}"></span>
       <span class="text">?</span>
     </p>
     <div class="grid-modalButtons-parent">
       <div id="cancelDelete" class="modalButton buttonCancel">Cancel</div>
-      <a id="delete" class="modalButton buttonConfirm-warning" th:href="@{/users/delete/{userId}(userId=${billyUserDto.userId})}">Delete</a>
+      <a id="delete" class="modalButton buttonConfirm-warning"
+         th:href="@{/users/delete/{userId}(userId=${billyUserDto.userId})}">Delete</a>
     </div>
   </div>
   <div th:replace="fragments/general :: bottomScripts"></div>
