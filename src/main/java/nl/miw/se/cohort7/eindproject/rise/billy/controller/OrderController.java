@@ -50,30 +50,29 @@ public class OrderController {
         model.addAttribute("barOrder", BarOrderDto.activeOrder);
         model.addAttribute("allCategories", assortmentService.findAllCategories());
         model.addAttribute("allUsers", userService.findAll());
-//        model.addAttribute("order", barOrderService.findAll());
         model.addAttribute("selectedUser", new BillyUserDto());
         return "orderForm";
     }
 
-    @GetMapping("/orders/add/{productId}")
-    protected String addProductToOrder(@PathVariable("productId") Long productId) {
-        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
-        if (optionalProduct.isEmpty()) {
-            return "redirect:/orders/new";
-        }
-        BarOrderDto.addProductToOrder(optionalProduct.get());
-        return "redirect:/orders/new";
-    }
-
-    @GetMapping("/orders/remove/{productId}")
-    protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
-        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
-        if (optionalProduct.isEmpty()) {
-            return "redirect:/orders/new";
-        }
-        BarOrderDto.removeProductFromOrder(optionalProduct.get());
-        return "redirect:/orders/new";
-    }
+//    @GetMapping("/orders/add/{productId}")
+//    protected String addProductToOrder(@PathVariable("productId") Long productId) {
+//        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
+//        if (optionalProduct.isEmpty()) {
+//            return "redirect:/orders/new";
+//        }
+//        BarOrderDto.addProductToOrder(optionalProduct.get());
+//        return "redirect:/orders/new";
+//    }
+//
+//    @GetMapping("/orders/remove/{productId}")
+//    protected String removeProductFromOrder(@PathVariable("productId") Long productId) {
+//        Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
+//        if (optionalProduct.isEmpty()) {
+//            return "redirect:/orders/new";
+//        }
+//        BarOrderDto.removeProductFromOrder(optionalProduct.get());
+//        return "redirect:/orders/new";
+//    }
 
     @GetMapping({"/orders/directPay","/orders/clearOrder"})
     protected String doDirectPay() {

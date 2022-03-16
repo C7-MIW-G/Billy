@@ -29,7 +29,7 @@ public class OrderAjaxController {
         this.userService = userService;
     }
 
-    @PostMapping("/addProduct/{id}")
+    @GetMapping("/addProduct/{id}")
     public ResponseEntity<?> addProductToOrder(@PathVariable("id") Long id) {
         ReceiptAjaxResponse response = new ReceiptAjaxResponse();
 
@@ -45,7 +45,7 @@ public class OrderAjaxController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/removeProduct/{id}")
+    @GetMapping("/removeProduct/{id}")
     public ResponseEntity<?> removeProductFromOrder(@PathVariable("id") Long id) {
         ReceiptAjaxResponse response = new ReceiptAjaxResponse();
 
@@ -55,6 +55,15 @@ public class OrderAjaxController {
         } else{
             response.setMessage("Product not found!");
         }
+
+        setReceiptResponse(response);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/getProducts")
+    public ResponseEntity<?> getProductFromOrder(){
+        ReceiptAjaxResponse response = new ReceiptAjaxResponse();
 
         setReceiptResponse(response);
 

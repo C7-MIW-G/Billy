@@ -6,12 +6,18 @@ $(function () {
     });
 });
 
+$(document).ready(function () {
+
+    document.getElementsByClassName('cat-click').item(0).click();
+    fire_ajax_getOrder();
+});
+
 function fire_ajax_getProducts(id){
 
     // $("#assortmentPage").addClass('disabledPage');
 
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/a-api/getProducts/" + id,
         cache: false,
@@ -38,9 +44,39 @@ function fire_ajax_addProduct(id){
     // $("#assortmentPage").addClass('disabledPage');
 
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/o-api/addProduct/" + id,
+        cache: false,
+        timeout: 600000,
+
+        success: function (resultData){
+
+            fillOrderList(resultData);
+            fillTotalPrice(resultData);
+
+            fillAccountOrderList(resultData);
+
+            console.log("SUCCESS : ", resultData);
+            // $("#assortmentPage").removeClass('disabledPage');
+        },
+
+        error: function (e){
+
+            console.log("ERROR: ", e)
+            // $("#assortmentPage").removeClass('disabledPage');
+        }
+    });
+}
+
+function fire_ajax_getOrder(){
+
+    // $("#assortmentPage").addClass('disabledPage');
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/o-api/getProducts/",
         cache: false,
         timeout: 600000,
 
@@ -68,7 +104,7 @@ function fire_ajax_removeProduct(id){
     // $("#assortmentPage").addClass('disabledPage');
 
     $.ajax({
-        type: "POST",
+        type: "GET",
         contentType: "application/json",
         url: "/o-api/removeProduct/" + id,
         cache: false,

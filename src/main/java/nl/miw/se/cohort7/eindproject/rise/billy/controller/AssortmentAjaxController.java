@@ -27,7 +27,7 @@ public class AssortmentAjaxController {
     }
 
 
-    @PostMapping("/getProducts/{id}")
+    @GetMapping("/getProducts/{id}")
     public ResponseEntity<?> getProductsFromCategory(@PathVariable("id") Long id) {
         ProductListAjaxResponse response = new ProductListAjaxResponse();
 
