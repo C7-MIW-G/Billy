@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+    <title>Category form</title>
+</head>
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+<div th:replace="fragments/general :: logoutModal"></div>
+
+
+<div class="billyContainer">
+    <div class="itemView grid-itemView-parent">
+        <div class="overviewListHead">
+            <div class="headStyleButton" th:text="${category.getCategoryId() == 0 ? 'New Category' : 'Edit'}"></div>
+        </div>
+        <div class="itemViewList">
+            <form th:action="@{/assortment/categories/new}" method="post" th:object="${category}">
+                <ul class="unordered-list">
+                    <li>
+                        <div class="grid-item-parent">
+                            <div><label for="name">Name</label></div>
+                            <div><input id="name" type="text" required maxlength="64" th:field="*{categoryName}"></div>
+                        </div>
+                        <div class="grid-item-parent error-inputField">
+                            <div></div>
+                            <div th:if="${#fields.hasErrors('categoryName')}" th:errorclass="error" th:errors="*{categoryName}"></div>
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="formButtonsGrid grid-buttons-parent">
+                            <div class="grid-buttonRow-parent">
+                                <div>
+                                    <input type="hidden" th:field="*{categoryId}">
+                                    <button class="detailsButtons"  value="Save">Save</button>
+                                </div>
+                                <div>
+                                    <a th:href="@{/assortment/categories}" th:class="button">Return</a>
+                                </div>
+                                <div><a class="button" th:class="${productListSize > 0 ? 'buttonIsDisabled button' : 'button'}"
+                                        id="deleteButton"
+                                        th:style="${category.getCategoryId() == 0 ? 'display:none' : 'visible'}"
+                                        th:text="Delete">
+                                </a>
+                                    <span class="billyTooltipCategory">Please delete all products before deleting the category</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="deleteModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader">Delete</div>
+        <p>
+            <span class="text-center">Are you sure you want to delete </span>
+            <span class="text-center" th:text="${category.categoryName}"></span>
+            <span class="text-center">?</span>
+        </p>
+        <div class="grid-modalButtons-parent">
+            <div id="cancelDelete" class="modalButton buttonCancel">Cancel</div>
+            <a id="delete" class="modalButton buttonConfirm-warning" th:href="@{/assortment/categories/delete/{categoryId}/(categoryId=${category.categoryId})}">Delete</a>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" th:src="@{/js/deleteConfirm.js}"></script>
+
+
+<div th:replace="fragments/general :: bottomScripts"></div>
+</body>
+</html>

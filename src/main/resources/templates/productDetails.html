@@ -42,13 +42,13 @@
                 <li>
                     <div class="item-buttons grid-buttons-parent">
                         <div>
-                            <a th:href="@{/assortment/products/update/{productId}(productId=${product.productId})}">
+                            <a th:href="@{/assortment/products/update/{productId}/(productId=${product.productId})}">
                                 <button class="detailsButtons">Edit</button>
                             </a>
                             <a id="deleteButton">
                                 <button class="detailsButtons">Delete</button>
                             </a>
-                            <a th:href="@{/assortment/categories/{categoryId} (categoryId = ${product.getCategoryDto().categoryId})}" class="button">Return</a>
+                            <a th:href="@{/assortment/categories/{categoryId}/ (categoryId = ${product.getCategoryDto().categoryId})}" class="button">Return</a>
                         </div>
                     </div>
                 </li>
@@ -67,7 +67,7 @@
         <div class="grid-modalButtons-parent">
             <div id="cancelDelete" class="modalButton buttonCancel">Cancel</div>
             <a id="delete" class="modalButton buttonConfirm-warning"
-               th:href="@{/assortment/products/delete/{productId}(productId=${product.productId})}">Delete</a>
+               th:href="@{/assortment/products/delete/{productId}/(productId=${product.productId})}">Delete</a>
         </div>
     </div>
     <div th:replace="fragments/general :: bottomScripts"></div>

@@ -20,19 +20,19 @@
             <ul class="unordered-list" th:each="billyUserDto : ${allBillyUsers}">
                 <li>
 
-                        <div class="grid-user-grandparent">
-                            <a th:href="@{/users/details/{userId}(userId=${billyUserDto.getUserId()})}">
-                                <div class="grid-user-parent">
-                                    <div th:class="${billyUserDto.getUserRoleEmoticon()}"></div>
-                                    <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
-                                    <div class="euro-sign" sec:authorize="hasRole('ROLE_BAR MANAGER')">€</div>
-                                    <div class="grid-user-child-right"  th:text="${billyUserDto.getAccountBalanceDisplayString()}" sec:authorize="hasRole('ROLE_BAR MANAGER')"></div>
-                                </div>
-                            </a>
-                            <a th:href="@{users/update/balance/{userId}(userId=${billyUserDto.userId})}" class="add-credit-button">
-                                <div class="fas fa-donate"></div>
-                            </a>
-                        </div>
+                    <div class="grid-user-grandparent">
+                        <a th:href="@{/users/details/{userId}/(userId=${billyUserDto.getUserId()})}">
+                            <div class="grid-user-parent">
+                                <div th:class="${billyUserDto.getUserRoleEmoticon()}"></div>
+                                <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
+                                <div class="euro-sign" sec:authorize="hasRole('ROLE_BAR MANAGER')">€</div>
+                                <div class="grid-user-child-right"  th:text="${billyUserDto.getAccountBalanceDisplayString()}" sec:authorize="hasRole('ROLE_BAR MANAGER')"></div>
+                            </div>
+                        </a>
+                        <a th:href="@{users/update/balance/{userId}/(userId=${billyUserDto.userId})}" class="add-credit-button">
+                            <div class="fas fa-donate"></div>
+                        </a>
+                    </div>
 
                 </li>
             </ul>

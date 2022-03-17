@@ -41,7 +41,7 @@ public class UserController {
         return "userOverview";
     }
 
-    @GetMapping("/update/balance/{billyUserId}")
+    @GetMapping("/update/balance/{billyUserId}/")
     @Secured({"ROLE_BAR MANAGER", "ROLE_BARTENDER"})
     protected String updateUserBalance(@PathVariable("billyUserId") Long userId, Model model) {
         BillyUserDto billyuserDto = userService.findByUserId(userId);
@@ -54,7 +54,7 @@ public class UserController {
         return "adjustCreditForm";
     }
 
-    @PostMapping("/update/balance/{billyUserId}")
+    @PostMapping("/update/balance/{billyUserId}/")
     protected String updateUserBalance(@Valid @ModelAttribute("addCredit") AddCreditDto addCredit, BindingResult result,
     @PathVariable("billyUserId") Long userId){
         if (result.hasErrors()) {
@@ -64,7 +64,6 @@ public class UserController {
             if (billyUserDto != null){
                 billyUserDto.calculateNewCredit(addCredit.getValue());
                 userService.updateUser(billyUserDto);
-                System.out.println(addCredit);
             }
         return "redirect:/users";
     }
@@ -97,7 +96,7 @@ public class UserController {
         return "redirect:/users";
     }
 
-    @GetMapping("/update/{billyUserId}")
+    @GetMapping("/update/{billyUserId}/")
     protected String showUserForm(@PathVariable("billyUserId") Long userId, Model model) {
         BillyUserDto billyUserDto = userService.findByUserId(userId);
         if (billyUserDto == null) {
@@ -107,7 +106,7 @@ public class UserController {
         return "userForm";
     }
 
-    @GetMapping("/details/{billyUserId}")
+    @GetMapping("/details/{billyUserId}/")
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String showUserDetails(@PathVariable("billyUserId") Long BillyUserId, Model model) {
         BillyUserDto billyUserDto = userService.findByUserId(BillyUserId);
@@ -167,17 +166,5 @@ public class UserController {
             model.addAttribute("OrdersByUser", barOrderViewDtoList);
             return "userOrderHistory";
         }
-    }
-
-    @GetMapping("/details/{billyUserId}/orderHistory/{orderId}")
-    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
-    protected String seeOrderHistoryDetails(@PathVariable("orderId") Long barOrderId, Model model,
-                                            @PathVariable String billyUserId) {
-        Optional<BarOrderViewDto> optionalBarOrderViewDto = barOrderService.findBarOrderById(barOrderId);
-        if (optionalBarOrderViewDto.isPresent()) {
-            model.addAttribute("barOrderDetail", optionalBarOrderViewDto.get());
-            return "userOrderHistoryDetails";
-        }
-        return "redirect:/users";
     }
 }

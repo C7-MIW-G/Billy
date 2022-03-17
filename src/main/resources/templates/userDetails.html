@@ -60,7 +60,7 @@
           <div class="item-buttons grid-buttons-parent">
             <div class="formButtonsGrid">
               <a th:href="@{/users/details/{userId}/orderHistory(userId=${billyUserDto.userId})}" class="button">Order history</a>
-              <a th:href="@{/users/update/{userId}(userId=${billyUserDto.userId})}"
+              <a th:href="@{/users/update/{userId}/(userId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')" class="button">Edit</a>
               </a>
               <a th:href="@{/users}" th:class="button">Return</a>
@@ -82,7 +82,7 @@
     <div class="grid-modalButtons-parent">
       <div id="cancelDelete" class="modalButton buttonCancel">Cancel</div>
       <a id="delete" class="modalButton buttonConfirm-warning"
-         th:href="@{/users/delete/{userId}(userId=${billyUserDto.userId})}">Delete</a>
+         th:href="@{/users/delete/{userId}/(userId=${billyUserDto.userId})}">Delete</a>
     </div>
   </div>
   <div th:replace="fragments/general :: bottomScripts"></div>

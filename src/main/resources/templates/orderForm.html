@@ -30,7 +30,7 @@
         <div class="receipt grid-orderPage-child grid-receipt-parent">
             <div class="clear-order-button-container">
                 <a onclick="fire_ajax_clearOrder()">
-                    <button class="clear-order-button">&#x2716</button>
+                    <div class="clear-order-button">&#x2716</div>
                 </a>
             </div>
             <div class="receipt-child recept-orderForm">
@@ -114,7 +114,7 @@
             <span>Charge </span>
             <span id="confirmUser"></span>
             <span> for </span>
-            <span id="accountPayTotalPrice" class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+            <span id="accountPayTotalPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
             <span>?</span>
         </p>
         <div class="grid-modalButtons-parent">

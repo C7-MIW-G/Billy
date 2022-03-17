@@ -19,7 +19,7 @@ function fire_ajax_getProducts(id){
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/a-api/getProducts/" + id,
+        url: "/a-api/getProducts/" + id + "/",
         cache: false,
         timeout: 600000,
 
@@ -46,7 +46,7 @@ function fire_ajax_addProduct(id){
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/o-api/addProduct/" + id,
+        url: "/o-api/addProduct/" + id + "/",
         cache: false,
         timeout: 600000,
 
@@ -98,7 +98,7 @@ function fire_ajax_removeProduct(id){
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/o-api/removeProduct/" + id,
+        url: "/o-api/removeProduct/" + id + "/",
         cache: false,
         timeout: 600000,
 
@@ -173,7 +173,7 @@ function fire_ajax_doAccountPay(id){
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        url: "/o-api/accountPay/" + id,
+        url: "/o-api/accountPay/" + id  + "/",
         cache: false,
         timeout: 600000,
 
@@ -384,7 +384,6 @@ function fillTotalPrice(data) {
 }
 function setupTotalPrice(price){
     let new_totalPrice = document.createElement('span');
-    new_totalPrice.setAttribute('class', 'productPrice');
 
     let tPrice = document.createTextNode(price);
     new_totalPrice.appendChild(tPrice);
@@ -394,11 +393,13 @@ function setupTotalPrice(price){
 function fillReceiptTotalPrice(tPrice) {
     let new_totalPrice = setupTotalPrice(tPrice);
     new_totalPrice.setAttribute('id', 'totalPrice');
+    new_totalPrice.setAttribute('class', 'productPrice');
     document.getElementById("totalPrice").replaceWith(new_totalPrice);
 }
 function fillAccountPayTotalPrice(tPrice){
     let new_totalPrice = setupTotalPrice(tPrice);
     new_totalPrice.setAttribute('id', 'accountTotalPrice');
+    new_totalPrice.setAttribute('class', 'productPrice');
     document.getElementById("accountTotalPrice").replaceWith(new_totalPrice);
 
 }
