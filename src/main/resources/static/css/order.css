@@ -108,15 +108,16 @@
     font-family: "Courier New", Verdana, sans-serif ;
     font-size: 1rem;
     line-height: 1.5;
-    height: calc(90%);
+    height: 90%;
+    min-width: 20%;
 }
 
 .receipt-ProductsList{
-    height: calc(100% - 2rem);
-    overflow: hidden;
-    overflow-y: auto;
+    overflow-y: overlay;
     font-family: "Courier New", Verdana, sans-serif ;
     background-color: white;
+    max-height: 93%;
+    height: 93%;
 }
 
 .receipt-ProductsList ul li a{
@@ -149,7 +150,8 @@
 .totalPrice{
     display: grid;
     grid-template-columns: calc(100% - 7em) 1rem 6rem;
-    text-align: right;
+    text-align: left;
+    margin-left: 3%;
 }
 
 .bartender{
@@ -169,19 +171,19 @@
 }
 .account-pay-modal-container{
     width: auto;
-    max-width: 50rem;
+    max-width: 75%;
     height: 75%;
     margin: 5vh auto;
 }
 .account-pay-modal-body{
     display: grid;
-    grid-template-columns: 3fr max(35%, 12rem);
-    grid-gap: max(5%, 4rem);
+    grid-template-columns: 3fr 2fr;
+    grid-gap: 2%;
     height: 100%;
 }
 .grid-user-account-pay{
     display: grid;
-    grid-template-columns: calc(40%) calc(25%) calc(31%);
+    grid-template-columns: calc(59%) calc(10%) calc(31%);
 }
 .flex-user-accountBalance{
     display: flex;
@@ -195,13 +197,22 @@
 }
 .account-pay-modal-body-select-customer{
     display: grid;
-    grid-template-rows: 10% 80%;
+    border: thin solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-height: 90%;
+    height: 100%;
+    background-color: white;
 }
 .account-pay-modal-body-order-info{
     display: grid;
-    grid-template-rows: 70% 25% 5%;
+    grid-template-rows: 94% 6%;
     align-items: center;
     background-color: white;
+    border: thin solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 90%;
+    max-height: 80%;
+    overflow: initial;
 }
 
 .isDisabled {
@@ -274,7 +285,7 @@
 }
 
 .clear-order-button-container {
-    background-color: #fffdd0;
+    background-color: transparent;
 }
 
 .clear-order-button {

@@ -14,10 +14,10 @@
 <body>
 <ul class="navTop" th:fragment="navbar">
     <div>
-        <li><a class="navTop-items navTop-left" th:href="@{/}">Order</a></li>
-        <li><a class="navTop-items navTop-left" th:href="@{/assortment}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Products</a></li>
-        <li><a class="navTop-items navTop-left" th:href="@{/users}">Users</a></li>
-        <li><a class="navTop-items navTop-left" th:href="@{/orderHistory}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Order history</a></li>
+        <li id="orderTab" class="navTab"><a class="navTop-items navTop-left" th:href="@{/}">Order</a></li>
+        <li id="productsTab" class="navTab"><a class="navTop-items navTop-left" th:href="@{/assortment}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Products</a></li>
+        <li id="usersTab" class="navTab"><a class="navTop-items navTop-left" th:href="@{/users}">Users</a></li>
+        <li id="orderHistoryTab" class="navTab"><a class="navTop-items navTop-left" th:href="@{/orderHistory}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Order history</a></li>
     </div>
     <div>
         <li><a class="navTop-items"
@@ -45,6 +45,7 @@
     <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/logoutForm.js}"></script>
+    <script type="text/javascript" th:src="@{/js/navbar.js}"></script>
 </div>
 </body>
 </html>

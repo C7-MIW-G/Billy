@@ -280,11 +280,11 @@ public class Seeder {
         defaultBier.setCategoryDto(bier);
         defaultBier.setProductOfAge(true);
 
-        defaultBier.setProductName("Heineken 0.3l");
+        defaultBier.setProductName("Heineken 0.3L");
         defaultBier.setProductPrice(2.50);
         assortmentService.saveProduct(defaultBier);
 
-        defaultBier.setProductName("Heineken 0.5l");
+        defaultBier.setProductName("Heineken 0.5L");
         defaultBier.setProductPrice(4.50);
         assortmentService.saveProduct(defaultBier);
 
