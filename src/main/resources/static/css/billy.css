@@ -510,9 +510,10 @@ a:visited {
     text-align: center;
     margin: 25vh auto auto auto;
     border: 2px solid dimgrey;
-    width: fit-content;
+    width: 23rem;
     border-radius: 0.25rem;
     background: linear-gradient(180deg, #d9d9d9 0%, #f0f0f0 15%, #ffffff 100%);
+
 }
 
 .modalHeader{
@@ -536,8 +537,15 @@ a:visited {
     margin-top: 6.6%;
 }
 .buttonConfirm-warning{
-    color: white;
+    color: white !important;
     background-color: #d70000;
+    margin-top: 6.6%;
+}
+
+.buttonOK{
+    background-color: #5cb85c;
+    color: white;
+    margin-top: 6.6%;
 }
 
 .buttonConfirm {
