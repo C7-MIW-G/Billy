@@ -4,10 +4,13 @@
 }
 .productName{
     text-align: left;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 .productPrice{
     text-align: right;
+    margin-right: 15%;
 }
 
 .euro-sign {

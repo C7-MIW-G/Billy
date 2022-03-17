@@ -9,7 +9,7 @@
 
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
-        <div class="itemViewListHead">
+        <div class="overviewListHead">
             <div class="headStyle">Add credit</div>
         </div>
         <div class="itemViewList">
@@ -32,7 +32,9 @@
                             <div>
                                 <button th:class="detailsButtons" type="submit" value="Add credit">Add credit</button>
                             </div>
-                            <a th:href="@{/users}" th:class="button">Return</a>
+                            <div>
+                                <a th:href="@{/users}" th:class="button">Return</a>
+                            </div>
                         </div>
                     </li>
                 </ul>

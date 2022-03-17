@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Column;
 import javax.validation.constraints.Size;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Size;
  */
 
 @Getter @Setter
-public class CategoryDto {
+public class CategoryDto implements Comparable<CategoryDto> {
 
     private long categoryId;
 
@@ -20,4 +21,9 @@ public class CategoryDto {
     @Size(max = 32, message = "The name of the category should be less than 33 characters")
     @Column(nullable = false)
     private String categoryName;
+
+    @Override
+    public int compareTo(@NotNull CategoryDto o) {
+        return this.categoryName.toLowerCase().compareTo(o.getCategoryName().toLowerCase());
+    }
 }

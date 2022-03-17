@@ -27,15 +27,16 @@
                 <div class="
                  receipt-TotalPrice">
                     <div class="totalPrice">
-                        <span class="totalPrice">Total Price:</span>
-                        <div class="euro-sign">€</div>
+                        <span>Total Price:</span>
+                        <span class="euro-sign">€</span>
                         <span class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(barOrderDetail.totalPrice)}"></span>
                     </div>
                 </div>
             </div>
+        </div>
+        <div>
             <button class="returnButtonOrderHistory" onclick="history.back()">Return</button>
         </div>
-
     </div>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>

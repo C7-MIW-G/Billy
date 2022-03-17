@@ -8,11 +8,11 @@
 <div th:replace="fragments/general :: logoutModal"></div>
 
 <div class="billyContainer">
-    <div class="overviewNoHistory grid-overview-noHistoryParent">
-        <div class="overviewOrderHistoryList grid-overviewOrderHistoryListHead-parent">
-            <div class="grid-user-child-left fontBold">Date and time</div>
-            <div class="grid-user-child-left fontBold">Price</div>
-            <div class="grid-user-child-left fontBold">Bartender</div>
+    <div class="overview grid-overview-HistoryParent">
+        <div class="overviewListHead grid-overviewOrderHistoryListHead-parent">
+            <div class="grid-user-child-left headStyle">Date and time</div>
+            <div class="grid-user-child-left headStyle">Price</div>
+            <div class="grid-user-child-left headStyle">Bartender</div>
         </div>
         <div>
             <h3 class="center-msg" th:text="${userDto.getName()} + ' has no orders yet!'"></h3>
