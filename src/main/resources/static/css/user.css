@@ -16,6 +16,7 @@
 
 .grid-orderHistoryDetails-parent{
     display: grid;
+    grid-template-rows: 90% 10%;
 }
 .grid-user-child-left{
     text-align: left;

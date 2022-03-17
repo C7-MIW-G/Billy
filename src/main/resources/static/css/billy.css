@@ -397,9 +397,23 @@ activeTab {
     max-height: calc(90%);
     overflow: hidden;
 }
+
+.recept-orderForm{
+    margin-top: 5px;
+    max-height: 90%;
+    height: 90%;
+    font-family: "Courier New", Verdana, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-style: solid;
+    border-width: thin;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
 .receipt-orderHistoryDetails {
     margin-top: 5px;
-    height: calc(87%);
+    max-height: 100%;
+    height: 100%;
     font-family: "Courier New", Verdana, sans-serif;
     font-size: 1rem;
     line-height: 1.5;
@@ -462,12 +476,13 @@ a:visited {
 .modalContainer{
     padding: 2.5rem;
     text-align: center;
-    background-color: #fcfcfc;
     margin: 25vh auto auto auto;
     border: 2px solid dimgrey;
     width: fit-content;
     border-radius: 0.25rem;
+    background: linear-gradient(180deg, #d9d9d9 0%, #f0f0f0 15%, #ffffff 100%);
 }
+
 .modalHeader{
     font-size: 1.75rem;
     font-weight: bold;
@@ -485,6 +500,8 @@ a:visited {
 }
 .buttonCancel{
     background-color: #cbcbcb;
+    margin-bottom: 0;
+    margin-top: 6.6%;
 }
 .buttonConfirm-warning{
     color: white;
