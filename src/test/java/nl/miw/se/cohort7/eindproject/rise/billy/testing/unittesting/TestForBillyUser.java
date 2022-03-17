@@ -1,4 +1,4 @@
-package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittesting;
+package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittests;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.AddCreditDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
