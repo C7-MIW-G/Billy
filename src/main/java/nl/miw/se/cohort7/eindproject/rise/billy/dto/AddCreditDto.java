@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddCreditDto {
-
+    
     private double value;
 }

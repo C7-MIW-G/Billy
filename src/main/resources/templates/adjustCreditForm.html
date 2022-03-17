@@ -17,9 +17,11 @@
                 <ul class="unordered-list">
                     <li>
                         <div class="grid-item-parent">
-                            <div><label class="inputLabel" for="addCredit">amount:</label></div>
+                            <div><label class="inputLabel" for="addCredit">Amount:</label></div>
                             <div><input type="number" id="addCredit" name="addCredit" th:field="*{value}"></div>
                         </div>
+                    </li>
+                    <li>
                         <div class="grid-item-parent">
                             <div>Account balance:</div>
                             <div th:text="${billyuserDto.getAccountBalanceDisplayString()}"></div>

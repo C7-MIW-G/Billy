@@ -1,6 +1,7 @@
 .grid-user-parent{
     display: grid;
-    grid-template-columns: 7% 58% 20% 15%;
+    padding: 0;
+    grid-template-columns: 7% 70% 8% 15%;
 }
 
 .grid-completeOrderHistory-parent{
@@ -48,4 +49,32 @@
 
 .buttonAddCredit{
     padding: 1px !important;
+    background-color: white;
+    transition: background-color .5s;
+    padding: 2px;
 }
+
+.buttonAddCredit:hover {
+    background-color: greenyellow;
+}
+.add-credit-button {
+    float: right;
+    background-color: transparent;
+    border: none;
+    height: auto;
+    width: auto;
+}
+.add-credit-button:hover {
+    background-color: lightsteelblue;
+    border-radius: 9px;
+    cursor: pointer;
+    border-width: 1px;
+    border-style: outset;
+    border-color: rgb(118, 118, 118);
+    border-image: initial;
+    height: auto;
+    width: auto;
+}
+
+
+
