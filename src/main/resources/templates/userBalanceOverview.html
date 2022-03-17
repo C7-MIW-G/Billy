@@ -11,7 +11,7 @@
     <div class="overview">
         <div class="overviewList">
             <ul class="unordered-list" th:each="billyUserDto : ${allBillyUsers}">
-                <li><a th:href="@{/users/details/{userId}(userId=${billyUserDto.userId})}">
+                <li><a th:href="@{/users/details/{userId}/(userId=${billyUserDto.userId})}">
                     <div class="grid-user-parent">
                         <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
                         <div class="grid-user-child-right" th:text="${billyUserDto.getAccountBalanceDisplayString()}"></div>

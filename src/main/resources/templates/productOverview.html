@@ -16,7 +16,7 @@
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="product : ${allProducts}">
-                <li><a th:href="@{/assortment/products/details/{productId}(productId=${product.productId})}">
+                <li><a th:href="@{/assortment/products/details/{productId}/(productId=${product.productId})}">
                     <div class="grid-product-parent">
                         <div class="productName fontBold" th:text="${product.getProductName()}"></div>
                         <div class="euro-sign">€</div>

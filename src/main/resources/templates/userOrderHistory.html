@@ -19,7 +19,7 @@
         <div class="overviewList">
             <ul class="unordered-list" th:each="barOrder : ${OrdersByUser}">
                 <li>
-                    <a style="padding-left: 0;padding-right: 0;" th:href="@{/users/details/{userId}/orderHistory/{orderId}(orderId=${barOrder.orderId}, userId=${billyUserId})}">
+                    <a style="padding-left: 0;padding-right: 0;" th:href="@{/users/details/{userId}/orderHistory/{orderId}/(orderId=${barOrder.orderId}, userId=${billyUserId})}">
                         <div class="grid-orderHistory-parent">
                             <div class="grid-user-child-left order-history-list-item-element"  th:text="${#temporals.format(barOrder.getDateTime(), 'dd-MM-yyyy HH:mm')}"></div>
                             <div class="grid-user-child-left order-history-list-item-element"  th:text="${barOrder.getTotalPriceEuroString(barOrder.getTotalPrice())}"></div>

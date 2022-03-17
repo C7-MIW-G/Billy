@@ -10,7 +10,7 @@
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
         <div class="overviewListHead">
-            <div class="headStyle" th:text="${product.productId == 0 ? 'New Product' : 'Edit'}"></div>
+            <div class="headStyle" th:text="${product.productId > 0 ? 'Edit' : 'New Product'}"></div>
         </div>
         <div class="itemViewList">
             <form th:action="@{/assortment/products/save}" method="post" th:object="${product}">
@@ -50,8 +50,8 @@
                                 <button class="detailsButtons" type="submit" value="Save product">Save</button>
                             </div>
                             <div>
-                                <a th:class="${product.productId == null ? 'displayNone' : 'button'}" th:href="@{/assortment/products/details/{productId} (productId = ${product.productId})}" class="button">Return</a>
-                                <a th:class="${product.productId != null ? 'displayNone' : 'button'}" th:href="@{/assortment/categories/{categoryId} (categoryId = ${product.getCategoryDto().categoryId})}" class="button">Return</a>
+                                <a th:class="${product.productId == null ? 'displayNone' : 'button'}" th:href="@{/assortment/products/details/{productId}/ (productId = ${product.productId})}" class="button">Return</a>
+                                <a th:class="${product.productId != null ? 'displayNone' : 'button'}" th:href="@{/assortment/categories/{categoryId}/ (categoryId = ${product.getCategoryDto().categoryId})}" class="button">Return</a>
                             </div>
                         </div>
                     </li>

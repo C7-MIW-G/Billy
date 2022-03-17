@@ -52,7 +52,7 @@ public class OrderController {
         return "completeOrderHistory";
     }
 
-    @GetMapping({"users/details/{billyUserId}/orderHistory/{orderId}", "orderHistory/{orderId}"})
+    @GetMapping({"users/details/{billyUserId}/orderHistory/{orderId}/", "orderHistory/{orderId}/"})
     @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String seeOrderHistoryDetails(@PathVariable("orderId") Long barOrderId, Model model) {
         Optional<BarOrderViewDto> optionalBarOrderViewDto = barOrderService.findBarOrderById(barOrderId);
