@@ -10,7 +10,7 @@
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
         <div class="overviewListHead">
-            <div class="headStyleButton vertical-center" th:text="${billyUserDto.getUserId() > 0 ? 'Edit' : 'New user'}"></div>
+            <div class="headStyleButton vertical-center" th:text="${billyUserDto.getUserId() > 0 ? 'Edit' : 'New'}"></div>
         </div>
         <div class="itemViewList grid-form_returnButton-parent">
             <form th:action="@{/users/new}" method="post" th:object="${billyUserDto}">
@@ -91,6 +91,17 @@
                                 <button class="detailsButtons" type="submit" value="Save user">Save</button>
                             </div>
                             <div>
+                                <a th:class="${billyUserDto.userId == null ? 'displayNone' : 'button'}" th:href="@{/users/changePassword/{billyUserId}(billyUserId=${billyUserDto.userId})}"
+                                   sec:authorize="hasRole('ROLE_BAR MANAGER')" class="button">Change Password</a>
+                            </div>
+                            <div>
+                                <a th:class="(${billyUserDto.userId == null ? 'displayNone' : 'button'})" th:classappend="${billyUserId == #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled ' : ''}"
+                                   id="deleteButton" sec:authorize="hasRole('ROLE_BAR MANAGER')" class="button">Delete
+                                </a>
+                                <span class="billyTooltip">It is not possible to delete your own account</span>
+                            </div>
+
+                            <div>
                                 <a th:class="${billyUserDto.userId == null ? 'displayNone' : 'button'}" th:href="@{/users/details/{userId} (userId = ${billyUserDto.userId})}" class="button">Return</a>
                                 <a th:class="${billyUserDto.userId != null ? 'displayNone' : 'button'}" th:href="@{/users}" class="button">Return</a>
                             </div>
@@ -100,6 +111,23 @@
             </form>
         </div>
     </div>
+</div>
+<div id="deleteModal" class="customModal">
+    <div class="modalContainer">
+        <div class="modalHeader"></div>
+        <p>
+            <span class="text-center">Are you sure you want to delete </span>
+            <span class="text-center" th:text="${billyUserDto.getName()}"></span>
+            <span class="text">?</span>
+        </p>
+        <div class="grid-modalButtons-parent">
+            <div id="cancelDelete" class="modalButton buttonCancel">Cancel</div>
+            <a id="delete" class="modalButton buttonConfirm-warning"
+               th:href="@{/users/delete/{userId}(userId=${billyUserDto.userId})}">Delete</a>
+        </div>
+    </div>
+    <div th:replace="fragments/general :: bottomScripts"></div>
+    <script type="text/javascript" th:src="@{/js/deleteConfirm.js}"></script>
 </div>
 <div th:replace="fragments/general :: bottomScripts"></div>
 </body>
