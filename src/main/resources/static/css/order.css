@@ -196,13 +196,20 @@
 }
 .account-pay-modal-body-select-customer{
     display: grid;
-    grid-template-rows: 10% 80%;
+    border: thin solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    max-height: 100%;
+    height: 100%;
 }
 .account-pay-modal-body-order-info{
     display: grid;
-    grid-template-rows: 70% 25% 5%;
+    grid-template-rows: 94% 6%;
     align-items: center;
     background-color: white;
+    border: thin solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 90%;
+    max-height: 90%;
 }
 
 .isDisabled {
