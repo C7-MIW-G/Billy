@@ -19,7 +19,7 @@ import java.util.Date;
 
 @Getter @Setter
 @UniqueUsername
-public class BillyUserDto {
+public class BillyUserDto implements Comparable <BillyUserDto> {
 
     private static final int USER_DISPLAY_STRING_LENGTH = 20;
 
@@ -49,7 +49,6 @@ public class BillyUserDto {
 
     @NegativeOrZero(message = "Please insert a negative number or 0")
     private double maxCredit;
-
 
 
     public String getUserRoleEmoticon() {
@@ -86,7 +85,7 @@ public class BillyUserDto {
         return formatAsEuro(accountBalance);
     }
 
-    public String getRemainingCreditDisplayString(){
+    public String getRemainingCreditDisplayString() {
         return formatAsEuro(accountBalance - maxCredit);
     }
 
@@ -102,10 +101,13 @@ public class BillyUserDto {
         accountBalance -= amount;
     }
 
-    public void calculateNewCredit(double addCredit){
+    public void calculateNewCredit(double addCredit) {
         accountBalance += addCredit;
     }
 
+    @Override
+    public int compareTo(@org.jetbrains.annotations.NotNull BillyUserDto o) {
+        return this.getName().toLowerCase().compareTo(o.getName().toLowerCase());
+    }
 }
-
 
