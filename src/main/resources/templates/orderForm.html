@@ -114,7 +114,8 @@
             <span>Charge </span>
             <span id="confirmUser"></span>
             <span> for </span>
-            <span id="accountPayTotalPrice" class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+            <span id="accountPayTotalPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+            <span>?</span>
         </p>
         <div class="grid-modalButtons-parent">
             <div id="cancelButton" class="modalButton buttonCancel">Cancel</div>

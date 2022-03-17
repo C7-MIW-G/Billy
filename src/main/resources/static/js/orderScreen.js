@@ -410,6 +410,7 @@ function fillDirectPayTotalPrice(tPrice){
 function fillConfirmPayTotalPrice(tPrice){
     let new_totalPrice = setupTotalPrice("€ " + tPrice);
     new_totalPrice.setAttribute('id', 'accountPayTotalPrice');
+    new_totalPrice.removeAttribute('class');
     document.getElementById("accountPayTotalPrice").replaceWith(new_totalPrice);
 }
 
