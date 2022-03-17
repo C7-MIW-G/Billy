@@ -23,7 +23,7 @@
                         <div class="grid-user-grandparent">
                             <a th:href="@{/users/details/{userId}(userId=${billyUserDto.getUserId()})}">
                                 <div class="grid-user-parent">
-                                    <div class="grid-user-child-left RoleSign fas"  th:text="${billyUserDto.getUserRoleEmoticon()}" ></div>
+                                    <div th:class="${billyUserDto.getUserRoleEmoticon()}"></div>
                                     <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
                                     <div class="euro-sign" sec:authorize="hasRole('ROLE_BAR MANAGER')">€</div>
                                     <div class="grid-user-child-right"  th:text="${billyUserDto.getAccountBalanceDisplayString()}" sec:authorize="hasRole('ROLE_BAR MANAGER')"></div>

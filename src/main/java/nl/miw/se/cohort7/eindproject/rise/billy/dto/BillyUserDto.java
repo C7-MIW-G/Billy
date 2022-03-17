@@ -54,11 +54,9 @@ public class BillyUserDto implements Comparable <BillyUserDto> {
     public String getUserRoleEmoticon() {
         switch (userRole) {
             case "ROLE_BAR MANAGER":
-                return new String(Character.toChars(0x1F454));
+                return "fas fa-user-cog";
             case "ROLE_BARTENDER":
-                return new String(Character.toChars(0x1F935));
-            case "ROLE_CUSTOMER":
-                return new String(Character.toChars(0x2800));
+                return "fas fa-user-tie";
             default:
                 return "";
         }

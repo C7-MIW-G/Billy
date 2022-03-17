@@ -44,11 +44,6 @@
     text-overflow: ellipsis;
 }
 
-.RoleSign{
-    opacity: 100%;
-    font-size: 18px;
-}
-
 .grid-user-grandparent {
     display: grid;
     grid-template-columns: calc(100% - 2.375rem) 2.375rem;
@@ -79,7 +74,7 @@
     width: auto;
     border-color:#888888;
     border-style: solid;
-    border-width: 0px;
+    border-width: 0;
 }
 
 .add-credit-button:focus{
