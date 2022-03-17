@@ -1,4 +1,4 @@
-package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittests;
+package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittesting;
 
 import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
 import org.junit.jupiter.api.Test;

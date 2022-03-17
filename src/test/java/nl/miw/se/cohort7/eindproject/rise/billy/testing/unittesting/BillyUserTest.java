@@ -1,6 +1,10 @@
-package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittests;
+package nl.miw.se.cohort7.eindproject.rise.billy.testing.unittesting;
 
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BillyUserDto;
+import nl.miw.se.cohort7.eindproject.rise.billy.dto.BarOrderDto;
 import nl.miw.se.cohort7.eindproject.rise.billy.model.BillyUser;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

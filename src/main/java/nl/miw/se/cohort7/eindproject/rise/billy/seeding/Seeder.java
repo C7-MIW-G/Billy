@@ -70,7 +70,7 @@ public class Seeder {
         managerUser1.setMaxCredit(-125);
 
         managerUser1.setName("Erik de Vries");
-        managerUser1.setUsername("barmanager@billy.com");
+        managerUser1.setUsername("barmanager1@billy.com");
         managerUser1.setPassword(DEFAULT_PASSWORD);
         managerUser1.setUserRole("ROLE_BAR MANAGER");
         userService.saveNewUser(managerUser1);
@@ -82,7 +82,7 @@ public class Seeder {
         managerUser2.setMaxCredit(0);
 
         managerUser2.setName("José de Groot");
-        managerUser2.setUsername("barmanagerjose@billy.com");
+        managerUser2.setUsername("barmanager2@billy.com");
         managerUser2.setPassword(DEFAULT_PASSWORD);
         managerUser2.setUserRole("ROLE_BAR MANAGER");
         userService.saveNewUser(managerUser2);
@@ -95,7 +95,7 @@ public class Seeder {
         bartender1.setMaxCredit(0);
 
         bartender1.setName("Hans de Kraai");
-        bartender1.setUsername("bartenderhans@billy.com");
+        bartender1.setUsername("bartender1@billy.com");
         bartender1.setPassword(DEFAULT_PASSWORD);
         bartender1.setUserRole("ROLE_BARTENDER");
         userService.saveNewUser(bartender1);
@@ -106,7 +106,7 @@ public class Seeder {
         bartender2.setMaxCredit(-100);
 
         bartender2.setName("Johan van Dijk");
-        bartender2.setUsername("bartenderjohan@billy.com");
+        bartender2.setUsername("bartender2@billy.com");
         bartender2.setPassword(DEFAULT_PASSWORD);
         bartender2.setUserRole("ROLE_BARTENDER");
         userService.saveNewUser(bartender2);
@@ -117,7 +117,7 @@ public class Seeder {
         bartender3.setMaxCredit(-50);
 
         bartender3.setName("Erica van Drie");
-        bartender3.setUsername("bartendererica@billy.com");
+        bartender3.setUsername("bartender3@billy.com");
         bartender3.setPassword(DEFAULT_PASSWORD);
         bartender3.setUserRole("ROLE_BARTENDER");
         userService.saveNewUser(bartender3);
