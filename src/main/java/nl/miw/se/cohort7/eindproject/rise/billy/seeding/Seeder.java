@@ -31,15 +31,12 @@ public class Seeder {
     private AssortmentService assortmentService;
     private UserService userService;
     private BarOrderService barOrderService;
-    private Date currentDate;
 
     @Autowired
     public Seeder(AssortmentService assortmentService, UserService userService, BarOrderService barOrderService) {
         this.assortmentService = assortmentService;
         this.userService = userService;
         this.barOrderService = barOrderService;
-        this.currentDate = Date.from(Instant.now());
-
     }
 
     @EventListener
