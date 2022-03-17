@@ -110,15 +110,16 @@
 <div id="confirm-account-pay-modal" class="customModal">
     <div class="modalContainer">
         <div class="modalHeader">Account pay</div>
-        <p>
+        <p class="text-center">
             <span>Charge </span>
             <span id="confirmUser"></span>
             <span> for </span>
             <span id="accountPayTotalPrice" class="productPrice" th:text="'€ ' + ${barOrder.getTotalPriceDisplayString()}"></span>
+            <span>?</span>
         </p>
         <div class="grid-modalButtons-parent">
             <div id="cancelButton" class="modalButton buttonCancel">Cancel</div>
-            <a id="confirmButton" class="modalButton buttonConfirm-warning">Confirm</a>
+            <a id="confirmButton" class="modalButton buttonOK">Confirm</a>
         </div>
     </div>
 
