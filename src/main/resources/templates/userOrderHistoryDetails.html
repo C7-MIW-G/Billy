@@ -18,7 +18,7 @@
                                 <div class="grid-product-parent">
                                     <div class="productName" th:text="${product.productName}"></div>
                                     <div class="euro-sign">€</div>
-                                    <div class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(product.productPrice)}"></div>
+                                    <div class="productPrice" th:text="${barOrderDetail.getTotalPriceDisplayString(product.productPrice * product.amount)}"></div>
                                 </div>
                             </div>
                         </li>
