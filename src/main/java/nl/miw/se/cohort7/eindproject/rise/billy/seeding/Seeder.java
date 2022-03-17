@@ -12,11 +12,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import javax.swing.text.html.Option;
 import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Jordy Pragt <j.pragt@st.hanze.nl>
@@ -25,181 +22,205 @@ import java.util.Optional;
 @Component
 public class Seeder {
 
-    private final String DEFAULT_PASSWORD = "123456789";
+    private static final int RANDOM_UPPER_LIMIT_NUMBER_OF_PRODUCTS = 10;
+    private static final int RANDOM_UPPER_LIMIT_PRODUCT_AMOUNT = 5;
+    private static final int RANDOM_UPPER_LIMIT_ORDER_AMOUNT = 17;
+    private static final int RANDOM_LOWER_LIMIT = 1;
+    private static final String DEFAULT_PASSWORD = "123456789";
 
     private AssortmentService assortmentService;
     private UserService userService;
     private BarOrderService barOrderService;
-    private Date currentDate;
 
     @Autowired
     public Seeder(AssortmentService assortmentService, UserService userService, BarOrderService barOrderService) {
         this.assortmentService = assortmentService;
         this.userService = userService;
         this.barOrderService = barOrderService;
-        this.currentDate = Date.from(Instant.now());
-
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent refreshedEvent){
-        if (userService.findUsersByRole("ROLE_BAR MANAGER").isEmpty()){
-            if (userService.findAll().isEmpty()){
-                seedBartenders();
-                seedCustomers();
-            }
-            seedManager();
-        }
-
         if (assortmentService.findAllCategories().isEmpty()
                 && assortmentService.findAllProducts().isEmpty()){
             seedCategory();
             seedProducts();
         }
 
-        if (barOrderService.findAll().isEmpty()) {
-            seedBarOrders();
+        if (userService.findUsersByRole("ROLE_BAR MANAGER").isEmpty()){
+            if (userService.findAll().isEmpty()){
+                seedBartenders();
+                seedCustomers();
+                seedOrder();
+            }
+            seedManager();
+        }
+    }
+
+    private BillyUserDto createBasicUser(String name, Date date, double balance, double maxCredit){
+        BillyUserDto user = new BillyUserDto();
+
+        user.setName(name);
+        user.setPassword(DEFAULT_PASSWORD);
+        user.setBirthdate(date);
+        user.setAccountBalance(balance);
+        user.setMaxCredit(maxCredit);
+
+        return user;
+    }
+
+    private void saveAsManager(List<BillyUserDto> managerList){
+        for (BillyUserDto manager : managerList) {
+            String email = String.format("barmanager%d@billy.com", managerList.lastIndexOf(manager) + 1);
+            manager.setUsername(email);
+            manager.setUserRole("ROLE_BAR MANAGER");
+
+            userService.saveNewUser(manager);
+        }
+    }
+
+    private void saveAsBartender(List<BillyUserDto> bartenderList){
+        for (BillyUserDto bartender : bartenderList) {
+            String email = String.format("bartender%d@billy.com", bartenderList.lastIndexOf(bartender) + 1);
+            bartender.setUsername(email);
+            bartender.setUserRole("ROLE_BARTENDER");
+
+            userService.saveNewUser(bartender);
+        }
+    }
+
+    private void saveAsCustomer(List<BillyUserDto> customerList){
+        for (BillyUserDto customer : customerList) {
+            String email = String.format("customer%d@billy.com", customerList.lastIndexOf(customer) + 1);
+            customer.setUsername(email);
+            customer.setUserRole("ROLE_CUSTOMER");
+
+            userService.saveNewUser(customer);
         }
     }
 
     private void seedManager(){
-        BillyUserDto managerUser1 = new BillyUserDto();
+        List<BillyUserDto> managerList = new ArrayList<>();
 
-        managerUser1.setBirthdate(convertToDateViaInstant(LocalDate.of(1990, Month.APRIL,15)));
-        managerUser1.setAccountBalance(0);
-        managerUser1.setMaxCredit(-125);
+        Date birthdate1 = convertToDateViaInstant(LocalDate.of(1990, Month.APRIL,15));
+        managerList.add(createBasicUser("Erik de Vries", birthdate1, 0, -125));
 
-        managerUser1.setName("Erik de Vries");
-        managerUser1.setUsername("barmanager1@billy.com");
-        managerUser1.setPassword(DEFAULT_PASSWORD);
-        managerUser1.setUserRole("ROLE_BAR MANAGER");
-        userService.saveNewUser(managerUser1);
+        Date birthdate2 = convertToDateViaInstant(LocalDate.of(1963, Month.JANUARY,5));
+        managerList.add(createBasicUser("José de Groot", birthdate2, 0, 0));
 
-        BillyUserDto managerUser2 = new BillyUserDto();
-
-        managerUser2.setBirthdate(convertToDateViaInstant(LocalDate.of(1963, Month.JANUARY,5)));
-        managerUser2.setAccountBalance(0);
-        managerUser2.setMaxCredit(0);
-
-        managerUser2.setName("José de Groot");
-        managerUser2.setUsername("barmanager2@billy.com");
-        managerUser2.setPassword(DEFAULT_PASSWORD);
-        managerUser2.setUserRole("ROLE_BAR MANAGER");
-        userService.saveNewUser(managerUser2);
+        saveAsManager(managerList);
     }
 
     private void seedBartenders(){
-        BillyUserDto bartender1 = new BillyUserDto();
-        bartender1.setBirthdate(convertToDateViaInstant(LocalDate.of(1980, Month.AUGUST,23)));
-        bartender1.setAccountBalance(0);
-        bartender1.setMaxCredit(0);
+        List<BillyUserDto> bartenderList = new ArrayList<>();
 
-        bartender1.setName("Hans de Kraai");
-        bartender1.setUsername("bartender1@billy.com");
-        bartender1.setPassword(DEFAULT_PASSWORD);
-        bartender1.setUserRole("ROLE_BARTENDER");
-        userService.saveNewUser(bartender1);
+        Date birthdate1 = convertToDateViaInstant(LocalDate.of(1980, Month.AUGUST,23));
+        bartenderList.add(createBasicUser("Hans de Kraai", birthdate1, 0, 0));
 
-        BillyUserDto bartender2 = new BillyUserDto();
-        bartender2.setBirthdate(convertToDateViaInstant(LocalDate.of(1949, Month.DECEMBER,28)));
-        bartender2.setAccountBalance(0);
-        bartender2.setMaxCredit(-100);
+        Date birthdate2 = convertToDateViaInstant(LocalDate.of(1949, Month.DECEMBER,28));
+        bartenderList.add(createBasicUser("Johan van Dijk", birthdate2, 0, -100));
 
-        bartender2.setName("Johan van Dijk");
-        bartender2.setUsername("bartender2@billy.com");
-        bartender2.setPassword(DEFAULT_PASSWORD);
-        bartender2.setUserRole("ROLE_BARTENDER");
-        userService.saveNewUser(bartender2);
+        Date birthdate3 = convertToDateViaInstant(LocalDate.of(2002, Month.FEBRUARY,2));
+        bartenderList.add(createBasicUser("Erica van Drie", birthdate3, 0, -50));
 
-        BillyUserDto bartender3 = new BillyUserDto();
-        bartender3.setBirthdate(convertToDateViaInstant(LocalDate.of(2002, Month.FEBRUARY,2)));
-        bartender3.setAccountBalance(0);
-        bartender3.setMaxCredit(-50);
-
-        bartender3.setName("Erica van Drie");
-        bartender3.setUsername("bartender3@billy.com");
-        bartender3.setPassword(DEFAULT_PASSWORD);
-        bartender3.setUserRole("ROLE_BARTENDER");
-        userService.saveNewUser(bartender3);
+        saveAsBartender(bartenderList);
     }
 
     private void seedCustomers(){
-        BillyUserDto customer1 = new BillyUserDto();
-        customer1.setBirthdate(convertToDateViaInstant(LocalDate.of(2005, Month.SEPTEMBER,13)));
-        customer1.setAccountBalance(0);
-        customer1.setMaxCredit(0);
+        List<BillyUserDto> customerList = new ArrayList<>();
 
-        customer1.setName("Fenna den Hartog");
-        customer1.setUsername("customerfenna@billy.com");
-        customer1.setPassword(DEFAULT_PASSWORD);
-        customer1.setUserRole("ROLE_CUSTOMER");
-        userService.saveNewUser(customer1);
+        Date birthdate1 = convertToDateViaInstant(LocalDate.of(2005, Month.SEPTEMBER,13));
+        customerList.add(createBasicUser("Fenna den Hartog", birthdate1, 25, 0));
 
-        BillyUserDto customer2 = new BillyUserDto();
-        customer2.setBirthdate(convertToDateViaInstant(LocalDate.of(2010, Month.OCTOBER,19)));
-        customer2.setAccountBalance(0);
-        customer2.setMaxCredit(0);
+        Date birthdate2 = convertToDateViaInstant(LocalDate.of(2010, Month.OCTOBER,19));
+        customerList.add(createBasicUser("Finn den Hartog", birthdate2, 0, 0));
 
-        customer2.setName("Finn den Hartog");
-        customer2.setUsername("customerfinn@billy.com");
-        customer2.setPassword(DEFAULT_PASSWORD);
-        customer2.setUserRole("ROLE_CUSTOMER");
-        userService.saveNewUser(customer2);
+        Date birthdate3 = convertToDateViaInstant(LocalDate.of(2004, Month.MAY,13));
+        customerList.add(createBasicUser("Rick ten Dam", birthdate3, 0, -20));
 
-        BillyUserDto customer3 = new BillyUserDto();
-        customer3.setBirthdate(convertToDateViaInstant(LocalDate.of(2004, Month.MAY,13)));
-        customer3.setAccountBalance(0);
-        customer3.setMaxCredit(0);
+        Date birthdate4 = convertToDateViaInstant(LocalDate.of(2007, Month.NOVEMBER,21));
+        customerList.add(createBasicUser("Steven de Kraai", birthdate4, 0, 0));
 
-        customer3.setName("Rick ten Dam");
-        customer3.setUsername("customerrick@billy.com");
-        customer3.setPassword(DEFAULT_PASSWORD);
-        customer3.setUserRole("ROLE_CUSTOMER");
-        userService.saveNewUser(customer3);
+        Date birthdate5 = convertToDateViaInstant(LocalDate.of(1975, Month.JULY,17));
+        customerList.add(createBasicUser("Ria de Vries", birthdate5, 0, -175));
 
-        BillyUserDto customer4 = new BillyUserDto();
-        customer4.setBirthdate(convertToDateViaInstant(LocalDate.of(2007, Month.NOVEMBER,21)));
-        customer4.setAccountBalance(0);
-        customer4.setMaxCredit(0);
+        Date birthdate6 = convertToDateViaInstant(LocalDate.of(1967, Month.JUNE,13));
+        customerList.add(createBasicUser("Els", birthdate6, 100, 0));
 
-        customer4.setName("Steven de Kraai");
-        customer4.setUsername("customersteven@billy.com");
-        customer4.setPassword(DEFAULT_PASSWORD);
-        customer4.setUserRole("ROLE_CUSTOMER");
-        userService.saveNewUser(customer4);
+        Date birthdate7 = convertToDateViaInstant(LocalDate.of(1972, Month.JANUARY,13));
+        customerList.add(createBasicUser("Johanna Waterman-Van der Heijden", birthdate7, 0, -50));
 
-        BillyUserDto customer5 = new BillyUserDto();
-        customer5.setBirthdate(convertToDateViaInstant(LocalDate.of(1975, Month.JULY,17)));
-        customer5.setAccountBalance(0);
-        customer5.setMaxCredit(-175);
+        saveAsCustomer(customerList);
+    }
 
-        customer5.setName("Ria de Vries");
-        customer5.setUsername("customerria@billy.com");
-        customer5.setPassword(DEFAULT_PASSWORD);
-        customer5.setUserRole("ROLE_CUSTOMER");
-        userService.saveNewUser(customer5);
+    private void seedOrder(){
+        List<ProductDto> productList = assortmentService.findAllProducts();
+        Collections.shuffle(productList);
 
-        BillyUserDto customer6 = new BillyUserDto();
-        customer6.setBirthdate(convertToDateViaInstant(LocalDate.of(1967, Month.JUNE,13)));
-        customer6.setAccountBalance(0);
-        customer6.setMaxCredit(0);
+        List<BillyUserDto> customerList = userService.findUsersByRole("ROLE_CUSTOMER");
+        List<BillyUserDto> bartenderList = userService.findUsersByRole("ROLE_BARTENDER");
 
-        customer6.setName("Els");
-        customer6.setUsername("customerels@billy.com");
-        customer6.setPassword(DEFAULT_PASSWORD);
-        customer6.setUserRole("ROLE_CUSTOMER");
-        userService.saveNewUser(customer6);
+        for (BillyUserDto customer : customerList) {
+            int amountOfOrders = getRandomNumberStartOnOne(RANDOM_UPPER_LIMIT_ORDER_AMOUNT);
+            for (int orderNumber = 0; orderNumber < amountOfOrders; orderNumber++) {
+                makeAndSaveOrder(customer, orderNumber, bartenderList, productList);
+            }
+        }
+    }
 
-        BillyUserDto customer7 = new BillyUserDto();
-        customer7.setBirthdate(convertToDateViaInstant(LocalDate.of(1972, Month.JANUARY,13)));
-        customer7.setAccountBalance(0);
-        customer7.setMaxCredit(-50);
+    private void makeAndSaveOrder(BillyUserDto customer, int number,
+                                  List<BillyUserDto> bartenderList, List<ProductDto> productList){
+        BarOrderDto barOrderDto = new BarOrderDto();
+        Collections.shuffle(bartenderList);
 
-        customer7.setName("Johanna Waterman-Van der Heijden");
-        customer7.setUsername("customerjohanna@billy.com");
-        customer7.setPassword(DEFAULT_PASSWORD);
-        customer7.setUserRole("ROLE_CUSTOMER");
-        userService.saveNewUser(customer7);
+        Optional<BillyUserDto> optionalBartender = bartenderList.stream().findFirst();
+        optionalBartender.ifPresent(barOrderDto::setBartender);
+
+        barOrderDto.setDateTime(getDate(number));
+        barOrderDto.setCustomer(customer);
+
+        barOrderDto.setProductMap(makeProductMap(productList));
+
+        BarOrderDto.activeOrder = barOrderDto;
+        barOrderService.saveBarOrder(barOrderDto);
+        BarOrderDto.clearActiveOrder();
+    }
+
+    private LocalDateTime getDate(int hour){
+        int year = java.time.Year.now().getValue();
+        int month = MonthDay.now().getMonthValue();
+        int day = MonthDay.now().getDayOfMonth();
+        int minute = LocalTime.now().getMinute();
+        return LocalDateTime.of(year, month, day, hour, minute);
+    }
+
+    private Map<ProductDto, Integer> makeProductMap(List<ProductDto> productList){
+        Map<ProductDto, Integer> productMap = new HashMap<>();
+
+        int buyListSize = getRandomNumberStartOnOne(RANDOM_UPPER_LIMIT_NUMBER_OF_PRODUCTS);
+        ArrayList<Integer> productsAdded = new ArrayList<>();
+
+        for (int i = 0; i < buyListSize; i++) {
+            Optional<ProductDto> optionalProduct = getRandomProduct(productList, productsAdded);
+            optionalProduct.ifPresent(productDto ->
+                    productMap.put(productDto, getRandomNumberStartOnOne(RANDOM_UPPER_LIMIT_PRODUCT_AMOUNT)));
+        }
+        return productMap;
+    }
+
+    private int getRandomNumberStartOnOne(int upperLimit){
+        return (int) (Math.random() *
+                (upperLimit - RANDOM_LOWER_LIMIT)) + RANDOM_LOWER_LIMIT;
+    }
+
+    private Optional<ProductDto> getRandomProduct(List<ProductDto> productList, ArrayList<Integer> productsAdded){
+        int productPosition = (int) (Math.random() * (productList.size() - RANDOM_LOWER_LIMIT));
+        if(!productsAdded.contains(productPosition)){
+            ProductDto productDto = productList.get(productPosition);
+            productsAdded.add(productPosition);
+            return Optional.of(productDto);
+        }
+        return Optional.empty();
     }
 
     private void seedCategory(){
@@ -494,31 +515,6 @@ public class Seeder {
         defaultSnoep.setProductName("Zakje snoep");
         defaultSnoep.setProductPrice(0.50);
         assortmentService.saveProduct(defaultSnoep);
-    }
-
-    private void seedBarOrders() {
-        BillyUserDto customer1 = new BillyUserDto();
-        customer1.setName("Fenna den Hartog");
-
-        BillyUserDto customer2 = new BillyUserDto();
-        customer2.setName("Finn den Hartog");
-
-        BillyUserDto customer3 = new BillyUserDto();
-        customer3.setName("Rick ten Dam");
-
-        BillyUserDto bartender1 = new BillyUserDto();
-        bartender1.setName("Hans de Kraai");
-
-        BillyUserDto bartender2 = new BillyUserDto();
-        bartender2.setName("Johan van Dijk");
-
-        BarOrderDto barOrder1 = new BarOrderDto();
-        barOrder1.setBartender(bartender1);
-        barOrder1.setCustomer(customer1);
-
-        BarOrderDto barOrder2 = new BarOrderDto();
-        barOrder2.setBartender(bartender2);
-        barOrder2.setCustomer(customer3);
     }
 
     public Date convertToDateViaInstant(LocalDate dateToConvert) {

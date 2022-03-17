@@ -171,19 +171,19 @@
 }
 .account-pay-modal-container{
     width: auto;
-    max-width: 50rem;
+    max-width: 75%;
     height: 75%;
     margin: 5vh auto;
 }
 .account-pay-modal-body{
     display: grid;
-    grid-template-columns: 3fr max(35%, 12rem);
-    grid-gap: max(5%, 4rem);
+    grid-template-columns: 3fr 2fr;
+    grid-gap: 2%;
     height: 100%;
 }
 .grid-user-account-pay{
     display: grid;
-    grid-template-columns: calc(40%) calc(25%) calc(31%);
+    grid-template-columns: calc(59%) calc(10%) calc(31%);
 }
 .flex-user-accountBalance{
     display: flex;
@@ -199,7 +199,7 @@
     display: grid;
     border: thin solid;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    max-height: 100%;
+    max-height: 90%;
     height: 100%;
     background-color: white;
 }
@@ -211,7 +211,8 @@
     border: thin solid;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     height: 90%;
-    max-height: 90%;
+    max-height: 80%;
+    overflow: initial;
 }
 
 .isDisabled {

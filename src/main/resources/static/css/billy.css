@@ -327,7 +327,7 @@ activeTab {
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: normal;
-
+    margin: auto;
 }
 
 .balance-button {
@@ -356,6 +356,14 @@ activeTab {
     font-size: 1.5rem;
     font-weight: bold;
     margin-left: 0.625rem;
+}
+
+.headStyleButton{
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 0.625rem;
+    margin-top: 1%;
 }
 .itemViewList ul li{
     padding-top: 0.5rem;
