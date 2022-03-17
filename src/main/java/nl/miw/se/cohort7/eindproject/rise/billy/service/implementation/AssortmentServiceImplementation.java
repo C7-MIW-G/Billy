@@ -7,6 +7,7 @@ import nl.miw.se.cohort7.eindproject.rise.billy.model.Product;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.CategoryRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.repository.ProductRepository;
 import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
+import nl.miw.se.cohort7.eindproject.rise.billy.service.DtoConverter.AssortmentConverters;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,35 +25,18 @@ public class AssortmentServiceImplementation implements AssortmentService {
 
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
+    private AssortmentConverters assortmentConverters;
 
     public AssortmentServiceImplementation(ProductRepository productRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
+        this.assortmentConverters = new AssortmentConverters();
     }
-
 
     //Category-related
-    private CategoryDto convertCategoryToDto(Category category){
-        CategoryDto categoryDto = new CategoryDto();
-
-        categoryDto.setCategoryId(category.getCategoryId());
-        categoryDto.setCategoryName(category.getCategoryName());
-
-        return categoryDto;
-    }
-
-    private Category convertDtoToCategory(CategoryDto categoryDto){
-        Category category = new Category();
-        category.setCategoryId(categoryDto.getCategoryId());
-
+    private void getAndSetCategoryProductList(Category category){
         Optional<Category> optionalCategory = categoryRepository.findById(category.getCategoryId());
-        if (optionalCategory.isPresent()){
-            category = optionalCategory.get();
-        }
-
-        category.setCategoryName(categoryDto.getCategoryName());
-
-        return category;
+        optionalCategory.ifPresent(value -> category.setProducts(value.getProducts()));
     }
 
 
@@ -60,26 +44,28 @@ public class AssortmentServiceImplementation implements AssortmentService {
     public List<CategoryDto> findAllCategories() {
         return categoryRepository.findAll()
                 .stream()
-                .map(this::convertCategoryToDto)
+                .map(assortmentConverters::convertCategoryToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public void saveCategory(CategoryDto categoryDto) {
-        categoryRepository.save(convertDtoToCategory(categoryDto));
+        Category category = assortmentConverters.convertDtoToCategory(categoryDto);
+        getAndSetCategoryProductList(category);
+        categoryRepository.save(category);
     }
 
     @Override
     public Optional<CategoryDto> findCategoryById(Long id) {
         Optional<Category> optionalCategory = categoryRepository.findById(id);
-        return optionalCategory.map(this::convertCategoryToDto);
+        return optionalCategory.map(assortmentConverters::convertCategoryToDto);
     }
 
     @Override
     public List<CategoryDto> findCategoryByName(String name) {
         return categoryRepository.findByCategoryName(name)
                 .stream()
-                .map(this::convertCategoryToDto)
+                .map(assortmentConverters::convertCategoryToDto)
                 .collect(Collectors.toList());
     }
 
@@ -90,14 +76,15 @@ public class AssortmentServiceImplementation implements AssortmentService {
         optionalCategory.ifPresent(
                 category -> productList.addAll(category.getProducts()
                         .stream()
-                        .map(this::convertProductToDto)
+                        .map(assortmentConverters::convertProductToDto)
                         .collect(Collectors.toList())));
         return productList;
     }
 
     @Override
     public void deleteCategory(CategoryDto categoryDto) {
-        Category category = convertDtoToCategory(categoryDto);
+        Category category = assortmentConverters.convertDtoToCategory(categoryDto);
+        getAndSetCategoryProductList(category);
         if(category.getProducts().isEmpty()){
             categoryRepository.delete(category);
         }
@@ -105,57 +92,33 @@ public class AssortmentServiceImplementation implements AssortmentService {
 
 
     //Product-related
-    private ProductDto convertProductToDto(Product product){
-        ProductDto productDto = new ProductDto();
-
-        productDto.setProductId(product.getProductId());
-        productDto.setProductName(product.getProductName());
-        productDto.setProductPrice(product.getProductPrice());
-        productDto.setProductOfAge(product.isProductOfAge());
-
-        productDto.setCategoryDto(convertCategoryToDto(product.getCategory()));
-
-        return productDto;
+    private Optional<Category> getCategoryOfProductDto(ProductDto productDto){
+        return categoryRepository.findById(productDto.getCategoryDto().getCategoryId());
     }
-
-    private Product convertDtoToProduct(ProductDto productDto){
-        Product product = new Product();
-
-        product.setProductId(productDto.getProductId());
-        product.setProductName(productDto.getProductName());
-        product.setProductPrice(productDto.getProductPrice());
-        product.setProductOfAge(productDto.isProductOfAge());
-
-        Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategoryDto().getCategoryId());
-        optionalCategory.ifPresent(product::setCategory);
-        return product;
-    }
-
 
     @Override
     public Optional<ProductDto> findByProductId(Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
-        return optionalProduct.map(this::convertProductToDto);
+        return optionalProduct.map(assortmentConverters::convertProductToDto);
     }
 
     @Override
     public List<ProductDto> findAllProducts() {
         return productRepository.findAll()
                 .stream()
-                .map(this::convertProductToDto)
+                .map(assortmentConverters::convertProductToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public void saveProduct(ProductDto productDto) {
         if(productDto.getCategoryDto() != null){
-            productRepository.save(convertDtoToProduct(productDto));
+            productRepository.save(assortmentConverters.convertDtoToProduct(productDto, getCategoryOfProductDto(productDto)));
         }
     }
 
     @Override
     public void deleteProduct(ProductDto productDto) {
-        productRepository.delete(convertDtoToProduct(productDto));
-
+        productRepository.delete(assortmentConverters.convertDtoToProduct(productDto, getCategoryOfProductDto(productDto)));
     }
 }
