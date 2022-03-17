@@ -11,7 +11,7 @@
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
         <div class="overviewListHead">
-            <div class="headStyle" th:text="${category.getCategoryId() == 0 ? 'New Category' : 'Edit'}"></div>
+            <div class="headStyleButton" th:text="${category.getCategoryId() == 0 ? 'New Category' : 'Edit'}"></div>
         </div>
         <div class="itemViewList">
             <form th:action="@{/assortment/categories/new}" method="post" th:object="${category}">

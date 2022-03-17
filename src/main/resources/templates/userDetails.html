@@ -9,8 +9,8 @@
 <div th:replace="fragments/general :: logoutModal"></div>
 <div class="billyContainer">
   <div class="itemView grid-itemView-parent">
-    <div class="overviewListHead">
-      <div class="headStyle">Details</div>
+    <div class="overviewListHead vertical-center">
+      <span class="headStyleButton vertical-center">Details</span>
     </div>
     <div class="itemViewList">
       <ul class="unordered-list">
@@ -58,20 +58,12 @@
         </li>
         <li>
           <div class="item-buttons grid-buttons-parent">
-            <div class="grid-buttonRow-parent">
+            <div class="grid-2buttonRow-parent">
               <a th:href="@{/users/details/{userId}/orderHistory(userId=${billyUserDto.userId})}">
                 <button class="detailsButtons">Order history</button>
               </a>
               <a th:href="@{/users/update/{userId}/(userId=${billyUserDto.userId})}"
                  sec:authorize="hasRole('ROLE_BAR MANAGER')"><button class="detailsButtons">Edit</button>
-              </a>
-              <a th:class="${billyUserId == #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled ' : ''}" id="deleteButton" sec:authorize="hasRole('ROLE_BAR MANAGER')">
-                <button class="detailsButtons">Delete</button>
-              </a>
-              <span class="billyTooltip">Users cannot delete themselves</span>
-              <a th:href="@{/users/changePassword/{billyUserId}/(billyUserId=${billyUserDto.userId})}"
-                 sec:authorize="hasRole('ROLE_BAR MANAGER')">
-                <button class="detailsButtons">Password change</button>
               </a>
               <a th:href="@{/users}" th:class="button">Return</a>
             </div>

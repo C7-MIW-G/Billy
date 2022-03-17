@@ -10,7 +10,7 @@
 
 
 <div class="billyContainer">
-    <div class="overview grid-overview-parent">
+    <div class="overview grid-overview-ProductParent">
         <div class="overviewListHead grid-overviewListHead-parent">
             <div class="category-products-header-grid">
                 <div class="headStyle vertical-center">
@@ -28,14 +28,18 @@
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="product : ${productList}">
-                <li><a th:href="@{/assortment/products/details/{productId}/(productId=${product.getProductId()})}">
-                    <div class="grid-product-parent">
-                        <div class="productName" th:text="${product.getProductName()}"></div>
-                        <div class="euro-sign">€</div>
-                        <div class="productPrice" th:text="${product.getPriceDisplayString()}"></div>
-                    </div>
-                </a></li>
+                <li>
+                    <a th:href="@{/assortment/products/details/{productId}/(productId=${product.getProductId()})}">
+                        <div class="grid-product-parent">
+                            <div class="productName" th:text="${product.getProductName()}"></div>
+                            <div class="euro-sign">€</div>
+                            <div class="productPrice" th:text="${product.getPriceDisplayString()}"></div>
+                        </div>
+                    </a></li>
             </ul>
+        </div>
+        <div class="overviewListFooter">
+            <a th:href="@{/assortment}" class="button returnButtonFooter">Return</a>
         </div>
     </div>
 </div>

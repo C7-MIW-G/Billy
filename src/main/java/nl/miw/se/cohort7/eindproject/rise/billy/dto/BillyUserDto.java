@@ -19,7 +19,7 @@ import java.util.Date;
 
 @Getter @Setter
 @UniqueUsername
-public class BillyUserDto {
+public class BillyUserDto implements Comparable <BillyUserDto> {
 
     private static final int USER_DISPLAY_STRING_LENGTH = 20;
 
@@ -51,15 +51,12 @@ public class BillyUserDto {
     private double maxCredit;
 
 
-
     public String getUserRoleEmoticon() {
         switch (userRole) {
             case "ROLE_BAR MANAGER":
-                return new String(Character.toChars(0x1F454));
+                return "fas fa-user-cog";
             case "ROLE_BARTENDER":
-                return new String(Character.toChars(0x1F935));
-            case "ROLE_CUSTOMER":
-                return new String(Character.toChars(0x2800));
+                return "fas fa-user-tie";
             default:
                 return "";
         }
@@ -86,7 +83,7 @@ public class BillyUserDto {
         return formatAsEuro(accountBalance);
     }
 
-    public String getRemainingCreditDisplayString(){
+    public String getRemainingCreditDisplayString() {
         return formatAsEuro(accountBalance - maxCredit);
     }
 
@@ -102,10 +99,13 @@ public class BillyUserDto {
         accountBalance -= amount;
     }
 
-    public void calculateNewCredit(double addCredit){
+    public void calculateNewCredit(double addCredit) {
         accountBalance += addCredit;
     }
 
+    @Override
+    public int compareTo(@org.jetbrains.annotations.NotNull BillyUserDto o) {
+        return this.getName().toLowerCase().compareTo(o.getName().toLowerCase());
+    }
 }
-
 

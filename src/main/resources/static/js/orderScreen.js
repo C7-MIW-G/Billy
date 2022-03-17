@@ -237,7 +237,10 @@ function fillProductList(data){
         euroDiv.setAttribute('class', 'euro-sign');
 
 
-        let pPrice = document.createTextNode(product.productPrice.toFixed(2));
+        let price = product.productPrice.toFixed(2);
+        price = price.replace('.', ',');
+        let pPrice = document.createTextNode(price);
+
 
         let priceDiv = document.createElement('div');
         priceDiv.setAttribute('class', 'productPrice');
@@ -420,7 +423,9 @@ function fillUserListAccountPay(data) {
         let euroSign = document.createTextNode('€');
         let euroSpan = document.createElement('span');
 
-        let balanceAmount = document.createTextNode(user.accountBalance.toFixed(2));
+        let balance = user.accountBalance.toFixed(2);
+        balance = balance.replace('.', ',');
+        let balanceAmount = document.createTextNode(balance);
         let amountSpan = document.createElement('span');
         amountSpan.setAttribute('class', 'flex-user-accountBalance-first-child');
 

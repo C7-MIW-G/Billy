@@ -10,6 +10,7 @@ import nl.miw.se.cohort7.eindproject.rise.billy.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -45,6 +46,7 @@ public class UserServiceImplementation implements UserService {
         return userRepository.findAll()
                 .stream()
                 .map(billyUserDtoConverter::convertToDto)
+                .sorted()
                 .collect(Collectors.toList());
     }
 

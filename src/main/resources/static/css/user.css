@@ -1,6 +1,7 @@
 .grid-user-parent{
     display: grid;
-    grid-template-columns: 7% 58% 20% 15%;
+    padding: 0;
+    grid-template-columns: 7% 70% 8% 15%;
 }
 
 .grid-completeOrderHistory-parent{
@@ -11,7 +12,7 @@
 
 .grid-orderHistory-parent{
     display: grid;
-    grid-template-columns: calc(42.5%) calc(25%) calc(33%);
+    grid-template-columns: calc(42%) calc(25%) calc(33%);
 }
 
 .grid-orderHistoryDetails-parent{
@@ -43,11 +44,6 @@
     text-overflow: ellipsis;
 }
 
-.RoleSign{
-    opacity: 100%;
-    font-size: 18px;
-}
-
 .grid-user-grandparent {
     display: grid;
     grid-template-columns: calc(100% - 2.375rem) 2.375rem;
@@ -55,4 +51,36 @@
 
 .buttonAddCredit{
     padding: 1px !important;
+    background-color: white;
+    transition: background-color .5s;
+    /*padding: 2px;*/
 }
+
+.buttonAddCredit:hover {
+    background-color: greenyellow;
+}
+.add-credit-button {
+    float: right;
+    background-color: transparent;
+    height: auto;
+    width: auto;
+}
+.add-credit-button:hover {
+    background-color: lightsteelblue;
+    color: #4e4f4d;
+    cursor: pointer;
+    border-image: initial;
+    height: auto;
+    width: auto;
+    border-color:#888888;
+    border-style: solid;
+    border-width: 0;
+}
+
+.add-credit-button:focus{
+    background-color: #A0B4CE
+}
+
+
+
+
