@@ -20,6 +20,8 @@
 .grid-user-child-left{
     text-align: left;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .displayNone{
@@ -28,12 +30,16 @@
 
 .grid-user-child-center{
     text-align: center;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .grid-user-child-right{
     text-align: right;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .RoleSign{

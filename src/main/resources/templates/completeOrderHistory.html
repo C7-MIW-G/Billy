@@ -10,21 +10,21 @@
 
 <div class="billyContainer">
     <div class="overview grid-overview-parent">
-        <div class="overviewOrderHistoryList grid-overviewCompleteOrderHistoryListHead-parent">
-            <div class="grid-user-child-left fontBold">Date and time</div>
-            <div class="grid-user-child-left fontBold">Price</div>
-            <div class="grid-user-child-left fontBold">Customer</div>
-            <div class="grid-user-child-left fontBold">Bartender</div>
+        <div class="overviewListHead grid-complete-order-history-list-item">
+            <div class="grid-user-child-left headStyle">Date and time</div>
+            <div class="grid-user-child-left headStyle">Price</div>
+            <div class="grid-user-child-left headStyle">Customer</div>
+            <div class="grid-user-child-left headStyle">Bartender</div>
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="orders : ${allOrders}">
                 <li>
-                    <a th:href="@{/users/details/{userId}/orderHistory/{orderId}(orderId=${orders.orderId}, userId=${orders.getCustomerId()})}">
-                        <div class="grid-completeOrderHistory-parent">
-                            <div class="grid-user-child-left"   th:text="${#temporals.format(orders.getDateTime(), 'dd-MM-yyyy HH:mm')}"></div>
-                            <div class="grid-user-child-left" th:text="${orders.getTotalPriceEuroString(orders.totalPrice)}"></div>
-                            <div class="grid-user-child-left" th:text="${orders.customerName}"></div>
-                            <div class="grid-user-child-left"  th:text="${orders.bartenderName}"></div>
+                    <a style="padding-left: 0;padding-right: 0" th:href="@{/users/details/{userId}/orderHistory/{orderId}(orderId=${orders.orderId}, userId=${orders.getCustomerId()})}">
+                        <div class="grid-complete-order-history-list-item">
+                            <div class="grid-user-child-left order-history-list-item-element"   th:text="${#temporals.format(orders.getDateTime(), 'dd-MM-yyyy HH:mm')}"></div>
+                            <div class="grid-user-child-left order-history-list-item-element" th:text="${orders.getTotalPriceEuroString(orders.totalPrice)}"></div>
+                            <div class="grid-user-child-left order-history-list-item-element" th:text="${orders.customerName}"></div>
+                            <div class="grid-user-child-left order-history-list-item-element"  th:text="${orders.bartenderName}"></div>
                         </div>
                     </a>
                 </li>

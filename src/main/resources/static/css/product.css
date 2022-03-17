@@ -4,7 +4,9 @@
 }
 .productName{
     text-align: left;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 .productPrice{
     text-align: right;

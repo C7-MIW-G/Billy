@@ -9,7 +9,7 @@
 
 <div class="billyContainer">
     <div class="itemView grid-itemView-parent">
-        <div class="itemViewListHead">
+        <div class="overviewListHead">
             <div class="headStyle">Add credit</div>
         </div>
         <div class="itemViewList">
@@ -17,7 +17,7 @@
                 <ul class="unordered-list">
                     <li>
                         <div class="grid-item-parent">
-                            <div><label class="inputLabel" for="addCredit">amount:</label></div>
+                            <div><label class="inputLabel" for="addCredit">Amount:</label></div>
                             <div><input type="number" id="addCredit" name="addCredit" th:field="*{value}"></div>
                         </div>
                         <div class="grid-item-parent">
@@ -30,7 +30,9 @@
                             <div>
                                 <button th:class="detailsButtons" type="submit" value="Add credit">Add credit</button>
                             </div>
-                            <a th:href="@{/users}" th:class="button">Return</a>
+                            <div>
+                                <a th:href="@{/users}" th:class="button">Return</a>
+                            </div>
                         </div>
                     </li>
                 </ul>

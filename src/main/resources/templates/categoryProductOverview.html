@@ -3,6 +3,7 @@
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>Product Overview</title>
 </head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 <div th:replace="fragments/general :: logoutModal"></div>
@@ -12,12 +13,12 @@
     <div class="overview grid-overview-parent">
         <div class="overviewListHead grid-overviewListHead-parent">
             <div class="category-products-header-grid">
-                <div class="category-name vertical-center">
+                <div class="headStyle vertical-center">
                     <span th:text="${category.getCategoryName()}"></span>
                 </div>
                 <div class="edit-button vertical-center">
                     <a th:href="@{/assortment/categories/update/{categoryId}(categoryId=${category.categoryId})}">
-                        <button>&#x270F</button>
+                        <button><i class="fa fa-pencil"></i></button>
                     </a>
                 </div>
             </div>
