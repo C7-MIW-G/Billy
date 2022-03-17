@@ -11,19 +11,19 @@
 
 <div class="billyContainer">
     <div class="overview grid-overview-HistoryParent">
-        <div class="overviewOrderHistoryList grid-overviewOrderHistoryListHead-parent">
-            <div class="grid-user-child-left fontBold">Date and time</div>
-            <div class="grid-user-child-left fontBold">Price</div>
-            <div class="grid-user-child-left fontBold">Bartender</div>
+        <div class="overviewListHead grid-overviewOrderHistoryListHead-parent">
+            <div class="grid-user-child-left headStyle">Date and time</div>
+            <div class="grid-user-child-left headStyle">Price</div>
+            <div class="grid-user-child-left headStyle">Bartender</div>
         </div>
         <div class="overviewList">
             <ul class="unordered-list" th:each="barOrder : ${OrdersByUser}">
                 <li>
-                    <a th:href="@{/users/details/{userId}/orderHistory/{orderId}(orderId=${barOrder.orderId}, userId=${billyUserId})}">
+                    <a style="padding-left: 0;padding-right: 0;" th:href="@{/users/details/{userId}/orderHistory/{orderId}(orderId=${barOrder.orderId}, userId=${billyUserId})}">
                         <div class="grid-orderHistory-parent">
-                            <div class="grid-user-child-left"  th:text="${#temporals.format(barOrder.getDateTime(), 'dd-MM-yyyy HH:mm')}"></div>
-                            <div class="grid-user-child-left"  th:text="${barOrder.getTotalPriceEuroString(barOrder.getTotalPrice())}"></div>
-                            <div class="grid-user-child-left" th:text="${barOrder.getBartenderName()}"></div>
+                            <div class="grid-user-child-left order-history-list-item-element"  th:text="${#temporals.format(barOrder.getDateTime(), 'dd-MM-yyyy HH:mm')}"></div>
+                            <div class="grid-user-child-left order-history-list-item-element"  th:text="${barOrder.getTotalPriceEuroString(barOrder.getTotalPrice())}"></div>
+                            <div class="grid-user-child-left order-history-list-item-element" th:text="${barOrder.getBartenderName()}"></div>
                         </div>
                     </a>
                 </li>

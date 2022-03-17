@@ -227,15 +227,10 @@ button:hover {
 
 .grid-overview-HistoryParent{
     display: grid;
-    grid-template-rows: 8% 82% 10%;
+    grid-template-rows: 45px calc(90% - 45px) 10%;
     height: calc(90%);
 }
 
-.grid-overview-noHistoryParent{
-    display: grid;
-    grid-template-rows: 8% 82% 10%;
-    height: calc(90%);
-}
 .overviewList{
     max-height: calc(80vh - 10px - 2.875rem);
     overflow-y: auto;
@@ -258,11 +253,16 @@ button:hover {
 }
 .overviewListHead{
     border-bottom: 1px solid dimgrey;
-    background-color: #d0d0d0;
+    min-height: 45px;
 }
+
 .overviewOrderHistoryList{
     padding: 0.75rem 0.75rem;
     border-bottom: 1px solid dimgrey;
+}
+
+.order-history-list-item-element {
+    margin-left: 15px;
 }
 
 .overviewListFooter{
@@ -281,10 +281,9 @@ button:hover {
 }
 
 
-.grid-overviewCompleteOrderHistoryListHead-parent{
+.grid-complete-order-history-list-item {
     display: grid;
-    grid-template-columns: calc(24.5%) calc(24.5%) calc(24.5%) calc(25%);
-    border-bottom: 1px solid dimgrey;
+    grid-template-columns: 30% 20% 25% 25%;
 }
 
 .new-button{
@@ -293,7 +292,8 @@ button:hover {
 }
 
 .vertical-center {
-    margin: auto;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .paymentButtons{
@@ -327,9 +327,7 @@ button:hover {
     display: grid;
     grid-template-rows: auto auto;
 }
-.itemViewListHead{
-    border-bottom: 1px solid dimgrey;
-}
+
 .headStyle{
     display: block;
     font-size: 1.5rem;
@@ -546,3 +544,4 @@ a.button {
 a.button:hover {
     background-color: #A0B4CE;
 }
+
