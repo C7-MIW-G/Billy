@@ -6,10 +6,13 @@ html, body {
 }
 
 /*temporary*/
-.grid-buttonRow-parent{
-    display: flex;
-    flex-direction: row;
-    column-gap: 15px;
+.grid-2buttonRow-parent{
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 22.2%;
+    margin-top: 3%;
+    column-gap: 2%;
+    row-gap: 10%;
 }
 .button_temporary {
     /*font-family: Arial;*/
@@ -393,8 +396,12 @@ activeTab {
 
 .formButtonsGrid {
     display: grid;
-    grid-template-columns: 15% 15% 70%;
+    grid-template-columns: auto auto auto;
+    width: 50%;
     margin-top: 3%;
+    column-gap: 2%;
+    row-gap: 10%;
+    cursor: pointer;
 }
 
 /*forms*/
@@ -584,6 +591,7 @@ a.button {
     border-image: initial;
     padding: 6px 1px;
     text-align: center;
+    cursor: pointer;
 }
 
 a.button:hover {
