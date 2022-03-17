@@ -113,7 +113,7 @@
 }
 
 .receipt-ProductsList{
-    overflow-y: auto;
+    overflow-y: overlay;
     font-family: "Courier New", Verdana, sans-serif ;
     background-color: white;
     max-height: 93%;
