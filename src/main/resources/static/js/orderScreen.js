@@ -384,7 +384,6 @@ function fillTotalPrice(data) {
 }
 function setupTotalPrice(price){
     let new_totalPrice = document.createElement('span');
-    new_totalPrice.setAttribute('class', 'productPrice');
 
     let tPrice = document.createTextNode(price);
     new_totalPrice.appendChild(tPrice);
@@ -394,11 +393,13 @@ function setupTotalPrice(price){
 function fillReceiptTotalPrice(tPrice) {
     let new_totalPrice = setupTotalPrice(tPrice);
     new_totalPrice.setAttribute('id', 'totalPrice');
+    new_totalPrice.setAttribute('class', 'productPrice');
     document.getElementById("totalPrice").replaceWith(new_totalPrice);
 }
 function fillAccountPayTotalPrice(tPrice){
     let new_totalPrice = setupTotalPrice(tPrice);
     new_totalPrice.setAttribute('id', 'accountTotalPrice');
+    new_totalPrice.setAttribute('class', 'productPrice');
     document.getElementById("accountTotalPrice").replaceWith(new_totalPrice);
 
 }
@@ -410,7 +411,6 @@ function fillDirectPayTotalPrice(tPrice){
 function fillConfirmPayTotalPrice(tPrice){
     let new_totalPrice = setupTotalPrice("€ " + tPrice);
     new_totalPrice.setAttribute('id', 'accountPayTotalPrice');
-    new_totalPrice.removeAttribute('class');
     document.getElementById("accountPayTotalPrice").replaceWith(new_totalPrice);
 }
 
