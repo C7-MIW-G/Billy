@@ -13,9 +13,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import javax.swing.text.html.Option;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.Month;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Optional;
 
@@ -66,24 +65,24 @@ public class Seeder {
     private void seedManager(){
         BillyUserDto managerUser1 = new BillyUserDto();
 
-        managerUser1.setBirthdate(Date.from(Instant.from(LocalDate.of(1990, Month.APRIL,15))));
+        managerUser1.setBirthdate(convertToDateViaInstant(LocalDate.of(1990, Month.APRIL,15)));
         managerUser1.setAccountBalance(0);
         managerUser1.setMaxCredit(-125);
 
         managerUser1.setName("Erik de Vries");
-        managerUser1.setUsername("barmanager@billy.com");
+        managerUser1.setUsername("barmanager1@billy.com");
         managerUser1.setPassword(DEFAULT_PASSWORD);
         managerUser1.setUserRole("ROLE_BAR MANAGER");
         userService.saveNewUser(managerUser1);
 
         BillyUserDto managerUser2 = new BillyUserDto();
 
-        managerUser2.setBirthdate(Date.from(Instant.from(LocalDate.of(1963, Month.JANUARY,5))));
+        managerUser2.setBirthdate(convertToDateViaInstant(LocalDate.of(1963, Month.JANUARY,5)));
         managerUser2.setAccountBalance(0);
         managerUser2.setMaxCredit(0);
 
         managerUser2.setName("José de Groot");
-        managerUser2.setUsername("barmanagerjose@billy.com");
+        managerUser2.setUsername("barmanager2@billy.com");
         managerUser2.setPassword(DEFAULT_PASSWORD);
         managerUser2.setUserRole("ROLE_BAR MANAGER");
         userService.saveNewUser(managerUser2);
@@ -91,34 +90,34 @@ public class Seeder {
 
     private void seedBartenders(){
         BillyUserDto bartender1 = new BillyUserDto();
-        bartender1.setBirthdate(Date.from(Instant.from(LocalDate.of(1980, Month.AUGUST,23))));
+        bartender1.setBirthdate(convertToDateViaInstant(LocalDate.of(1980, Month.AUGUST,23)));
         bartender1.setAccountBalance(0);
         bartender1.setMaxCredit(0);
 
         bartender1.setName("Hans de Kraai");
-        bartender1.setUsername("bartenderhans@billy.com");
+        bartender1.setUsername("bartender1@billy.com");
         bartender1.setPassword(DEFAULT_PASSWORD);
         bartender1.setUserRole("ROLE_BARTENDER");
         userService.saveNewUser(bartender1);
 
         BillyUserDto bartender2 = new BillyUserDto();
-        bartender2.setBirthdate(Date.from(Instant.from(LocalDate.of(1949, Month.DECEMBER,28))));
+        bartender2.setBirthdate(convertToDateViaInstant(LocalDate.of(1949, Month.DECEMBER,28)));
         bartender2.setAccountBalance(0);
         bartender2.setMaxCredit(-100);
 
         bartender2.setName("Johan van Dijk");
-        bartender2.setUsername("bartenderjohan@billy.com");
+        bartender2.setUsername("bartender2@billy.com");
         bartender2.setPassword(DEFAULT_PASSWORD);
         bartender2.setUserRole("ROLE_BARTENDER");
         userService.saveNewUser(bartender2);
 
         BillyUserDto bartender3 = new BillyUserDto();
-        bartender3.setBirthdate(Date.from(Instant.from(LocalDate.of(2002, Month.FEBRUARY,2))));
+        bartender3.setBirthdate(convertToDateViaInstant(LocalDate.of(2002, Month.FEBRUARY,2)));
         bartender3.setAccountBalance(0);
         bartender3.setMaxCredit(-50);
 
         bartender3.setName("Erica van Drie");
-        bartender3.setUsername("bartendererica@billy.com");
+        bartender3.setUsername("bartender3@billy.com");
         bartender3.setPassword(DEFAULT_PASSWORD);
         bartender3.setUserRole("ROLE_BARTENDER");
         userService.saveNewUser(bartender3);
@@ -126,7 +125,7 @@ public class Seeder {
 
     private void seedCustomers(){
         BillyUserDto customer1 = new BillyUserDto();
-        customer1.setBirthdate(Date.from(Instant.from(LocalDate.of(2005, Month.SEPTEMBER,13))));
+        customer1.setBirthdate(convertToDateViaInstant(LocalDate.of(2005, Month.SEPTEMBER,13)));
         customer1.setAccountBalance(0);
         customer1.setMaxCredit(0);
 
@@ -137,7 +136,7 @@ public class Seeder {
         userService.saveNewUser(customer1);
 
         BillyUserDto customer2 = new BillyUserDto();
-        customer2.setBirthdate(Date.from(Instant.from(LocalDate.of(2010, Month.OCTOBER,19))));
+        customer2.setBirthdate(convertToDateViaInstant(LocalDate.of(2010, Month.OCTOBER,19)));
         customer2.setAccountBalance(0);
         customer2.setMaxCredit(0);
 
@@ -148,7 +147,7 @@ public class Seeder {
         userService.saveNewUser(customer2);
 
         BillyUserDto customer3 = new BillyUserDto();
-        customer3.setBirthdate(Date.from(Instant.from(LocalDate.of(2004, Month.MAY,13))));
+        customer3.setBirthdate(convertToDateViaInstant(LocalDate.of(2004, Month.MAY,13)));
         customer3.setAccountBalance(0);
         customer3.setMaxCredit(0);
 
@@ -159,7 +158,7 @@ public class Seeder {
         userService.saveNewUser(customer3);
 
         BillyUserDto customer4 = new BillyUserDto();
-        customer4.setBirthdate(Date.from(Instant.from(LocalDate.of(2007, Month.NOVEMBER,21))));
+        customer4.setBirthdate(convertToDateViaInstant(LocalDate.of(2007, Month.NOVEMBER,21)));
         customer4.setAccountBalance(0);
         customer4.setMaxCredit(0);
 
@@ -170,7 +169,7 @@ public class Seeder {
         userService.saveNewUser(customer4);
 
         BillyUserDto customer5 = new BillyUserDto();
-        customer5.setBirthdate(Date.from(Instant.from(LocalDate.of(1975, Month.JULY,17))));
+        customer5.setBirthdate(convertToDateViaInstant(LocalDate.of(1975, Month.JULY,17)));
         customer5.setAccountBalance(0);
         customer5.setMaxCredit(-175);
 
@@ -181,7 +180,7 @@ public class Seeder {
         userService.saveNewUser(customer5);
 
         BillyUserDto customer6 = new BillyUserDto();
-        customer6.setBirthdate(Date.from(Instant.from(LocalDate.of(1967, Month.JUNE,13))));
+        customer6.setBirthdate(convertToDateViaInstant(LocalDate.of(1967, Month.JUNE,13)));
         customer6.setAccountBalance(0);
         customer6.setMaxCredit(0);
 
@@ -192,7 +191,7 @@ public class Seeder {
         userService.saveNewUser(customer6);
 
         BillyUserDto customer7 = new BillyUserDto();
-        customer7.setBirthdate(Date.from(Instant.from(LocalDate.of(1972, Month.JANUARY,13))));
+        customer7.setBirthdate(convertToDateViaInstant(LocalDate.of(1972, Month.JANUARY,13)));
         customer7.setAccountBalance(0);
         customer7.setMaxCredit(-50);
 
@@ -269,28 +268,14 @@ public class Seeder {
         defaultBier.setProductPrice(22.50);
         assortmentService.saveProduct(defaultBier);
 
-        defaultBier.setProductName("Heineken 0.0%");
-        defaultBier.setProductPrice(2.25);
-        defaultBier.setProductOfAge(false);
-        assortmentService.saveProduct(defaultBier);
-
         defaultBier.setProductName("Amstel Radler");
         defaultBier.setProductPrice(2.50);
-        assortmentService.saveProduct(defaultBier);
-
-        defaultBier.setProductName("Amstel Radler 0.0%");
-        defaultBier.setProductPrice(2.25);
-        defaultBier.setProductOfAge(false);
         assortmentService.saveProduct(defaultBier);
 
         defaultBier.setProductName("Leffe Blond");
         defaultBier.setProductPrice(4.50);
         assortmentService.saveProduct(defaultBier);
 
-        defaultBier.setProductName("Leffe Blond 0.0%");
-        defaultBier.setProductPrice(3.50);
-        defaultBier.setProductOfAge(false);
-        assortmentService.saveProduct(defaultBier);
 
         defaultBier.setProductName("Leffe Bruin");
         defaultBier.setProductPrice(2.50);
@@ -302,6 +287,22 @@ public class Seeder {
 
         defaultBier.setProductName("Franziskaner Weissbier");
         defaultBier.setProductPrice(4.50);
+        assortmentService.saveProduct(defaultBier);
+
+
+        defaultBier.setProductName("Amstel Radler 0.0%");
+        defaultBier.setProductPrice(2.25);
+        defaultBier.setProductOfAge(false);
+        assortmentService.saveProduct(defaultBier);
+
+        defaultBier.setProductName("Heineken 0.0%");
+        defaultBier.setProductPrice(2.25);
+        defaultBier.setProductOfAge(false);
+        assortmentService.saveProduct(defaultBier);
+
+        defaultBier.setProductName("Leffe Blond 0.0%");
+        defaultBier.setProductPrice(3.50);
+        defaultBier.setProductOfAge(false);
         assortmentService.saveProduct(defaultBier);
 
         defaultBier.setProductName("Franziskaner Weissbier 0.0%");
@@ -520,5 +521,9 @@ public class Seeder {
         barOrder2.setCustomer(customer3);
     }
 
-
+    public Date convertToDateViaInstant(LocalDate dateToConvert) {
+        return java.util.Date.from(dateToConvert.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+    }
 }

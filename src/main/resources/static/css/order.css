@@ -116,6 +116,7 @@
     overflow: hidden;
     overflow-y: auto;
     font-family: "Courier New", Verdana, sans-serif ;
+    background-color: white;
 }
 
 .receipt-ProductsList ul li a{
@@ -198,8 +199,9 @@
 }
 .account-pay-modal-body-order-info{
     display: grid;
-    grid-template-rows: 70% 15% 5%;
+    grid-template-rows: 70% 25% 5%;
     align-items: center;
+    background-color: white;
 }
 
 .isDisabled {
