@@ -64,14 +64,11 @@ html, body {
     -webkit-box-shadow: 2px 2px 11px #666;
     position: absolute;
     z-index: -1;
-    margin-left: 20%;
-
     transition: opacity 300ms;
 }
 
 .billyTooltipCategory {
     opacity: 0;
-
     width: auto;
     text-align: center;
     background-color: #ffa;
