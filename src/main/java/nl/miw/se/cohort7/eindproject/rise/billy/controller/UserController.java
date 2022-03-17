@@ -168,16 +168,4 @@ public class UserController {
             return "userOrderHistory";
         }
     }
-
-    @GetMapping("/details/{billyUserId}/orderHistory/{orderId}")
-    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
-    protected String seeOrderHistoryDetails(@PathVariable("orderId") Long barOrderId, Model model,
-                                            @PathVariable String billyUserId) {
-        Optional<BarOrderViewDto> optionalBarOrderViewDto = barOrderService.findBarOrderById(barOrderId);
-        if (optionalBarOrderViewDto.isPresent()) {
-            model.addAttribute("barOrderDetail", optionalBarOrderViewDto.get());
-            return "userOrderHistoryDetails";
-        }
-        return "redirect:/users";
-    }
 }
