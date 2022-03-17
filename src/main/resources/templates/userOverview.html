@@ -3,6 +3,7 @@
 <head th:replace="fragments/general :: baseHeader(~{:: title})">
     <title>User Overview</title>
 </head>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <body>
 <nav th:replace="fragments/general :: navbar"></nav>
 <div th:replace="fragments/general :: logoutModal"></div>
@@ -22,14 +23,14 @@
                         <div class="grid-user-grandparent">
                             <a th:href="@{/users/details/{userId}(userId=${billyUserDto.getUserId()})}">
                                 <div class="grid-user-parent">
-                                    <div class="grid-user-child-left RoleSign" th:text="${billyUserDto.getUserRoleEmoticon()}" ></div>
+                                    <div class="grid-user-child-left RoleSign fas"  th:text="${billyUserDto.getUserRoleEmoticon()}" ></div>
                                     <div class="grid-user-child-left fontBold" th:text="${billyUserDto.getName()}"></div>
                                     <div class="euro-sign" sec:authorize="hasRole('ROLE_BAR MANAGER')">€</div>
                                     <div class="grid-user-child-right"  th:text="${billyUserDto.getAccountBalanceDisplayString()}" sec:authorize="hasRole('ROLE_BAR MANAGER')"></div>
                                 </div>
                             </a>
                             <a th:href="@{users/update/balance/{userId}(userId=${billyUserDto.userId})}" class="add-credit-button">
-                                <div>&#65291</div>
+                                <div class="fas fa-donate"></div>
                             </a>
                         </div>
 
