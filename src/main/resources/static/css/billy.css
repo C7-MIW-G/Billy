@@ -396,12 +396,11 @@ activeTab {
 
 .formButtonsGrid {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto auto auto;
     width: 50%;
     margin-top: 3%;
     column-gap: 2%;
     row-gap: 10%;
-    cursor: pointer;
 }
 
 /*forms*/

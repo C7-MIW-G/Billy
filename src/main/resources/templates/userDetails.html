@@ -58,12 +58,10 @@
         </li>
         <li>
           <div class="item-buttons grid-buttons-parent">
-            <div class="grid-2buttonRow-parent">
-              <a th:href="@{/users/details/{userId}/orderHistory(userId=${billyUserDto.userId})}">
-                <button class="detailsButtons">Order history</button>
-              </a>
+            <div class="formButtonsGrid">
+              <a th:href="@{/users/details/{userId}/orderHistory(userId=${billyUserDto.userId})}" class="button">Order history</a>
               <a th:href="@{/users/update/{userId}(userId=${billyUserDto.userId})}"
-                 sec:authorize="hasRole('ROLE_BAR MANAGER')"><button class="detailsButtons">Edit</button>
+                 sec:authorize="hasRole('ROLE_BAR MANAGER')" class="button">Edit</a>
               </a>
               <a th:href="@{/users}" th:class="button">Return</a>
             </div>
