@@ -10,6 +10,7 @@ import nl.miw.se.cohort7.eindproject.rise.billy.service.AssortmentService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,6 +62,7 @@ public class AssortmentServiceImplementation implements AssortmentService {
         return categoryRepository.findAll()
                 .stream()
                 .map(this::convertCategoryToDto)
+                .sorted()
                 .collect(Collectors.toList());
     }
 
@@ -91,6 +93,7 @@ public class AssortmentServiceImplementation implements AssortmentService {
                 category -> productList.addAll(category.getProducts()
                         .stream()
                         .map(this::convertProductToDto)
+                        .sorted()
                         .collect(Collectors.toList())));
         return productList;
     }
