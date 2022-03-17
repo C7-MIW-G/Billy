@@ -73,15 +73,21 @@
 }
 .add-credit-button:hover {
     background-color: lightsteelblue;
-    border-radius: 9px;
+    border-radius: 8px;
     cursor: pointer;
     border-width: 1px;
-    border-style: outset;
-    border-color: rgb(118, 118, 118);
+    border-color: #4e4f4d;
     border-image: initial;
     height: auto;
     width: auto;
+    box-shadow: #6e6e6e;
+    border-style: outset;
 }
+
+.add-credit-button:focus{
+    background-color: #A0B4CE
+}
+
 
 
 
