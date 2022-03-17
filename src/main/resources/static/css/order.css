@@ -183,7 +183,7 @@
 }
 .grid-user-account-pay{
     display: grid;
-    grid-template-columns: calc(40%) calc(25%) calc(31%);
+    grid-template-columns: calc(59%) calc(10%) calc(31%);
 }
 .flex-user-accountBalance{
     display: flex;
