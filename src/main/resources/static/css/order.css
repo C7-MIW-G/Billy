@@ -300,6 +300,8 @@
     box-shadow: #6e6e6e;
     cursor: pointer;
     font-size: x-large;
+
+    text-align: -webkit-center;
 }
 .clear-order-button:hover {
     background-color: #d70000;
