@@ -190,6 +190,11 @@ button:hover {
 .navTop div li a:focus{
     background-color: #A0B4CE;
 }
+
+activeTab {
+    background: #04AA6D;
+    color: white;
+}
 /*container*/
 .billyContainer{
     padding: 5px;
