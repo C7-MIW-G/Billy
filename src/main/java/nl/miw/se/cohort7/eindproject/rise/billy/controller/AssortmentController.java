@@ -50,10 +50,10 @@ public class AssortmentController {
             return "assortmentForm";
         }
         assortmentService.saveCategory(category);
-        return "redirect:/assortment/categories/" + category.getCategoryId();
+        return "redirect:/assortment/categories/" + category.getCategoryId() + "/";
     }
 
-    @GetMapping("/categories/{categoryId}")
+    @GetMapping("/categories/{categoryId}/")
     protected String showCategoryProductList(@PathVariable("categoryId") Long categoryId, Model model) {
         Optional<CategoryDto> optionalCategory = assortmentService.findCategoryById(categoryId);
         if (optionalCategory.isPresent()){
@@ -66,14 +66,14 @@ public class AssortmentController {
         return "redirect:/assortment";
     }
 
-    @GetMapping("/categories/delete/{categoryId}")
+    @GetMapping("/categories/delete/{categoryId}/")
     protected String deleteCategory(@PathVariable("categoryId") Long categoryId){
         Optional<CategoryDto> optionalCategory = assortmentService.findCategoryById(categoryId);
         optionalCategory.ifPresent(categoryDto -> assortmentService.deleteCategory(categoryDto));
         return "redirect:/assortment";
     }
 
-    @GetMapping("/categories/update/{categoryId}")
+    @GetMapping("/categories/update/{categoryId}/")
     protected String deleteCategory(@PathVariable("categoryId") Long categoryId, Model model) {
         Optional<CategoryDto> optionalCategory = assortmentService.findCategoryById(categoryId);
         if (optionalCategory.isPresent()){

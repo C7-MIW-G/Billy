@@ -20,8 +20,8 @@
         <li id="orderHistoryTab" class="navTab"><a class="navTop-items navTop-left" th:href="@{/orderHistory}" sec:authorize="hasRole('ROLE_BAR MANAGER')">Order history</a></li>
     </div>
     <div>
-        <li><a class="navTop-items"
-               th:href="@{/users/details/{userId}(userId=${#authentication.getPrincipal().getUserId()})}"
+        <li id="currentUserTab"><a class="navTop-items"
+               th:href="@{/users/details/{userId}/(userId=${#authentication.getPrincipal().getUserId()})}"
                th:text="${#authentication.getPrincipal().getDisplayName()}" sec:authorize="hasRole('ROLE_NOT_ADMIN')"></a></li>
         <li><a id="logoutButton" class="navTop-items navTop-right pointer">Logout</a></li>
     </div>
@@ -46,6 +46,7 @@
     <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/logoutForm.js}"></script>
     <script type="text/javascript" th:src="@{/js/navbar.js}"></script>
+    <input type="hidden" id="principalUserId" th:value="${#authentication.getPrincipal().getUserId()}">
 </div>
 </body>
 </html>

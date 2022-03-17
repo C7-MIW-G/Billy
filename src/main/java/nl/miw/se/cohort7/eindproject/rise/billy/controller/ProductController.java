@@ -35,7 +35,7 @@ public class ProductController {
         return "productOverview";
     }
 
-    @GetMapping("/new/{categoryId}")
+    @GetMapping("/new/{categoryId}/")
     protected String showProductForm(@PathVariable("categoryId") Long categoryId, Model model){
         Optional<CategoryDto> optionalCategory = assortmentService.findCategoryById(categoryId);
         if (optionalCategory.isPresent()) {
@@ -44,7 +44,7 @@ public class ProductController {
             model.addAttribute("product", product);
             return "productForm";
         }
-        return "redirect:/assortment/categories/" + categoryId;
+        return "redirect:/assortment/categories/" + categoryId + "/";
     }
 
     @PostMapping("/save")
@@ -53,10 +53,10 @@ public class ProductController {
             return "productForm";
         }
         assortmentService.saveProduct(product);
-        return "redirect:/assortment/categories/" + product.getCategoryDto().getCategoryId();
+        return "redirect:/assortment/categories/" + product.getCategoryDto().getCategoryId() + "/";
     }
 
-    @GetMapping("/update/{productId}")
+    @GetMapping("/update/{productId}/")
     protected String showProductFormUpdate(@PathVariable("productId") Long productId, Model model) {
         Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
         if (optionalProduct.isPresent()){
@@ -66,7 +66,7 @@ public class ProductController {
         return "redirect:/assortment";
     }
 
-    @GetMapping("/details/{productId}")
+    @GetMapping("/details/{productId}/")
     protected String showProductDetails(@PathVariable("productId") Long productId, Model model) {
         Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
         if (optionalProduct.isPresent()){
@@ -76,13 +76,13 @@ public class ProductController {
         return "redirect:/assortment";
     }
 
-    @GetMapping("/delete/{productId}")
+    @GetMapping("/delete/{productId}/")
     protected String deleteProduct(@PathVariable("productId") Long productId) {
         Optional<ProductDto> optionalProduct = assortmentService.findByProductId(productId);
         if (optionalProduct.isPresent()) {
             ProductDto product = optionalProduct.get();
             assortmentService.deleteProduct(product);
-            return "redirect:/assortment/categories/" + product.getCategoryDto().getCategoryId();
+            return "redirect:/assortment/categories/" + product.getCategoryDto().getCategoryId() + "/";
         }
         return "redirect:/assortment";
     }

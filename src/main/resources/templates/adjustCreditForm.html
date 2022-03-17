@@ -13,7 +13,7 @@
             <div class="headStyle">Add credit</div>
         </div>
         <div class="itemViewList">
-            <form th:action="@{/users/update/balance/{userId}(userId=${billyuserDto.getUserId()})}" method="post" name="adjustCreditForm" id="adjustCreditForm" th:object="${addCredit}">
+            <form th:action="@{/users/update/balance/{userId}/(userId=${billyuserDto.getUserId()})}" method="post" name="adjustCreditForm" id="adjustCreditForm" th:object="${addCredit}">
                 <ul class="unordered-list">
                     <li>
                         <div class="grid-item-parent">

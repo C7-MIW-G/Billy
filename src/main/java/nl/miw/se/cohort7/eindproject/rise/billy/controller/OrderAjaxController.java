@@ -33,7 +33,7 @@ public class OrderAjaxController {
         this.barOrderService = barOrderService;
     }
 
-    @GetMapping("/addProduct/{id}")
+    @GetMapping("/addProduct/{id}/")
     public ResponseEntity<?> addProductToOrder(@PathVariable("id") Long id) {
         ReceiptAjaxResponse response = new ReceiptAjaxResponse();
 
@@ -49,7 +49,7 @@ public class OrderAjaxController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/removeProduct/{id}")
+    @GetMapping("/removeProduct/{id}/")
     public ResponseEntity<?> removeProductFromOrder(@PathVariable("id") Long id) {
         ReceiptAjaxResponse response = new ReceiptAjaxResponse();
 
@@ -99,7 +99,7 @@ public class OrderAjaxController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/accountPay/{userId}")
+    @GetMapping("/accountPay/{userId}/")
     protected ResponseEntity<?>  doAccountPay(@PathVariable("userId") Long userId) {
         BarOrderDto.activeOrder.setDateTime(LocalDateTime.now());
 

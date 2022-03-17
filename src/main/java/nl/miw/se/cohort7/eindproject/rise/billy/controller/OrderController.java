@@ -8,9 +8,11 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -48,5 +50,16 @@ public class OrderController {
         Collections.sort(barOrderViewDtoList);
         model.addAttribute("allOrders", barOrderViewDtoList);
         return "completeOrderHistory";
+    }
+
+    @GetMapping({"users/details/{billyUserId}/orderHistory/{orderId}/", "orderHistory/{orderId}/"})
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
+    protected String seeOrderHistoryDetails(@PathVariable("orderId") Long barOrderId, Model model) {
+        Optional<BarOrderViewDto> optionalBarOrderViewDto = barOrderService.findBarOrderById(barOrderId);
+        if (optionalBarOrderViewDto.isPresent()) {
+            model.addAttribute("barOrderDetail", optionalBarOrderViewDto.get());
+            return "userOrderHistoryDetails";
+        }
+        return "redirect:/users";
     }
 }
