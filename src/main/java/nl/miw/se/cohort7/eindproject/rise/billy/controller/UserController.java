@@ -54,7 +54,9 @@ public class UserController {
         return "adjustCreditForm";
     }
 
+
     @PostMapping("/update/balance/{billyUserId}/")
+    @Secured({"ROLE_BARTENDER", "ROLE_BAR MANAGER"})
     protected String updateUserBalance(@Valid @ModelAttribute("addCredit") AddCreditDto addCredit, BindingResult result,
     @PathVariable("billyUserId") Long userId){
         if (result.hasErrors()) {
