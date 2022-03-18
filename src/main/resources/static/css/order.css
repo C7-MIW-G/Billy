@@ -301,7 +301,7 @@
     cursor: pointer;
     font-size: x-large;
 
-    text-align: -webkit-center;
+    text-align: center;
 }
 .clear-order-button:hover {
     background-color: #d70000;
