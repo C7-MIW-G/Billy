@@ -65,7 +65,7 @@
                             <div th:if="${#fields.hasErrors('maxCredit')}" th:errorclass="error" th:errors="*{maxCredit}"></div>
                         </div>
                     </li>
-                    <li sec:authorize="hasRole('ROLE_BAR MANAGER')">
+                    <li th:style="${'ROLE_BAR MANAGER' eq #authentication.getPrincipal().getUserRole() ? 'visibility: visible' : 'display: none'}">
                         <div class="grid-item-parent">
                             <div>
                                 <label for="roles">Role</label>
@@ -75,8 +75,8 @@
                                         th:class="${billyUserId eq #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled' : ''}"
                                         id="roles" th:field="*{userRole}">
                                     <option value="ROLE_CUSTOMER" selected>Customer</option>
-                                    <option value="ROLE_BARTENDER" >Bartender</option>
-                                    <option value="ROLE_BAR MANAGER">Bar Manager</option>
+                                    <option sec:authorize="hasRole('ROLE_BAR MANAGER')" value="ROLE_BARTENDER" >Bartender</option>
+                                    <option sec:authorize="hasRole('ROLE_BAR MANAGER')" value="ROLE_BAR MANAGER">Bar Manager</option>
                                 </select>
                                 <span class="billyTooltipRole">Users cannot edit their own role</span>
                             </div>
