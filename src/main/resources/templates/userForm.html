@@ -93,15 +93,10 @@
                             <div>
                                 <a th:class="${billyUserDto.userId == null ? 'displayNone' : 'button'}" th:href="@{/users/changePassword/{billyUserId}/(billyUserId=${billyUserDto.userId})}"
                                    sec:authorize="hasRole('ROLE_BAR MANAGER')" class="button">Change Password</a>
-                            </div>
-                            <div>
                                 <a th:class="(${billyUserDto.userId == null ? 'displayNone' : 'button'})" th:classappend="${billyUserId == #authentication.getPrincipal().getUserId() ? 'buttonIsDisabled ' : ''}"
                                    id="deleteButton" sec:authorize="hasRole('ROLE_BAR MANAGER')" class="button">Delete
                                 </a>
                                 <span class="billyTooltip">It is not possible to delete your own account</span>
-                            </div>
-
-                            <div>
                                 <a th:class="${billyUserDto.userId == null ? 'displayNone' : 'button'}" th:href="@{/users/details/{userId}/ (userId = ${billyUserDto.userId})}" class="button">Return</a>
                                 <a th:class="${billyUserDto.userId != null ? 'displayNone' : 'button'}" th:href="@{/users}" class="button">Return</a>
                             </div>
