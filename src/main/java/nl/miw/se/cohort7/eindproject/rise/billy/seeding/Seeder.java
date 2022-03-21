@@ -148,7 +148,7 @@ public class Seeder {
         customerList.add(createBasicUser("Els", birthdate6, 100, 0));
 
         Date birthdate7 = convertToDateViaInstant(LocalDate.of(1972, Month.JANUARY,13));
-        customerList.add(createBasicUser("Johanna Waterman-Van der Heijden", birthdate7, 0, -50));
+        customerList.add(createBasicUser("Johanna Waterman", birthdate7, 0, -50));
 
         saveAsCustomer(customerList);
     }
