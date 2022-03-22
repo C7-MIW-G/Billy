@@ -129,6 +129,9 @@ public class Seeder {
     private void seedCustomers(){
         List<BillyUserDto> customerList = new ArrayList<>();
 
+        Date birthdateP = convertToDateViaInstant(LocalDate.of(2001, Month.MARCH,25));
+        customerList.add(createBasicUser("Herman Sieger", birthdateP, 0, 0));
+
         Date birthdate1 = convertToDateViaInstant(LocalDate.of(2005, Month.SEPTEMBER,13));
         customerList.add(createBasicUser("Fenna den Hartog", birthdate1, 25, 0));
 
@@ -226,6 +229,9 @@ public class Seeder {
     private void seedCategory(){
         CategoryDto category = new CategoryDto();
 
+        category.setCategoryName("Rum");
+        assortmentService.saveCategory(category);
+
         category.setCategoryName("Bier");
         assortmentService.saveCategory(category);
 
@@ -270,6 +276,17 @@ public class Seeder {
 
         Optional<CategoryDto> optionalSnacks = assortmentService.findCategoryByName("Snacks").stream().findFirst();
         optionalSnacks.ifPresent(this::seedSnacks);
+
+        Optional<CategoryDto> optionalRum = assortmentService.findCategoryByName("Rum").stream().findFirst();
+        if (optionalRum.isPresent()){
+            ProductDto defaultRum = new ProductDto();
+            defaultRum.setCategoryDto(optionalRum.get());
+            defaultRum.setProductOfAge(true);
+            defaultRum.setProductName("Bacardi");
+            defaultRum.setProductPrice(5.25);
+            assortmentService.saveProduct(defaultRum);
+        }
+
     }
 
     private void seedBier(CategoryDto bier) {
@@ -417,8 +434,8 @@ public class Seeder {
         defaultSnack.setProductPrice(1.75);
         assortmentService.saveProduct(defaultSnack);
 
-        defaultSnack.setProductName("Broodje");
-        defaultSnack.setProductPrice(0.50);
+        defaultSnack.setProductName("Broodje Kaas");
+        defaultSnack.setProductPrice(1.50);
         assortmentService.saveProduct(defaultSnack);
     }
 
