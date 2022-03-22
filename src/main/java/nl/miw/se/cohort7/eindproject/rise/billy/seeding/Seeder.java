@@ -189,7 +189,7 @@ public class Seeder {
     private LocalDateTime getDate(int hour){
         int year = java.time.Year.now().getValue();
         int month = MonthDay.now().getMonthValue();
-        int day = MonthDay.now().getDayOfMonth();
+        int day = MonthDay.now().getDayOfMonth()-1;
         int minute = LocalTime.now().getMinute();
         return LocalDateTime.of(year, month, day, hour, minute);
     }
@@ -381,15 +381,15 @@ public class Seeder {
         defaultSnack.setCategoryDto(snacks);
         defaultSnack.setProductOfAge(false);
 
-        defaultSnack.setProductName("Bittergarnituur gemixt 16 stuks");
+        defaultSnack.setProductName("Bittergarnituur 16 stuks");
         defaultSnack.setProductPrice(8);
         assortmentService.saveProduct(defaultSnack);
 
-        defaultSnack.setProductName("Bitterballen 8 stuks met saus");
+        defaultSnack.setProductName("Bitterballen 8 stuks");
         defaultSnack.setProductPrice(5);
         assortmentService.saveProduct(defaultSnack);
 
-        defaultSnack.setProductName("Kaasstengels 8 stuks met saus");
+        defaultSnack.setProductName("Kaasstengels 8 stuks");
         defaultSnack.setProductPrice(5);
         assortmentService.saveProduct(defaultSnack);
 
