@@ -52,7 +52,7 @@
     line-height: 1.5;
 
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: overlay;
 
     border: 2px solid dimgrey;
     background-color: #fcfcfc;

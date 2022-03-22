@@ -88,7 +88,7 @@ public class BillyUserDto implements Comparable <BillyUserDto> {
     }
 
     public String getCreditDisplayString() {
-        return formatAsEuro(maxCredit * -1);
+        return formatAsEuro(maxCredit);
     }
 
     private String formatAsEuro(double amount) {

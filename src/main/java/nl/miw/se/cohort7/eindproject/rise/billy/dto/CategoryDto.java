@@ -2,9 +2,9 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
