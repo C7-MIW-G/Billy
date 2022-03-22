@@ -122,6 +122,7 @@ public class UserServiceImplementation implements UserService {
         return userRepository.findAll()
                 .stream()
                 .map(billyUserDtoConverter::convertToOrderUserDto)
+                .sorted()
                 .collect(Collectors.toList());
     }
 

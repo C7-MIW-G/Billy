@@ -2,6 +2,7 @@ package nl.miw.se.cohort7.eindproject.rise.billy.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,7 +14,7 @@ import java.util.List;
  * User model for use in Orderscreen.
  */
 @Getter @Setter
-public class OrderUserDto {
+public class OrderUserDto implements Comparable<OrderUserDto>{
 
     private Long userId;
     private String displayName;
@@ -64,4 +65,8 @@ public class OrderUserDto {
         return getAge(dateOfBirth) >= BarOrderDto.MIN_AGE_FOR_PRODUCTS_OF_AGE;
     }
 
+    @Override
+    public int compareTo(@org.jetbrains.annotations.NotNull OrderUserDto o) {
+        return this.getDisplayName().toLowerCase().compareTo(o.getDisplayName().toLowerCase());
+    }
 }
