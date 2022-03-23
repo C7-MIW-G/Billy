@@ -17,7 +17,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 /**
  * @author Lars van der Schoor <la.van.der.schoor@st.hanze.nl>
  * Date of creation : 08-02-2022
- * Configurate the permission within the web application
+ * Configure the permissions within the web application
  */
 
 @Configuration
